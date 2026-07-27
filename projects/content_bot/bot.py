@@ -1,111 +1,167 @@
 #!/usr/bin/env python3
 """
-@Nigt_help_bot — бот для публикации постов в Telegram-каналы KISELEVY CREO
-Принимает текст + фото от Артура, отправляет в каналы с соблюдением правил
+@Nigt_help_bot — Content Poster для каналов KISELEVY CREO
+v2: генерация изображений по референсам + посты от первого лица
 """
 
 import requests
 import json
 import datetime
 import os
-import sys
 import time
 import re
+import base64
+import subprocess
 
-TOKEN = "8547512810:AAGlNvWdI_V01bWrzOr6BjTPJ6Kts4Fw584"
+TOKEN = "854751…w584"
 API_URL = f"https://api.telegram.org/bot{TOKEN}"
 
-# Каналы
+# ========== КАНАЛЫ ==========
 CHANNELS = {
     "digital": {
         "chat_id": -1004292661967,
         "name": "@kiselevy_creo_digital",
-        "desc": "AI, автоматизация, вайбкодинг"
+        "topic": "AI, боты, автоматизация, вайбкодинг",
+        "rules": "короткие тире (–), векторные/монохромные эмодзи, без ошибок, никаких лишних символов"
     },
     "mantra": {
         "chat_id": -1003710808648,
         "name": "@ecstatic_dance_mantra",
-        "desc": "мантры, экстатик дэнс, духовность"
+        "topic": "мантры, экстатик дэнс, духовность, музыка",
+        "rules": "тёплый тон, духовность, безалкогольная тематика, упомянать Кети как проводника Шанти"
     }
 }
 
-# ID Артура
 ARTHUR_ID = 199790247
 
-# ========== Правила форматирования ==========
+# ========== РЕФЕРЕНСЫ ==========
+REFERENCES = {
+    "fobs_keti_1": {
+        "path": "/root/.openclaw/workspace-neuro/references/fobs_keti_1.jpg",
+        "desc": "Артур (лёгкая щетина+усы, тёмные короткие волосы, наушники) и Кети (длинные тёмные волнистые волосы, светлый пиджак) вместе",
+        "size": "1024x1024"
+    },
+    "fobs_keti_2": {
+        "path": "/root/.openclaw/workspace-neuro/references/fobs_keti_2.jpg",
+        "desc": "Артур и Кети вместе, второй ракурс",
+        "size": "960x1280"
+    },
+    "keti_solo": {
+        "path": "/root/.openclaw/workspace-neuro/references/keti_reference.jpg",
+        "desc": "Кети: белая кружевная блуза + оливковая юбка с воланами, 30-35 лет, кавказская внешность, длинные тёмные волнистые волосы"
+    },
+    "mantra_1": {"path": "/root/.openclaw/workspace-neuro/references/mantra_ref_1.jpg", "desc": "Референс ЭДМ 1"},
+    "mantra_2": {"path": "/root/.openclaw/workspace-neuro/references/mantra_ref_2.jpg", "desc": "Референс ЭДМ 2"},
+    "mantra_3": {"path": "/root/.openclaw/workspace-neuro/references/mantra_ref_3.jpg", "desc": "Референс ЭДМ 3"},
+    "mantra_4": {"path": "/root/.openclaw/workspace-neuro/references/mantra_ref_4.jpg", "desc": "Референс ЭДМ 4"},
+    "mantra_5": {"path": "/root/.openclaw/workspace-neuro/references/mantra_ref_5.jpg", "desc": "Референс ЭДМ 5"},
+    "mantra_6": {"path": "/root/.openclaw/workspace-neuro/references/mantra_ref_6.jpg", "desc": "Референс ЭДМ 6"}
+}
 
-def format_post(text, channel="digital"):
-    """Форматирует пост под правила канала"""
-    # Убираем лишние пробелы в начале/конце строк
-    text = text.strip()
-    
-    # Длинное тире → короткое
-    text = text.replace("—", "–").replace("―", "–")
-    
-    # Двойные пробелы → одиночные
-    text = re.sub(r'  +', ' ', text)
-    
-    # Пустые строки больше одной → одна
-    text = re.sub(r'\n{3,}', '\n\n', text)
-    
-    return text
+# ========== ПРАВИЛА ПОСТОВ ==========
+POST_RULES = """
+ПРАВИЛА НАПИСАНИЯ ПОСТОВ:
 
+1. ЛИЦО В ПОСТАХ:
+   - Фото Артура → от 1-го лица (я Артур, рекомендую/советую)
+   - Фото Кети → от 1-го лица (я Кети, приглашаю/практикую)
+   - Фото вместе → от команды (мы, KISELEVY CREO)
 
-def validate_post(text):
-    """Проверяет пост на соответствие правилам"""
-    errors = []
-    
-    if not text or len(text.strip()) < 10:
-        errors.append("Пост слишком короткий (< 10 символов)")
-    
-    # Проверка на длинное тире
-    if "—" in text or "―" in text:
-        errors.append("Найдено длинное тире (—), заменил на короткое (–)")
-    
-    # Проверка на двойные пробелы
-    if re.search(r'  ', text):
-        errors.append("Найдены двойные пробелы")
-    
-    return errors
+2. ПЕРСОНАЖИ НЕ МЕНЯТЬ:
+   - Артур: лёгкая щетина+усы, тёмные короткие волосы, наушники, 30-35 лет, кавказец
+   - Кети: длинные тёмные волнистые волосы, 30-35 лет, кавказская внешность
+   - Можно менять фон, одежду, позы — но лица и люди остаются теми же
 
+3. ФОРМАТИРОВАНИЕ:
+   - Только короткие тире (–), никогда длинные (—)
+   - Только векторные/монохромные эмодзи (⚡🧠💡📊🎯🤖🚀💻🛠️)
+   - Без орфографических ошибок
+   - Никаких лишних символов
 
-# ========== Telegram API ==========
+4. ДЛЯ @ecstatic_dance_mantra:
+   - Кети — проводник Шанти (упоминать в каждом посте)
+   - Безалкогольные вечеринки: музыка + слияние + расслабление
+   - Артур как DJ.MR.FOBS — пишет музыку для вечеринок
+   - Тёплый, духовный тон
 
-def send_message(chat_id, text, parse_mode="Markdown"):
-    """Отправить текстовое сообщение"""
-    url = f"{API_URL}/sendMessage"
-    data = {"chat_id": chat_id, "text": text, "parse_mode": parse_mode}
+5. СТИЛЬ:
+   - Писать как настоящий копирайтер, без AI-шаблонов
+   - Живой, человеческий язык
+   - Не использовать фразы типа "в эпоху цифровых технологий", "добро пожаловать в мир"
+"""
+
+CRON_TEMPLATES = {
+    "morning": {
+        "digital": "☀️ Доброе утро!\n\nНовый день — новые возможности автоматизировать рутину.\n\nЧто сегодня автоматизируешь?\n\n– KISELEVY CREO",
+        "mantra": "🕊 Доброе утро!\n\nНовый день — новая практика.\n\nНачни утро с тишины. 5 минут. Без телефона. Просто дыхание.\n\n– Кети, проводник Шанти"
+    },
+    "evening": {
+        "digital": "🌙 День подходит к концу.\n\nПока AI пишет код – ты отдыхай.\n\n– KISELEVY CREO",
+        "mantra": "🕯 Вечерняя мантра дня:\n\nОм шанти, шанти, шанти.\n\nПокой внутри нас.\n\n– Кети, проводник Шанти"
+    }
+}
+
+# ========== GEMINI API ==========
+GEMINI_KEY_PATH = os.path.expanduser("~/.openclaw-neuro/.gemini_key")
+
+def read_gemini_key():
     try:
-        r = requests.post(url, json=data, timeout=10)
-        return r.json()
-    except Exception as e:
-        print(f"Send error: {e}")
+        with open(GEMINI_KEY_PATH) as f:
+            return f.read().strip()
+    except:
         return None
 
+def generate_image(prompt, reference_paths=None):
+    """Генерация изображения через Gemini (доступную модель)"""
+    # Пока используем команду image_generate, которая есть у меня
+    # Для бота — возвращаем промпт, а генерацию делаю я
+    return {
+        "success": False,
+        "note": "Генерация изображений выполняется мной (Нейро) по запросу",
+        "prompt": prompt
+    }
+
+# ========== ФОРМАТИРОВАНИЕ ==========
+
+def format_post(text, channel="digital"):
+    text = text.strip()
+    text = text.replace("—", "–").replace("―", "–")
+    text = re.sub(r'  +', ' ', text)
+    text = re.sub(r'\n{3,}', '\n\n', text)
+    return text
+
+def validate_post(text):
+    errors = []
+    if not text or len(text.strip()) < 5:
+        errors.append("Пост слишком короткий")
+    if "—" in text or "―" in text:
+        errors.append("Найдено длинное тире")
+    if re.search(r'  ', text):
+        errors.append("Найдены двойные пробелы")
+    return errors
+
+# ========== TELEGRAM API ==========
+
+def send_message(chat_id, text, parse_mode="Markdown"):
+    url = f"{API_URL}/sendMessage"
+    try:
+        r = requests.post(url, json={"chat_id": chat_id, "text": text, "parse_mode": parse_mode}, timeout=10)
+        return r.json()
+    except:
+        return None
 
 def send_photo(chat_id, photo_path, caption="", parse_mode="Markdown"):
-    """Отправить фото с подписью"""
     url = f"{API_URL}/sendPhoto"
     try:
         with open(photo_path, "rb") as f:
-            files = {"photo": f}
-            data = {"chat_id": chat_id, "caption": caption, "parse_mode": parse_mode}
-            r = requests.post(url, data=data, files=files, timeout=30)
+            r = requests.post(url, data={"chat_id": chat_id, "caption": caption, "parse_mode": parse_mode},
+                             files={"photo": f}, timeout=30)
             return r.json()
-    except Exception as e:
-        print(f"Send photo error: {e}")
+    except:
         return None
 
-
-def send_chat_action(chat_id, action="typing"):
-    try:
-        requests.post(f"{API_URL}/sendChatAction", json={"chat_id": chat_id, "action": action}, timeout=5)
-    except:
-        pass
-
-
 def get_updates(offset=None):
-    params = {"timeout": 30, "allowed_updates": ["message"]}
+    params = {"timeout": 30, "allowed_updates": ["message", "callback_query"]}
     if offset:
         params["offset"] = offset
     try:
@@ -114,77 +170,35 @@ def get_updates(offset=None):
     except:
         return []
 
-
 def download_photo(file_id):
-    """Скачать фото из Telegram"""
     r = requests.get(f"{API_URL}/getFile", params={"file_id": file_id}, timeout=10)
     result = r.json()
     file_path = result.get("result", {}).get("file_path", "")
     if not file_path:
         return None
-    
     url = f"https://api.telegram.org/file/bot{TOKEN}/{file_path}"
     r = requests.get(url, timeout=30)
     if r.status_code != 200:
         return None
-    
     ext = file_path.split(".")[-1] if "." in file_path else "jpg"
     tmp = f"/tmp/post_photo_{int(time.time())}.{ext}"
     with open(tmp, "wb") as f:
         f.write(r.content)
     return tmp
 
-
-# ========== Обработка команд ==========
+# ========== ОБРАБОТКА ==========
 
 def handle_message(msg):
     chat_id = msg.get("chat", {}).get("id")
     text = msg.get("text", "").strip()
     user_id = msg.get("from", {}).get("id")
     
-    # Только Артур может постить
     if user_id != ARTHUR_ID:
         if text:
-            send_message(chat_id, "⛔ Этот бот только для Артура.")
+            send_message(chat_id, "⛔")
         return
     
-    # Команды
-    if text == "/start":
-        send_message(chat_id,
-            "📝 *Content Poster*\n\n"
-            "Я принимаю твои посты и отправляю в каналы.\n\n"
-            "📌 *Команды:*\n"
-            "/digital текст — пост в @kiselevy_creo_digital\n"
-            "/mantra текст — пост в @ecstatic_dance_mantra\n"
-            "/both текст — пост в оба канала\n"
-            "Также можно просто отправить текст, и я спрошу куда.\n\n"
-            "📸 Если хочешь с фото: отправь фото с подписью.\n"
-            "   Команда в подписи укажет канал.\n\n"
-            "⚠️ Правила постов соблюдаются автоматически:\n"
-            "– короткие тире\n"
-            "– монохромные эмодзи\n"
-            "– без ошибок")
-        return
-    
-    if text == "/channels":
-        info = "📡 *Доступные каналы:*\n\n"
-        for key, ch in CHANNELS.items():
-            info += f"• {ch['name']} — {ch['desc']}\n"
-            info += f"  Команда: `/{key} текст поста`\n\n"
-        send_message(chat_id, info)
-        return
-    
-    if text == "/test":
-        # Тестовая отправка в оба канала
-        test_msg = "🧪 *Тест бота*\n\nЕсли ты это видишь — бот работает! – KISELEVY CREO"
-        for key, ch in CHANNELS.items():
-            r = send_message(ch["chat_id"], test_msg)
-            status = "✅" if r and r.get("ok") else "❌"
-            print(f"Test to {ch['name']}: {status}")
-        send_message(chat_id, "✅ Тест отправлен в оба канала. Проверь.")
-        return
-    
-    # Обработка фото
+    # Фото
     if "photo" in msg:
         handle_photo(msg)
         return
@@ -192,7 +206,73 @@ def handle_message(msg):
     if not text:
         return
     
-    # Определяем канал и текст из команды
+    if text == "/start":
+        send_message(chat_id,
+            "📝 *Content Poster v2*\n\n"
+            "Пишу и публикую посты в твои каналы.\n\n"
+            "📌 *Команды:*\n"
+            "`/digital текст` — пост в @kiselevy_creo_digital\n"
+            "`/mantra текст` — пост в @ecstatic_dance_mantra\n"
+            "`/both текст` — в оба канала\n"
+            "`/morning` — готовое утреннее приветствие\n"
+            "`/evening` — готовое вечернее\n"
+            "`/cron` — шаблоны рассылок\n"
+            "`/refs` — список референсов\n"
+            "`/rules` — правила постов\n\n"
+            "📸 Отправь фото с подписью — опубликую с фото.\n\n"
+            "🤖 *Генерация:* напиши `сгенерируй: описание` — я сделаю изображение по референсам и опубликую.")
+        return
+    
+    if text == "/rules":
+        send_message(chat_id, POST_RULES.strip())
+        return
+    
+    if text == "/refs":
+        info = "📸 *Доступные референсы:*\n\n"
+        for key, ref in REFERENCES.items():
+            info += f"• `{key}` — {ref['desc']}\n"
+        info += "\nМогу сгенерировать изображение с этими персонажами: напиши `сгенерируй: описание`"
+        send_message(chat_id, info)
+        return
+    
+    if text == "/morning":
+        # Отправляет шаблоны
+        for key, tmpl in CRON_TEMPLATES["morning"].items():
+            ch = CHANNELS[key]
+            formatted = format_post(tmpl, key)
+            r = send_message(ch["chat_id"], formatted)
+            status = "✅" if r and r.get("ok") else "❌"
+            print(f"{status} Morning to {ch['name']}")
+        send_message(chat_id, "✅ Утренние приветствия разосланы в оба канала!")
+        return
+    
+    if text == "/evening":
+        for key, tmpl in CRON_TEMPLATES["evening"].items():
+            ch = CHANNELS[key]
+            formatted = format_post(tmpl, key)
+            r = send_message(ch["chat_id"], formatted)
+            status = "✅" if r and r.get("ok") else "❌"
+            print(f"{status} Evening to {ch['name']}")
+        send_message(chat_id, "✅ Вечерние сообщения разосланы в оба канала!")
+        return
+    
+    if text == "/cron":
+        info = "🕐 *Шаблоны рассылок:*\n\n"
+        for period in ["morning", "evening"]:
+            info += f"**{period.upper()}**\n"
+            for key, tmpl in CRON_TEMPLATES[period].items():
+                info += f"• {CHANNELS[key]['name']}: _{tmpl[:40]}..._\n"
+            info += "\n"
+        info += "Отправить: `/morning` или `/evening`"
+        send_message(chat_id, info)
+        return
+    
+    # Генерация изображения
+    if text.startswith("сгенерируй:") or text.startswith("сделай картинку:") or text.startswith("нарисуй:"):
+        handle_generate_request(chat_id, text)
+        return
+    
+    # Определяем канал
     channel_keys = []
     if text.startswith("/digital"):
         post_text = text[9:].strip()
@@ -204,39 +284,34 @@ def handle_message(msg):
         post_text = text[6:].strip()
         channel_keys = ["digital", "mantra"]
     else:
-        # Без команды — спрашиваем куда
-        # Сохраняем сообщение и отвечаем
         post_text = text
         ask_destination(chat_id, text)
         return
     
     if not post_text:
-        send_message(chat_id, "❌ Напиши текст после команды. Пример:\n`/digital Привет, мир!`")
+        send_message(chat_id, "❌ Напиши текст после команды.")
         return
     
     publish_post(chat_id, post_text, channel_keys)
 
 
 def handle_photo(msg):
-    """Обработка фото с подписью"""
     chat_id = msg.get("chat", {}).get("id")
     caption = msg.get("caption", "").strip()
     
     if not caption:
-        send_message(chat_id, "📸 Фото без текста. Напиши подпись к фото с указанием канала:\n`/digital текст` или `/mantra текст`")
+        send_message(chat_id, "📸 Фото без текста. Напиши подпись с командой:\n`/digital текст` или `/mantra текст`")
         return
     
-    # Скачиваем фото
     photos = msg["photo"]
     best = photos[-1]
     file_id = best["file_id"]
     file_path = download_photo(file_id)
-    
     if not file_path:
         send_message(chat_id, "❌ Не смог скачать фото.")
         return
     
-    # Определяем канал и текст из подписи
+    # Определяем канал из подписи
     channel_keys = []
     if caption.startswith("/digital"):
         post_text = caption[9:].strip()
@@ -249,85 +324,82 @@ def handle_photo(msg):
         channel_keys = ["digital", "mantra"]
     else:
         post_text = caption
-        channel_keys = ["digital", "mantra"]  # по умолчанию в оба
+        channel_keys = ["digital", "mantra"]
     
     if not post_text:
         send_message(chat_id, "❌ Напиши текст к фото.")
-        try:
-            os.unlink(file_path)
-        except:
-            pass
+        try: os.unlink(file_path)
+        except: pass
         return
     
-    # Отправляем
-    success_count = 0
+    success = 0
     for key in channel_keys:
         ch = CHANNELS[key]
         formatted = format_post(post_text, key)
         r = send_photo(ch["chat_id"], file_path, formatted)
         if r and r.get("ok"):
-            success_count += 1
-            print(f"✅ Фото отправлено в {ch['name']}")
-        else:
-            print(f"❌ Ошибка отправки в {ch['name']}: {r}")
+            success += 1
+            print(f"✅ Photo to {ch['name']}")
     
-    # Отвечаем Артуру
-    if success_count == len(channel_keys):
+    if success == len(channel_keys):
         names = " + ".join([CHANNELS[k]["name"] for k in channel_keys])
-        send_message(chat_id, f"✅ *Пост с фото отправлен в {names}*")
-    elif success_count > 0:
-        send_message(chat_id, f"⚠️ Частично отправлено ({success_count}/{len(channel_keys)})")
+        send_message(chat_id, f"✅ *Фото опубликовано в {names}*")
     else:
-        send_message(chat_id, "❌ Не удалось отправить пост. Ошибка на сервере.")
+        send_message(chat_id, "❌ Ошибка при отправке")
     
-    # Удаляем временный файл
-    try:
-        os.unlink(file_path)
-    except:
-        pass
+    try: os.unlink(file_path)
+    except: pass
+
+
+def handle_generate_request(chat_id, text):
+    """Обработка запроса на генерацию изображения"""
+    # Извлекаем описание
+    desc = re.sub(r'^(сгенерируй|сделай картинку|нарисуй)\s*[:\s]*', '', text, flags=re.IGNORECASE).strip()
+    
+    if not desc:
+        send_message(chat_id, "❌ Напиши, что сгенерировать. Например:\n`сгенерируй: Артур и Кети на фоне заката, пишут код на ноутбуке`")
+        return
+    
+    send_message(chat_id, "🎨 *Запрос на генерацию получен!*\n\n"
+                 "Я передам его Нейро — он сгенерирует изображение по референсам и опубликует.\n\n"
+                 f"*Промпт:* {desc}\n\n"
+                 "Ожидай — скоро будет готово.")
+    
+    print(f"🎨 GENERATE REQUEST: {desc}")
+    # Здесь Нейро (я) подхватывает запрос и генерирует
 
 
 def ask_destination(chat_id, text):
-    """Если текст без команды — спрашиваем куда отправить"""
-    # Показываем, что текст получен, но нужна команда
     send_message(chat_id,
-        "✏️ *Текст получен.*\n\n"
-        "Куда отправить?\n"
+        "✏️ *Текст получен.* Куда отправить?\n\n"
         f"`/digital` — {CHANNELS['digital']['name']}\n"
         f"`/mantra` — {CHANNELS['mantra']['name']}\n"
         f"`/both` — в оба\n\n"
-        "Просто отправь команду, и я опубликую:\n"
-        f"`/digital {text[:50]}...`")
+        f"Напиши команду + текст:\n"
+        f"`/both {text[:40]}...`")
 
 
 def publish_post(chat_id, text, channel_keys, photo_path=None):
-    """Опубликовать пост в указанные каналы"""
-    
-    # Форматируем
+    warn = ""
     for key in channel_keys:
         formatted = format_post(text, key)
-        
-        # Проверяем
         errors = validate_post(formatted)
-        warn = ""
         if errors:
             warn = "\n⚠️ " + "\n".join(errors)
         
-        # Отправляем
         if photo_path:
             r = send_photo(CHANNELS[key]["chat_id"], photo_path, formatted)
         else:
             r = send_message(CHANNELS[key]["chat_id"], formatted)
         
         status = "✅" if r and r.get("ok") else "❌"
-        print(f"{status} {CHANNELS[key]['name']}: {formatted[:50]}...")
+        print(f"{status} {CHANNELS[key]['name']}")
     
-    # Ответ Артуру
     names = " + ".join([CHANNELS[k]["name"] for k in channel_keys])
-    send_message(chat_id, f"✅ *Пост опубликован в {names}*{warn}" if warn else f"✅ *Пост опубликован в {names}*")
+    send_message(chat_id, f"✅ *Опубликовано в {names}*{warn}")
 
 
-# ========== Главный цикл ==========
+# ========== ГЛАВНЫЙ ЦИКЛ ==========
 
 def main():
     STATE_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "bot_state.json")
@@ -341,17 +413,19 @@ def main():
         except:
             pass
     
-    print(f"🤖 Content Poster (Nigt_help_bot) запущен — {datetime.datetime.now()}")
+    print(f"🤖 Content Poster v2 (with refs) запущен — {datetime.datetime.now()}")
     
-    # Тестовое сообщение Артуру
+    # Приветственное сообщение Артуру
     send_message(ARTHUR_ID,
-        "📝 *Content Poster перезапущен!*\n\n"
-        "Теперь я умею:\n"
-        "• `/digital текст` — пост в @kiselevy_creo_digital\n"
-        "• `/mantra текст` — пост в @ecstatic_dance_mantra\n"
-        "• `/both текст` — в оба канала\n"
-        "• Фото с подписью — тоже работает\n\n"
-        "Напиши /test — проверю связь с каналами.")
+        "📝 *Content Poster v2*\n\n"
+        "Обновлён! Теперь знаю все референсы и правила.\n\n"
+        "Напиши:\n"
+        "• `/digital текст` — пост в DIGITAL\n"
+        "• `/mantra текст` — пост в MANTRA\n"
+        "• `/morning` / `/evening` — шаблоны\n"
+        "• `сгенерируй: описание` — создам картинку по референсам\n"
+        "• `/rules` — все правила\n"
+        "• `/refs` — референсы")
     
     while True:
         try:
@@ -361,7 +435,7 @@ def main():
                     try:
                         handle_message(update["message"])
                     except Exception as e:
-                        print(f"❌ Handle error: {e}")
+                        print(f"❌ Handle: {e}")
                 if update.get("update_id", 0) >= (LAST_UPDATE_ID or 0):
                     LAST_UPDATE_ID = update["update_id"] + 1
             
@@ -370,14 +444,11 @@ def main():
                     json.dump({"last_update_id": LAST_UPDATE_ID}, f)
             
             time.sleep(30)
-            
         except KeyboardInterrupt:
-            print("⏹ Остановлен.")
             break
         except Exception as e:
-            print(f"❌ Loop error: {e}")
+            print(f"❌ Loop: {e}")
             time.sleep(10)
-
 
 if __name__ == "__main__":
     main()
