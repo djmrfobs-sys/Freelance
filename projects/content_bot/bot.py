@@ -88,27 +88,38 @@ POST_RULES = """
    - Без орфографических ошибок
    - Никаких лишних символов
 
-4. ДЛЯ @ecstatic_dance_mantra:
+4. КОНТЕНТ @kiselevy_creo_digital:
+   - Только полезная информация про: автоматизацию, создание ботов, написание сайтов, внедрение AI-систем
+   - Маркетинг и продюсирование от Кети
+   - Реальный опыт: "как я сделал", "как я автоматизировал", "какую систему внедрил"
+   - Никаких шаблонных приветствий "доброе утро", "день подходит к концу" — ненужная вода
+
+5. ДЛЯ @ecstatic_dance_mantra:
    - Кети — проводник Шанти (упоминать в каждом посте)
    - Безалкогольные вечеринки: музыка + слияние + расслабление
    - Артур как DJ.MR.FOBS — пишет музыку для вечеринок
    - Тёплый, духовный тон
    - ОБЯЗАТЕЛЬНО: пост на русском + пустая строка + пост на сербском
 
-5. СТИЛЬ:
+6. СТИЛЬ:
    - Писать как настоящий копирайтер, без AI-шаблонов
-   - Живой, человеческий язык
+   - Живой, человеческий язык, разговорный тон
    - Не использовать фразы типа "в эпоху цифровых технологий", "добро пожаловать в мир"
-"""
+
+7. РЕАКЦИИ:
+   - В конце каждого поста добавлять строку с призывом к реакции
+   - Для DIGITAL: 
+
+❤️🔥💡 — поставь реакцию"""
 
 CRON_TEMPLATES = {
     "morning": {
-        "digital": "☀️ Доброе утро!\n\nНовый день — новые возможности автоматизировать рутину.\n\nЧто сегодня автоматизируешь?\n\n– KISELEVY CREO\n\n——\n\n☀️ Good morning!\n\nA new day – new opportunities to automate the routine.\n\nWhat are you automating today?\n\n– KISELEVY CREO",
-        "mantra": "🕊 Доброе утро!\n\nНовый день — новая практика.\n\nНачни утро с тишины. 5 минут. Без телефона. Просто дыхание.\n\n– Кети, проводник Шанти\n\n——\n\n🕊 Добро јутро!\n\nНови дан — нова пракса.\n\nЗапочни јутро са тишином. 5 минута. Без телефона. Само дисање.\n\n– Кети, водич Шанти"
+        "digital": "Запустил нового Telegram-бота за 20 минут. Просто описал задачу — AI сам написал код.\n\nВайбкодинг — это не магия. Это когда ты перестаёшь писать код руками и начинаешь описывать, что нужно сделать.\n\nСобрал для вас ТОП-3 инструмента, которые реально экономят время:\n\n1. Cursor — AI-редактор кода. Пишет за тебя\n2. Lovable — сайты из промпта\n3. n8n — автоматизация без кода\n\nКаким пользуетесь вы?\n\n– Артур, KISELEVY CREO\n\n——\n\nI launched a new Telegram bot in 20 minutes. Just described the task — AI wrote the code itself.\n\nVibecoding is not magic. It's when you stop writing code by hand and start describing what needs to be done.\n\nTop 3 tools that save real time:\n\n1. Cursor — AI code editor\n2. Lovable — websites from a prompt\n3. n8n — no-code automation\n\nWhat do you use?\n\n– Artur, KISELEVY CREO\n\n❤️🔥💡 — drop a reaction",
+        "mantra": "Каждое утро я начинаю с 5 минут тишины. Без телефона, без мыслей о делах. Просто дыхание.\n\nЭто не про религию. Это про возможность услышать себя до того, как мир начнёт диктовать, что делать.\n\nПопробуйте завтра. Прямо после будильника. 5 минут.\n\n– Кети, проводник Шанти\n\n——\n\nСвако јутро почињем са 5 минута тишине. Без телефона, без мисли о обавезама. Само дисање.\n\nОво није вера. Ово је прилика да чујете себе пре него што свет почне да диктира.\n\nПробајте сутра. Одмах после будилице. 5 минута.\n\n– Кети, водич Шанти\n\n❤️🕊🔥 — остави реакцију"
     },
     "evening": {
-        "digital": "🌙 День подходит к концу.\n\nПока AI пишет код – ты отдыхай.\n\n– KISELEVY CREO\n\n——\n\n🌙 The day is coming to an end.\n\nWhile AI writes the code – you rest.\n\n– KISELEVY CREO",
-        "mantra": "🕯 Вечерняя мантра дня:\n\nОм шанти, шанти, шанти.\n\nПокой внутри нас.\n\n– Кети, проводник Шанти\n\n——\n\n🕯 Вечерња мантра дана:\n\nОм шанти, шанти, шанти.\n\nМир у нама.\n\n– Кети, водич Шанти"
+        "digital": "Сегодня автоматизировал выгрузку данных из 5 источников в одну таблицу.\n\nРаньше это занимало 2 часа ручной работы. Теперь — 5 минут и скрипт всё делает сам.\n\nСекрет: не надо писать сложный код. Связка Make.com + Google Sheets + Python решает 90% задач.\n\nЧто из своего бизнеса вы хотите автоматизировать, но не знаете с чего начать?\n\n– Артур, KISELEVY CREO\n\n——\n\nToday I automated data export from 5 sources into one table.\n\nBefore: 2 hours of manual work. Now: 5 minutes and the script does it all.\n\nThe secret: you don't need complex code. Make.com + Google Sheets + Python solves 90% of tasks.\n\nWhat part of your business do you want to automate but don't know where to start?\n\n– Artur, KISELEVY CREO\n\n❤️🔥💡 — drop a reaction",
+        "mantra": "Вечером я зажигаю свечу. Не для красоты — как ритуал завершения дня.\n\nПламя напоминает: всё, что горело сегодня — отпусти. Завтра новый огонь.\n\nПопробуйте: перед сном зажгите свечу на 5 минут. Просто смотрите на огонь.\n\n– Кети, проводник Шанти\n\n——\n\nУвече палим свећу. Не због лепоте — као ритуал завршетка дана.\n\nПламен подсећа: све што је горело данас — пусти. Сутра нова ватра.\n\nПробајте: пред спавање упалите свећу на 5 минута. Само гледајте у пламен.\n\n– Кети, водич Шанти\n\n🕊🕯❤️ — остави реакцију"
     }
 }
 
@@ -350,7 +361,8 @@ def handle_photo(msg):
     success = 0
     for key in channel_keys:
         ch = CHANNELS[key]
-        formatted = format_post(post_text, key)
+        text_with_reactions = add_reactions_footer(post_text, key)
+        formatted = format_post(text_with_reactions, key)
         r = send_photo(ch["chat_id"], file_path, formatted)
         if r and r.get("ok"):
             success += 1
@@ -394,10 +406,26 @@ def ask_destination(chat_id, text):
         f"`/both {text[:40]}...`")
 
 
+def add_reactions_footer(text, channel_key):
+    """Добавляет строку с призывом к реакции в конец поста"""
+    footers = {
+        "digital": "\n\n❤️🔥💡 — поставь реакцию",
+        "mantra": "\n\n🕊❤️🔥 — остави реакцију"
+    }
+    footer = footers.get(channel_key, "\n\n❤️ — поставь реакцију")
+    
+    # Проверяем, не добавлена ли уже строка с реакциями
+    if footer.strip() not in text:
+        text += footer
+    return text
+
+
 def publish_post(chat_id, text, channel_keys, photo_path=None):
     warn = ""
     for key in channel_keys:
-        formatted = format_post(text, key)
+        # Добавляем строку с реакциями
+        text_with_reactions = add_reactions_footer(text, key)
+        formatted = format_post(text_with_reactions, key)
         errors = validate_post(formatted)
         if errors:
             warn = "\n⚠️ " + "\n".join(errors)
