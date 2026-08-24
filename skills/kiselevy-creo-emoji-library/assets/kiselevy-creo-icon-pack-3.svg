@@ -1,0 +1,40 @@
+<svg width="680" height="800" viewBox="0 0 680 800" xmlns="http://www.w3.org/2000/svg" role="img">
+<title>Пакет 3: праздники, спорт, технологии, животные — KISELEVY CREO</title>
+<desc>16 линейных иконок в персиково-бежевой палитре по темам праздники, спорт, технологии и животные</desc>
+<style>
+  .bgA{fill:#e8b593} .bgB{fill:#e9ddd0} .bgC{fill:#d9986f}
+  .ln{fill:none;stroke:#5c4033;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .fl{fill:#5c4033}
+  .lbl{font-family:sans-serif;font-size:15px;fill:#8a6f5c}
+</style>
+
+<!-- ПРАЗДНИКИ -->
+<text x="40" y="40" class="lbl">Праздники</text>
+<g transform="translate(140,110)"><circle r="60" class="bgA"/><path d="M-20 20 L-20 -10 L0 -25 L20 -10 L20 20 Z" class="ln"/><rect x="-8" y="0" width="16" height="20" class="ln"/></g>
+<g transform="translate(300,110)"><circle r="60" class="bgB"/><path d="M-20 15 L-14 -15 L-6 5 L0 -20 L6 5 L14 -15 L20 15 Z" class="ln"/><line x1="-22" y1="15" x2="22" y2="15" class="ln"/></g>
+<g transform="translate(460,110)"><circle r="60" class="bgC"/><circle cx="-6" cy="6" r="16" class="ln"/><line x1="6" y1="-6" x2="22" y2="-22" class="ln"/><circle cx="24" cy="-24" r="4" class="fl"/></g>
+<g transform="translate(620,110)"><circle r="60" class="bgA"/><path d="M-22 10 Q0 -20 22 10 Z" class="ln"/><circle cx="0" cy="-22" r="4" class="fl"/><line x1="-22" y1="10" x2="22" y2="10" class="ln"/></g>
+
+<!-- СПОРТ -->
+<text x="40" y="220" class="lbl">Спорт</text>
+<g transform="translate(140,290)"><circle r="60" class="bgB"/><circle r="24" class="ln"/><path d="M-24 0 h48 M0 -24 v48 M-17 -17 l34 34 M-17 17 l34 -34" class="ln" opacity="0.5"/></g>
+<g transform="translate(300,290)"><circle r="60" class="bgC"/><ellipse rx="26" ry="18" class="ln"/><line x1="-26" y1="0" x2="26" y2="0" class="ln"/><path d="M-13 -12 Q0 -6 13 -12 M-13 12 Q0 6 13 12" class="ln"/></g>
+<g transform="translate(460,290)"><circle r="60" class="bgA"/><line x1="-20" y1="20" x2="20" y2="-20" class="ln"/><circle cx="20" cy="-20" r="8" class="ln"/></g>
+<g transform="translate(620,290)"><circle r="60" class="bgB"/><path d="M0 -24 L28 24 L-28 24 Z" class="ln"/><circle cx="0" cy="8" r="5" class="fl"/></g>
+
+<!-- ТЕХНОЛОГИИ -->
+<text x="40" y="400" class="lbl">Технологии</text>
+<g transform="translate(140,470)"><circle r="60" class="bgC"/><rect x="-14" y="-24" width="28" height="44" rx="4" class="ln"/><line x1="-14" y1="12" x2="14" y2="12" class="ln"/></g>
+<g transform="translate(300,470)"><circle r="60" class="bgA"/><rect x="-24" y="-16" width="48" height="30" rx="3" class="ln"/><path d="M-30 18 h60 l-6 8 h-48 z" class="ln"/></g>
+<g transform="translate(460,470)"><circle r="60" class="bgB"/><circle r="4" class="fl"/><circle r="14" class="ln"/><circle r="24" class="ln"/><line x1="0" y1="-24" x2="0" y2="-30" class="ln"/><line x1="0" y1="24" x2="0" y2="30" class="ln"/><line x1="-24" y1="0" x2="-30" y2="0" class="ln"/><line x1="24" y1="0" x2="30" y2="0" class="ln"/></g>
+<g transform="translate(620,470)"><circle r="60" class="bgC"/><path d="M-18 8 a18 18 0 1 1 30 -14" class="ln"/><path d="M12 -14 l0 -8 l8 4 z" class="fl"/></g>
+
+<!-- ЖИВОТНЫЕ -->
+<text x="40" y="580" class="lbl">Животные</text>
+<g transform="translate(140,650)"><circle r="60" class="bgB"/><circle r="22" class="ln"/><path d="M-18 -18 l-6 -12 l14 4 z" class="fl"/><path d="M18 -18 l6 -12 l-14 4 z" class="fl"/><circle cx="-8" cy="-2" r="2.5" class="fl"/><circle cx="8" cy="-2" r="2.5" class="fl"/><path d="M-6 10 Q0 14 6 10" class="ln"/></g>
+<g transform="translate(300,650)"><circle r="60" class="bgA"/><ellipse rx="22" ry="18" class="ln"/><path d="M-20 -14 l-4 -10 l10 6 z" class="fl"/><path d="M20 -14 l4 -10 l-10 6 z" class="fl"/><circle cx="-8" cy="-2" r="2.5" class="fl"/><circle cx="8" cy="-2" r="2.5" class="fl"/><ellipse cx="0" cy="8" rx="5" ry="3" class="fl"/></g>
+<g transform="translate(460,650)"><circle r="60" class="bgC"/><ellipse rx="20" ry="16" class="ln"/><path d="M-6 -30 q6 10 0 16 M6 -30 q-6 10 0 16" class="ln"/><circle cx="-7" cy="-2" r="2.5" class="fl"/><circle cx="7" cy="-2" r="2.5" class="fl"/></g>
+<g transform="translate(620,650)"><circle r="60" class="bgB"/><ellipse rx="24" ry="16" class="ln"/><path d="M-24 -4 Q-34 -14 -30 -24" class="ln"/><circle cx="-10" cy="-4" r="2.5" class="fl"/></g>
+
+<text x="340" y="770" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#8a6f5c">kiselevy creo — pack 3: праздники · спорт · технологии · животные</text>
+</svg>

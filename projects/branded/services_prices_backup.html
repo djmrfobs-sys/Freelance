@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Услуги и цены — KISELEVY CREO</title>
+<style>
+:root{
+  --blue:#A8D0E6;
+  --peach:#F8C6A6;
+  --peach-deep:#FF8A5B;
+  --ink:#1C2B33;
+  --ink-soft:#5B6C74;
+  --glass:rgba(251,251,248,.9);
+  --radius:24px;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+  font-family:'Plus Jakarta Sans','Segoe UI',sans-serif;
+  color:var(--ink);
+  line-height:1.25;
+  background:linear-gradient(160deg,var(--blue),#D6D3DD 48%,var(--peach));
+  background-attachment:fixed;
+  min-height:100vh;
+  font-size:12px;
+}
+@page{size:A4;margin:0;}
+.sheet{max-width:210mm;margin:0 auto;padding:0;}
+.card{
+  background:var(--glass);
+  backdrop-filter:blur(8px);
+  border-radius:0;
+  box-shadow:0 20px 50px rgba(28,43,51,.15);
+  overflow:hidden;
+  margin-bottom:0;
+}
+.hero{position:relative;overflow:hidden;min-height:100px;display:flex;align-items:flex-end;padding:12px 16px;color:#fff;}
+.hero .bg{position:absolute;inset:0;background-image:url('fobs_keti_2.jpg');background-size:cover;background-position:center;filter:brightness(.5);z-index:0;}
+.hero .shade{position:absolute;inset:0;background:linear-gradient(180deg,transparent 30%,rgba(28,43,51,.85) 100%);z-index:1;}
+.hero .content{position:relative;z-index:2;}
+.hero .logo{position:absolute;top:7px;left:11px;z-index:3;background:rgba(255,255,255,.92);border-radius:7px;padding:3px 7px;display:flex;flex-direction:column;line-height:1.1;box-shadow:0 3px 12px rgba(0,0,0,.25);}
+.hero .logo b{font-size:12px;letter-spacing:.5px;color:var(--ink);}
+.hero .logo span{font-size:6px;letter-spacing:2px;color:var(--peach-deep);font-weight:700;}
+.hero h1{font-size:22px;font-weight:800;letter-spacing:.5px;text-shadow:0 4px 20px rgba(0,0,0,.4);}
+.hero p{margin-top:2px;font-size:11px;opacity:.95;}
+.body{padding:9px 18px 10px;}
+h2{font-size:13px;margin:8px 0 3px;color:var(--ink);display:flex;align-items:center;gap:7px;}
+h2:first-child{margin-top:0;}
+h2 .dot{width:12px;height:12px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--peach-deep));flex:0 0 auto;}
+.svc{background:#fff;border:1px solid #E7EDF0;border-radius:6px;padding:3px 8px;margin:2px 0;display:flex;justify-content:space-between;align-items:center;gap:10px;}
+.svc .name{font-weight:700;flex:1;font-size:11.5px;}
+.svc .desc{display:block;font-size:10px;color:var(--ink-soft);font-weight:400;margin-top:1px;}
+.svc .price{color:var(--peach-deep);font-weight:800;white-space:nowrap;font-size:12.5px;}
+.pkg{background:#fff;border:1px solid #E7EDF0;border-left:5px solid var(--peach-deep);border-radius:7px;padding:4px 8px;margin:3px 0;transition:transform .15s;}
+.pkg:hover{transform:translateX(4px);}
+.pkg .t{font-weight:800;font-size:12px;display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:nowrap;}
+.pkg .t .price{color:var(--peach-deep);font-size:12.5px;}
+.pkg .badge{display:inline-block;background:linear-gradient(135deg,var(--blue),var(--peach-deep));color:#fff;font-size:7px;font-weight:800;border-radius:20px;padding:1px 5px;letter-spacing:.5px;margin-right:4px;vertical-align:middle;}
+.pkg .s{color:var(--ink-soft);font-size:11px;margin-top:1px;}
+.pkg ul{list-style:none;margin-top:1px;display:inline;}
+.pkg li{display:inline-block;padding:1px 6px 1px 0;position:relative;font-size:10.5px;color:var(--ink);}
+.note{background:#FFF7EF;border:1px solid #FFE3CA;border-radius:7px;padding:5px 10px;font-size:10.5px;color:var(--ink-soft);margin-top:6px;}
+.note b{color:var(--ink);}
+.contact{background:#fff;border:1px solid #E7EDF0;border-radius:7px;padding:5px 10px;margin-top:6px;text-align:center;}
+.contact .ct{font-weight:800;font-size:12.5px;color:var(--ink);}
+.contact .cs{color:var(--ink-soft);font-size:10.5px;margin-top:1px;}
+.footer{text-align:center;color:#fff;font-size:10.5px;opacity:.9;margin-top:5px;padding-bottom:7px;}
+.badge-top{display:inline-block;background:linear-gradient(135deg,var(--blue),var(--peach-deep));color:#fff;font-weight:800;font-size:9px;border-radius:30px;padding:2px 8px;letter-spacing:1px;margin-bottom:2px;}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:4px;}
+.grid .pkg{margin:0;}
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="card">
+    <div class="hero">
+      <div class="bg"></div>
+      <div class="shade"></div>
+      <div class="logo"><b>KISELEVY&nbsp;CREO</b><span>TECH INNOVATIONS</span></div>
+      <div class="content">
+        <div class="badge-top">УСЛУГИ И ЦЕНЫ</div>
+        <h1>Что мы делаем</h1>
+        <p>Точные цены за фиксированный состав. Без скрытых доплат и расхождений.</p>
+      </div>
+    </div>
+    <div class="body">
+
+      <h2><span class="dot"></span>Разработка ботов</h2>
+      <div class="svc"><div><div class="name">Telegram-бот базовый</div><div class="desc">Приём заявок, ответы на частые вопросы, уведомления, кнопки меню.</div></div><div class="price">29 000 ₽</div></div>
+      <div class="svc"><div><div class="name">Telegram-бот с логикой и базой данных</div><div class="desc">Меню, сценарии, хранение данных клиентов, личный кабинет.</div></div><div class="price">59 000 ₽</div></div>
+      <div class="svc"><div><div class="name">Telegram-бот с оплатой и ИИ</div><div class="desc">Приём оплат, интеграции, искусственный интеллект в диалоге, автопосты.</div></div><div class="price">129 000 ₽</div></div>
+      <div class="svc"><div><div class="name">Фирменный ИИ-бот под ключ</div><div class="desc">Роли, подписка, личный кабинет, полная автоматизация. Стоимость зависит от проекта.</div></div><div class="price">от 149 000 ₽</div></div>
+
+      <h2><span class="dot"></span>Сайты и лендинги</h2>
+      <div class="svc"><div><div class="name">Лендинг простой</div><div class="desc">Продающая страница с формой заявки под ключ.</div></div><div class="price">49 000 ₽</div></div>
+      <div class="svc"><div><div class="name">Лендинг с автоматизацией</div><div class="desc">Лендинг + CRM, заявки в бот, воронка продаж.</div></div><div class="price">149 000 ₽</div></div>
+
+      <h2><span class="dot"></span>Маркетинг и продвижение</h2>
+      <div class="svc"><div><div class="name">Маркетинг-стратегия + диагностика</div><div class="desc">Анализ, позиционирование, план продвижения, воронка.</div></div><div class="price">69 000 ₽</div></div>
+      <div class="svc"><div><div class="name">Маркетинг-система через личность</div><div class="desc">Строим личный бренд и систему, которая приводит клиентов сама.</div></div><div class="price">250 000 ₽</div></div>
+      <div class="svc"><div><div class="name">Абонентское сопровождение личного бренда</div><div class="desc">Ежемесячное ведение, контент, стратегия, рост.</div></div><div class="price">69 000 ₽/мес</div></div>
+
+      <h2><span class="dot"></span>Telegram-каналы</h2>
+      <div class="svc"><div><div class="name">Настройка Telegram-канала + позиционирование</div><div class="desc">Канал, который приносит подписчиков и заявки.</div></div><div class="price">49 000 ₽</div></div>
+      <div class="svc"><div><div class="name">Бот автопостов в канал</div><div class="desc">Посты публикуются сами по графику каждый день.</div></div><div class="price">39 000 ₽</div></div>
+
+      <h2><span class="dot"></span>Контент</h2>
+      <div class="svc"><div><div class="name">Контент-план на месяц</div><div class="desc">Темы, рубрики, структура постов на 30 дней.</div></div><div class="price">29 000 ₽</div></div>
+      <div class="svc"><div><div class="name">Контент-план + тексты + сторис</div><div class="desc">Готовые тексты постов и сторис на месяц.</div></div><div class="price">59 000 ₽/мес</div></div>
+      <div class="svc"><div><div class="name">Полное ведение</div><div class="desc">План + тексты + посты + стратегия под ключ.</div></div><div class="price">89 000 ₽/мес</div></div>
+
+      <h2><span class="dot"></span>Готовые решения под ключ</h2>
+
+      <div class="grid">
+      <div class="pkg">
+        <div class="t"><span><span class="badge">ПАКЕТ 1</span>Бизнес-фундамент</span><span class="price">149 000 ₽</span></div>
+        <div class="s">Старт вашего бизнеса в сети.</div>
+        <ul>
+          <li>Сайт-визитка</li>
+          <li>Бот-помощник внутри сайта</li>
+          <li>Приём заявок</li>
+          <li>Базовая автоматизация</li>
+        </ul>
+      </div>
+
+      <div class="pkg">
+        <div class="t"><span><span class="badge">ПАКЕТ 2</span>Продюсер-под ключ</span><span class="price">390 000 ₽</span></div>
+        <div class="s">Полное ведение проекта от идеи до продаж.</div>
+        <ul>
+          <li>Сайт + бот</li>
+          <li>Стратегия и позиционирование</li>
+          <li>Воронка продаж</li>
+          <li>Запуск и продвижение</li>
+        </ul>
+      </div>
+
+      <div class="pkg">
+        <div class="t"><span><span class="badge">ПАКЕТ 3</span>Цифровой фасад</span><span class="price">250 000 ₽ + 69 000 ₽/мес</span></div>
+        <div class="s">Маркетинговая система через вашу личность.</div>
+        <ul>
+          <li>Позиционирование личного бренда</li>
+          <li>Telegram-канал</li>
+          <li>Бот</li>
+          <li>Контент-система</li>
+          <li>Нейропомощник</li>
+        </ul>
+      </div>
+
+      <div class="pkg">
+        <div class="t"><span><span class="badge">ПАКЕТ 4</span>Автоворонка продаж</span><span class="price">450 000 ₽</span></div>
+        <div class="s">Продукт, который сам приводит и продаёт клиентам.</div>
+        <ul>
+          <li>Лендинг</li>
+          <li>Бот</li>
+          <li>Воронка</li>
+          <li>Канал с автопостами</li>
+          <li>Трафик, захват, нагрев, продажа</li>
+        </ul>
+      </div>
+      </div>
+
+      <div class="pkg">
+        <div class="t"><span><span class="badge">ПАКЕТ 5</span>ИИ-продукт под ключ</span><span class="price">от 750 000 ₽</span></div>
+        <div class="s">Серьёзный ИИ-сервис с собственной механикой. Стоимость рассчитывается под каждый проект.</div>
+        <ul>
+          <li>Бот с несколькими ролями</li>
+          <li>Искусственный интеллект</li>
+          <li>Подписка и оплата</li>
+          <li>Личный кабинет</li>
+        </ul>
+      </div>
+
+      <div class="pkg">
+
+      <div class="note">
+        <b>Честные цены.</b> Каждая цена - за фиксированный состав. Никаких «от 80 до 200 тысяч»
+        и скрытых доплат. Что-то сверх состава - обсуждаем отдельно до старта работ.
+      </div>
+
+      <div class="contact">
+        <div class="ct">Нужен расчёт под ваш проект?</div>
+        <div class="cs">Напишите нам - подберём решение и точную цену за 1 день.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="footer">KISELEVY CREO · Tech Innovations · 2026</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,1077 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Сербско-русский бот-переводчик v3.0 — ИНТЕЛЛЕКТУАЛЬНАЯ ДЕТЕКЦИЯ ЯЗЫКА
+
+Стратегия распознавания:
+1. Pass1 (Whisper auto-detect) + анализ через detect_lang_sr_ru()
+2. Если конфликт (Whisper="russian" но нет русских слов) → Pass2 с language="sr"
+3. Выбираем результат с большинством маркеров
+
+Перевод: RU→SR | SR→RU | EN→RU
+История: SQLite (персистентная)
+"""
+
+import os, io, time, re, logging, subprocess, tempfile, json, hashlib
+import threading, datetime, sqlite3, urllib.parse, base64
+import requests
+
+# ======================== КОНФИГУРАЦИЯ ========================
+
+BASE = "/root/.openclaw/workspace-neuro"
+
+with open(f"{BASE}/secrets/serbian_translator_bot.token") as f:
+    TOKEN = f.read().strip()
+
+GROQ_KEY = open(os.path.expanduser("~/.openclaw-neuro/.groq_key")).read().strip()
+DEEPSEEK_KEY = open(os.path.expanduser("~/.openclaw-neuro/.deepseek_key")).read().strip()
+
+# Gemini API ключ
+_gemini_paths = [
+    os.path.expanduser("~/.openclaw-neuro/.gemini_key"),
+    f"{BASE}/secrets/gemini_key",
+    f"{BASE}/secrets/.gemini_key",
+]
+GEMINI_KEY = ""
+for _gp in _gemini_paths:
+    if os.path.exists(_gp):
+        GEMINI_KEY = open(_gp).read().strip()
+        break
+
+API = f"https://api.telegram.org/bot{TOKEN}"
+AUTHORIZED = {199790247, 5276541529}
+
+logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
+log = logging.getLogger("srbot")
+
+# ======================== SQLite ========================
+
+DB_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "translator_history.db")
+DB_LOCK = threading.Lock()
+
+
+def init_db():
+    try:
+        with DB_LOCK:
+            conn = sqlite3.connect(DB_PATH)
+            c = conn.cursor()
+            c.execute("""
+                CREATE TABLE IF NOT EXISTS dialog_history (
+                    id INTEGER PRIMARY KEY,
+                    chat_id INTEGER,
+                    role TEXT,
+                    text TEXT,
+                    ts TEXT
+                )
+            """)
+            c.execute("CREATE INDEX IF NOT EXISTS idx_chat_id ON dialog_history(chat_id)")
+            c.execute("""
+                CREATE TABLE IF NOT EXISTS lang_detection_log (
+                    id INTEGER PRIMARY KEY,
+                    chat_id INTEGER,
+                    source TEXT,
+                    whisper_result TEXT,
+                    text_sample TEXT,
+                    final_lang TEXT,
+                    reason TEXT,
+                    ts TEXT
+                )
+            """)
+            c.execute("""
+                CREATE TABLE IF NOT EXISTS translation_cache (
+                    id INTEGER PRIMARY KEY,
+                    src_hash TEXT,
+                    src_text TEXT,
+                    src_lang TEXT,
+                    tgt_lang TEXT,
+                    translated TEXT,
+                    ts TEXT
+                )
+            """)
+            c.execute("CREATE INDEX IF NOT EXISTS idx_cache_hash ON translation_cache(src_hash, src_lang, tgt_lang)")
+            conn.commit()
+            conn.close()
+    except Exception as e:
+        log.error(f"init_db err: {e}")
+
+
+def save_dialog(chat_id, role, text):
+    try:
+        with DB_LOCK:
+            conn = sqlite3.connect(DB_PATH)
+            ts = datetime.datetime.now().isoformat()
+            conn.execute(
+                "INSERT INTO dialog_history (chat_id, role, text, ts) VALUES (?, ?, ?, ?)",
+                (chat_id, role, text, ts),
+            )
+            conn.commit()
+            conn.close()
+    except Exception as e:
+        log.error(f"save_dialog err: {e}")
+
+
+def get_dialog_history(chat_id, limit=12):
+    try:
+        with DB_LOCK:
+            conn = sqlite3.connect(DB_PATH)
+            c = conn.cursor()
+            c.execute(
+                "SELECT role, text FROM dialog_history WHERE chat_id=? ORDER BY id DESC LIMIT ?",
+                (chat_id, limit),
+            )
+            rows = c.fetchall()
+            conn.close()
+            return [{"role": r[0], "text": r[1]} for r in reversed(rows)]
+    except Exception as e:
+        log.error(f"get_dialog_history err: {e}")
+        return []
+
+
+def clear_dialog_history(chat_id):
+    try:
+        with DB_LOCK:
+            conn = sqlite3.connect(DB_PATH)
+            conn.execute("DELETE FROM dialog_history WHERE chat_id=?", (chat_id,))
+            conn.commit()
+            conn.close()
+    except Exception as e:
+        log.error(f"clear_dialog_history err: {e}")
+
+
+def cache_get(text, src_lang, tgt_lang):
+    """Достать перевод из кэша по хэшу текста."""
+    try:
+        h = hashlib.md5(text.strip().lower().encode("utf-8")).hexdigest()
+        with DB_LOCK:
+            conn = sqlite3.connect(DB_PATH)
+            c = conn.cursor()
+            c.execute(
+                "SELECT translated FROM translation_cache WHERE src_hash=? AND src_lang=? AND tgt_lang=?",
+                (h, src_lang, tgt_lang),
+            )
+            row = c.fetchone()
+            conn.close()
+            if row:
+                log.info(f"cache HIT: {text[:40]!r}")
+                return row[0]
+        return None
+    except Exception as e:
+        log.error(f"cache_get err: {e}")
+        return None
+
+
+def cache_set(text, src_lang, tgt_lang, translated):
+    """Сохранить перевод в кэш."""
+    try:
+        h = hashlib.md5(text.strip().lower().encode("utf-8")).hexdigest()
+        with DB_LOCK:
+            conn = sqlite3.connect(DB_PATH)
+            ts = datetime.datetime.now().isoformat()
+            conn.execute(
+                "INSERT OR REPLACE INTO translation_cache (src_hash, src_text, src_lang, tgt_lang, translated, ts) VALUES (?, ?, ?, ?, ?, ?)",
+                (h, text[:200], src_lang, tgt_lang, translated, ts),
+            )
+            conn.commit()
+            conn.close()
+    except Exception as e:
+        log.error(f"cache_set err: {e}")
+
+
+def log_lang_detection(chat_id, source, whisper_result, text_sample, final_lang, reason):
+    try:
+        with DB_LOCK:
+            conn = sqlite3.connect(DB_PATH)
+            ts = datetime.datetime.now().isoformat()
+            conn.execute(
+                "INSERT INTO lang_detection_log (chat_id, source, whisper_result, text_sample, final_lang, reason, ts) VALUES (?, ?, ?, ?, ?, ?, ?)",
+                (chat_id, source, whisper_result, text_sample[:100], final_lang, reason, ts),
+            )
+            conn.commit()
+            conn.close()
+    except Exception as e:
+        log.error(f"log_lang_detection err: {e}")
+
+
+# ======================== Последний текст ========================
+
+LAST_USER = {}
+LAST_LOCK = threading.Lock()
+
+# Режим принудительного направления: chat_id -> "sr" | "ru" | "en" | None
+MODE = {}
+MODE_LOCK = threading.Lock()
+
+
+def set_mode(chat_id, mode):
+    with MODE_LOCK:
+        MODE[chat_id] = mode
+
+
+def get_mode(chat_id):
+    with MODE_LOCK:
+        return MODE.get(chat_id)
+
+
+def save_last_user(chat_id, text):
+    with LAST_LOCK:
+        LAST_USER[chat_id] = text
+    try:
+        with DB_LOCK:
+            conn = sqlite3.connect(DB_PATH)
+            conn.execute("CREATE TABLE IF NOT EXISTS last_user (chat_id INTEGER PRIMARY KEY, text TEXT)")
+            conn.execute("INSERT OR REPLACE INTO last_user (chat_id, text) VALUES (?, ?)", (chat_id, text))
+            conn.commit()
+            conn.close()
+    except Exception as e:
+        log.error(f"save_last_user db err: {e}")
+
+
+def get_last_user(chat_id):
+    with LAST_LOCK:
+        v = LAST_USER.get(chat_id)
+        if v:
+            return v
+    try:
+        with DB_LOCK:
+            conn = sqlite3.connect(DB_PATH)
+            c = conn.cursor()
+            c.execute("SELECT text FROM last_user WHERE chat_id=?", (chat_id,))
+            row = c.fetchone()
+            conn.close()
+            if row:
+                return row[0]
+    except Exception as e:
+        log.error(f"get_last_user db err: {e}")
+    return None
+
+
+# ======================== HTTP-ретраи ========================
+
+def requests_get_retry(url, **kwargs):
+    max_retries = 3
+    timeout = kwargs.pop("timeout", 10)
+    last_exc = None
+    for attempt in range(max_retries):
+        try:
+            return requests.get(url, timeout=timeout, **kwargs)
+        except (requests.exceptions.Timeout, requests.exceptions.ConnectionError) as e:
+            last_exc = e
+            log.warning(f"GET retry {attempt+1}/{max_retries}: {e}")
+            time.sleep(0.5 * (attempt + 1))
+        except Exception as e:
+            last_exc = e
+            log.error(f"GET err {attempt+1}: {e}")
+            time.sleep(0.5 * (attempt + 1))
+    raise last_exc
+
+
+def requests_post_retry(url, **kwargs):
+    max_retries = 3
+    timeout = kwargs.pop("timeout", 10)
+    last_exc = None
+    for attempt in range(max_retries):
+        try:
+            return requests.post(url, timeout=timeout, **kwargs)
+        except (requests.exceptions.Timeout, requests.exceptions.ConnectionError) as e:
+            last_exc = e
+            log.warning(f"POST retry {attempt+1}/{max_retries}: {e}")
+            time.sleep(0.5 * (attempt + 1))
+        except Exception as e:
+            last_exc = e
+            log.error(f"POST err {attempt+1}: {e}")
+            time.sleep(0.5 * (attempt + 1))
+    raise last_exc
+
+
+# ======================== Telegram helpers ========================
+
+def tg(method, **params):
+    try:
+        r = requests_post_retry(f"{API}/{method}", data=params, timeout=120)
+        return r.json()
+    except Exception:
+        return {"ok": False}
+
+
+def send_text(chat_id, text, reply_to=None):
+    data = {"chat_id": chat_id, "text": text}
+    if reply_to:
+        data["reply_to_message_id"] = reply_to
+    try:
+        r = requests_post_retry(f"{API}/sendMessage", data=data, timeout=20)
+        if not r.json().get("ok"):
+            log.error(f"send_text fail: {r.text[:200]}")
+    except Exception as e:
+        log.error(f"send_text err: {e}")
+
+
+def send_text_with_button(chat_id, text, button_text, callback_data):
+    keyboard = {"inline_keyboard": [[{"text": button_text, "callback_data": callback_data}]]}
+    data = {
+        "chat_id": chat_id,
+        "text": text,
+        "reply_markup": json.dumps(keyboard),
+    }
+    try:
+        r = requests_post_retry(f"{API}/sendMessage", data=data, timeout=20)
+        if not r.json().get("ok"):
+            log.error(f"send_text_with_button fail: {r.text[:200]}")
+    except Exception as e:
+        log.error(f"send_text_with_button err: {e}")
+
+
+def send_voice(chat_id, voice_path, caption=None, reply_to=None):
+    try:
+        with open(voice_path, "rb") as f:
+            files = {"voice": ("voice.ogg", f, "audio/ogg")}
+            data = {"chat_id": chat_id}
+            if caption:
+                data["caption"] = caption
+            if reply_to:
+                data["reply_to_message_id"] = reply_to
+            requests_post_retry(f"{API}/sendVoice", data=data, files=files, timeout=120)
+    except Exception as e:
+        log.error(f"send_voice err: {e}")
+
+
+# ======================== ОПРЕДЕЛЕНИЕ ЯЗЫКА (УМНОЕ) ========================
+
+def detect_lang_sr_ru(text, chat_id=None, source="text"):
+    """
+    ИНТЕЛЛЕКТУАЛЬНОЕ определение языка: сербский / русский / английский.
+    
+    Приоритет: СЛОВА > БУКВЫ > МАРКЕРЫ
+    
+    Это решает проблему, когда Whisper генерирует русские буквы при распознавании сербской речи.
+    """
+    low = text.lower()
+    chars = set(low)
+    letters = [c for c in text if c.isalpha()]
+    words = {w.strip(".,!?():;'\"-–—/").lower() for w in low.split()}
+
+    # === СЕРБСКИЕ МАРКЕРЫ ===
+    sr_words_lat = {
+        "kako", "sta", "šta", "sto", "što", "gde", "gdje", "kada", "kad", "kuda",
+        "nije", "nema", "hvala", "dobro", "zdravo", "danas", "sutra", "sada", "uvek",
+        "opet", "jos", "još", "zato", "kroz", "preko", "dok", "ako", "sve",
+        "oni", "ona", "mi", "vi", "nas", "vas", "se", "sam", "si", "smo", "ste", "su",
+        "je", "bilo", "bio", "bila", "ovde", "tamo", "puno", "malo", "idem", "idemo",
+        "dolazim", "volim", "zelim", "želim", "moram", "probam", "imate", "imam",
+        "radim", "radimo", "znam", "znate", "lepo", "brzo", "polako", "recite",
+        "pomoci", "pomoći", "potreban", "kupiti", "kupujem", "stize", "stiže",
+        "dolazi", "zovem", "zovemo", "cemo", "ćemo", "necu", "neću", "posle", "pre",
+        "vece", "veče", "dan", "jutro", "noc", "noć", "dobrodosli", "dobrodošli",
+        "prijatno", "izvoli", "izvolite", "moze", "može",
+        "treba", "trebam", "shta", "bas", "baš",
+        "naravno", "svakako", "jedan", "dva", "tri", "voda", "hleb", "hrana", "kafa",
+        "svuda", "samo", "jer", "ali", "pa", "li", "da", "ne", "evo", "eto",
+        "molim", "hocu", "hoću", "razumem", "razumijem", "vidim", "cujem", "čujem",
+        "govorim", "pricam", "pričam", "pitam", "odgovor", "odgovaram",
+        "raqun", "račun", "novi", "novog", "novom",  # дополнительные сербские слова
+    }
+
+    sr_words_cyr = {
+        # ЧИСТО СЕРБСКИЕ слова в кириллице (НЕ совпадают с русскими).
+        # Слова, одинаковые в обоих языках (вода, хлеб, град, улица, два, три, могу, где,
+        # чаша, сто, доктор, цена и т.п.) сюда НЕ входят — они путали бы сербский с русским.
+        # Приветствия и вежливость
+        "хвала", "здраво", "добродошли", "пријатно", "изволи", "изволите", "молим",
+        "добар", "дан", "јутро", "вече", "ноћ",
+        "добар дан", "добро јутро", "добро вече", "лаку ноћ", "драго ми је", "хвала лепо",
+        # Время
+        "данас", "сутра", "сада", "јутро", "вече", "ноћ", "прекосутра", "синоћ", "ујутру", "увече",
+        # Связки / частицы / местоимения
+        "није", "нема", "све", "кроз", "овде", "тамо", "пуно", "са", "је", "јесте",
+        "које", "која", "који", "шта", "када", "кад", "јер", "само", "ово", "то", "оно",
+        "зашто", "како", "колико", "чиме", "си", "смо", "сте", "су", "био",
+        # Глаголы (сербские формы 1-го лица, которых нет в русском)
+        "желим", "желиш", "жели", "желимо", "радим", "знам", "волим", "имам", "имате",
+        "идем", "идеш", "иде", "идемо", "долазим", "морам", "мораш", "покушавам",
+        "разумем", "чујем", "причам", "причаш", "питам", "зовеш", "зове", "звао", "звала",
+        "дођи", "дођите", "дошао", "дошла", "хоћу", "хоћеш", "хоће", "треба", "требам",
+        "платим", "купим", "купујем", "тражим", "гледам", "слушам", "чекам", "помажем",
+        "свиђа", "седим", "стојим", "живим", "вратим", "враћам",
+        # Существительные (чисто сербские)
+        "храна", "кафа", "шоља", "тањир", "пиће", "јело", "човек", "дете", "деца",
+        "кућа", "земља", "рачун", "новац", "пекара", "продавница", "пијаца", "апотека",
+        "лекар", "болница", "школа", "музеј", "воз", "аутобус", "станица", "карта",
+        "презиме", "име", "боја", "окус", "топло", "хладно", "вруће", "лепо", "дивно", "супер",
+        # Числа (сербские, кроме два/три, которые совпадают с русскими)
+        "један", "четири", "пет", "шест", "седам", "осам", "девет", "десет",
+        # Фразы
+        "како си", "како сте", "молим вас", "добро сам",
+        "шта радиш", "шта радите", "колико кошта", "како се зовеш", "како се зовете",
+        "код куће", "на послу", "у школи", "у граду",
+        # Прочее
+        "зато", "опет", "још", "близу", "далеко", "полако", "брзо", "свакако", "наравно",
+        "можда", "вероватно", "стварно", "баш", "већ", "увек", "понекад", "често", "ретко",
+        "занимљиво", "занимљив", "радознао", "радознала",
+    }
+
+    sr_spec_cyr = set("љњџћђј")
+    sr_lat_dia = ("š", "ž", "ć", "č", "đ", "nj", "lj", "dž")
+
+    # === РУССКИЕ МАРКЕРЫ ===
+    # Только буквы, которых в сербском НЕТ: ъ ы э ё щ й ю я
+    # (ц и ш есть и в сербском, поэтому убраны — иначе путали бы сербский с русским)
+    ru_exclusive = set("ъыэёщйюя")
+    ru_words = {
+        "привет", "пока", "спасибо", "пожалуйста", "извините", "здравствуйте",
+        "ночь", "утро", "день", "вечер", "ночью", "утром", "днём", "вечером",
+        "люблю", "хочу", "могу", "надо", "нельзя", "можно", "нужно",
+        "меньше", "больше", "хороший", "плохой", "красивый", "новый", "старый",
+        "горячий", "холодный", "тёплый", "русский", "родной", "сегодня",
+        "завтра", "вчера", "сейчас", "потом", "здесь", "там", "тут",
+        "почему", "зачем", "откуда", "куда", "когда", "сколько",
+        "переведи", "переведите", "перевод", "скажи", "скажите",
+    }
+
+    # ============================================================
+    # ПРОВЕРКА 1: ЭКСКЛЮЗИВНЫЕ БУКВЫ (самые надёжные маркеры)
+    #    Буквы, которых нет в другом языке — это железный признак.
+    # ============================================================
+    if chars & sr_spec_cyr:
+        reason = "sr_special_cyrillic: љњџћђј"
+        log.info(f"detect: {reason}")
+        if chat_id:
+            log_lang_detection(chat_id, source, "?", text[:50], "sr", reason)
+        return "sr"
+
+    if chars & ru_exclusive:
+        reason = "ru_exclusive: ъыэёщйюя"
+        log.info(f"detect: {reason}")
+        if chat_id:
+            log_lang_detection(chat_id, source, "?", text[:50], "ru", reason)
+        return "ru"
+
+    # ============================================================
+    # ПРОВЕРКА 2: СЕРБСКИЕ СЛОВА (сильные, не совпадающие с русскими)
+    # ============================================================
+    sr_word_hits = words & (sr_words_lat | sr_words_cyr)
+    if sr_word_hits:
+        reason = f"sr_words: {','.join(list(sr_word_hits)[:3])}"
+        log.info(f"detect: {reason}")
+        if chat_id:
+            log_lang_detection(chat_id, source, "?", text[:50], "sr", reason)
+        return "sr"
+
+    # ============================================================
+    # ПРОВЕРКА 3: РУССКИЕ СЛОВА
+    # ============================================================
+    ru_word_hits = words & ru_words
+    if ru_word_hits:
+        reason = f"ru_words: {','.join(list(ru_word_hits)[:3])}"
+        log.info(f"detect: {reason}")
+        if chat_id:
+            log_lang_detection(chat_id, source, "?", text[:50], "ru", reason)
+        return "ru"
+
+    # ============================================================
+    # ПРОВЕРКА 4: ЛАТИНСКИЕ ДИАКРИТИКИ (признак сербской латиницы)
+    # ============================================================
+    if any(m in low for m in sr_lat_dia):
+        reason = "sr_latin_diacritics: š,ž,ć,č,đ"
+        log.info(f"detect: {reason}")
+        if chat_id:
+            log_lang_detection(chat_id, source, "?", text[:50], "sr", reason)
+        return "sr"
+
+    # ============================================================
+    # ПРОВЕРКА 5: ДОЛЯ БУКВ (приоритет низкий)
+    # ============================================================
+    cyr_all = set("абвгдежзиклмнопрстуфхцчшщъыьэюяјљњџћђ")
+    if letters:
+        cyr_count = sum(1 for c in letters if c.lower() in cyr_all)
+        cyr_ratio = cyr_count / len(letters)
+
+        lat_count = sum(1 for c in letters if c.lower() in "abcdefghijklmnopqrstuvwxyz")
+        lat_ratio = lat_count / len(letters)
+
+        # Если много латиницы без диакритик → английский
+        if lat_ratio > 0.5:
+            reason = f"latin_dominant: {lat_ratio:.2f}"
+            log.info(f"detect: {reason}")
+            if chat_id:
+                log_lang_detection(chat_id, source, "?", text[:50], "en", reason)
+            return "en"
+
+        # Если кириллица > 50%, по умолчанию русский
+        if cyr_ratio > 0.5:
+            reason = f"cyr_ratio={cyr_ratio:.2f}_default_ru"
+            log.info(f"detect: {reason}")
+            if chat_id:
+                log_lang_detection(chat_id, source, "?", text[:50], "ru", reason)
+            return "ru"
+
+    # Фоллбэк: сербский
+    reason = "fallback_sr"
+    log.info(f"detect: {reason}")
+    if chat_id:
+        log_lang_detection(chat_id, source, "?", text[:50], "sr", reason)
+    return "sr"
+
+
+# ======================== WHISPER (Groq) — V3.0 ========================
+
+def transcribe_groq(audio_path, chat_id=None):
+    """
+    Стратегия ТРЁХ УРОВНЕЙ:
+    
+    Level 1: Pass1 с автоопределением
+    Level 2: Анализируем Pass1 через detect_lang_sr_ru()
+    Level 3: Если конфликт (Whisper="russian" но нет русских слов) → Pass2 с sr
+    
+    Это избегает ложного "russian" при распознавании сербской речи.
+    """
+    headers = {"Authorization": f"Bearer {GROQ_KEY}"}
+
+    # === PASS 1: автоопределение ===
+    log.info("Whisper: Pass1 (auto-detect)")
+    data1 = {"model": "whisper-large-v3-turbo", "response_format": "verbose_json"}
+    with open(audio_path, "rb") as f:
+        r1 = requests.post(
+            "https://api.groq.com/openai/v1/audio/transcriptions",
+            headers=headers,
+            data=data1,
+            files={"file": ("audio.ogg", f, "audio/ogg")},
+            timeout=90,
+        )
+    if r1.status_code != 200:
+        return None, None, f"STT error {r1.status_code}"
+
+    d1 = r1.json()
+    text1 = d1.get("text", "").strip()
+    wlang1 = (d1.get("language") or "").lower()
+
+    log.info(f"Whisper Pass1: lang={wlang1!r} text={text1[:80]!r}")
+
+    # Английский — верим сразу
+    if "eng" in wlang1 or wlang1 == "en":
+        log.info(f"Whisper: detected ENGLISH")
+        if chat_id:
+            log_lang_detection(chat_id, "voice", wlang1, text1[:50], "en", "whisper_english")
+        return text1, "en", None
+
+    # === АНАЛИЗИРУЕМ Pass1 через detect_lang_sr_ru() ===
+    detected_lang = detect_lang_sr_ru(text1, chat_id=None, source="whisper_analysis")
+
+    # Если Whisper сказал "russian":
+    #   - проверяем по СЛОВАМ-маркерам (буквы могут быть искажены Whisper'ом для сербской речи!)
+    #   - если русских слов НЕТ → это скорее всего сербская речь → Pass2 с language='sr'
+    if "russ" in wlang1 or wlang1 == "ru":
+        ru_word_markers = {
+            "привет", "пока", "спасибо", "пожалуйста", "извините", "здравствуйте",
+            "хочу", "надо", "нельзя", "можно", "нужно", "почему", "зачем",
+            "откуда", "сколько", "сегодня", "завтра", "вчера", "сейчас",
+            "потом", "здесь", "переведи", "переведите", "перевод", "скажи",
+            "подскажи", "подскажите", "ладно", "хорошо", "давай", "ничего",
+            "ещё", "уже", "тоже", "только", "конечно", "наверное", "кажется",
+            "кстати", "вообще", "поэтому", "понял", "поняла", "понятно",
+            "ребята", "ребёнок", "деньги", "работа", "работаю", "делаю",
+            "пойдём", "пойду", "пошли", "будет", "будем", "будешь",
+            "который", "которая", "которые", "чтобы", "потому",
+            "слушай", "смотри", "знаешь", "думаю", "считаю", "верно",
+            "добрый", "день", "тебя", "зовут", "меня", "мне", "есть", "быть",
+            "очень", "просто", "самый", "самая", "такой", "такая", "этот", "эта",
+        }
+        auto_words = {w.strip(".,!?():;'\"-–—/").lower() for w in text1.split()}
+        has_ru_words = bool(auto_words & ru_word_markers)
+        log.info(f"Whisper: russian? ru_word_markers={has_ru_words} detected={detected_lang}")
+
+        if has_ru_words:
+            # Есть явные русские слова → русский
+            if chat_id:
+                log_lang_detection(chat_id, "voice", wlang1, text1[:50], "ru", "ru_word_markers_found")
+            return text1, "ru", None
+
+        # Нет русских слов → скорее всего Whisper спутал сербскую речь с русской
+        log.info(f"Whisper: 'russian' but NO ru word markers -> Pass2 с language='sr'")
+
+        # === PASS 2: принудительный sr ===
+        data2 = {"model": "whisper-large-v3-turbo", "response_format": "verbose_json", "language": "sr"}
+        with open(audio_path, "rb") as f:
+            r2 = requests.post(
+                "https://api.groq.com/openai/v1/audio/transcriptions",
+                headers=headers,
+                data=data2,
+                files={"file": ("audio.ogg", f, "audio/ogg")},
+                timeout=90,
+            )
+        if r2.status_code != 200:
+            # Pass2 не удался — используем Pass1
+            if chat_id:
+                log_lang_detection(chat_id, "voice", wlang1, text1[:50], "sr", "pass2_failed_use_pass1")
+            return text1, "sr", None
+
+        d2 = r2.json()
+        text2 = d2.get("text", "").strip()
+        log.info(f"Whisper Pass2 (sr): text={text2[:80]!r}")
+
+        # Перепроверяем Pass2 — если там сербские маркеры, берём его
+        detected_lang2 = detect_lang_sr_ru(text2, chat_id=None, source="whisper_pass2_analysis")
+        log.info(f"Whisper Pass2 analysis: {detected_lang2}")
+
+        # Pass2 с sr дал сербский текст или хотя бы не явный русский → берём Pass2
+        if detected_lang2 in ("sr", "en"):
+            if chat_id:
+                log_lang_detection(chat_id, "voice", f"{wlang1}+sr", text2[:50], detected_lang2, "pass2_confirmed")
+            return text2, detected_lang2, None
+        else:
+            # Pass2 всё равно дал русский — оставляем Pass1, но помечаем sr (сербская речь, искажённая Whisper)
+            if chat_id:
+                log_lang_detection(chat_id, "voice", f"{wlang1}+sr", text1[:50], "sr", "pass2_ru_still_use_sr")
+            return text1, "sr", None
+
+    # Whisper сказал НЕ русский (sr/serbian/другое) — если есть конфликт с детектом, уточняем
+    if detected_lang != wlang1 and "eng" not in wlang1:
+        # Whisper не русский и не английский → сербский, берём pass1
+        if chat_id:
+            log_lang_detection(chat_id, "voice", wlang1, text1[:50], detected_lang, "whisper_non_ru_use_detect")
+        return text1, detected_lang, None
+
+    # Нет конфликта — используем Pass1 с обнаруженным языком
+    log.info(f"Whisper: Pass1 OK, lang={detected_lang}")
+    if chat_id:
+        log_lang_detection(chat_id, "voice", wlang1, text1[:50], detected_lang, "pass1_ok")
+    return text1, detected_lang, None
+
+
+# ======================== ПЕРЕВОД (DeepSeek) ========================
+
+def translate_to(text, target_lang, source_lang, chat_id=None, history=False):
+    # 1) Сначала кэш — повторяющиеся фразы переводятся мгновенно
+    cached = cache_get(text, source_lang, target_lang)
+    if cached:
+        return cached
+
+    # Нормализация названий языков для промпта
+    _src_names = {
+        "serbskogo": "сербского", "russkogo": "русского", "anglijskogo": "английского",
+        "sr": "сербского", "ru": "русского", "en": "английского",
+    }
+    _tgt_names = {
+        "serbskij": "сербский", "russkij": "русский", "anglijskij": "английский",
+        "sr": "сербский", "ru": "русский", "en": "английский",
+    }
+    src_name = _src_names.get(source_lang, source_lang)
+    tgt_name = _tgt_names.get(target_lang, target_lang)
+
+    # 2) Без истории по умолчанию (history=False везде) — она тормозит DeepSeek
+    messages = []
+
+    if history and chat_id:
+        hist = get_dialog_history(chat_id, limit=6)
+        for h in hist:
+            messages.append({"role": h["role"], "content": h["text"]})
+
+    system_prompt = (
+        f"Ты профессиональный переводчик сербского, русского и английского языков. "
+        f"Переведи следующий текст с {src_name} на {tgt_name}. "
+        f"Верни ТОЛЬКО перевод: без пояснений, без кавычек, без комментариев и без лишнего текста. "
+        f"Сохрани смысл, стиль и тон оригинала. "
+        f"Переводи естественно, как носитель языка, без буквальности."
+    )
+
+    messages.insert(0, {"role": "system", "content": system_prompt})
+    messages.append({"role": "user", "content": text})
+
+    try:
+        r = requests_post_retry(
+            "https://api.deepseek.com/chat/completions",
+            headers={
+                "Authorization": f"Bearer {DEEPSEEK_KEY}",
+                "Content-Type": "application/json",
+            },
+            json={
+                "model": "deepseek-chat",
+                "messages": messages,
+                "temperature": 0.3,
+                "max_tokens": 2000,
+            },
+            timeout=20,
+        )
+        if r.status_code != 200:
+            log.error(f"DeepSeek err {r.status_code}: {r.text[:200]}")
+            return f"[Ошибка: {r.status_code}]"
+        data = r.json()
+        result = data["choices"][0]["message"]["content"].strip()
+
+        # 3) Сохраняем в кэш для будущих повторений
+        if not result.startswith("["):
+            cache_set(text, source_lang, target_lang, result)
+        return result
+    except Exception as e:
+        log.error(f"translate_to err: {e}")
+        return f"[Ошибка: {e}]"
+
+
+# ======================== TTS (Google Translate) ========================
+
+def tts_google(text, lang="sr"):
+    try:
+        tts_text = text[:500]
+        encoded = urllib.parse.quote(tts_text)
+        url = f"https://translate.google.com/translate_tts?ie=UTF-8&q={encoded}&tl={lang}&client=tw-ob"
+
+        r = requests.get(url, timeout=30, headers={"User-Agent": "Mozilla/5.0"})
+        if r.status_code != 200 or len(r.content) < 1000:
+            log.warning(f"TTS: bad response (status={r.status_code}, size={len(r.content)})")
+            return None
+
+        with tempfile.NamedTemporaryFile(suffix=".mp3", delete=False) as f:
+            f.write(r.content)
+            mp3 = f.name
+
+        ogg = mp3 + ".ogg"
+        result = subprocess.run(
+            ["ffmpeg", "-y", "-i", mp3, "-filter:a", "atempo=0.85", "-c:a", "libopus", ogg],
+            capture_output=True, timeout=30,
+        )
+        os.unlink(mp3)
+
+        if result.returncode != 0:
+            log.error(f"TTS ffmpeg err: {result.stderr[:200]}")
+            return None
+
+        return ogg
+    except Exception as e:
+        log.error(f"tts_google err: {e}")
+        return None
+
+
+def tts_async(chat_id, text, lang):
+    """Озвучка в отдельном потоке — не блокирует текстовый ответ."""
+    def _worker():
+        try:
+            ogg = tts_google(text, lang)
+            if ogg:
+                send_voice(chat_id, ogg)
+                os.unlink(ogg)
+        except Exception as e:
+            log.error(f"tts_async err: {e}")
+
+    threading.Thread(target=_worker, daemon=True).start()
+
+
+# ======================== OCR (Gemini Vision) ========================
+
+def ocr_image(image_path):
+    if not GEMINI_KEY:
+        return None, "Gemini API key not found"
+
+    try:
+        with open(image_path, "rb") as f:
+            img_data = base64.b64encode(f.read()).decode("utf-8")
+
+        models = ["gemini-2.0-flash", "gemini-1.5-flash", "gemini-2.5-flash-preview-05-20"]
+
+        for model in models:
+            try:
+                url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={GEMINI_KEY}"
+                payload = {
+                    "contents": [{
+                        "parts": [
+                            {"inline_data": {"mime_type": "image/jpeg", "data": img_data}},
+                            {"text": "Распознай весь текст на изображении. Верни ТОЛЬКО распознанный текст без пояснений."},
+                        ]
+                    }]
+                }
+                r = requests.post(url, json=payload, timeout=60)
+                if r.status_code == 200:
+                    data = r.json()
+                    text = data.get("candidates", [{}])[0].get("content", {}).get("parts", [{}])[0].get("text", "").strip()
+                    if text:
+                        log.info(f"OCR ok (model={model})")
+                        return text, None
+                else:
+                    log.warning(f"OCR model {model} err {r.status_code}")
+                    continue
+            except Exception as e:
+                log.warning(f"OCR model {model} exception: {e}")
+                continue
+
+        return None, "All Gemini models unavailable"
+    except Exception as e:
+        return None, f"OCR err: {e}"
+
+
+# ======================== ОБРАБОТЧИКИ ========================
+
+def handle_text(chat_id, text):
+    # Жёсткий режим /sr /ru /en если установлен, иначе автодетект
+    mode = get_mode(chat_id)
+    if mode:
+        lang = mode
+        log.info(f"handle_text: MODE={mode}")
+    else:
+        lang = detect_lang_sr_ru(text, chat_id=chat_id, source="text")
+    log.info(f"handle_text: lang={lang} text={text[:50]!r}")
+
+    if lang == "ru":
+        tr = translate_to(text, "serbskij", "russkogo", chat_id=None, history=False)
+        flag = "RU -> SR"
+    elif lang == "en":
+        tr = translate_to(text, "russkij", "anglijskogo", chat_id=None, history=False)
+        flag = "EN -> RU"
+    else:
+        tr = translate_to(text, "russkij", "serbskogo", chat_id=None, history=False)
+        flag = "SR -> RU"
+
+    save_dialog(chat_id, "user", text)
+    save_dialog(chat_id, "assistant", tr)
+
+    if lang == "ru":
+        save_last_user(chat_id, text)
+        send_text_with_button(chat_id, f"{flag}\n\n{tr}", "🇬🇧 Перевести на английский", "to_en")
+        tts_async(chat_id, tr, "sr")
+    elif lang == "en":
+        save_last_user(chat_id, text)
+        send_text_with_button(chat_id, f"{flag}\n\n{tr}", "🇷🇸 Перевести на сербский", "to_sr")
+        tts_async(chat_id, tr, "ru")
+    else:
+        send_text(chat_id, f"{flag}\n\n{tr}")
+        tts_async(chat_id, tr, "ru")
+
+
+def handle_voice(chat_id, file_id):
+    send_text(chat_id, "🎙 Распознаю...")
+    try:
+        fi = tg("getFile", file_id=file_id)
+        if not fi.get("ok"):
+            send_text(chat_id, "Не удалось получить файл.")
+            return
+        path = fi["result"]["file_path"]
+        data = requests_get_retry(
+            f"https://api.telegram.org/file/bot{TOKEN}/{path}", timeout=60
+        ).content
+        with tempfile.NamedTemporaryFile(suffix=".oga", delete=False) as f:
+            f.write(data)
+            raw = f.name
+
+        audio = raw + ".ogg"
+        subprocess.run(
+            ["ffmpeg", "-y", "-i", raw, "-c:a", "libopus", audio],
+            capture_output=True, timeout=30,
+        )
+        os.unlink(raw)
+
+        text, lang, err = transcribe_groq(audio, chat_id=chat_id)
+        os.unlink(audio)
+        if err or not text:
+            send_text(chat_id, f"Не распознал: {err or 'пусто'}")
+            return
+
+        log.info(f"voice: final_lang={lang} text={text!r}")
+
+        # Жёсткий режим /sr /ru /en если установлен, иначе язык от Whisper/детекта
+        mode = get_mode(chat_id)
+        if mode:
+            lang = mode
+            log.info(f"voice: MODE={mode}")
+
+        if lang == "ru":
+            tr = translate_to(text, "serbskij", "russkogo", chat_id=None, history=False)
+            flag = "RU -> SR"
+        elif lang == "en":
+            tr = translate_to(text, "russkij", "anglijskogo", chat_id=None, history=False)
+            flag = "EN -> RU"
+        else:
+            tr = translate_to(text, "russkij", "serbskogo", chat_id=None, history=False)
+            flag = "SR -> RU"
+
+        save_dialog(chat_id, "user", text)
+        save_dialog(chat_id, "assistant", tr)
+
+        out = f"🎙 {text}\n\n{flag}\n{tr}"
+
+        if lang == "ru":
+            save_last_user(chat_id, text)
+            send_text_with_button(chat_id, out, "🇬🇧 Перевести на английский", "to_en")
+            tts_async(chat_id, tr, "sr")
+        elif lang == "en":
+            save_last_user(chat_id, text)
+            send_text_with_button(chat_id, out, "🇷🇸 Перевести на сербский", "to_sr")
+            tts_async(chat_id, tr, "ru")
+        else:
+            send_text(chat_id, out)
+            tts_async(chat_id, tr, "ru")
+
+    except Exception as e:
+        log.error(f"handle_voice err: {e}")
+        send_text(chat_id, f"Ошибка: {e}")
+
+
+def handle_photo(chat_id, file_id):
+    try:
+        fi = tg("getFile", file_id=file_id)
+        if not fi.get("ok"):
+            send_text(chat_id, "Не удалось получить фото.")
+            return
+        path = fi["result"]["file_path"]
+        data = requests_get_retry(
+            f"https://api.telegram.org/file/bot{TOKEN}/{path}", timeout=120
+        ).content
+        with tempfile.NamedTemporaryFile(suffix=".jpg", delete=False) as f:
+            f.write(data)
+            img = f.name
+
+        send_text(chat_id, "📷 Распознаю текст...")
+        text, err = ocr_image(img)
+        os.unlink(img)
+
+        if err or not text:
+            send_text(chat_id, f"{err or 'Не распознал'}")
+            return
+
+        lang = detect_lang_sr_ru(text, chat_id=chat_id, source="photo")
+
+        if lang == "ru":
+            tr = translate_to(text, "serbskij", "russkogo", chat_id=None, history=False)
+            flag = "RU -> SR"
+        elif lang == "en":
+            tr = translate_to(text, "russkij", "anglijskogo", chat_id=None, history=False)
+            flag = "EN -> RU"
+        else:
+            tr = translate_to(text, "russkij", "serbskogo", chat_id=None, history=False)
+            flag = "SR -> RU"
+
+        save_dialog(chat_id, "user", text)
+        save_dialog(chat_id, "assistant", tr)
+
+        out = f"📷 {text}\n\n{flag}\n{tr}"
+
+        if lang == "ru":
+            save_last_user(chat_id, text)
+            send_text_with_button(chat_id, out, "🇬🇧 Перевести на английский", "to_en")
+        elif lang == "en":
+            save_last_user(chat_id, text)
+            send_text_with_button(chat_id, out, "🇷🇸 Перевести на сербский", "to_sr")
+        else:
+            send_text(chat_id, out)
+
+        tts_lang = "sr" if lang == "ru" else "ru"
+        tts_async(chat_id, tr, tts_lang)
+
+    except Exception as e:
+        log.error(f"handle_photo err: {e}")
+        send_text(chat_id, f"Ошибка при обработке фото: {e}")
+
+
+# ======================== POLLING ========================
+
+def get_updates(offset):
+    for attempt in range(3):
+        try:
+            r = requests_get_retry(
+                f"{API}/getUpdates",
+                params={"offset": offset, "timeout": 25},
+                timeout=30,
+            )
+            return r.json().get("result", [])
+        except Exception as e:
+            log.error(f"getUpdates err (popytka {attempt+1}): {e}")
+            time.sleep(1.5)
+    return []
+
+
+def main():
+    init_db()
+    log.info("Bot zapuschen (versiya 3.0 — intelligent lang detection)")
+    offset = 0
+
+    while True:
+        try:
+            for upd in get_updates(offset):
+                offset = upd["update_id"] + 1
+
+                cb = upd.get("callback_query")
+                if cb:
+                    cid = cb["message"]["chat"]["id"]
+                    if cid not in AUTHORIZED:
+                        continue
+                    if cb["data"] == "to_en":
+                        requests_post_retry(
+                            f"{API}/answerCallbackQuery",
+                            data={"callback_query_id": cb["id"], "text": "Перевожу на английский..."},
+                            timeout=8,
+                        )
+                        src = get_last_user(cid) or ""
+                        if not src:
+                            send_text(cid, "Нет исходного текста.")
+                        else:
+                            en = translate_to(src, "anglijskij", "russkogo", chat_id=None, history=False)
+                            send_text(cid, f"🇬🇧 RU -> EN\n\n{en}")
+                    elif cb["data"] == "to_sr":
+                        requests_post_retry(
+                            f"{API}/answerCallbackQuery",
+                            data={"callback_query_id": cb["id"], "text": "Перевожу на сербский..."},
+                            timeout=8,
+                        )
+                        src = get_last_user(cid) or ""
+                        if not src:
+                            send_text(cid, "Нет исходного текста.")
+                        else:
+                            sr = translate_to(src, "serbskij", "anglijskogo", chat_id=None, history=False)
+                            send_text(cid, f"🇷🇸 EN -> SR\n\n{sr}")
+                    continue
+
+                msg = upd.get("message") or upd.get("edited_message")
+                if not msg:
+                    continue
+                chat_id = msg["chat"]["id"]
+                if chat_id not in AUTHORIZED:
+                    send_text(chat_id, "Бот личный.")
+                    continue
+
+                text = msg.get("text")
+                voice = msg.get("voice")
+
+                if text and text.startswith("/"):
+                    cmd = text.lower().split()[0]
+                    if cmd == "/start":
+                        send_text(
+                            chat_id,
+                            "🇷🇸🇷🇺 Переводчик\n\n"
+                            "📝 Текст — напиши фразу\n"
+                            "🎙 Голос — отправь голосовое\n"
+                            "📷 Фото — отправь фото с текстом\n\n"
+                            "RU → SR | SR → RU | EN → RU\n\n"
+                            "/sr — режим: сербский → русский\n"
+                            "/ru — режим: русский → сербский\n"
+                            "/en — режим: английский → русский\n"
+                            "/auto — автодетект (по умолчанию)\n"
+                            "/clear — очистить историю",
+                        )
+                    elif cmd == "/sr":
+                        set_mode(chat_id, "sr")
+                        send_text(chat_id, "✅ Режим: сербский → русский")
+                    elif cmd == "/ru":
+                        set_mode(chat_id, "ru")
+                        send_text(chat_id, "✅ Режим: русский → сербский")
+                    elif cmd == "/en":
+                        set_mode(chat_id, "en")
+                        send_text(chat_id, "✅ Режим: английский → русский")
+                    elif cmd == "/auto":
+                        set_mode(chat_id, None)
+                        send_text(chat_id, "✅ Режим: автодетект")
+                    elif cmd == "/clear":
+                        clear_dialog_history(chat_id)
+                        send_text(chat_id, "✅ История очищена.")
+                    continue
+
+                if text:
+                    handle_text(chat_id, text)
+                elif voice:
+                    handle_voice(chat_id, voice["file_id"])
+                elif msg.get("photo"):
+                    handle_photo(chat_id, msg["photo"][-1]["file_id"])
+
+        except Exception as e:
+            log.error(f"loop err: {e}")
+            time.sleep(3)
+
+        time.sleep(0.3)
+
+
+if __name__ == "__main__":
+    main()

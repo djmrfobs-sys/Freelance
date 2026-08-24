@@ -1,0 +1,5 @@
+2026-08-14 20:46:43,494 INFO Бот запущен
+2026-08-14 20:47:13,117 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-14 20:47:22,521 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-14 20:50:08,612 INFO Бот запущен
+2026-08-14 20:50:09,938 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"

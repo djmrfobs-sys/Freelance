@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Комбо-пакеты — KISELEVY CREO</title>
+<style>
+:root{--blue:#A8D0E6;--peach:#F8C6A6;--peach-deep:#FF8A5B;--ink:#1C2B33;--ink-soft:#5B6C74;}
+*{margin:0;padding:0;box-sizing:border-box;}
+@page{size:A4;margin:0;}
+body{font-family:'Plus Jakarta Sans','Segoe UI',sans-serif;color:var(--ink);line-height:1.4;}
+.page{width:210mm;height:297mm;position:relative;overflow:hidden;background:#fff;page-break-after:always;}
+.hero{position:relative;overflow:hidden;height:26mm;color:#fff;background:linear-gradient(135deg,var(--blue),#D6D3DD 45%,var(--peach));display:flex;align-items:center;justify-content:center;text-align:center;padding:0 15mm;}
+.hero .content{z-index:2;position:relative;}
+.hero h1{font-size:21px;font-weight:800;text-shadow:0 2px 12px rgba(0,0,0,.12);color:var(--ink);}
+.hero p{margin-top:2px;font-size:11px;opacity:.85;color:var(--ink);}
+.body{padding:4mm 16mm 3mm;}
+.pkg{background:#fff;border:1px solid #E7EDF0;border-left:6px solid var(--peach-deep);border-radius:12px;padding:3.5mm 6mm;margin-bottom:3mm;box-shadow:0 6px 18px rgba(28,43,51,.07);}
+.pkg .p-row{display:flex;justify-content:space-between;align-items:center;gap:12px;}
+.pkg .p-row .t{font-size:14.5px;font-weight:800;}
+.pkg .p-row .t .badge-p{display:inline-block;background:linear-gradient(135deg,var(--blue),var(--peach-deep));color:#fff;font-size:8.5px;font-weight:800;border-radius:20px;padding:2px 8px;letter-spacing:1px;margin-right:6px;vertical-align:middle;}
+.pkg .s{color:var(--ink-soft);font-size:11px;margin-top:1px;}
+.pkg ul{list-style:none;margin-top:2mm;}
+.pkg li{padding:1.5px 0 0 14px;position:relative;font-size:11px;}
+.pkg li::before{content:'';position:absolute;left:2px;top:6px;width:7px;height:7px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--peach-deep));}
+.pkg .ex{font-size:10.5px;color:var(--ink);margin-top:1.8mm;border-top:1px dashed #E7EDF0;padding-top:1.2mm;line-height:1.3;}
+.pkg .ex b{color:var(--peach-deep);}
+.ribbon{background:linear-gradient(135deg,var(--blue),var(--peach));border-radius:8px;padding:2mm 4mm;margin:0 0 1.5mm 0;display:flex;justify-content:space-between;align-items:center;gap:8px;}
+.ribbon .old{font-size:11px;color:var(--ink-soft);white-space:nowrap;}
+.ribbon .old s{color:var(--ink);font-weight:800;}
+.ribbon .new{color:var(--ink);font-weight:800;white-space:nowrap;font-size:11.5px;}
+.ribbon .new .price{color:var(--peach-deep);font-size:15px;font-weight:800;}
+.ribbon .new .add{font-size:10px;color:var(--ink);font-weight:700;white-space:nowrap;}
+.ribbon .save{font-size:9px;color:var(--ink);font-weight:800;background:#fff;border-radius:20px;padding:2px 8px;white-space:nowrap;}
+.footer{position:absolute;bottom:6mm;left:0;right:0;text-align:center;color:#8a9aa2;font-size:11px;letter-spacing:1px;}
+</style>
+</head>
+<body>
+
+<div class="page">
+  <div class="hero">
+    <div class="content">
+      <h1>Комбо-пакеты под ключ</h1>
+      <p>Готовые решения - когда нужен полный продукт, а не отдельная услуга. Выгоднее, чем покупать по отдельности.</p>
+    </div>
+    <div class="badge">ГОТОВЫЕ РЕШЕНИЯ</div>
+  </div>
+  <div class="body">
+
+    <div class="ribbon">
+      <span class="old">Данный состав по отдельности: <s>108 000 ₽</s></span>
+      <span class="new">Выгодная цена <span class="price">92 000 ₽</span></span>
+      <span class="save">−16 000 ₽</span>
+    </div>
+    <div class="pkg">
+      <div class="p-row"><div class="t"><span class="badge-p">ПАКЕТ 1</span>Бизнес-фундамент</div></div>
+      <div class="s">Старт бизнеса в сети.</div>
+      <ul><li>Сайт-визитка (5 страниц)</li><li>Бот-помощник внутри сайта</li><li>Приём и обработка заявок</li><li>Базовая автоматизация</li></ul>
+      <div class="ex"><b>Этот инструмент для вас,</b> если вы только выходите в сеть и нужно, чтобы бизнес был заметен и принимал заявки.</div>
+      <div class="ex"><b>Мы соберём</b> вам основу: сайт, где вас легко найти, бот-помощник внутри него и приём заявок с базовой автоматизацией - старт без лишней сложности.</div>
+    </div>
+
+    <div class="ribbon">
+      <span class="old">Данный состав по отдельности: <s>347 000 ₽</s></span>
+      <span class="new">Выгодная цена <span class="price">295 000 ₽</span></span>
+      <span class="save">−52 000 ₽</span>
+    </div>
+    <div class="pkg">
+      <div class="p-row"><div class="t"><span class="badge-p">ПАКЕТ 2</span>Продюсер-под ключ</div></div>
+      <div class="s">Проект от идеи до продаж.</div>
+      <ul><li>Сайт + бот</li><li>Стратегия и позиционирование</li><li>Воронка продаж</li><li>Запуск и продвижение</li></ul>
+      <div class="ex"><b>Этот инструмент для вас,</b> если нужен полный проект от идеи до первых продаж.</div>
+      <div class="ex"><b>Мы пройдём</b> с вами весь путь: сделаем сайт и бота, определим позиционирование, построим воронку продаж и запустим продвижение - вы получаете готовый бизнес-процесс под ключ.</div>
+    </div>
+
+    <div class="ribbon">
+      <span class="old">Данный состав по отдельности: <s>236 000 ₽</s></span>
+      <span class="new">Выгодная цена <span class="price">201 000 ₽</span> <span class="add">+ 69 000 ₽/мес</span></span>
+      <span class="save">−35 000 ₽</span>
+    </div>
+    <div class="pkg">
+      <div class="p-row"><div class="t"><span class="badge-p">ПАКЕТ 3</span>Цифровой фасад</div></div>
+      <div class="s">Маркетинг через вашу личность.</div>
+      <ul><li>Позиционирование личного бренда</li><li>Telegram-канал</li><li>Бот</li><li>Контент-система</li><li>Нейропомощник</li></ul>
+      <div class="ex"><b>Этот инструмент для вас,</b> если вы хотите продавать через свою личность и доверие.</div>
+      <div class="ex"><b>Мы построим</b> ваш личный бренд: канал, бот, контент-систему и подключим нейропомощника - система, которая приводит клиентов через вас.</div>
+    </div>
+
+  </div>
+  <div class="footer">KISELEVY CREO · Tech Innovations · 2026</div>
+</div>
+
+<div class="page">
+  <div class="hero">
+    <div class="content">
+      <h1>Комбо-пакеты под ключ</h1>
+      <p>Готовые решения - когда нужен полный продукт, а не отдельная услуга. Выгоднее, чем покупать по отдельности.</p>
+    </div>
+    <div class="badge">ГОТОВЫЕ РЕШЕНИЯ</div>
+  </div>
+  <div class="body">
+
+    <div class="ribbon">
+      <span class="old">Данный состав по отдельности: <s>386 000 ₽</s></span>
+      <span class="new">Выгодная цена <span class="price">328 000 ₽</span></span>
+      <span class="save">−58 000 ₽</span>
+    </div>
+    <div class="pkg">
+      <div class="p-row"><div class="t"><span class="badge-p">ПАКЕТ 4</span>Автоворонка продаж</div></div>
+      <div class="s">Продукт, который продаёт сам.</div>
+      <ul><li>Лендинг</li><li>Бот</li><li>Воронка</li><li>Канал с автопостами</li><li>Трафик, захват, нагрев, продажа</li></ul>
+      <div class="ex"><b>Этот инструмент для вас,</b> если вы хотите, чтобы продукт продавал сам, без постоянного ручного контроля.</div>
+      <div class="ex"><b>Мы соберём</b> полный цикл: лендинг, бот, воронка, канал с автопостами и настройка трафика - от захвата до продажи автоматически.</div>
+    </div>
+
+    <div class="ribbon">
+      <span class="old">Данный состав по отдельности: <s>646 000 ₽</s></span>
+      <span class="new">Выгодная цена <span class="price">549 000 ₽</span></span>
+      <span class="save">−97 000 ₽</span>
+    </div>
+    <div class="pkg">
+      <div class="p-row"><div class="t"><span class="badge-p">ПАКЕТ 5</span>ИИ-продукт под ключ</div></div>
+      <div class="s">Серьёзный ИИ-сервис с собственной механикой, стоимость под проект.</div>
+      <ul><li>Бот с несколькими ролями</li><li>ИИ-логика</li><li>Подписка и оплата</li><li>Личный кабинет</li></ul>
+      <div class="ex"><b>Этот инструмент для вас,</b> если нужен серьёзный ИИ-сервис с собственной механикой.</div>
+      <div class="ex"><b>Мы разработаем</b> продукт с нуля: бот с несколькими ролями, ИИ-логика, подписка и оплата, личный кабинет. Точная стоимость считается под проект.</div>
+    </div>
+
+  </div>
+  <div class="footer">KISELEVY CREO · Tech Innovations · 2026</div>
+</div>
+
+</body>
+</html>

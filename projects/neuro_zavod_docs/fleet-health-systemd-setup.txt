@@ -1,0 +1,33 @@
+# === ~/.config/systemd/user/fleet-health.service ===
+
+[Unit]
+Description=Fleet health check — все юниты нейрозавода
+
+[Service]
+Type=oneshot
+ExecStart=%h/backups/fleet-health.sh
+
+# === ~/.config/systemd/user/fleet-health.timer ===
+
+[Unit]
+Description=Проверка здоровья флота каждые 10 минут
+
+[Timer]
+OnCalendar=*:0/10
+Persistent=true
+
+[Install]
+WantedBy=timers.target
+
+# === Установка ===
+# 1. mkdir -p ~/backups (если ещё нет)
+# 2. cp fleet-health.sh ~/backups/ && chmod +x ~/backups/fleet-health.sh
+# 3. Впиши в скрипт: реальные имена всех 15 юнитов (сверить через systemctl --user list-units --type=service)
+# 4. Создай отдельного telegram-бота-наблюдателя через @BotFather — НЕ используй токен пользовательского бота
+# 5. Впиши ADMIN_BOT_TOKEN и ADMIN_CHAT_ID в скрипт
+# 6. systemctl --user daemon-reload
+# 7. systemctl --user enable --now fleet-health.timer
+# 8. Тест: systemctl --user start fleet-health.service && journalctl --user -u fleet-health.service -n 20
+#
+# ВАЖНО: админ-чат должен быть ОТДЕЛЬНЫМ от чатов, где сидят пользователи ботов —
+# иначе алерты "бот упал" увидят клиенты клиники, а не только ты.

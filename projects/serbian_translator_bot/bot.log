@@ -1,0 +1,876 @@
+2026-08-03 10:27:55,885 INFO Бот запущен
+2026-08-03 10:28:23,937 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-03 10:28:54,866 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-03 10:29:50,449 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-03 10:30:10,030 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-03 10:32:09,709 INFO Бот запущен
+2026-08-03 10:32:35,607 INFO Бот запущен
+2026-08-03 10:33:29,270 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-03 10:34:15,309 INFO Бот запущен
+2026-08-03 10:34:39,069 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-03 10:35:00,424 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-03 10:35:41,684 INFO Бот запущен
+2026-08-03 10:36:01,105 INFO Бот запущен
+2026-08-03 10:36:15,117 INFO Бот запущен
+2026-08-03 10:36:29,117 INFO Бот запущен
+2026-08-03 10:37:37,396 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-03 10:38:16,112 INFO Бот запущен
+2026-08-03 10:38:52,589 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-03 10:40:03,132 INFO Бот запущен
+2026-08-03 10:40:31,126 INFO Бот запущен
+2026-08-03 10:40:44,104 INFO Бот запущен
+2026-08-03 11:06:25,949 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-03 11:06:39,015 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-03 13:21:33,754 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-03 13:44:39,599 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-03 14:11:56,542 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-03 17:15:31,123 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-03 17:15:48,297 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-03 17:44:30,895 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-04 16:25:09,733 INFO Бот запущен
+2026-08-04 16:26:27,640 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-04 16:26:29,993 ERROR photo err: name 'url' is not defined
+2026-08-04 16:27:04,526 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-04 16:27:06,284 ERROR photo err: name 'url' is not defined
+2026-08-04 16:27:53,904 INFO Бот запущен
+2026-08-04 16:36:36,381 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-04 16:38:45,696 INFO Бот запущен
+2026-08-04 16:39:58,159 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-04 17:20:57,051 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-05 18:20:46,752 INFO Бот запущен
+2026-08-05 18:23:33,422 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-06 01:15:57,236 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-06 07:35:46,929 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-06 07:36:02,523 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-06 07:36:48,062 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-06 09:48:46,136 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-06 09:52:00,621 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-06 09:52:23,310 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-06 10:18:14,441 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-06 10:19:25,135 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-06 10:29:00,762 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-06 10:29:38,265 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-06 10:30:12,149 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-06 10:31:21,466 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-06 12:00:53,812 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-06 12:01:54,816 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-06 12:02:12,057 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-06 12:02:35,445 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-07 09:24:34,544 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-07 09:24:55,778 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-07 09:34:41,596 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-07 09:34:59,738 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-07 09:45:31,081 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-07 10:06:42,899 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-08 07:55:55,262 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-08 07:58:47,174 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-08 16:59:01,244 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-08 16:59:36,776 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-08 17:42:21,145 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-08 17:43:43,176 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-08 17:45:07,967 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-08 18:00:36,417 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-09 09:50:26,161 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-09 09:51:25,105 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-09 09:53:42,869 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-10 01:10:05,280 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-10 02:01:21,272 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-10 02:53:04,870 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-10 02:54:37,828 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-10 03:17:50,968 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-10 05:05:59,047 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-10 05:50:23,939 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-10 06:52:22,156 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-10 07:48:19,134 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-10 08:28:14,940 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-10 08:29:17,608 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-10 08:30:19,632 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-10 08:30:30,100 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-10 08:44:35,762 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-10 08:45:21,985 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-10 08:47:29,957 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-10 08:50:12,979 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-10 08:50:23,248 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-10 10:23:45,667 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-10 11:37:51,574 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-10 13:21:11,958 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-10 14:40:24,786 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-10 15:25:12,458 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-10 16:53:49,398 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-10 18:30:52,380 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-10 19:59:17,704 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-10 21:13:47,530 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-10 22:40:37,645 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-11 00:19:05,069 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-11 00:26:30,019 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-11 01:47:05,335 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-11 02:18:15,977 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-11 03:45:39,061 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-11 04:07:43,067 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-11 04:14:56,724 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-11 05:57:59,145 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-11 07:40:55,622 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-11 09:38:50,241 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-11 09:46:05,910 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-11 10:08:12,026 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-11 10:31:21,257 INFO Бот запущен
+2026-08-11 12:10:18,198 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-11 12:36:03,926 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-11 13:05:48,286 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-11 13:51:42,856 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-11 15:48:24,370 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-11 15:59:33,085 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-11 16:47:40,801 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-11 17:14:55,074 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-11 17:24:37,251 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-11 20:43:58,006 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-11 21:24:36,285 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-11 21:45:08,472 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-11 22:09:15,158 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-11 22:12:29,387 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-11 23:56:55,247 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-12 00:19:18,854 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-12 00:34:09,283 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-12 00:48:00,951 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-12 00:56:36,310 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-12 02:06:40,705 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-12 04:31:16,742 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-12 05:30:24,012 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-12 06:22:46,211 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-12 06:30:13,234 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-12 06:40:42,605 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-12 07:28:13,562 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-12 07:51:21,833 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-12 07:57:09,829 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-12 08:16:04,868 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-12 09:14:55,764 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-12 09:29:43,423 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-12 10:30:48,320 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-12 11:04:47,104 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-12 11:12:30,412 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-12 12:44:29,613 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-12 12:59:12,284 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-12 14:35:52,942 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-12 15:03:51,236 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-12 15:12:57,592 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-12 15:42:19,362 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-12 16:09:49,122 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-12 16:10:27,499 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-12 16:11:29,162 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-12 16:21:23,662 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-12 16:21:29,424 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-12 16:26:23,740 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-12 16:26:28,414 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-12 16:38:45,603 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-12 16:45:13,857 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-12 17:03:37,201 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-12 17:26:03,218 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-12 18:03:04,837 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-12 18:07:51,888 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-12 19:17:13,345 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-12 22:53:10,226 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-12 23:01:47,342 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-12 23:15:11,169 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-13 00:59:02,766 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-13 01:10:03,222 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-13 01:13:33,700 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-13 01:28:24,070 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-13 01:35:38,825 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-13 02:20:18,182 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-13 03:27:35,789 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-13 04:19:48,612 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-13 04:31:29,459 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-13 04:34:43,564 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-13 06:08:08,484 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-13 06:37:07,135 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-13 07:02:04,246 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-13 07:36:53,767 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-13 08:21:45,342 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-13 08:35:06,160 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-13 08:36:10,581 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-13 08:37:51,796 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-13 08:40:39,602 INFO Бот запущен
+2026-08-13 08:41:04,167 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-13 08:42:50,476 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-13 08:45:07,818 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-13 08:47:59,358 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-13 08:49:32,330 INFO Бот запущен
+2026-08-13 08:49:59,652 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-13 08:50:05,966 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-13 08:51:00,665 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-13 08:52:30,937 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-13 08:54:35,186 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-13 08:59:22,282 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-13 09:08:35,745 INFO Бот запущен
+2026-08-13 10:20:17,525 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-13 12:43:23,777 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-13 12:50:50,710 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-13 13:29:20,538 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-13 13:30:47,452 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-13 13:33:43,013 INFO Бот запущен
+2026-08-13 15:02:12,644 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-13 16:01:50,831 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-13 16:38:24,237 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-13 17:56:52,030 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-13 19:36:49,094 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-13 20:28:11,363 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-13 21:49:20,393 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-13 22:56:23,266 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-14 02:21:22,792 ERROR loop err: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))
+2026-08-14 02:39:32,548 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-14 02:48:10,737 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-14 02:52:46,559 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-14 05:50:20,411 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-14 05:52:21,424 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-14 05:52:32,735 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-14 05:52:45,453 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-14 05:54:33,335 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-14 05:54:37,647 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-14 06:20:23,678 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-14 06:21:19,717 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-14 06:24:18,860 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-14 06:24:42,360 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-14 06:31:38,056 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-14 06:57:36,084 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-14 07:19:58,422 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-14 08:28:32,357 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-14 08:49:15,010 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-14 10:17:14,750 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-14 10:57:08,331 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-14 11:05:10,486 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-14 11:46:19,746 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-14 12:08:45,744 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-14 12:13:00,189 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-14 12:13:42,072 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-14 12:14:08,801 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-14 12:15:01,517 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-14 12:16:44,392 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-14 12:18:05,971 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-14 12:47:34,956 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-14 13:10:38,678 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-14 14:00:06,650 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-14 15:01:35,050 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-14 16:54:17,079 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-14 17:37:52,889 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-14 18:01:28,387 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-14 18:26:56,517 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-14 19:40:57,320 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-14 20:25:23,433 ERROR loop err: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=70)
+2026-08-14 20:34:22,340 INFO Бот запущен
+2026-08-14 20:37:05,595 INFO Бот запущен
+2026-08-14 20:39:57,725 INFO Бот запущен
+2026-08-14 20:42:28,234 INFO Бот запущен
+2026-08-14 20:43:06,872 INFO Бот запущен
+2026-08-14 20:46:38,759 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-14 20:46:40,677 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-14 20:47:28,986 INFO Бот запущен
+2026-08-14 20:51:00,474 INFO Бот запущен
+2026-08-14 20:51:01,906 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-14 20:51:03,932 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-14 20:52:22,312 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-14 20:52:25,774 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-14 20:52:28,419 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-14 20:52:30,662 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-14 20:52:43,106 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-14 20:52:52,575 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-14 20:52:59,096 INFO Бот запущен
+2026-08-14 20:53:39,508 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-14 20:53:41,888 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-14 20:54:01,137 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-14 20:56:14,555 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-14 20:57:16,786 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-14 20:57:37,755 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-14 20:57:55,970 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-14 20:58:05,054 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-14 20:58:29,838 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-14 21:00:40,221 INFO Бот запущен
+2026-08-14 21:04:58,536 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-14 21:05:09,936 INFO Бот запущен
+2026-08-14 21:05:15,925 INFO voice transcribe: lang=None text='Доброе утро!'
+2026-08-14 21:07:31,545 INFO voice transcribe: lang=None text='Могу ли добить рачун?'
+2026-08-14 21:08:14,440 INFO Бот запущен
+2026-08-14 21:08:57,117 INFO Бот запущен
+2026-08-14 21:09:46,298 INFO voice transcribe: wlang='Russian' text='Могу ли добить ирачон?'
+2026-08-14 21:09:47,230 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-14 21:11:09,004 INFO Бот запущен
+2026-08-14 21:11:51,671 INFO Бот запущен
+2026-08-14 21:12:29,502 INFO groq auto: lang='Russian' text='Доброе утро, добрый вечер!'
+2026-08-14 21:12:29,752 INFO groq sr-check: lang='Serbian' text='Dobro jutro, dobro вечero.'
+2026-08-14 21:12:29,752 INFO voice transcribe: wlang='sr' text='Dobro jutro, dobro вечero.'
+2026-08-14 21:12:30,679 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-14 21:12:57,933 INFO Бот запущен
+2026-08-14 21:12:58,403 INFO groq auto: lang='Russian' text='Доброе утро, добрый вечер!'
+2026-08-14 21:12:58,559 INFO groq sr-check: lang='Serbian' text='Dobro jutro, dobro вечero.'
+2026-08-14 21:12:58,559 INFO voice transcribe: wlang='sr' text='Dobro jutro, dobro вечero.'
+2026-08-14 21:12:59,553 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-14 21:15:01,008 INFO groq auto: lang='Russian' text='Могу ли добить рачун?'
+2026-08-14 21:15:01,232 INFO groq sr-check: lang='Serbian' text='Možu li dobiti račun?'
+2026-08-14 21:15:01,232 INFO voice transcribe: wlang='sr' text='Možu li dobiti račun?'
+2026-08-14 21:15:01,533 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-14 21:15:56,047 INFO Бот запущен
+2026-08-14 21:17:14,470 INFO voice transcribe: wlang='Serbian' text='Koe godina? Kutsu? Zakosu? Mogu li dobyte dve čaši vruči vode? Hvala vam! Molim! Prijatno!'
+2026-08-14 21:19:40,391 INFO Бот запущен
+2026-08-14 21:20:11,110 INFO voice transcribe: wlang='Serbian' text='Koe godina? Kutsu? Zakosu? Mogu li dobyte dve čaši vruči vode? Hvala vam! Molim! Prijatno!'
+2026-08-14 21:20:12,039 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-14 21:21:25,365 INFO voice transcribe: wlang='Serbian' text='Koe godina? Kutsu? Zakosu? Mogu li dobyte dve čaši vruči vode? Hvala vam! Molim! Prijatno!'
+2026-08-14 21:21:25,650 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-14 21:21:27,635 INFO voice transcribe: wlang='Serbian' text='Mogu li dobiti račo? Kucu, disko kucu. Jedan 2.'
+2026-08-14 21:21:27,922 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-14 21:22:50,483 ERROR getUpdates err (попытка 1): HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-14 21:23:22,899 INFO voice transcribe: wlang='Serbian' text='Koe godina? Kutsu? Zakosu? Mogu li dobyte dve čaši vruči vode? Hvala vam! Molim! Prijatno!'
+2026-08-14 21:23:23,180 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-14 21:26:44,241 INFO voice transcribe: wlang='Serbian' text='1,2,3,4,5,6,7,8'
+2026-08-14 21:26:44,530 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-14 22:15:32,753 ERROR getUpdates err (попытка 1): HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-14 22:23:00,751 ERROR getUpdates err (попытка 1): HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-14 22:37:41,372 ERROR getUpdates err (попытка 1): HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-14 22:59:50,758 ERROR getUpdates err (попытка 1): HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-14 23:14:22,358 ERROR getUpdates err (попытка 1): HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-14 23:37:12,896 ERROR getUpdates err (попытка 1): HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-14 23:45:44,598 ERROR getUpdates err (попытка 1): HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-14 23:53:25,156 ERROR getUpdates err (попытка 1): HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-15 02:35:22,138 ERROR getUpdates err (попытка 1): HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-15 03:17:37,887 ERROR getUpdates err (попытка 1): HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-15 03:39:58,343 ERROR getUpdates err (попытка 1): HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-15 06:06:25,276 ERROR getUpdates err (попытка 1): HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot8830241640:AAGfQwkdDku-v9IG3aaxuNHTMggsMvx5IMA/getUpdates?offset=561287206&timeout=25 (Caused by ConnectTimeoutError(<HTTPSConnection(host='api.telegram.org', port=443) at 0x75a256fdad50>, 'Connection to api.telegram.org timed out. (connect timeout=30)'))
+2026-08-15 06:45:09,202 INFO Бот запущен
+2026-08-15 06:45:09,203 INFO Бот запущен
+2026-08-15 06:45:44,630 INFO Бот запущен
+2026-08-15 06:45:44,630 INFO Бот запущен
+2026-08-15 06:49:28,903 INFO Бот запущен
+2026-08-15 06:49:28,903 INFO Бот запущен
+  File "/root/.openclaw/workspace-neuro/projects/serbian_translator_bot/bot.py", line 30
+    with HIST_LOCK:
+IndentationError: unexpected indent
+  File "/root/.openclaw/workspace-neuro/projects/serbian_translator_bot/bot.py", line 30
+    with HIST_LOCK:
+IndentationError: unexpected indent
+2026-08-15 07:07:08,098 INFO Бот запущен
+2026-08-15 07:07:11,630 INFO Бот запущен
+2026-08-15 07:10:20,253 INFO voice transcribe: wlang='Russian' text='Добрый день! Молим Вас! О, хвала куцу за косу! Приятно! Красно! Добрый день! Могу ли добыть рачун? Могу ли две чаши теплой воды в руче?'
+2026-08-15 07:10:21,197 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-15 07:11:40,760 INFO Бот запущен
+2026-08-15 07:14:20,488 INFO Бот запущен
+2026-08-15 07:15:51,843 INFO voice transcribe: lang='en' text='Hello, what is your name? My name is Artur. I am there 41 years ago. Where are you from?'
+2026-08-15 07:15:52,803 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-15 07:18:34,815 INFO voice transcribe: lang='ru' text='Добрый день, меня зовут Катя. Я пришла сегодня на прием к доктору, во сколько мне нужно зайти к нему в кабинет.'
+2026-08-15 07:18:53,994 INFO Бот запущен
+2026-08-15 07:21:43,777 INFO voice transcribe: lang='en' text="Hello, my name is Artur. I'm 41 years old."
+2026-08-15 07:21:44,753 INFO HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+2026-08-15 07:31:28,057 INFO Bot zapuschen (versiya 2.0 — polnyj rewrite)
+2026-08-15 07:33:20,415 INFO whisper pass1: lang='russian' text='Добрый день. Какое имя твое?'
+2026-08-15 07:33:20,416 INFO voice result: wlang='ru' text='Добрый день. Какое имя твое?'
+2026-08-15 07:33:20,416 INFO voice final lang: ru
+2026-08-15 07:35:51,241 INFO whisper pass1: lang='russian' text='Могу ли добыть и рачун? Могу ли добыть и две чаши топлой воды?'
+2026-08-15 07:35:51,242 INFO voice result: wlang='ru' text='Могу ли добыть и рачун? Могу ли добыть и две чаши топлой воды?'
+2026-08-15 07:35:51,242 INFO voice final lang: ru
+2026-08-15 07:39:00,294 INFO Bot zapuschen (versiya 2.0 — polnyj rewrite)
+2026-08-15 07:41:18,844 INFO Bot zapuschen (versiya 2.0 — polnyj rewrite)
+2026-08-15 07:43:19,004 WARNING POST retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot8830241640:AAGfQwkdDku-v9IG3aaxuNHTMggsMvx5IMA/sendMessage (Caused by ConnectTimeoutError(<HTTPSConnection(host='api.telegram.org', port=443) at 0x7f35b66907d0>, 'Connection to api.telegram.org timed out. (connect timeout=60)'))
+2026-08-15 07:43:19,991 INFO whisper pass1: lang='russian' text='Могу ли добить ирачуну? Могу ли добыть и две чаши топлой воды?'
+2026-08-15 07:43:19,991 INFO whisper: 'russian' c yavnymi ru bukvami bez sr konflikta -> return ru
+2026-08-15 07:43:19,992 INFO voice result: wlang='ru' text='Могу ли добить ирачуну? Могу ли добыть и две чаши топлой воды?'
+2026-08-15 07:43:19,992 INFO voice final lang: ru
+2026-08-15 07:45:52,629 INFO Bot zapuschen (versiya 2.0 — polnyj rewrite)
+2026-08-15 07:54:09,503 INFO whisper pass1: lang='russian' text='Могу ли добить и рачун? Могу ли добыть и две чаши топлой воды?'
+2026-08-15 07:54:09,503 INFO whisper: likely Russian (3 exclusive letters)
+2026-08-15 07:54:09,504 INFO voice result: wlang='ru' text='Могу ли добить и рачун? Могу ли добыть и две чаши топлой воды?'
+2026-08-15 07:54:09,504 INFO voice final lang: ru
+2026-08-15 07:59:37,669 INFO whisper pass1: lang='russian' text='Могу ли добить рачун? Кое цена? Куца.'
+2026-08-15 07:59:37,669 INFO whisper: 'russian' but no markers (0 exclusive letters) -> pass2 sr
+2026-08-15 07:59:37,903 INFO whisper pass2 (sr): text='Mogu li dobiti račun? Ko je cena? Kudza.'
+2026-08-15 07:59:37,904 INFO voice result: wlang='sr' text='Mogu li dobiti račun? Ko je cena? Kudza.'
+2026-08-15 07:59:37,906 INFO voice final lang: sr
+2026-08-15 08:00:41,856 INFO Bot zapuschen (versiya 3.0 — intelligent lang detection)
+2026-08-15 08:01:12,277 INFO Whisper: Pass1 (auto-detect)
+2026-08-15 08:01:12,517 INFO Whisper Pass1: lang='russian' text='1, 2, 3, 4, 5, 6, 7, 8, 9, 10.'
+2026-08-15 08:01:12,517 INFO detect: fallback_sr
+2026-08-15 08:01:12,517 INFO Whisper: КОНФЛИКТ (Whisper=russian но text=sr) → Pass2 с language='sr'
+2026-08-15 08:01:12,763 INFO Whisper Pass2 (sr): text='1, 2, 3, 4, 5, 5, 6, 7, 8, 9, 10'
+2026-08-15 08:01:12,763 INFO detect: fallback_sr
+2026-08-15 08:01:12,763 INFO Whisper Pass2 analysis: sr
+2026-08-15 08:01:12,764 ERROR log_lang_detection err: table lang_detection_log has no column named whisper_result
+2026-08-15 08:01:12,765 INFO voice: final_lang=sr text='1, 2, 3, 4, 5, 5, 6, 7, 8, 9, 10'
+2026-08-15 08:03:15,643 INFO Whisper: Pass1 (auto-detect)
+2026-08-15 08:03:15,812 INFO Whisper Pass1: lang='russian' text='Могу ли добыть и рачун? Могу ли добить и две чаши топлой воды?'
+2026-08-15 08:03:15,812 INFO detect: ru_words: могу
+2026-08-15 08:03:15,812 INFO Whisper: Pass1 OK, lang=ru
+2026-08-15 08:03:15,813 ERROR log_lang_detection err: table lang_detection_log has no column named whisper_result
+2026-08-15 08:03:15,814 INFO voice: final_lang=ru text='Могу ли добыть и рачун? Могу ли добить и две чаши топлой воды?'
+2026-08-15 08:04:04,532 INFO Bot zapuschen (versiya 3.0 — intelligent lang detection)
+2026-08-15 08:05:35,009 INFO Whisper: Pass1 (auto-detect)
+2026-08-15 08:05:35,181 INFO Whisper Pass1: lang='russian' text='Могу ли добыть и рачун? Могу ли добить и две чаши топлой воды?'
+2026-08-15 08:05:35,181 INFO detect: sr_words: рачун,ли,могу
+2026-08-15 08:05:35,181 INFO Whisper: КОНФЛИКТ (Whisper=russian но text=sr) → Pass2 с language='sr'
+2026-08-15 08:05:35,355 INFO Whisper Pass2 (sr): text='Могу ли добыти рачун? Могу ли добити две чаши топлой воды?'
+2026-08-15 08:05:35,355 INFO detect: sr_words: рачун,ли,могу
+2026-08-15 08:05:35,355 INFO Whisper Pass2 analysis: sr
+2026-08-15 08:05:35,356 ERROR log_lang_detection err: table lang_detection_log has no column named whisper_result
+2026-08-15 08:05:35,357 INFO voice: final_lang=sr text='Могу ли добыти рачун? Могу ли добити две чаши топлой воды?'
+2026-08-15 08:05:48,992 INFO Whisper: Pass1 (auto-detect)
+2026-08-15 08:05:49,242 INFO Whisper Pass1: lang='russian' text='Какое имя? Могу ли добыть ирачом? Ваша куция?'
+2026-08-15 08:05:49,243 INFO detect: sr_words: ли,могу
+2026-08-15 08:05:49,243 INFO Whisper: КОНФЛИКТ (Whisper=russian но text=sr) → Pass2 с language='sr'
+2026-08-15 08:05:49,480 INFO Whisper Pass2 (sr): text='Koe je ima? Mogu li dobyć iрачu? Vasa kuca?'
+2026-08-15 08:05:49,480 INFO detect: sr_words: je,li
+2026-08-15 08:05:49,480 INFO Whisper Pass2 analysis: sr
+2026-08-15 08:05:49,480 ERROR log_lang_detection err: table lang_detection_log has no column named whisper_result
+2026-08-15 08:05:49,482 INFO voice: final_lang=sr text='Koe je ima? Mogu li dobyć iрачu? Vasa kuca?'
+2026-08-15 08:07:44,735 INFO Bot zapuschen (versiya 3.0 — intelligent lang detection)
+2026-08-15 08:09:26,718 INFO Whisper: Pass1 (auto-detect)
+2026-08-15 08:09:26,975 INFO Whisper Pass1: lang='russian' text='Могу ли добить рачун? Какая цена? Могу ли добить и две чаши топлой воды?'
+2026-08-15 08:09:26,975 INFO detect: sr_words: могу,рачун,ли
+2026-08-15 08:09:26,975 INFO Whisper: КОНФЛИКТ (Whisper=russian но text=sr) → Pass2 с language='sr'
+2026-08-15 08:09:27,218 INFO Whisper Pass2 (sr): text='Могу ли добить рачун? Која е цена? Могу ли добити две чаше топлой воде?'
+2026-08-15 08:09:27,218 INFO detect: sr_words: могу,рачун,ли
+2026-08-15 08:09:27,218 INFO Whisper Pass2 analysis: sr
+2026-08-15 08:09:27,218 ERROR log_lang_detection err: table lang_detection_log has no column named whisper_result
+2026-08-15 08:09:27,220 INFO voice: final_lang=sr text='Могу ли добить рачун? Која е цена? Могу ли добити две чаше топлой воде?'
+2026-08-15 08:13:30,363 INFO Whisper: Pass1 (auto-detect)
+2026-08-15 08:13:30,597 INFO Whisper Pass1: lang='russian' text='Кое-кутце? Кое-годино?'
+2026-08-15 08:13:30,597 INFO detect: ru_exclusive: ъыэщёйюя
+2026-08-15 08:13:30,597 INFO Whisper: Pass1 OK, lang=ru
+2026-08-15 08:13:30,597 ERROR log_lang_detection err: table lang_detection_log has no column named whisper_result
+2026-08-15 08:13:30,598 INFO voice: final_lang=ru text='Кое-кутце? Кое-годино?'
+2026-08-15 08:19:13,717 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-15 08:23:22,908 INFO Whisper: Pass1 (auto-detect)
+2026-08-15 08:23:23,068 INFO Whisper Pass1: lang='russian' text='Не могу ли добить ирачон, какая ее цена.'
+2026-08-15 08:23:23,068 INFO detect: sr_words: могу,ли
+2026-08-15 08:23:23,068 INFO Whisper: КОНФЛИКТ (Whisper=russian но text=sr) → Pass2 с language='sr'
+2026-08-15 08:23:23,309 INFO Whisper Pass2 (sr): text='Ne mogu li da biti račan, koja je cena.'
+2026-08-15 08:23:23,309 INFO detect: sr_words: ne,li,da
+2026-08-15 08:23:23,309 INFO Whisper Pass2 analysis: sr
+2026-08-15 08:23:23,309 ERROR log_lang_detection err: table lang_detection_log has no column named whisper_result
+2026-08-15 08:23:23,311 INFO voice: final_lang=sr text='Ne mogu li da biti račan, koja je cena.'
+2026-08-15 08:23:41,929 INFO Whisper: Pass1 (auto-detect)
+2026-08-15 08:23:42,086 INFO Whisper Pass1: lang='russian' text='Какая цена, круто'
+2026-08-15 08:23:42,086 INFO detect: ru_exclusive: ъыэщёйюя
+2026-08-15 08:23:42,086 INFO Whisper: Pass1 OK, lang=ru
+2026-08-15 08:23:42,086 ERROR log_lang_detection err: table lang_detection_log has no column named whisper_result
+2026-08-15 08:23:42,087 INFO voice: final_lang=ru text='Какая цена, круто'
+2026-08-15 08:28:34,142 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-15 08:57:59,439 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-15 10:11:44,216 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-15 11:40:28,389 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-15 11:44:51,927 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-15 12:25:21,870 INFO Bot zapuschen (versiya 3.0 — intelligent lang detection)
+2026-08-15 12:39:40,770 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-15 12:52:45,202 INFO Whisper: Pass1 (auto-detect)
+2026-08-15 12:52:45,433 INFO Whisper Pass1: lang='russian' text='Добрдан, кое имя?'
+2026-08-15 12:52:45,434 INFO detect: ru_exclusive: ъыэщёйюя
+2026-08-15 12:52:45,434 INFO Whisper: Pass1 OK, lang=ru
+2026-08-15 12:52:45,434 ERROR log_lang_detection err: table lang_detection_log has no column named whisper_result
+2026-08-15 12:52:45,435 INFO voice: final_lang=ru text='Добрдан, кое имя?'
+2026-08-15 12:59:15,936 INFO Bot zapuschen (versiya 3.0 — intelligent lang detection)
+2026-08-15 14:51:42,614 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-15 15:15:11,294 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-15 16:28:05,111 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-15 16:50:30,622 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-15 16:57:48,106 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-15 17:14:11,079 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-15 18:01:13,097 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-15 18:11:56,928 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-15 18:34:07,958 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-15 18:41:29,430 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-15 19:37:49,730 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-15 19:47:58,662 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-15 21:54:49,944 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-15 22:00:45,318 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-15 23:07:36,137 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-15 23:15:52,507 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-16 00:12:16,598 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-16 01:12:52,886 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-16 01:13:23,449 WARNING GET retry 2/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-16 01:53:54,514 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-16 02:40:20,356 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-16 03:19:06,102 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-16 04:59:51,305 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-16 05:10:04,816 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-16 06:46:42,573 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-16 07:45:46,089 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-16 07:48:42,775 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-16 07:53:25,894 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-16 08:50:39,618 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-16 10:06:02,390 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-16 10:36:01,495 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-16 10:59:47,076 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-16 11:07:19,270 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-16 11:53:53,020 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-16 13:11:33,232 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-16 13:42:30,806 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-16 14:40:40,591 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-16 14:45:19,121 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-16 15:10:18,903 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-16 15:31:53,649 WARNING GET retry 1/3: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))
+2026-08-16 17:13:43,281 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-16 18:29:26,066 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-16 18:36:45,565 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-16 19:29:05,942 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-16 19:36:47,542 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-16 19:53:55,097 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-16 20:06:32,650 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-16 20:17:04,529 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-16 20:43:18,519 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-16 22:04:17,132 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-16 22:34:09,159 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-16 23:10:57,686 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-16 23:17:47,286 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-17 00:17:23,764 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-17 00:39:25,334 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-17 01:23:42,415 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-17 02:57:39,468 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-17 04:18:14,798 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-17 05:27:38,846 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-17 05:34:49,483 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-17 05:36:10,768 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-17 06:39:14,691 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-17 06:56:57,978 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-17 07:47:16,294 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-17 08:26:42,397 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-17 09:38:48,009 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-17 09:43:06,795 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-17 09:58:27,417 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-17 10:29:54,368 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-17 12:10:41,144 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-17 12:34:18,356 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-17 13:26:23,834 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-17 14:13:13,482 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-17 14:28:27,350 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-17 15:15:03,194 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-17 16:23:58,139 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-17 17:17:58,476 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-17 17:22:39,862 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-17 17:37:40,498 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-17 17:49:10,294 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-17 18:27:18,806 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-17 18:44:27,350 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-17 18:58:50,487 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-17 19:43:13,037 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-17 20:27:08,561 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-17 21:10:30,772 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-17 22:14:12,371 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-17 22:21:58,779 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-17 23:09:13,686 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-17 23:22:00,589 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-17 23:24:47,258 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-17 23:55:34,573 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-18 00:01:46,624 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-18 00:09:22,303 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-18 00:26:05,655 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-18 00:42:51,407 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-18 00:46:38,716 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-18 00:59:24,622 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-18 01:07:04,985 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-18 01:30:59,835 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-18 03:07:04,143 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-18 03:51:56,682 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-18 04:08:05,426 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-18 04:43:01,134 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-18 04:54:01,402 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-18 05:05:02,221 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-18 06:04:31,781 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-18 06:13:04,087 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-18 06:41:09,526 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-18 07:41:00,934 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-18 07:58:38,166 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-18 08:38:02,037 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-18 09:31:49,911 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-18 09:32:27,677 WARNING GET retry 2/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-18 10:01:26,731 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-18 11:04:02,646 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-18 11:26:49,489 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-18 11:37:42,598 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-18 11:49:46,550 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-18 12:00:00,716 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-18 12:36:57,756 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-18 13:43:36,337 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-18 14:12:44,303 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-18 14:29:23,030 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-18 15:45:49,062 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-18 15:55:51,480 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-18 16:17:48,532 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-18 16:25:14,117 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-18 17:17:09,987 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-18 18:23:09,672 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-18 19:08:02,059 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-18 20:30:33,125 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-18 20:54:13,395 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-18 20:58:48,037 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-18 21:09:05,301 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-18 22:04:47,632 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-18 22:41:40,502 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-18 23:23:13,747 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-18 23:30:50,565 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-18 23:32:34,540 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-19 00:01:21,281 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-19 01:04:13,532 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-19 02:00:48,155 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-19 02:04:57,502 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-19 03:00:08,336 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-19 03:59:33,132 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-19 05:09:01,209 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-19 05:16:22,166 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-19 05:31:23,157 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-19 06:42:32,654 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-19 07:04:49,046 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-19 10:28:50,966 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-19 11:21:47,415 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-19 11:53:46,357 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-19 12:30:43,220 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-19 13:07:46,700 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-19 14:11:43,979 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-19 15:21:01,323 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-19 17:05:43,548 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-19 18:59:39,998 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-19 19:18:43,078 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-19 19:37:53,866 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-19 22:14:47,784 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-19 22:19:00,444 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-19 22:22:19,090 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-19 22:41:43,438 WARNING GET retry 1/3: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))
+2026-08-19 22:42:13,999 WARNING GET retry 2/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-19 23:13:23,592 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-20 00:06:24,533 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-20 00:08:36,489 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-20 00:38:59,473 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-20 01:55:50,868 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-20 02:03:44,303 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-20 03:11:57,437 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-20 03:59:48,653 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-20 05:56:32,088 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-20 06:46:13,621 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-20 06:58:15,279 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-20 07:16:03,952 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-20 07:30:58,925 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-20 07:44:35,625 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-20 07:52:03,740 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-20 07:59:33,014 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-20 08:22:51,718 WARNING OCR model gemini-2.0-flash err 404
+2026-08-20 08:22:51,848 WARNING OCR model gemini-1.5-flash err 404
+2026-08-20 08:22:51,961 WARNING OCR model gemini-2.5-flash-preview-05-20 err 404
+2026-08-20 08:23:54,217 INFO detect: sr_words: su
+2026-08-20 08:23:54,219 INFO handle_text: lang=sr text='zdravo,stigli su računi.Ukupno 14.600 din.pozdrav'
+2026-08-20 09:36:29,565 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-20 10:09:07,203 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-20 10:28:11,376 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-20 10:50:15,378 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-20 11:34:33,330 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-20 13:25:29,413 WARNING OCR model gemini-2.0-flash err 404
+2026-08-20 13:25:29,546 WARNING OCR model gemini-1.5-flash err 404
+2026-08-20 13:25:29,674 WARNING OCR model gemini-2.5-flash-preview-05-20 err 404
+2026-08-20 15:32:03,857 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-20 16:12:16,508 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-20 16:58:26,295 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-20 17:08:08,020 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-20 17:44:20,842 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-20 20:09:17,558 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-20 20:30:01,240 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-20 21:04:13,421 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-20 21:33:43,049 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-20 21:55:47,234 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-20 22:47:49,208 WARNING GET retry 1/3: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))
+2026-08-21 00:31:34,083 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-21 01:06:41,167 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-21 01:08:27,851 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-21 01:23:09,806 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-21 02:07:29,638 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-21 02:22:36,254 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-21 03:18:37,451 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-21 03:49:22,138 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-21 05:21:24,788 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-21 06:48:17,948 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-21 07:14:53,906 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-21 07:47:01,403 WARNING GET retry 1/3: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))
+2026-08-21 08:00:29,273 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-21 08:16:00,662 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-21 09:02:31,160 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-21 09:17:06,198 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-21 09:46:34,006 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-21 10:09:21,817 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-21 10:20:47,505 INFO Whisper: Pass1 (auto-detect)
+2026-08-21 10:20:47,720 INFO Whisper Pass1: lang='russian' text='Добрый день! За косу, прессу, молим вас, хвала! Могу ли добить рачун? Может две '
+2026-08-21 10:20:47,720 INFO detect: sr_words: добро,могу,ли
+2026-08-21 10:20:47,720 INFO Whisper: russian? ru_word_markers=True detected=sr
+2026-08-21 10:20:47,723 INFO voice: final_lang=ru text='Добрый день! За косу, прессу, молим вас, хвала! Могу ли добить рачун? Может две чаши топлой воды? Вручье? Красно? Приятно? Добро?'
+2026-08-21 10:22:10,717 INFO Whisper: Pass1 (auto-detect)
+2026-08-21 10:22:10,993 INFO Whisper Pass1: lang='croatian' text='Dobar dan, za kosu, presu, molimo vas, hvala. Mogu li da dobijem račun? Možda dv'
+2026-08-21 10:22:10,993 INFO detect: sr_words: račun,vas,hvala
+2026-08-21 10:22:10,996 INFO voice: final_lang=sr text='Dobar dan, za kosu, presu, molimo vas, hvala. Mogu li da dobijem račun? Možda dve šolje tople vode. Uživanje, crveno, prijatno, dobro.'
+2026-08-21 10:23:12,610 INFO detect: ru_words: русский,переведи
+2026-08-21 10:23:12,612 INFO handle_text: lang=ru text='Переведи этот это голосовое на русский язык'
+2026-08-21 10:26:03,099 INFO Whisper: Pass1 (auto-detect)
+2026-08-21 10:26:03,274 INFO Whisper Pass1: lang='russian' text='Добрый день! Могу ли добыть рачун?'
+2026-08-21 10:26:03,274 INFO detect: sr_words: могу,ли,рачун
+2026-08-21 10:26:03,274 INFO Whisper: russian? ru_word_markers=True detected=sr
+2026-08-21 10:26:03,277 INFO voice: final_lang=ru text='Добрый день! Могу ли добыть рачун?'
+2026-08-21 10:38:29,707 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-21 10:53:15,713 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-21 12:39:09,148 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-21 13:36:37,531 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-21 13:44:07,785 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-21 13:58:57,879 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-21 14:13:59,744 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-21 14:37:11,693 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-21 14:57:54,553 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-21 14:59:52,419 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-21 15:12:22,160 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-21 15:19:38,697 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-21 15:22:18,101 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-21 15:45:55,352 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-21 16:16:14,903 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-21 17:54:55,453 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-21 18:54:37,640 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-21 19:24:15,840 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-21 19:46:22,988 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-21 20:01:20,278 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-21 20:50:08,747 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-21 21:07:58,855 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-21 21:21:24,220 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-21 21:37:17,958 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-22 00:54:24,626 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-22 01:16:53,669 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-22 02:57:35,372 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-22 03:49:24,096 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-22 04:03:14,671 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-22 05:17:20,669 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-22 05:46:59,606 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-22 05:51:27,669 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-22 06:59:57,685 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-22 07:22:20,044 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-22 07:52:17,810 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-22 07:53:40,108 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-22 09:38:02,250 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-22 10:31:13,502 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-22 11:39:04,727 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-22 12:09:46,384 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-22 12:17:18,542 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-22 12:40:02,135 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-22 12:40:59,078 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-22 14:09:37,900 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-22 14:46:27,493 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-22 15:32:57,103 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-22 16:25:50,227 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-22 16:55:32,429 INFO Bot zapuschen (versiya 3.0 — intelligent lang detection)
+2026-08-22 17:01:09,873 INFO Whisper: Pass1 (auto-detect)
+2026-08-22 17:01:10,130 INFO Whisper Pass1: lang='russian' text='Добрый день, меня зовут Артур, я из России. Как я к вам могу обратиться?'
+2026-08-22 17:01:10,130 INFO detect: ru_exclusive: ъыэёщйюя
+2026-08-22 17:01:10,130 INFO Whisper: russian? ru_word_markers=True detected=ru
+2026-08-22 17:01:10,133 INFO voice: final_lang=ru text='Добрый день, меня зовут Артур, я из России. Как я к вам могу обратиться?'
+2026-08-22 17:02:31,494 INFO cache HIT: 'Добрый день, меня зовут Артур, я из Росс'
+2026-08-22 17:02:31,673 INFO cache HIT: 'Добрый день, меня зовут Артур, я из Росс'
+2026-08-22 17:02:31,835 INFO cache HIT: 'Добрый день, меня зовут Артур, я из Росс'
+2026-08-22 17:02:31,981 INFO cache HIT: 'Добрый день, меня зовут Артур, я из Росс'
+2026-08-22 17:03:02,144 INFO cache HIT: 'Добрый день, меня зовут Артур, я из Росс'
+2026-08-22 17:03:02,661 INFO Whisper: Pass1 (auto-detect)
+2026-08-22 17:03:02,918 INFO Whisper Pass1: lang='russian' text='Добр дам, зовемся Артур, из Руси сам. Како да вам все обратим?'
+2026-08-22 17:03:02,918 INFO detect: ru_exclusive: ъыэёщйюя
+2026-08-22 17:03:02,918 INFO Whisper: russian? ru_word_markers=False detected=ru
+2026-08-22 17:03:02,918 INFO Whisper: 'russian' but NO ru word markers -> Pass2 с language='sr'
+2026-08-22 17:03:03,160 INFO Whisper Pass2 (sr): text='Добр, дам, зовёмся Артур, из Руси, сам. Како да вам се обратим?'
+2026-08-22 17:03:03,160 INFO detect: ru_exclusive: ъыэёщйюя
+2026-08-22 17:03:03,160 INFO Whisper Pass2 analysis: ru
+2026-08-22 17:03:03,164 INFO voice: final_lang=sr text='Добр дам, зовемся Артур, из Руси сам. Како да вам все обратим?'
+2026-08-22 17:03:24,870 INFO Whisper: Pass1 (auto-detect)
+2026-08-22 17:03:25,103 INFO Whisper Pass1: lang='english' text='Hello, my name is Artur. What is your name?'
+2026-08-22 17:03:25,103 INFO Whisper: detected ENGLISH
+2026-08-22 17:03:25,106 INFO voice: final_lang=en text='Hello, my name is Artur. What is your name?'
+2026-08-22 17:03:44,435 INFO Whisper: Pass1 (auto-detect)
+2026-08-22 17:03:44,676 INFO Whisper Pass1: lang='russian' text='Здраво! Я себя зовем Артур. Как себя зовешь?'
+2026-08-22 17:03:44,676 INFO detect: ru_exclusive: ъыэёщйюя
+2026-08-22 17:03:44,676 INFO Whisper: russian? ru_word_markers=False detected=ru
+2026-08-22 17:03:44,676 INFO Whisper: 'russian' but NO ru word markers -> Pass2 с language='sr'
+2026-08-22 17:03:44,854 INFO Whisper Pass2 (sr): text='Здраво, я се зовем Артур. Како се зовеш?'
+2026-08-22 17:03:44,854 INFO detect: ru_exclusive: ъыэёщйюя
+2026-08-22 17:03:44,854 INFO Whisper Pass2 analysis: ru
+2026-08-22 17:03:44,858 INFO voice: final_lang=sr text='Здраво! Я себя зовем Артур. Как себя зовешь?'
+2026-08-22 17:04:16,689 INFO Whisper: Pass1 (auto-detect)
+2026-08-22 17:04:16,860 INFO Whisper Pass1: lang='english' text='I am 41 years ago. I am from Russia.'
+2026-08-22 17:04:16,860 INFO Whisper: detected ENGLISH
+2026-08-22 17:04:16,863 INFO voice: final_lang=en text='I am 41 years ago. I am from Russia.'
+2026-08-22 17:05:25,333 INFO cache HIT: 'I am 41 years ago. I am from Russia.'
+2026-08-22 17:06:25,528 INFO cache HIT: 'I am 41 years ago. I am from Russia.'
+2026-08-22 17:08:39,453 INFO cache HIT: 'I am 41 years ago. I am from Russia.'
+2026-08-22 17:12:26,613 INFO Bot zapuschen (versiya 3.0 — intelligent lang detection)
+2026-08-22 17:49:11,229 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-22 19:04:37,915 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-22 20:25:11,429 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-22 20:32:32,360 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-22 21:09:31,467 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-22 22:14:56,470 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-22 23:15:38,662 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-23 00:00:17,049 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-23 00:30:19,790 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-23 00:52:26,074 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-23 02:50:54,654 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-23 02:55:40,822 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-23 03:03:31,752 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-23 05:34:33,495 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-23 06:03:46,289 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-23 06:11:10,619 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-23 06:29:01,565 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-23 06:44:28,951 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-23 06:55:11,506 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-23 07:21:43,950 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-23 07:39:07,143 WARNING GET retry 1/3: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))
+2026-08-23 07:46:52,169 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-23 07:54:16,598 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-23 07:59:50,400 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-23 08:01:42,218 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-23 08:53:33,984 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-23 09:15:42,867 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-23 09:23:02,411 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-23 10:29:29,327 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-23 10:46:12,593 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-23 11:09:04,023 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-23 11:31:44,450 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-23 12:39:49,453 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-23 12:50:33,230 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-23 13:42:39,216 INFO Bot zapuschen (v5.0 PRO — polnaya matrica 3x3)
+2026-08-23 14:10:40,523 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-23 14:12:02,818 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-23 14:56:11,926 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-23 15:34:21,911 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-23 15:55:23,885 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-23 15:56:29,070 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-23 16:11:40,427 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-23 16:39:53,923 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-23 18:29:16,621 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-23 18:38:14,322 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-23 18:52:08,027 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-23 20:38:03,086 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-23 20:58:02,692 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-23 21:20:26,007 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-23 21:31:13,430 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-23 21:46:19,146 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-23 22:05:13,950 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-23 22:16:55,647 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-23 22:27:48,741 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-23 23:33:14,062 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-23 23:57:06,458 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-24 00:26:37,222 WARNING GET retry 1/3: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))
+2026-08-24 00:42:21,572 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-24 01:10:59,838 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-24 01:13:16,938 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-24 01:33:40,566 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-24 03:02:09,817 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-24 03:09:30,774 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-24 03:44:02,817 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-24 03:53:55,904 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-24 04:16:13,713 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-24 04:59:31,853 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-24 05:07:07,531 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-24 05:14:39,696 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-24 05:15:29,815 WARNING GET retry 2/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-24 05:30:22,882 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-24 06:15:32,374 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-24 06:23:07,401 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-24 08:02:24,766 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-24 08:32:18,075 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-24 08:47:24,903 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-24 09:05:44,090 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-24 09:17:57,270 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-24 10:40:55,655 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-24 12:04:29,196 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-24 14:37:57,473 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-24 15:27:53,409 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)
+2026-08-24 15:51:28,651 WARNING GET retry 1/3: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=30)

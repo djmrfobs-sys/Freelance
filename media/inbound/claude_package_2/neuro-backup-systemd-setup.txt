@@ -1,0 +1,34 @@
+# === Файл: ~/.config/systemd/user/neuro-backup.service ===
+
+[Unit]
+Description=Backup neuro-zavod (bots, skills, knowledge)
+
+[Service]
+Type=oneshot
+ExecStart=%h/backups/backup-neuro-zavod.sh
+# Логи смотреть: journalctl --user -u neuro-backup.service
+
+# === Файл: ~/.config/systemd/user/neuro-backup.timer ===
+
+[Unit]
+Description=Ежедневный бэкап neuro-zavod
+
+[Timer]
+OnCalendar=*-*-* 04:00:00
+Persistent=true
+# Persistent=true — если сервер был выключен во время срока, бэкап сделается сразу при старте
+
+[Install]
+WantedBy=timers.target
+
+# === Команды установки ===
+#
+# 1. Создать оба файла выше по указанным путям (это два РАЗНЫХ файла, не один)
+# 2. mkdir -p ~/backups
+# 3. cp backup-neuro-zavod.sh ~/backups/ && chmod +x ~/backups/backup-neuro-zavod.sh
+# 4. Отредактировать пути SOURCES внутри backup-neuro-zavod.sh под реальную структуру
+# 5. systemctl --user daemon-reload
+# 6. systemctl --user enable --now neuro-backup.timer
+# 7. Проверить: systemctl --user list-timers | grep neuro-backup
+# 8. Тестовый прогон прямо сейчас (не дожидаясь 04:00): systemctl --user start neuro-backup.service
+#    затем: journalctl --user -u neuro-backup.service -n 30

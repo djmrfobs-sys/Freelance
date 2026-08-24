@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>План — KISELEVY CREO</title>
+<style>
+:root{
+  --blue:#A8D0E6;
+  --peach:#F8C6A6;
+  --peach-deep:#FF8A5B;
+  --ink:#1C2B33;
+  --ink-soft:#5B6C74;
+  --glass:rgba(251,251,248,.88);
+  --radius:24px;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+  font-family:'Plus Jakarta Sans','Segoe UI',sans-serif;
+  color:var(--ink);
+  line-height:1.55;
+  background:linear-gradient(160deg,var(--blue),#D6D3DD 48%,var(--peach));
+  background-attachment:fixed;
+  min-height:100vh;
+}
+.sheet{max-width:900px;margin:0 auto;padding:32px 20px 60px;}
+.card{
+  background:var(--glass);
+  backdrop-filter:blur(8px);
+  border-radius:var(--radius);
+  box-shadow:0 20px 50px rgba(28,43,51,.15);
+  overflow:hidden;
+  margin-bottom:28px;
+}
+.hero{position:relative;overflow:hidden;min-height:230px;display:flex;align-items:flex-end;padding:28px;color:#fff;}
+.hero .bg{position:absolute;inset:0;background-image:url('fobs_keti_2.jpg');background-size:cover;background-position:center;filter:brightness(.55);z-index:0;}
+.hero .shade{position:absolute;inset:0;background:linear-gradient(180deg,transparent 30%,rgba(28,43,51,.82) 100%);z-index:1;}
+.hero .content{position:relative;z-index:2;}
+.hero .logo{position:absolute;top:18px;left:22px;z-index:3;background:rgba(255,255,255,.92);border-radius:16px;padding:8px 14px;display:flex;flex-direction:column;line-height:1.1;box-shadow:0 6px 18px rgba(0,0,0,.25);}
+.hero .logo b{font-size:19px;letter-spacing:.5px;color:var(--ink);}
+.hero .logo span{font-size:9px;letter-spacing:3px;color:var(--peach-deep);font-weight:700;}
+.hero h1{font-size:38px;font-weight:800;letter-spacing:.5px;text-shadow:0 4px 20px rgba(0,0,0,.4);}
+.hero p{margin-top:6px;font-size:16px;opacity:.95;}
+.body{padding:28px 30px 34px;}
+h2{font-size:21px;margin:26px 0 12px;color:var(--ink);display:flex;align-items:center;gap:10px;}
+h2:first-child{margin-top:0;}
+h2 .dot{width:12px;height:12px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--peach-deep));flex:0 0 auto;}
+.stage{background:#fff;border:1px solid #E7EDF0;border-left:6px solid;border-radius:14px;padding:16px 18px;margin:14px 0;}
+.stage.s1{border-color:var(--blue);}
+.stage.s2{border-color:var(--peach-deep);}
+.stage.s3{border-color:#3F8F5F;}
+.stage .tag{font-size:12px;font-weight:800;letter-spacing:1.5px;color:var(--peach-deep);}
+.stage.s1 .tag{color:#3F7FA8;}
+.stage.s3 .tag{color:#3F8F5F;}
+.stage .t{font-weight:800;font-size:18px;margin-top:4px;}
+.stage .s{color:var(--ink-soft);font-size:15px;margin-top:8px;}
+.stage .s b{color:var(--ink);}
+.role{background:#fff;border:1px solid #E7EDF0;border-radius:14px;padding:16px 18px;margin:12px 0;}
+.role .who{font-weight:800;font-size:17px;color:var(--ink);}
+.role .who span{font-size:12px;color:var(--peach-deep);font-weight:800;margin-left:8px;}
+.role ul{list-style:none;margin-top:10px;}
+.role li{padding:7px 0 7px 22px;position:relative;font-size:15px;}
+.role li::before{content:'';position:absolute;left:4px;top:13px;width:8px;height:8px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--peach-deep));}
+.week{display:flex;gap:14px;align-items:flex-start;margin:12px 0;background:#fff;border:1px solid #E7EDF0;border-radius:14px;padding:16px 18px;}
+.week .n{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--blue),var(--peach-deep));color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;flex:0 0 auto;font-size:12px;text-align:center;line-height:1.1;}
+.week .t{font-weight:800;font-size:16px;}
+.week .s{color:var(--ink-soft);font-size:14px;margin-top:4px;}
+.rule{display:flex;gap:12px;align-items:flex-start;margin:10px 0;font-size:15px;}
+.rule .n{width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--peach-deep));color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;flex:0 0 auto;font-size:14px;}
+.note{background:#FFF7EF;border:1px solid #FFE3CA;border-radius:14px;padding:14px 18px;font-size:14px;color:var(--ink-soft);margin-top:14px;}
+.note b{color:var(--ink);}
+.footer{text-align:center;color:#fff;font-size:13px;opacity:.9;margin-top:8px;}
+.badge{display:inline-block;background:linear-gradient(135deg,var(--blue),var(--peach-deep));color:#fff;font-weight:800;font-size:12px;border-radius:30px;padding:5px 14px;letter-spacing:1px;margin-bottom:10px;}
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="card">
+    <div class="hero">
+      <div class="bg"></div>
+      <div class="shade"></div>
+      <div class="logo"><b>KISELEVY&nbsp;CREO</b><span>TECH INNOVATIONS</span></div>
+      <div class="content">
+        <div class="badge">ПЛАН 2026-2027</div>
+        <h1>Система на 10 месяцев</h1>
+        <p>Август 2026 - июнь 2027 · продукт - инструмент - привлечение</p>
+      </div>
+    </div>
+    <div class="body">
+
+      <h2><span class="dot"></span>Одна воронка</h2>
+      <div class="note" style="margin-top:0;">
+        <b>Reels</b> (привлечение) → <b>кодовое слово</b> → <b>лид-магнит</b> (приложение)
+        → <b>Telegram-канал</b> (нагрев) → <b>клиника</b> (продажа).<br>
+        Порядок запуска строгий: сначала продукт, потом инструмент, потом привлечение.
+      </div>
+
+      <h2><span class="dot"></span>Главная последовательность (3 этапа)</h2>
+
+      <div class="stage s1">
+        <div class="tag">ЭТАП 1 · СЕЙЧАС</div>
+        <div class="t">Доделать клинику</div>
+        <div class="s">Артур доводит до финала. Главное - подключить реальную оплату CloudPayments,
+        чтобы после бесплатной недели шли настоящие деньги. Продукт должен работать от и до,
+        прежде чем звать людей.</div>
+      </div>
+
+      <div class="stage s2">
+        <div class="tag">ЭТАП 2 · НА ДНЯХ</div>
+        <div class="t">Лид-магнит - своё приложение</div>
+        <div class="s">Приложение создаёт Артур, доводит до конечного результата. Сначала обсуждаем ТЗ:
+        какую боль решает, что даёт человеку, как связано с клиникой. Это то, что человек
+        получает за кодовое слово в Reels. Делается ПОСЛЕ клиники.</div>
+      </div>
+
+      <div class="stage s3">
+        <div class="tag">ЭТАП 3 · ПОТОМ</div>
+        <div class="t">Reels в Instagram - запуск воронки</div>
+        <div class="s">Выкладываем Reels с кодовым словом → приложение → Telegram → клиника.
+        Снимаем 16 готовых сценариев, монтирует бартер-партнёр. Запускает цепочку продаж.
+        Никак не раньше этапов 1-2.</div>
+      </div>
+
+      <h2><span class="dot"></span>Роль Кети в этот момент</h2>
+
+      <div class="role">
+        <div class="who">Кети <span>ПРОДЮСЕР</span></div>
+        <ul>
+          <li>Раскрытие через процесс: показывать в Instagram, как рождаются клиника и приложение.</li>
+          <li>Выстроить Telegram-канал как воронку (80% ценности + 20% продажи).</li>
+          <li>Подготовить 3-4 первых Reels из 16 сценариев (съёмка и идеи).</li>
+          <li>Найти и договориться с бартер-партнёром (монтаж + ведение).</li>
+          <li>Вернуться к регулярности: 1 пост в день, без перегруза.</li>
+          <li>Продумать, что должно давать приложение-лид-магнит.</li>
+        </ul>
+      </div>
+
+      <div class="role">
+        <div class="who">Артур <span>РАЗРАБОТКА</span></div>
+        <ul>
+          <li>Доделать клинику: CloudPayments, работает от и до.</li>
+          <li>Разработать приложение-лид-магнит.</li>
+          <li>Техническая механика всех продуктов.</li>
+        </ul>
+      </div>
+
+      <h2><span class="dot"></span>План на месяц по неделям</h2>
+
+      <div class="week"><div class="n">НЕД1<br>12-19.08</div><div><div class="t">Доделать клинику</div><div class="s">Артур: CloudPayments. Кети: бартер-письма, 3-4 Reels, структура канала, 1 пост в день.</div></div></div>
+      <div class="week"><div class="n">НЕД2<br>19-26.08</div><div><div class="t">Лид-магнит (приложение)</div><div class="s">ТЗ приложения вместе. Артур: разработка. Кети: контент, канал, договорённость с партнёром.</div></div></div>
+      <div class="week"><div class="n">НЕД3<br>26.08-02.09</div><div><div class="t">Разработка приложения</div><div class="s">Артур: доводит приложение до результата. Кети: кодовые слова, подготовка к запуску.</div></div></div>
+      <div class="week"><div class="n">НЕД4<br>02-12.09</div><div><div class="t">Запуск Reels</div><div class="s">Клиника + приложение готовы → включаем воронку. Первые подписчики, цель 10-20 платных.</div></div></div>
+
+      <h2><span class="dot"></span>Правила системы (защита от выгорания)</h2>
+      <div class="rule"><div class="n">1</div><div>Этап за этапом: продукт - инструмент - привлечение. Не делаем всё сразу.</div></div>
+      <div class="rule"><div class="n">2</div><div>Регулярность важнее объёма: 1 пост в день лучше, чем 7 за вечер и тишина.</div></div>
+      <div class="rule"><div class="n">3</div><div>Делегируем то, что выжигает (монтаж, ведение) - бартер решает это.</div></div>
+      <div class="rule"><div class="n">4</div><div>Кети не тянет всё на себе. Раскрытие = приоритет, мешающие люди в блоке.</div></div>
+      <div class="rule"><div class="n">5</div><div>Автоматизация вместо рутины: боты, посты, воронка делают систему, а не нас.</div></div>
+
+      <h2><span class="dot"></span>Что сейчас, в первую очередь</h2>
+      <div class="note" style="margin-top:0;">
+        1. Артур: CloudPayments в клинике (основа денег).<br>
+        2. Кети: разослать бартер-письма (возвращаем блог без выгорания).<br>
+        3. Кети: отснять первые 3-4 Reels из 16 сценариев.<br>
+        4. Кети: выстроить структуру Telegram-канала под воронку.<br>
+        5. На днях оба: ТЗ на приложение-лид-магнит.<br>
+        6. Проверить инвест-бота вживую («Дайджест сегодня»).
+      </div>
+
+    </div>
+  </div>
+
+  <div class="footer">KISELEVY CREO · Tech Innovations · 2026</div>
+</div>
+</body>
+</html>

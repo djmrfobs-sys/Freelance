@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Услуги и цены — KISELEVY CREO</title>
+<style>
+:root{--blue:#A8D0E6;--peach:#F8C6A6;--peach-deep:#FF8A5B;--ink:#1C2B33;--ink-soft:#5B6C74;}
+*{margin:0;padding:0;box-sizing:border-box;}
+@page{size:A4;margin:0;}
+body{font-family:'Plus Jakarta Sans','Segoe UI',sans-serif;color:var(--ink);line-height:1.4;}
+.page{width:210mm;height:297mm;position:relative;overflow:hidden;background:#fff;page-break-after:always;}
+.hero{position:relative;overflow:hidden;height:28mm;color:#fff;background:linear-gradient(135deg,var(--blue),#D6D3DD 45%,var(--peach));}
+.hero .content{position:absolute;bottom:8mm;left:20mm;right:20mm;z-index:2;text-align:center;}
+.hero h1{font-size:25px;font-weight:800;text-shadow:0 2px 12px rgba(0,0,0,.15);color:var(--ink);}
+.hero p{margin-top:2px;font-size:13px;opacity:.85;color:var(--ink);}
+.badge{position:absolute;bottom:8mm;left:0;right:0;margin:0 auto;width:fit-content;z-index:3;text-align:center;color:#fff;font-weight:800;font-size:11px;letter-spacing:3px;text-shadow:0 3px 14px rgba(0,0,0,.4);}
+.body{padding:5mm 17mm 3mm;}
+.cat{margin-bottom:3mm;}
+.cat h2{font-size:13.5px;margin-bottom:1.8mm;padding-bottom:1.2mm;border-bottom:3px solid var(--peach-deep);display:inline-block;}
+.svc{background:#fff;border:1px solid #E7EDF0;border-left:5px solid var(--peach-deep);border-radius:8px;padding:2.2mm 5.5mm;margin-bottom:2mm;box-shadow:0 4px 12px rgba(28,43,51,.04);}
+.svc .row{display:flex;justify-content:space-between;align-items:center;gap:10px;}
+.svc .name{font-weight:800;font-size:12.5px;flex:1;}
+.svc .price{color:var(--peach-deep);font-weight:800;font-size:13.5px;white-space:nowrap;}
+.svc .desc{font-size:10.6px;color:var(--ink-soft);margin-top:0.6mm;}
+.svc .q{font-size:10.2px;color:var(--ink-soft);margin-top:1.4mm;padding-top:1mm;border-top:1px dashed #E7EDF0;font-style:italic;line-height:1.32;}
+.svc .a{font-size:10.2px;color:var(--ink);margin-top:0.5mm;line-height:1.32;}
+.svc .a b{color:var(--peach-deep);}
+.note{background:#FFF7EF;border:1px solid #FFE3CA;border-radius:8px;padding:4mm 7mm;font-size:12px;color:var(--ink-soft);margin-top:3mm;}
+.note b{color:var(--ink);}
+.footer{position:absolute;bottom:8mm;left:0;right:0;text-align:center;color:#8a9aa2;font-size:12px;letter-spacing:1px;}
+</style>
+</head>
+<body>
+
+<div class="page">
+  <div class="hero">
+    <div class="content">
+      <h1>Инструменты</h1>
+      <p>которые мы создаём под ваш бизнес</p>
+    </div>
+      </div>
+  <div class="body">
+
+    <div class="cat">
+      <h2>Разработка ботов</h2>
+      <div class="svc"><div class="row"><span class="name">Telegram-бот базовый</span><span class="price">29 000 ₽</span></div><div class="desc">Бот с меню и кнопками, приём заявок, ответы на частые вопросы, уведомления.</div>
+        <div class="q">Этот инструмент для вас, если клиенты задают одни и те же вопросы и теряются, пока вы офлайн.</div>
+        <div class="a">Мы соберём вам личного ассистента в Telegram: он встретит клиента, ответит на частые вопросы (цены, адрес, режим работы), примет заявку и перешлёт её вам. Клиент всегда может вернуться в чат, даже ночью.</div></div>
+      <div class="svc"><div class="row"><span class="name">Бот с логикой и базой</span><span class="price">59 000 ₽</span></div><div class="desc">Сценарии диалога, хранение данных клиентов, личный кабинет, отчёты.</div>
+        <div class="q">Этот инструмент для вас, если информация о клиентах разбросана по перепискам, а вы тратите время на ручную обработку заявок.</div>
+        <div class="a">Мы сделаем так, что бот сам ведёт клиента по шагам (выбор услуги, данные, запись) и запоминает информацию о нём. Все обращения и история клиента собираются в одном личном кабинете, а не в сотне чатов.</div></div>
+      <div class="svc"><div class="row"><span class="name">Бот с оплатой и ИИ</span><span class="price">129 000 ₽</span></div><div class="desc">Приём оплат, интеграции, искусственный интеллект в диалоге, автопосты.</div>
+        <div class="q">Этот инструмент для вас, если клиент готов оплатить и записаться сразу, а вы теряете продажу, пока отвечаете вручную.</div>
+        <div class="a">Мы настроим бота так, что он принимает оплату прямо в чате, подключает нужные сервисы (касса, календарь, база клиентов) и сам отвечает на вопросы с помощью ИИ. Дополнительно он умеет сам публиковать посты в канал по расписанию.</div></div>
+      <div class="svc"><div class="row"><span class="name">Фирменный ИИ-бот под ключ</span><span class="price">от 149 000 ₽</span></div><div class="desc">Роли, подписка, личный кабинет, полная автоматизация. Стоимость под проект.</div>
+        <div class="q">Этот инструмент для вас, если нужен не просто бот, а полноценный цифровой сотрудник, который ведёт клиента и работает за вас.</div>
+        <div class="a">Мы разрабатываем бота с нуля под вашу задачу: роли (консультант, менеджер), подписка, личный кабинет и полная автоматизация. Точную стоимость считаем после разбора вашего проекта.</div></div>
+    </div>
+
+    <div class="cat">
+      <h2>Сайты и лендинги</h2>
+      <div class="svc"><div class="row"><span class="name">Лендинг простой</span><span class="price">49 000 ₽</span></div><div class="desc">Продающая страница, форма заявки, адаптив под телефон и компьютер.</div>
+        <div class="q">Этот инструмент для вас, если у вас нет страницы, которая продаёт, - клиенты уходят к конкурентам, потому что вас сложно найти и понять.</div>
+        <div class="a">Мы создадим продающую страницу: понятно, что вы предлагаете, кнопка для заявки, удобный вид и на телефоне, и на компьютере. Клиент приходит, читает и оставляет заявку.</div></div>
+    </div>
+
+
+  </div>
+  <div class="footer">KISELEVY CREO · Tech Innovations · 2026</div>
+</div>
+
+<div class="page">
+  <div class="hero">
+    <div class="content">
+      <h1>Инструменты</h1>
+      <p>которые мы создаём под ваш бизнес</p>
+    </div>
+      </div>
+  <div class="body">
+
+    <div class="cat">
+      <h2>Сайты и лендинги</h2>
+      <div class="svc"><div class="row"><span class="name">Лендинг с автоматизацией</span><span class="price">149 000 ₽</span></div><div class="desc">Лендинг + CRM, заявки сразу в бот, воронка продаж и рассылки.</div>
+        <div class="q">Этот инструмент для вас, если заявки приходят, но теряются: нет связи с базами, нет воронки и рассылок, а продажи зависят от ручной работы.</div>
+        <div class="a">Мы свяжем страницу с системами: заявки сразу попадают в бот и базу клиентов, дальше включается воронка продаж и автоматические рассылки. Ни одна заявка не теряется.</div></div>
+    </div>
+
+    <div class="cat">
+      <h2>Telegram-каналы</h2>
+      <div class="svc"><div class="row"><span class="name">Настройка канала + позиционирование</span><span class="price">49 000 ₽</span></div><div class="desc">Канал, который приводит подписчиков и заявки: оформление, контент, рубрики.</div>
+        <div class="q">Этот инструмент для вас, если канал есть, но он не приносит подписчиков и заявок - никто не понимает, зачем туда подписываться.</div>
+        <div class="a">Мы настроим канал так, чтобы он приводил клиентов: оформление, рубрики и контент. Люди видят пользу и подписываются, а вы получаете канал, который продаёт.</div></div>
+      <div class="svc"><div class="row"><span class="name">Бот автопостов в канал</span><span class="price">39 000 ₽</span></div><div class="desc">Посты публикуются сами по графику каждый день, без ручной работы.</div>
+        <div class="q">Этот инструмент для вас, если посты нужно выкладывать каждый день, а руки не доходят - канал просто простаивает.</div>
+        <div class="a">Мы сделаем так, что бот публикует посты в канал сам, по расписанию и каждый день. Вы один раз настраиваете график - дальше всё выходит автоматически, без ручной работы.</div></div>
+    </div>
+
+
+  </div>
+  <div class="footer">KISELEVY CREO · Tech Innovations · 2026</div>
+</div>
+
+<div class="page">
+  <div class="hero">
+    <div class="content">
+      <h1>Инструменты</h1>
+      <p>которые мы создаём под ваш бизнес</p>
+    </div>
+      </div>
+  <div class="body">
+
+    <div class="cat">
+      <h2>Маркетинг</h2>
+      <div class="svc"><div class="row"><span class="name">Маркетинг-стратегия + диагностика</span><span class="price">69 000 ₽</span></div><div class="desc">Анализ рынка, позиционирование, план продвижения, воронка продаж.</div>
+        <div class="q">Этот инструмент для вас, если вы тратите деньги на рекламу, но не понимаете, что работает, а что нет.</div>
+        <div class="a">Мы разберём ваш рынок и конкурентов, определим позиционирование, составим план продвижения и воронку продаж. Вы поймёте, куда вкладывать и какого результата ждать.</div></div>
+      <div class="svc"><div class="row"><span class="name">Маркетинг-система через личность</span><span class="price">250 000 ₽</span></div><div class="desc">Личный бренд + система, которая сама приводит и продаёт клиентам.</div>
+        <div class="q">Этот инструмент для вас, если от вас уходят к конкурентам, потому что вам не доверяют - нет узнаваемого лица и системы, которая продаёт за вас.</div>
+        <div class="a">Мы построим личный бренд и свяжем всё в один механизм: контент, канал, бот, воронку. Система сама приводит клиентов и продаёт - работает без вас круглые сутки.</div></div>
+    </div>
+
+    <div class="cat">
+      <h2>Контент</h2>
+      <div class="svc"><div class="row"><span class="name">Контент-план на месяц</span><span class="price">29 000 ₽</span></div><div class="desc">Темы, рубрики, структура постов на 30 дней под вашу нишу.</div>
+        <div class="q">Этот инструмент для вас, если вы не знаете, что публиковать: темы заканчиваются, а канал стоит на месте.</div>
+        <div class="a">Мы составим темы, рубрики и структуру постов на 30 дней под вашу нишу. Каждый день вы знаете, что публиковать, и не думаете над идеями.</div></div>
+      <div class="svc"><div class="row"><span class="name">План + тексты + сторис</span><span class="price">59 000 ₽/мес</span></div><div class="desc">Готовые тексты постов и сторис, можно сразу публиковать.</div>
+        <div class="q">Этот инструмент для вас, если одного плана мало - времени писать посты и сторис у вас нет.</div>
+        <div class="a">Мы к плану подготовим и сами тексты постов и сторис. Вы просто берёте готовый текст и публикуете - ничего сочинять не нужно.</div></div>
+    </div>
+
+
+  </div>
+  <div class="footer">KISELEVY CREO · Tech Innovations · 2026</div>
+</div>
+
+</body>
+</html>

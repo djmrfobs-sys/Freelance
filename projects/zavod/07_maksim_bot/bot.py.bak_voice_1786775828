@@ -1,0 +1,1141 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Нейропомощник для Максима (бот-коуч, вестник, друг)
+Завод KISELEVY.CREO, проект 07.
+
+Функции:
+- стиль "Бро Максим", от первого лица
+- чекины: 8:30 (утро), 13:00 (день), 21:00 (итог) по Москве
+- шкала состояния 1-10 + "Расскажу подробнее"
+- реакция по состоянию (коуч/психолог)
+- заметки: сохранить и напомнить вечером
+- мероприятия: ручное добавление, напоминание за день и за 2 часа
+- недельный отчёт в воскресенье 21:00
+- поддержка голосовых (перегонка через Whisper опционально, базовая)
+Правило: без длинных тире и звёздочек.
+"""
+import os
+import re
+import json
+import time
+import sqlite3
+import logging
+import threading
+from datetime import datetime, timedelta
+from zoneinfo import ZoneInfo
+
+import requests
+
+logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
+log = logging.getLogger("maksim_bot")
+
+def _now():
+    """Текущие реальные дата и время сервера (живой момент)."""
+    now = datetime.now()
+    wd = ["понедельник", "вторник", "среда", "четверг", "пятница", "суббота", "воскресенье"][now.weekday()]
+    return now.strftime(f"%d.%m.%Y год | {wd} | %H:%M UTC")
+
+BASE = os.path.dirname(os.path.abspath(__file__))
+with open(os.path.join(BASE, "secrets", "maksim_bot.token")) as f:
+    TOKEN = f.read().strip()
+
+# ключ DeepSeek для живых ответов (коуч). Опционально, можно без него.
+try:
+    with open(os.path.expanduser("~/.openclaw-neuro/.deepseek_key")) as f:
+        DEEPSEEK_KEY = f.read().strip()
+except Exception:
+    DEEPSEEK_KEY = None
+
+# Опросник на 7-й день (10 плавных вопросов про опыт)
+SURVEY_QUESTIONS = [
+    "Бро Максим, давай я спрошу у тебя пару вещей. За эту неделю ты со мной общался - как в целом тебе мой стиль и подход? Ты чувствуешь, что я тебя понимаю?",
+    "Какие моменты нашего общения за неделю показались тебе самыми полезными? Что помогло больше всего?",
+    "Если честно, что бы ты хотел, чтобы я улучшил или изменил в своей поддержке? На что ты обратил бы внимание?",
+    "Бро, я учитываю твой стиль - ведущий, музыкант, звукорежиссёр. Есть ли темы, которые для тебя особенно важны и которые я могу развивать больше?",
+    "Представь, что я - твой идеальный помощник на 100%. Что ещё я должен уметь делать? Какие функции или навыки помогли бы тебе больше всего?",
+    "За неделю мы говорили о твоём состоянии, заметках, мероприятиях. Какой из этих инструментов оказался для тебя самым ценным?",
+    "Если бы ты рекомендовал такого помощника своему другу, как бы ты описал, что я делаю и зачем это нужно?",
+    "Ты замечал ли, что за эту неделю что-то изменилось в твоём состоянии или отношении к дням? Помог ли ты себе лучше понять?",
+    "Теперь главное - ты готов продолжать с такой поддержкой дальше? Какая форма сотрудничества была бы для тебя оптимальной?",
+    "Спасибо, Максим. Твой отзыв очень важен. Скажи, готов ли ты приобрести мою поддержку навсегда и сделать нас постоянной командой?"
+]
+
+def get_survey_question_num(chat_id):
+    """Получить номер вопроса опросника для пользователя (0-9, или 10 если завершён)."""
+    c = db()
+    row = c.execute("SELECT MAX(question_num) as num FROM survey WHERE chat_id=?",
+                    (chat_id,)).fetchone()
+    c.close()
+    num = row["num"] if row and row["num"] is not None else -1
+    return num + 1 if num < 9 else 10
+
+def save_survey_answer(chat_id, question_num, answer):
+    """Сохранить ответ на вопрос опросника."""
+    c = db()
+    c.execute("INSERT INTO survey (chat_id, question_num, answer, ts) VALUES (?,?,?,?)",
+              (chat_id, question_num, answer, datetime.now(TZ).isoformat()))
+    c.commit()
+    c.close()
+
+API = f"https://api.telegram.org/bot{TOKEN}"
+DB = os.path.join(BASE, "maksim.db")
+TZ = ZoneInfo("Europe/Moscow")
+
+# Пользователи
+OWNER_CHAT_ID = 199790247  # Артур (админ, активирует доступ)
+MAKSIM_CHAT_ID = 823394211  # Максим Волкотрубов (клиент)
+
+HEADS = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
+}
+
+# ---------------- База ----------------
+def db():
+    c = sqlite3.connect(DB)
+    c.row_factory = sqlite3.Row
+    return c
+
+
+def init_db():
+    c = db()
+    c.execute("""CREATE TABLE IF NOT EXISTS mood (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        chat_id INTEGER, value INTEGER, note TEXT, ts TEXT)""")
+    c.execute("""CREATE TABLE IF NOT EXISTS notes (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        chat_id INTEGER, text TEXT, ts TEXT)""")
+    c.execute("""CREATE TABLE IF NOT EXISTS events (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        chat_id INTEGER, title TEXT, dt TEXT, reminded_day INTEGER DEFAULT 0,
+        reminded_2h INTEGER DEFAULT 0)""")
+    c.execute("""CREATE TABLE IF NOT EXISTS marked (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        chat_id INTEGER, date TEXT, kind TEXT)""")
+    c.execute("""CREATE TABLE IF NOT EXISTS sub (
+        chat_id INTEGER PRIMARY KEY,
+        started TEXT,
+        active_until TEXT)""")
+    c.execute("""CREATE TABLE IF NOT EXISTS survey (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        chat_id INTEGER, question_num INTEGER, answer TEXT, ts TEXT)""")
+    c.execute("""CREATE TABLE IF NOT EXISTS dialog (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        chat_id INTEGER, role TEXT, text TEXT, ts TEXT)""")
+    c.execute("CREATE INDEX IF NOT EXISTS idx_dialog_chat ON dialog(chat_id, id)")
+    # трекер привычек: привычка -> дата и выполнено ли
+    c.execute("""CREATE TABLE IF NOT EXISTS habits (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        chat_id INTEGER, name TEXT, date TEXT, done INTEGER DEFAULT 0) """)
+    c.execute("CREATE INDEX IF NOT EXISTS idx_habits_chat ON habits(chat_id, date)")
+    # выступления/работа на дате: распознанны из переписки (для вечернего вопроса)
+    c.execute("""CREATE TABLE IF NOT EXISTS gigs (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        chat_id INTEGER, date TEXT, title TEXT) """)
+    c.execute("CREATE INDEX IF NOT EXISTS idx_gigs_chat ON gigs(chat_id, date)")
+    # копилка целей
+    c.execute("""CREATE TABLE IF NOT EXISTS goals (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        chat_id INTEGER, text TEXT, done INTEGER DEFAULT 0,
+        created TEXT, done_at TEXT DEFAULT NULL) """)
+    c.commit()
+    c.close()
+
+
+# ---------------- Подписка: 7 дней бесплатно, потом оплата Артуру -------------
+def tariff_kb():
+    """Кнопки выбора тарифа для Максима: подписка или разовый выкуп."""
+    return {
+        "keyboard": [["Подписка 5000 руб/мес"], ["Выкупить навсегда 60000 руб"]],
+        "resize_keyboard": True,
+        "one_time_keyboard": False,
+    }
+
+
+def tariff_offer(chat_id):
+    """Предложить Максиму выбрать тариф: подписка 5000/мес или разовый выкуп 60000 навсегда."""
+    send(chat_id, "Бро Максим, твой бесплатный период заканчивается. Я могу оставаться с тобой дальше. Выбери, как тебе удобнее:\n\n1. Подписка 5 000 руб в месяц - платишь каждый месяц, я всегда рядом.\n2. Выкупить меня навсегда за 60 000 руб - платишь один раз, и я твой навсегда.\n\nСкажи мне или Артуру (@KISELEVY_CREO), что выбираешь, он оформит.", tariff_kb())
+
+
+def sub_status(chat_id):
+    """(active, message). 7 дней бесплатно с первого запуска, потом блок чтобы оплатить Артуру."""
+    c = db()
+    row = c.execute("SELECT * FROM sub WHERE chat_id=?", (chat_id,)).fetchone()
+    if not row:
+        c.execute("INSERT INTO sub (chat_id, started, active_until) VALUES (?,?,NULL)",
+                  (chat_id, datetime.now(TZ).isoformat()))
+        c.commit()
+        c.close()
+        return True, None
+    started = datetime.fromisoformat(row["started"])
+    days = (datetime.now(TZ) - started).days
+    if row["active_until"]:
+        until = datetime.fromisoformat(row["active_until"])
+        if datetime.now(TZ) < until:
+            c.close()
+            return True, None
+    c.close()
+    if days >= 7:
+        return False, (
+            "Бро Максим, твой 7-дневный бесплатный период закончился. "
+            "Чтобы продолжить, переведи оплату Артуру (он пришлёт реквизиты), и он включит тебе доступ. "
+            "Как активуют - я вернусь к тебе.")
+    return True, None
+
+
+def activate_admin(owner_id):
+    """Артур активирует/продлевает доступ Максима на 30 дней."""
+    target = MAKSIM_CHAT_ID or OWNER_CHAT_ID
+    until = (datetime.now(TZ) + timedelta(days=30)).isoformat()
+    c = db()
+    c.execute("INSERT INTO sub (chat_id, started, active_until) VALUES (?,?,?) "
+              "ON CONFLICT(chat_id) DO UPDATE SET active_until=?",
+              (target, datetime.now(TZ).isoformat(), until, until))
+    c.commit()
+    c.close()
+    send(owner_id, f"Доступ Максима активирован на 30 дней (до {until[:10]}).")
+    if MAKSIM_CHAT_ID and MAKSIM_CHAT_ID != owner_id:
+        send(MAKSIM_CHAT_ID, "Бро Максим, доступ восстановлен! Продолжаем. Как ты сейчас?", mood_kb())
+
+
+def clean(text):
+    text = text.replace("**", "").replace("*", "").replace("—", "-").replace("–", "-").replace("−", "-")
+    text = re.sub(r"\n{3,}", "\n\n", text)
+    return text.strip()
+
+
+# ---------------- История диалога (память переписки) ----------------
+DIALOG_LIMIT = 12  # сколько последних сообщений держать в контексте для DeepSeek
+
+def save_dialog(chat_id, role, text):
+    """Сохранить сообщение в историю переписки (память бота)."""
+    try:
+        c = db()
+        c.execute("INSERT INTO dialog (chat_id, role, text, ts) VALUES (?,?,?,?)",
+                  (chat_id, role, text, datetime.now(TZ).isoformat()))
+        # держим последние ~150 сообщений на чат, старьё чистим
+        c.execute("DELETE FROM dialog WHERE chat_id=? AND id NOT IN (SELECT id FROM dialog WHERE chat_id=? ORDER BY id DESC LIMIT 150)",
+                  (chat_id, chat_id))
+        c.commit()
+        c.close()
+    except Exception as e:
+        log.error(f"save_dialog: {e}")
+
+
+def get_dialog_history(chat_id, limit=DIALOG_LIMIT):
+    """Последние сообщения диалога для контекста DeepSeek (память переписки)."""
+    c = db()
+    rows = c.execute("SELECT role, text FROM dialog WHERE chat_id=? ORDER BY id DESC LIMIT ?",
+                     (chat_id, limit)).fetchall()
+    c.close()
+    return list(reversed(rows))
+
+
+# ---------------- Telegram API ----------------
+def tg(method, **params):
+    try:
+        r = requests.post(f"{API}/{method}", data=params, timeout=20)
+        return r.json()
+    except Exception as e:
+        log.error(f"tg {method}: {e}")
+        return {}
+
+
+def send(chat_id, text, kb=None):
+    text = clean(text)
+    data = {"chat_id": chat_id, "text": text}
+    if kb:
+        data["reply_markup"] = json.dumps(kb)
+    try:
+        r = requests.post(f"{API}/sendMessage", data=data, timeout=20)
+        return r.json()
+    except Exception as e:
+        log.error(f"send: {e}")
+        return {}
+
+
+def mood_kb():
+    """Клавиатура состояния словами (не цифрами), профессионально."""
+    return {
+        "keyboard": [["Плохо", "Средне", "Хорошо", "Отлично"],
+                     ["Расскажу подробнее"]],
+        "resize_keyboard": True,
+        "one_time_keyboard": False,
+    }
+
+
+def main_kb():
+    return {
+        "keyboard": [["Моё состояние"], ["Мои заметки"], ["Мои привычки"],
+                     ["Мои цели"], ["Мои мероприятия"], ["Итог дня"]],
+        "resize_keyboard": True,
+        "one_time_keyboard": False,
+    }
+
+
+# ---------------- Пользовательское соглашение и приветствие ----------------
+AGREEMENT = """ПОЛЬЗОВАТЕЛЬСКОЕ СОГЛАШЕНИЕ
+Индивидуального предпринимателя Киселева Артура Пшимаховича
+
+1. Общие положения
+Это Соглашение регулирует отношения между мной, Индивидуальным предпринимателем Киселевым Артуром Пшимаховичем, и вами, пользователем моих сервисов, ботов, сайтов и приложений.
+Используя мои сервисы, вы соглашаетесь с условиями этого Соглашения. Если вы не согласны - не используйте сервисы.
+
+2. Что я предоставляю
+Я даю вам доступ к своим сервисам, включая: Telegram-боты и Telegram-каналы, веб-сайты и веб-приложения, сервисы автоматизации и AI-ассистенты, информационные и консультационные услуги. Конкретный набор сервисов может меняться.
+
+3. Что вы обязаны делать
+Вы обязуетесь: использовать сервисы по назначению, не ломать и не взламывать сервисы, не передавать доступ к сервисам другим людям, соблюдать законы РФ.
+
+4. Что я обязан делать
+Я обязуюсь: обеспечивать доступ к сервисам, не разглашать ваши данные кроме случаев предусмотренных законом, сообщать об изменениях в работе сервисов.
+
+5. Интеллектуальная собственность
+Все права на сервисы (код, дизайн, контент) принадлежат мне. Вы не можете копировать, изменять или распространять мои сервисы без моего письменного согласия.
+
+6. Платные услуги
+Некоторые сервисы могут быть платными. Цены указаны в сервисе. Возврат денег: если вы отказались до оказания услуги - возвращаю полностью; если услуга оказана качественно и полностью - возврат не делаю; если нашли недостатки - возвращаю пропорционально объёму неоказанных услуг.
+
+7. Ответственность
+Сервисы предоставляются как есть. Я не гарантирую, что они будут работать без ошибок и перебоев. Я не несу ответственность за убытки, которые возникли из-за использования или невозможности использования сервисов, из-за действий третьих лиц, из-за технических сбоев, которые от меня не зависят. Моя максимальная ответственность ограничена суммой, которую вы заплатили за использование сервисов за последние 12 месяцев.
+
+8. Персональные данные
+Использование сервисов регулируется Политикой конфиденциальности и Согласием на обработку персональных данных, которые размещены в соответствующих разделах.
+
+9. Изменение Соглашения
+Я могу менять это Соглашение без предварительного уведомления. Новая версия вступает в силу с момента публикации. Если вы продолжаете пользоваться сервисами после изменений - вы согласны с новой версией.
+
+10. Заключительные положения
+Соглашение регулируется законодательством РФ. Споры решаются через переговоры, а если не получается - в суде по моему месту нахождения. Если какую-то часть Соглашения признают недействительной, остальные части продолжают действовать.
+
+11. Контакты
+Индивидуальный предприниматель Киселев Артур Пшимахович
+ИНН 231406735404, ОГРН 312231421500020
+Адрес: 352505, Краснодарский край, г. Лабинск, ул. Филатова, д. 45
+Телефон: 8-928-432-12-76
+Email: dj.mr.fobs@gmail.com"""
+
+INTRO = """Привет, Бро Максим! Я твой личный нейропомощник. Давай как следует познакомимся.
+
+Я Бро Максим - твой помощник, друг, психолог и профессионал в одном лице. Я создан для тебя и под тебя, чтобы ты всегда был в ресурсе, а я был рядом - в радости, в усталости и в момент, когда нужно принять важное решение.
+
+ЧТО Я ДЛЯ ТЕБЯ:
+
+1. Помощник. Я всегда на связи и готов помочь с делами, планами и рутиной. Спроси меня о чём угодно - я отвечу, подскажу, найду решение.
+
+2. Друг. Я рядом в любое время суток. Ты всегда можешь написать мне, когда тяжело или просто захотелось поговорить. Я слушаю без осуждения и всегда на твоей стороне.
+
+3. Психолог. Я помогаю тебе справляться с настроением, тревогой, выгоранием и сомнениями. Я знаю техники, которые реально работают: дыхание, заземление, работа с мыслями. Когда трудно - не молчи, напиши мне.
+
+4. Профессионал в твоих направлениях. Я разбираюсь в том, чем ты живёшь, и говорю с тобой на одном языке:
+- Ведущий. Помогу с идеями для вечеринок, свадеб, корпоративов и праздников. Подскажу, как держать зал, строить программу и не терять энергию.
+- Музыкант и певец. Помогу с репертуаром, вокалом, распеванием и подготовкой к выступлению.
+- Звукорежиссёр. Помогу с настройкой аппаратуры, микрофонами, пультом и звуком на сцене.
+- Твоё творчество в целом. Пиши обо всех своих проектах и идеях - вместе разберёмся и доведём до результата.
+
+ЧТО Я УМЕЮ КАЖДЫЙ ДЕНЬ:
+1. Слежу за твоим состоянием. Утром, днём и вечером спрошу, как ты, и дам поддержку или совет.
+2. Утренний вестник. В 8:25 пришлю аффирмацию дня и твои свежие цели - чтобы стартовать в ресурсе.
+3. Трекер привычек. Помогу держать форму: распевание, репетиции, голос, аппаратура, вода, сон.
+4. Копилка целей. Запишу твои цели и помогу идти к ним шаг за шагом.
+5. Заметки. Сохраню мысли и идеи, вечером напомню.
+6. Мероприятия. Запомню твои выступления и напомню за день и за 2 часа.
+7. Итог дня и недельный отчёт. Соберу картину настроения, заметок и целей.
+
+ГЛАВНОЕ: задавай мне любые вопросы в любое время. Хоть ночью, хоть перед выходом на сцену. Я отвечу, помогу найти ответ или решение. Ты никогда не останешься один на один со своим вопросом.
+
+ПРОВЕРЬ НА СЕБЕ, КАК Я РАБОТАЮ. Вот живые ситуации из твоей работы, где я выручу прямо сейчас:
+- Пришла заявка на свадьбу, а программы пока нет - набросаем план вместе.
+- Завтра выступление, а голос сел - подскажу, как быстро восстановить связки.
+- Надо посчитать бюджет мероприятия или составить смету.
+- Не знаешь, как ответить заказчику, чтобы он согласился.
+- Сомневаешься в репертуаре или хочешь свежую идею для номера.
+Напиши мне про любую такую ситуацию - и я разберу её с тобой прямо сейчас, по-рабочему.
+
+МОЁ СЛОВО: я не дам тебе сухих ответов из интернета. Я сначала слушаю тебя, а потом говорю по-человечески, как старший товарищ, который понимает твоё дело.
+
+КОНФИДЕНЦИАЛЬНОСТЬ: всё, что ты мне пишешь, остаётся между нами. Я никому не передаю твои слова, твои заметки и твои планы. Это твоё личное пространство.
+
+Пока это бесплатный период - пользуйся, проверяй меня. Когда поймёшь, что я нужен - скажи Артуру, и продолжим уже навсегда.
+
+Я рядом. Начнём? Выбери, как себя чувствуешь."""
+def ask_deepseek(user_text, system, history=None):
+    if not DEEPSEEK_KEY:
+        return None
+    # живая дата/время в системный промпт
+    now_line = f"Сейчас реальный момент: {_now()}."
+    if system and "Сейчас реальный момент" not in system:
+        system = system + "\n" + now_line
+    messages = [{"role": "system", "content": system}]
+    # добавляем историю переписки (память бота), чтобы помнить контекст
+    if history:
+        for h in history:
+            role = "user" if h["role"] == "user" else "assistant"
+            messages.append({"role": role, "content": h["text"]})
+    messages.append({"role": "user", "content": user_text})
+    try:
+        r = requests.post("https://api.deepseek.com/chat/completions",
+                          headers={"Authorization": f"Bearer {DEEPSEEK_KEY}",
+                                   "Content-Type": "application/json"},
+                          json={"model": "deepseek-chat",
+                                "messages": messages,
+                                "max_tokens": 600}, timeout=30)
+        d = r.json()
+        return d["choices"][0]["message"]["content"].strip()
+    except Exception as e:
+        log.error(f"deepseek: {e}")
+        return None
+
+
+def coach_reply(mood_value):
+    """Заготовки реакции на состояние. Без AI - быстро и надёжно."""
+    if mood_value <= 4:
+        return ("Бро Максим, слышу тебя. Бывает тяжело, и это нормально. "
+                "Не гони себя. Давай 3-5 минут спокойного дыхания: вдох на 4, выдох на 6. "
+                "Ты проходил через сложное и раньше - и справлялся. Что случилось? Расскажи, я рядом.")
+    elif mood_value <= 7:
+        return ("Бро Максим, держишься в среднем - уже хорошо. Помни, ты профессионал, "
+                "ты это умеешь. Давай нацелимся на сегодня: одна небольшая победа точно будет. "
+                "Что важнее всего сделать прямо сейчас?")
+    else:
+        return ("Бро Максим, вот это заряд! Так держать. Ты в ресурсе - лови момент, "
+                "делай большое. Пусть день будет твоим. Если что-то накопилось на сердце - я рядом, "
+                "пиши в любое время.")
+
+
+def free_dialog(user_text, chat_id):
+    """Свободный диалог: коуч/психолог через DeepSeek, или просто поддерживаем.
+    Сохраняет переписку в БД и передаёт историю в DeepSeek (память бота)."""
+    # если в свободном диалоге пришло слово состояния или число - это шкала
+    mv = mood_value(user_text)
+    if mv is not None:
+        q_num = get_survey_question_num(MAKSIM_CHAT_ID or OWNER_CHAT_ID)
+        if q_num >= 10:
+            # опросник пройден, это шкала состояния
+            save_mood(MAKSIM_CHAT_ID or OWNER_CHAT_ID, mv, user_text)
+            return coach_reply(mv)
+    system = (
+        "Ты Бро Максим - личный нейропомощник, нейрокоуч и нейропсихолог Максима "
+        "(ведущий, музыкант, звукорежиссёр, Лабинск). Общаешься от первого лица, дружески, "
+        "по имени, стиль 'Бро'. Ты его друг и правая рука. Сначала слушаешь, потом советуешь. "
+        "Не даёшь непрошеных советов. По-русски, тепло, без канцелярита. "
+        "Запрещено: длинные тире, звёздочки, markdown.")
+    # сохраняем и передаём историю переписки для контекста
+    save_dialog(chat_id, "user", user_text)
+    history = get_dialog_history(chat_id)
+    out = ask_deepseek(user_text, system, history=history)
+    if out:
+        save_dialog(chat_id, "assistant", out)
+        return out
+    save_dialog(chat_id, "assistant",
+                "Бро Максим, я с тобой. Расскажи подробнее, что на душе - я рядом и всегда готов "
+                "поддержать или помочь разобраться.")
+    return "Бро Максим, я с тобой. Расскажи подробнее, что на душе - я рядом и всегда готов " \
+           "поддержать или помочь разобраться."
+
+
+# ---------------- Логика ----------------
+def save_mood(chat_id, value, note=""):
+    c = db()
+    c.execute("INSERT INTO mood (chat_id, value, note, ts) VALUES (?,?,?,?)",
+              (chat_id, value, note, datetime.now(TZ).isoformat()))
+    c.commit()
+    c.close()
+
+
+MOOD_WORDS = {
+    "плохо": 3, "тяжело": 2, "устал": 3,
+    "средне": 5, "норм": 5, "нормально": 5, "так себе": 4,
+    "хорошо": 8, "ок": 8, "неплохо": 8,
+    "отлично": 10, "супер": 10, "прекрасно": 10, "шикарно": 10,
+}
+
+def mood_value(text):
+    """Перевести ответ в число 1-10. Слова -> уровни, цифры -> напрямую."""
+    t = (text or "").strip().lower()
+    if re.fullmatch(r"10|[1-9]", t):
+        return int(t)
+    if t in MOOD_WORDS:
+        return MOOD_WORDS[t]
+    return None
+
+
+def handle_mood_scale(chat_id, text):
+    val = mood_value(text)
+    if val is None:
+        return False
+    save_mood(chat_id, val, "")
+    reply = coach_reply(val)
+    send(chat_id, reply, main_kb())
+    # напоминаем о мероприятиях на сегодня
+    today = datetime.now(TZ).date().isoformat()
+    c = db()
+    evs = c.execute("SELECT * FROM events WHERE chat_id=? AND date(dt)=?",
+                    (chat_id, today)).fetchall()
+    c.close()
+    if evs:
+        titles = ", ".join(e["title"] for e in evs)
+        send(chat_id, f"Кстати, Бро Максим, сегодня у тебя: {titles}. Готов?")
+
+
+def start_survey(chat_id):
+    """Начать опросник: отправить первый вопрос."""
+    if SURVEY_QUESTIONS:
+        send(chat_id, SURVEY_QUESTIONS[0])
+
+def send_survey_answer_response(chat_id, question_num):
+    """Отправить следующий вопрос или финальное сообщение."""
+    if question_num < 9:
+        send(chat_id, SURVEY_QUESTIONS[question_num + 1])
+    elif question_num == 9:
+        # Финальное сообщение про покупку
+        final_msg = (
+            "Спасибо, Бро Максим, за развёрнутые ответы. Твой отзыв невероятно важен для меня.\n\n"
+            "За эту неделю ты понял, как я работаю, чем я полезен, и чего тебе от меня не хватает. "
+            "Это была демонстрация того, что может быть, когда у тебя есть личный помощник и друг, который всегда рядом, "
+            "понимает твой стиль и поддерживает в нужный момент.\n\n"
+            "Теперь, когда ты оценил эту поддержку, пришло время принять решение.\n\n"
+            "Для дальнейшего сотрудничества свяжись с Артуром, моим разработчиком: @KISELEVY_CREO или в личные сообщения. "
+            "Обсудите условия приобретения моей поддержки навсегда - постоянный помощник, который знает тебя, "
+            "развивается вместе с тобой, помогает в творчестве и жизни.\n\n"
+            "Ты достоин такой поддержки. Жди от Артура.")
+        send(chat_id, final_msg, main_kb())
+        # Отправляем Артуру все ответы Максима на опросник
+        notify_owner_survey_done(chat_id)
+
+
+def notify_owner_survey_done(chat_id):
+    """После завершения опросника отправить Артуру все ответы Максима."""
+    c = db()
+    rows = c.execute("SELECT question_num, answer FROM survey WHERE chat_id=? ORDER BY question_num ASC",
+                     (chat_id,)).fetchall()
+    c.close()
+    if not rows or chat_id == OWNER_CHAT_ID:
+        return
+    lines = [f"Опросник завершён. Ответы Максима (chat_id {chat_id}):"]
+    for r in rows:
+        qn = r["question_num"]
+        q = SURVEY_QUESTIONS[qn] if 0 <= qn < len(SURVEY_QUESTIONS) else f"Вопрос {qn + 1}"
+        lines.append(f"\n{qn + 1}. {q}\nОтвет: {r['answer']}")
+    # Финальное сообщение уже ушло Максиму; здесь дублируем итог для Артура
+    lines.append("\n\nМаксим прошёл опросник на 7-й день. Свяжиcь с ним, чтобы обсудить дальнейшее сотрудничество и что ему ещё нужно.")
+    # шлём в несколько сообщений, чтобы не упереться в лимит Telegram
+    text = "\n".join(lines)
+    for i in range(0, len(text), 3900):
+        send(OWNER_CHAT_ID, text[i:i + 3900])
+
+def handle_text(chat_id, text):
+    t = (text or "").strip()
+
+    # админ-команда Артура: активировать доступ
+    if t.startswith("/activate") and chat_id == OWNER_CHAT_ID:
+        activate_admin(chat_id)
+        return
+
+    # проверка: был ли уже пройден опросник
+    c = db()
+    survey_done = c.execute("SELECT COUNT(*) as cnt FROM survey WHERE chat_id=? AND question_num=9",
+                            (chat_id,)).fetchone()["cnt"] > 0
+    c.close()
+    
+    # если опросник пройден и это не админ - не пускаем
+    if survey_done and chat_id != OWNER_CHAT_ID:
+        active, block_msg = sub_status(chat_id)
+        if not active:
+            send(chat_id, block_msg, main_kb())
+            return
+    
+    # проверка подписки: 7 дней бесплатно, потом опросник
+    active, block_msg = sub_status(chat_id)
+    if not active and chat_id != OWNER_CHAT_ID:
+        # вместо блока - начинаем опросник
+        q_num = get_survey_question_num(chat_id)
+        if q_num < 10:
+            # опросник ещё не завершён
+            send_survey_answer_response(chat_id, q_num - 1) if q_num > 0 else start_survey(chat_id)
+        return
+    
+    # проверка: находимся ли мы в процессе опросника
+    q_num = get_survey_question_num(chat_id)
+    if q_num < 10 and chat_id != OWNER_CHAT_ID:
+        # опросник в процессе - сохрани ответ и отправь следующий вопрос
+        save_survey_answer(chat_id, q_num, t)
+        send_survey_answer_response(chat_id, q_num)
+        return
+
+    # команды
+    if t.startswith("/"):
+        cmd = t.split()[0]
+        rest = t[len(cmd):].strip()
+        if cmd == "/start":
+            # сначала пользовательское соглашение, потом рассказ о себе
+            send(chat_id, AGREEMENT)
+            send(chat_id, INTRO, mood_kb())
+        elif cmd == "/заметка":
+            if rest:
+                c = db()
+                c.execute("INSERT INTO notes (chat_id, text, ts) VALUES (?,?,?)",
+                          (chat_id, rest, datetime.now(TZ).isoformat()))
+                c.commit()
+                c.close()
+                send(chat_id, "Записал, Бро Максим. Вечером напомню.", main_kb())
+            else:
+                send(chat_id, "Напиши текст заметки после слова: /заметка текст")
+        elif cmd == "/мероприятие":
+            if rest:
+                # формат: название | ДД.ММ.ГГГГ ЧЧ:ММ
+                parts = rest.split("|")
+                title = parts[0].strip()
+                dt = parts[1].strip() if len(parts) > 1 else ""
+                try:
+                    dt_parsed = datetime.strptime(dt, "%d.%m.%Y %H:%M").replace(tzinfo=TZ)
+                except Exception:
+                    send(chat_id, "Формат: /мероприятие Название | ДД.ММ.ГГГГ ЧЧ:ММ, например: /мероприятие Свадьба Ивановых | 15.08.2026 18:00")
+                    return
+                c = db()
+                c.execute("INSERT INTO events (chat_id, title, dt) VALUES (?,?,?)",
+                          (chat_id, title, dt_parsed.isoformat()))
+                c.commit()
+                c.close()
+                send(chat_id, f"Добавил: {title}. Напомню за день и за 2 часа.", main_kb())
+            else:
+                send(chat_id, "Формат: /мероприятие Название | ДД.ММ.ГГГГ ЧЧ:ММ")
+        elif cmd == "/отчет" or cmd == "/итог":
+            send_weekly_report(chat_id)
+        elif cmd == "/привычка" or cmd == "/цель":
+            # одиночная команда без текста - показать статус
+            if cmd == "/привычка":
+                show_habits(chat_id)
+            else:
+                show_goals(chat_id)
+        elif cmd == "/привычка+":
+            if rest:
+                add_habit(chat_id, rest)
+            else:
+                show_habits(chat_id)
+        elif cmd == "/цель+":
+            if rest:
+                # если число - отметить выполнение, иначе добавить цель
+                if re.fullmatch(r"[1-9]\d*", rest):
+                    complete_goal(chat_id, int(rest) - 1)
+                else:
+                    add_goal(chat_id, rest)
+            else:
+                show_goals(chat_id)
+        else:
+            send(chat_id, "Доступно: /start, /заметка текст, /мероприятие Название | дата время, /привычка, /цель, /отчет",
+                 main_kb())
+        return
+
+    # кнопки
+    low = t.lower()
+    if low in ("моё состояние", "мое состояние", "состояние"):
+        save_mood(chat_id, 0, "")
+        send(chat_id, "Бро Максим, как ты сейчас? Выбери, как себя чувствуешь.", mood_kb())
+        return
+    if low in ("мои заметки", "заметки"):
+        c = db()
+        pts = c.execute("SELECT * FROM notes WHERE chat_id=? ORDER BY id DESC LIMIT 10",
+                        (chat_id,)).fetchall()
+        c.close()
+        if pts:
+            lines = "\n".join(f"- {p['text']}" for p in pts)
+            send(chat_id, f"Твои заметки:\n{lines}", main_kb())
+        else:
+            send(chat_id, "Заметок пока нет. Напиши мысль через /заметка текст.", main_kb())
+        return
+    if low in ("мои привычки", "привычки"):
+        show_habits(chat_id)
+        return
+    if low in ("мои цели", "цели"):
+        show_goals(chat_id)
+        return
+    if low in ("мои мероприятия", "мероприятия"):
+        c = db()
+        evs = c.execute("SELECT * FROM events WHERE chat_id=? AND dt > ? ORDER BY dt LIMIT 10",
+                        (chat_id, datetime.now(TZ).isoformat())).fetchall()
+        c.close()
+        if evs:
+            lines = "\n".join(f"- {e['title']} ({e['dt'][:16].replace('T', ' ')})" for e in evs)
+            send(chat_id, f"Твои мероприятия:\n{lines}\n\nДобавить: /мероприятие Название | ДД.ММ.ГГГГ ЧЧ:ММ", main_kb())
+        else:
+            send(chat_id, "Мероприятий пока нет. Добавить: /мероприятие Название | ДД.ММ.ГГГГ ЧЧ:ММ", main_kb())
+        return
+    if low in ("итог дня", "итог"):
+        send_weekly_report(chat_id)
+        return
+    if low in ("расскажу подробнее", "подробнее"):
+        send(chat_id, "Слушаю, Бро Максим. Пиши, не торопись. Я рядом.")
+        return
+    if low.startswith("/заметка"):
+        return
+
+    # слова состояния или число (шкала настроения)
+    mv = mood_value(t)
+    if mv is not None:
+        handle_mood_scale(chat_id, t)
+        return
+
+    # распознаём упоминание выступления/мероприятия/работы и запоминаем на сегодня
+    detect_gig(chat_id, t)
+
+    # свободный диалог
+    reply = free_dialog(t, chat_id)
+    send(chat_id, reply, main_kb())
+
+
+# ---------------- Трекер привычек ----------------
+DEFAULT_HABITS = [
+    "Голос: распевание / тёплые связки",
+    "Репетиция / отработка сценария",
+    "Вокал / инструмент (музыка)",
+    "Звук: проверил аппаратуру / микрофоны",
+    "Выпил воду (голос сух не должен)",
+    "Выспался (7-8 часов)",
+    "Движение / спорт (энергия для сцены)",
+]
+
+def show_habits(chat_id):
+    """Показать привычки на сегодня с чек-боксами."""
+    today = datetime.now(TZ).date().isoformat()
+    c = db()
+    # узнаем все известные привычки чата
+    rows = c.execute("SELECT DISTINCT name FROM habits WHERE chat_id=?", (chat_id,)).fetchall()
+    names = [r["name"] for r in rows] if rows else DEFAULT_HABITS
+    done_today = {r["name"] for r in c.execute(
+        "SELECT name FROM habits WHERE chat_id=? AND date=? AND done=1", (chat_id, today)).fetchall()}
+    c.close()
+    lines = ["Бро Максим, твои привычки на сегодня:"]
+    for name in names:
+        mark = "✅" if name in done_today else "⬜"
+        lines.append(f"{mark} {name}")
+    lines.append("")
+    lines.append("Отметить: /привычка Название ")
+    lines.append("Добавить новую: /привычка+ Название")
+    send(chat_id, "\n".join(lines), main_kb())
+
+
+def mark_habit(chat_id, name):
+    today = datetime.now(TZ).date().isoformat()
+    c = db()
+    c.execute("INSERT OR IGNORE INTO habits (chat_id, name, date, done) VALUES (?,?,?,1)",
+              (chat_id, name, today))
+    c.execute("UPDATE habits SET done=1 WHERE chat_id=? AND name=? AND date=?",
+              (chat_id, name, today))
+    c.commit()
+    c.close()
+    send(chat_id, f"Отметил: {name}. Молодец, Бро Максим!", main_kb())
+
+
+def add_habit(chat_id, name):
+    c = db()
+    c.execute("INSERT INTO habits (chat_id, name, date, done) VALUES (?,?,?,0)",
+              (chat_id, name, datetime.now(TZ).date().isoformat()))
+    c.commit()
+    c.close()
+    send(chat_id, f"Добавил привычку: {name}. Будем держать её вместе!", main_kb())
+
+
+# ---------------- Копилка целей ----------------
+def show_goals(chat_id):
+    c = db()
+    rows = c.execute("SELECT * FROM goals WHERE chat_id=? ORDER BY done ASC, id DESC", (chat_id,)).fetchall()
+    c.close()
+    if not rows:
+        send(chat_id, "Целей пока нет. Добавь через: /цель Моя цель", main_kb())
+        return
+    lines = ["Бро Максим, твои цели:"]
+    for g in rows:
+        mark = "✅" if g["done"] else "⬜"
+        lines.append(f"{mark} {g['text']}")
+    lines.append("")
+    lines.append("Добавить: /цель Текст")
+    lines.append("Выполнить: /цель+ номер")
+    send(chat_id, "\n".join(lines), main_kb())
+
+
+def add_goal(chat_id, text):
+    c = db()
+    c.execute("INSERT INTO goals (chat_id, text, done, created) VALUES (?,?,0,?)",
+              (chat_id, text, datetime.now(TZ).isoformat()))
+    c.commit()
+    c.close()
+    send(chat_id, f"Записал цель: {text}. Маленькими шагами, и она твоя.", main_kb())
+
+
+def complete_goal(chat_id, idx):
+    c = db()
+    rows = c.execute("SELECT * FROM goals WHERE chat_id=? ORDER BY done ASC, id DESC", (chat_id,)).fetchall()
+    if 0 <= idx < len(rows):
+        gid = rows[idx]["id"]
+        c.execute("UPDATE goals SET done=1, done_at=? WHERE id=?",
+                  (datetime.now(TZ).isoformat(), gid))
+        c.commit()
+        c.close()
+        send(chat_id, f"Цель выполнена: {rows[idx]['text']}. Красавец!", main_kb())
+    else:
+        c.close()
+        send(chat_id, "Такой номер не нашёл. Посмотри список через кнопку Мои цели.", main_kb())
+
+
+# ---------------- Утренний вестник с аффирмацией дня ----------------
+AFFIRMATIONS = [
+    "Ты сегодня в ресурсе. Сделай одно большое дело, и день твой.",
+    "Каждый день ты чуть ближе к своей вершине. Шаг за шагом.",
+    "Твой голос и харизма ведут тебя. Покажи миру их снова.",
+    "Сцена сегодня твоя - и зал будет с тобой.",
+    "Ты уже доказал, что умеешь. Сегодня просто продолжай.",
+    "Энергия приходит к тому, кто начинает. Начни с малого.",
+    "Твой звук - твой фирменный след. Настраивай, играй, звучи.",
+    "Слушай себя. Твоя интуиция сегодня особенно чёткая.",
+    "Сила - в регулярности. Ещё один шаг сегодня - и ты укрепился.",
+    "Всё, что ты хочешь, уже ждёт тебя впереди. Иди спокойно.",
+]
+
+def send_morning_digest(chat_id):
+    """Утренний вестник: приветствие + аффирмация дня + открытые цели."""
+    import random as _r
+    aff = _r.choice(AFFIRMATIONS)
+    c = db()
+    open_goals = c.execute("SELECT text FROM goals WHERE chat_id=? AND done=0 ORDER BY id DESC LIMIT 3", (chat_id,)).fetchall()
+    c.close()
+    msg = ["Бро Максим, доброе утро! ☀️", "", aff, ""]
+    if open_goals:
+        msg.append("Твои открытые цели:")
+        for i, g in enumerate(open_goals, 1):
+            msg.append(f"{i}. {g['text']}")
+        msg.append("")
+    msg.append("Как ты сегодня? Выбери настроение ниже, и пойдём красиво в этот день.")
+    send(chat_id, "\n".join(msg), mood_kb())
+
+
+# ---------------- Расписание (проверка каждые 30 сек) ----------------
+def run_scheduler():
+    while True:
+        try:
+            now = datetime.now(TZ)
+            hm = now.strftime("%H:%M")
+            wd = now.weekday()  # 0=Пн, 6=Вс
+            target = MAKSIM_CHAT_ID or OWNER_CHAT_ID
+            today = now.date().isoformat()
+
+            # утренний вестник с аффирмацией дня в 8:25 (перед чек-ином 8:30)
+            if hm == "08:25":
+                if not is_marked(target, today, "morning_digest"):
+                    mark(target, today, "morning_digest")
+                    send_morning_digest(target)
+
+            # утро 8:30 - только если ещё не спрашивали сегодня
+            if hm == "08:30":
+                if not is_marked(target, today, "morning"):
+                    mark(target, today, "morning")
+                    send(target, "Бро Максим, доброе утро! Как ты сегодня? Бодрым себя чувствуешь или тяжело?", mood_kb())
+            # день 13:00
+            if hm == "13:00":
+                if not is_marked(target, today, "day"):
+                    mark(target, today, "day")
+                    send(target, "Бро Максим, как ты сейчас, в середине дня?", mood_kb())
+            # вечер 21:00
+            if hm == "21:00":
+                if not is_marked(target, today, "evening"):
+                    mark(target, today, "evening")
+                    if has_gig_today(target):
+                        send(target, "Бро Максим, как прошло выступление? Как зал встретил? Что было самым ярким моментом?", mood_kb())
+                    else:
+                        send(target, "Бро Максим, подведём итоги дня? Как он прошёл? Что хорошего, что сложного?",
+                             main_kb())
+
+            # 7-й день: начать опросник
+            c = db()
+            sub_row = c.execute("SELECT started FROM sub WHERE chat_id=?", (target,)).fetchone()
+            c.close()
+            if sub_row:
+                started = datetime.fromisoformat(sub_row["started"])
+                days_since = (now - started).days
+                if days_since == 7:
+                    q_num = get_survey_question_num(target)
+                    if q_num == 0:
+                        send(target, "Бро Максим, прошло 7 дней нашего сотрудничества. Я хочу узнать твоё мнение и сделать себя лучше для тебя. У меня есть вопросы к тебе. Ты готов ответить?")
+                        start_survey(target)
+            
+            # недельный отчёт в воскресенье 21:05
+            if hm == "21:05" and wd == 6:
+                if not is_marked(target, now.isoformat(), "weekly"):
+                    mark(target, now.isoformat(), "weekly")
+                    send_weekly_report(target)
+
+            # напоминания о мероприятиях
+            remind_events(target, now)
+
+            # вечером напомнить заметки дня (в 21:10)
+            if hm == "21:10":
+                if not is_marked(target, today, "notes_remind"):
+                    mark(target, today, "notes_remind")
+                    remind_today_notes(target)
+        except Exception as e:
+            log.error(f"scheduler: {e}")
+        time.sleep(30)
+
+
+def is_marked(chat_id, key, kind):
+    c = db()
+    row = c.execute("SELECT id FROM marked WHERE chat_id=? AND date=? AND kind=?",
+                    (chat_id, key, kind)).fetchone()
+    c.close()
+    return row is not None
+
+
+def mark(chat_id, key, kind):
+    try:
+        c = db()
+        c.execute("INSERT INTO marked (chat_id, date, kind) VALUES (?,?,?)",
+                  (chat_id, key, kind))
+        c.commit()
+        c.close()
+    except Exception as e:
+        log.error(f"mark: {e}")
+
+
+GIG_HINTS = [
+    "концерт", "концерта", "концерте",
+    "свадьба", "свадьбу", "свадьбе",
+    "корпоратив", "юбилей", "выступление", "выступаю", "выступать", "веду", "ведущий",
+    "мероприятие", "мероприятия", "мероприятие",
+    "работаю", "на работе", "в дк", "дом культуры", "доме культуры",
+    "сцена", "на сцене", "звук", "пульт", "аппарат", "микрофон",
+    "шоу", "праздник", "торжество", "банкет", "играю", "пою", "вокал",
+]
+
+# временные маркеры: слово/часть -> сдвиг от сегодня
+DATE_HINTS = {
+    "сегодня": 0, "сегодня": 0, "сегодня вечером": 0,
+    "завтра": 1,
+    "послезавтра": 2,
+}
+
+WEEKDAY_HINTS = {
+    "понедельник": 0, "в понедельник": 0,
+    "вторник": 1, "во вторник": 1,
+    "среду": 2, "в среду": 2,
+    "четверг": 3, "в четверг": 3,
+    "пятницу": 4, "в пятницу": 4,
+    "субботу": 5, "в субботу": 5,
+    "воскресенье": 6, "в воскресенье": 6,
+}
+
+
+def parse_gig_date(text):
+    """Определить дату события из текста. Возвращает (date, ключ_обнаружен) или (None, None)."""
+    t = (text or "").lower()
+    # конкретная дата ДД.ММ[.ГГГГ]
+    m = re.search(r"(\b\d{1,2}[./]\d{1,2}(?:[./]\d{2,4})?)\b", t)
+    if m:
+        try:
+            parts = re.split(r"[./]", m.group(1))
+            d, mo = int(parts[0]), int(parts[1])
+            y = int(parts[2]) if len(parts) > 2 else datetime.now(TZ).year
+            dt = datetime(y, mo, d).date()
+            return dt, m.group(1)
+        except Exception:
+            pass
+    # день недели
+    for w, off in WEEKDAY_HINTS.items():
+        if w in t:
+            today = datetime.now(TZ).date()
+            delta = (off - today.weekday()) % 7
+            if delta == 0:
+                delta = 7  # "в субботу" сегодня суббота - значит следующая
+            return today + timedelta(days=delta), w.strip()
+    # сегодня / завтра / послезавтра
+    for key, off in DATE_HINTS.items():
+        if key in t:
+            return datetime.now(TZ).date() + timedelta(days=off), key
+    return None, None
+
+
+def detect_gig(chat_id, text):
+    """Если Максим упоминает выступление/работу - запомнить на дату события.
+    Если дата в будущем - также добавить в events для напоминаний."""
+    t = (text or "").lower()
+    hit = next((h for h in GIG_HINTS if h in t), None)
+    if not hit:
+        return
+    gdt, marker = parse_gig_date(text)
+    if gdt is None:
+        gdt = datetime.now(TZ).date()  # нет даты - считаем сегодня
+    gds = gdt.isoformat()
+    c = db()
+    exists = c.execute("SELECT 1 FROM gigs WHERE chat_id=? AND date=?",
+                       (chat_id, gds)).fetchone()
+    if not exists:
+        c.execute("INSERT INTO gigs (chat_id, date, title) VALUES (?,?,?)",
+                  (chat_id, gds, hit))
+    # событие в будущем - добавим в events для напоминаний (только если его там ещё нет)
+    ev_exists = c.execute("SELECT 1 FROM events WHERE chat_id=? AND date(dt)=? AND lower(title) LIKE ?",
+                          (chat_id, gds, f"%{hit}%")).fetchone()
+    if gdt > datetime.now(TZ).date() and not ev_exists:
+        dt_val = datetime.combine(gdt, datetime.min.time()).replace(tzinfo=TZ)
+        c.execute("INSERT INTO events (chat_id, title, dt) VALUES (?,?,?)",
+                  (chat_id, hit, dt_val.isoformat()))
+    c.commit()
+    c.close()
+
+
+def has_gig_today(chat_id):
+    """Есть ли у Максима выступление/работа сегодня."""
+    today = datetime.now(TZ).date().isoformat()
+    c = db()
+    row = c.execute("SELECT COUNT(*) n FROM gigs WHERE chat_id=? AND date=?",
+                    (chat_id, today)).fetchone()
+    c.close()
+    return bool(row and row["n"] > 0)
+
+
+def remind_events(chat_id, now):
+    c = db()
+    evs = c.execute("SELECT * FROM events WHERE chat_id=? AND dt > ?",
+                    (chat_id, now.isoformat())).fetchall()
+    for e in evs:
+        dt = datetime.fromisoformat(e["dt"])
+        diff = dt - now
+        # за день (24ч) и не напоминано
+        if timedelta(hours=22) < diff < timedelta(hours=26) and not e["reminded_day"]:
+            c.execute("UPDATE events SET reminded_day=1 WHERE id=?", (e["id"],))
+            c.commit()
+            send(chat_id, f"Бро Максим, завтра у тебя {e['title']} в {dt.strftime('%H:%M')}. Ты готов?")
+        # за 2 часа
+        if timedelta(minutes=110) < diff < timedelta(minutes=130) and not e["reminded_2h"]:
+            c.execute("UPDATE events SET reminded_2h=1 WHERE id=?", (e["id"],))
+            c.commit()
+            send(chat_id, f"Бро Максим, через 2 часа {e['title']}. Соберись, ты лучший!")
+    c.close()
+
+
+def remind_today_notes(chat_id):
+    today = datetime.now(TZ).date().isoformat()
+    c = db()
+    pts = c.execute("SELECT * FROM notes WHERE chat_id=? AND date(ts)=?",
+                    (chat_id, today)).fetchall()
+    c.close()
+    if pts:
+        lines = "\n".join(f"- {p['text']}" for p in pts)
+        send(chat_id, f"Бро Максим, твои заметки за сегодня:\n{lines}")
+
+
+def send_weekly_report(chat_id):
+    c = db()
+    week_ago = (datetime.now(TZ) - timedelta(days=7)).isoformat()
+    moods = c.execute("SELECT value FROM mood WHERE chat_id=? AND ts > ? AND value > 0",
+                      (chat_id, week_ago)).fetchall()
+    notes_count = c.execute("SELECT COUNT(*) n FROM notes WHERE chat_id=? AND ts > ?",
+                            (chat_id, week_ago)).fetchone()["n"]
+    evs = c.execute("SELECT title, dt FROM events WHERE chat_id=? AND dt > ? ORDER BY dt LIMIT 5",
+                    (chat_id, datetime.now(TZ).isoformat())).fetchall()
+    c.close()
+    avg = round(sum(m["value"] for m in moods) / len(moods), 1) if moods else 0
+    lines = [f"Бро Максим, твой отчёт за неделю:"]
+    lines.append(f"Среднее состояние: {avg} / 10" if avg else "Состояние: данных пока мало")
+    lines.append(f"Заметок за неделю: {notes_count}")
+    if evs:
+        ev_lines = ", ".join(f"{e['title']} ({e['dt'][:16].replace('T', ' ')})" for e in evs)
+        lines.append(f"Впереди: {ev_lines}")
+    send(chat_id, "\n".join(lines), main_kb())
+
+
+# ---------------- Watchdog (самовосстановление) ----------------
+HEARTBEAT = {"t": time.time()}
+
+def watchdog_loop():
+    """Следит за пульсом главного цикла. Если цикл завис дольше WATCHDOG_TIMEOUT -
+    принудительно аварийно завершает процесс, systemd (Restart=always) перезапустит.
+    Зависший цикл systemd не видит, поэтому такой внутренний сторож обязателен."""
+    wait = 0
+    while True:
+        try:
+            # проверяем каждые 20 сек
+            diff = time.time() - HEARTBEAT["t"]
+            # главный цикл обновляет HEARTBEAT при каждом апдейте/итерации
+            # если пульс протух дольше 300 сек (5 мин) и никакой активности - перезапуск
+            if diff > 300:
+                log.error(f"Watchdog: цикл завис ({diff:.0f}s без пульса) - принудительный рестарт")
+                os._exit(1)
+            # предупреждение в логи, когда приближаемся к лимиту
+            if diff > 240 and wait != int(diff / 60):
+                wait = int(diff / 60)
+                log.warning(f"Watchdog: сердцебиение почти протухло ({diff:.0f}s)")
+        except Exception as e:
+            log.error(f"watchdog: {e}")
+        time.sleep(20)
+
+
+# ---------------- Main ----------------
+def main():
+    init_db()
+    log.info("Нейропомощник для Максима запущен")
+
+    # планировщик в отдельном потоке
+    threading.Thread(target=run_scheduler, daemon=True).start()
+    # watchdog в отдельном потоке
+    threading.Thread(target=watchdog_loop, daemon=True).start()
+
+    offset = None
+    offset_file = os.path.join(BASE, "last_offset_maksim.txt")
+    try:
+        with open(offset_file) as f:
+            offset = int(f.read().strip())
+    except Exception:
+        pass
+
+    # Читаем апдейты с 0 при первом запуске, НЕ проглятывая старые.
+    # Иначе первое сообщение /start теряется.
+    start_offset = 0
+    try:
+        r0 = requests.get(f"{API}/getUpdates", params={"timeout": 20}, timeout=30)
+        d0 = r0.json()
+        if d0.get("ok"):
+            ups = d0.get("result", [])
+            if ups:
+                start_offset = ups[-1]["update_id"] + 1
+    except Exception:
+        pass
+
+    while True:
+        try:
+            # обновляем сердцебиение - watchdog видит, что цикл жив
+            HEARTBEAT["t"] = time.time()
+            this_offset = offset if offset is not None else start_offset
+            params = {"timeout": 40, "offset": this_offset}
+            r = requests.get(f"{API}/getUpdates", params=params, timeout=60)
+            d = r.json()
+            if not d.get("ok"):
+                time.sleep(2)
+                continue
+            seen = False
+            for upd in d.get("result", []):
+                new_id = upd["update_id"]
+                offset = new_id + 1
+                with open(offset_file, "w") as f:
+                    f.write(str(offset))
+                seen = True
+                msg = upd.get("message") or upd.get("edited_message")
+                if not msg:
+                    continue
+                chat_id = msg["chat"]["id"]
+                text = msg.get("text")
+                if not text:
+                    if msg.get("voice") or msg.get("audio"):
+                        send(chat_id, "Бро Максим, голосовое получил. Расшифровку подключим, а пока напиши текстом, договорились?")
+                    continue
+                handle_text(chat_id, text)
+            if not seen and offset is None:
+                # первый пустой опрос - запишем базу, чтобы не цеплять старые апдейты повторно
+                offset = 0 if start_offset == 0 else offset
+        except Exception as e:
+            log.error(f"loop: {e}")
+            time.sleep(2)
+            # даже при ошибке обновляем пульс - цикл не завис, просто была сетевая ошибка
+            HEARTBEAT["t"] = time.time()
+
+
+if __name__ == "__main__":
+    main()

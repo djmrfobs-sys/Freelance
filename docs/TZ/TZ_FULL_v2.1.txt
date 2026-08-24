@@ -1,0 +1,424 @@
+═══════════════════════════════════════════════════════════════════════════════
+ТЕХНИЧЕСКОЕ ЗАДАНИЕ
+"Insta Navigator AI" v2.1 — Полная расширенная версия
+═══════════════════════════════════════════════════════════════════════════════
+
+Дата: 15.07.2026
+Версия: 2.1 (Dashboard + Growth + Hashtags + Apify интеграция)
+Статус: В разработку
+Сроки: 25 дней
+Стоимость разработки: $4,500 (one-time)
+
+───────────────────────────────────────────────────────────────────────────────
+ЧАСТЬ 1: БАЗОВЫЕ МОДУЛИ АНАЛИТИКИ
+───────────────────────────────────────────────────────────────────────────────
+
+✅ МОДУЛЬ 1: DASHBOARD ANALYTICS 📊
+
+Описание: Визуальный дашборд с графиками и метриками роста Instagram аккаунта.
+
+Функции:
+• Метрики: Total Followers, Avg Likes/Post, Engagement Rate, Best Post Type
+• Графики:
+  1. Followers Growth Chart (Line chart, 7/30/90 дней)
+  2. Engagement Trend (Bar chart: Likes/Comments/Saves)
+  3. Post Performance Distribution (Pie chart: Reels/Carousel/Posts/Stories)
+  4. Optimal Posting Time Heatmap (Heat map: время суток x день недели)
+• Фильтры: Период (7/30/90/Custom), Post type, Metric
+• Экспорт: PDF, CSV, PNG
+• Performance: загрузка <2сек
+
+───────────────────────────────────────────────────────────────────────────────
+
+✅ МОДУЛЬ 2: GROWTH TRACKER 📈
+
+Описание: Отслеживание истории роста профиля с прогнозами.
+
+Функции:
+• История роста (Timeline):
+  - Дата | Followers | Daily Change | Engagement | Notes
+• Growth Analytics:
+  - Weekly/Monthly summary (avg, best, worst day)
+  - Growth rate chart с трендом
+  - Engagement correlation (Posts vs Followers gained)
+• Прогнозирование:
+  - Current: 2,534 followers
+  - 7 дней: ~2,600 (+2.6%)
+  - 30 дней: ~2,800 (+10.5%)
+  - 90 дней: ~3,200 (+26.2%)
+  - Confidence: 85%
+• Data storage: Database (Firebase/MongoDB)
+• Update: Daily snapshots
+• Forecast algorithm: Linear regression или ARIMA
+
+───────────────────────────────────────────────────────────────────────────────
+
+✅ МОДУЛЬ 3: HASHTAG RESEARCH 🏷️
+
+Описание: Исследование хештегов — популярность, сложность, рекомендации.
+
+Функции:
+• Поиск хештегов с метриками:
+  - Posts count
+  - Difficulty score (0-10)
+  - Engagement rate (%)
+  - Growth trend (↑/↓/→)
+  - Status (Easy/Medium/Hard/Very Hard)
+• Difficulty calculation:
+  - <5K posts: Easy (0-3)
+  - 5K-50K: Medium (4-6)
+  - 50K-500K: Hard (7-8)
+  - >500K: Very Hard (9-10)
+• Рекомендации (USE/SKIP)
+• Related hashtags
+• Hashtag tracking & history
+• Data source: Apify Hashtag Scraper
+• Update: Еженедельно
+• Search performance: <1сек
+
+───────────────────────────────────────────────────────────────────────────────
+ЧАСТЬ 2: APIFY ИНТЕГРАЦИЯ (6 НОВЫХ СКРАПЕРОВ)
+───────────────────────────────────────────────────────────────────────────────
+
+🔗 НОВЫЕ APIFY СКРАПЕРЫ:
+
+1. Instagram Mentions Scraper
+   - Находит упоминания профиля
+   - Sentiment анализ (positive/neutral/negative)
+   - Top mentions list
+   - Trends detection
+
+2. Instagram Reels Scraper
+   - Views, shares, saves per reel
+   - Watch time analysis
+   - Best performing reels
+   - Hook type detection (question/emotion/action/curiosity)
+   - Music genre analysis
+   - Duration optimization
+
+3. Instagram User Info Scraper
+   - Deep profile analysis
+   - Follower growth history
+   - Engagement patterns
+   - Content preferences
+
+4. Instagram Location Scraper
+   - Geographic analysis
+   - Regional trends
+   - Location-based engagement
+   - Posts by location
+
+5. TikTok Scraper
+   - Followers, views, engagement rate
+   - Avg likes per video
+   - Top videos analysis
+   - Upload frequency
+
+6. YouTube Channel Scraper
+   - Subscribers, total views
+   - Video stats
+   - Avg views per video
+   - Upload frequency
+
+───────────────────────────────────────────────────────────────────────────────
+ЧАСТЬ 3: РАСШИРЕННЫЕ МОДУЛИ (В LOVABLE)
+───────────────────────────────────────────────────────────────────────────────
+
+🌐 TAVILY ENHANCED (с 4 новыми компонентами):
+
+1. MENTIONS TRACKER
+   └─ Где упоминают аккаунт?
+   └─ Sentiment analysis
+   └─ Influencer mentions
+   └─ Trends detection
+
+2. REELS DEEP DIVE
+   └─ Views per reel
+   └─ Watch time analysis
+   └─ Best performing reels
+   └─ Hook & music recommendations
+
+3. COMPETITOR INTEL
+   └─ Top 3 конкурента в нише
+   └─ Их лучшие посты
+   └─ Их хештеги
+   └─ Их стратегия
+
+4. LOCATION INSIGHTS
+   └─ Географический анализ
+   └─ Regional trends
+   └─ Location-based engagement
+
+───────────────────────────────────────────────────────────────────────────────
+
+🎬 INSTAPRODUCER AI ENHANCED:
+
+1. FIND ACCOUNTS
+   ├─ By niche (через Mentions Scraper)
+   ├─ By location (через Location Scraper)
+   ├─ By engagement (через Reels Scraper)
+   └─ Competitor accounts
+
+2. ANALYZE REELS
+   ├─ What makes them viral?
+   ├─ Hook techniques
+   ├─ Music & transitions
+   └─ Best reels templates
+
+3. GET INSIGHTS
+   ├─ Optimal posting time
+   ├─ Best content type
+   ├─ Engagement multipliers
+   └─ Growth predictions
+
+4. CREATE CONTENT
+   ├─ Based on top performers
+   ├─ AI suggestions
+   ├─ Hashtag recommendations
+   └─ Caption templates
+
+───────────────────────────────────────────────────────────────────────────────
+
+📋 STRATEGIST ENHANCED:
+
+Новое: COMPETITOR STRATEGY MODULE
+├─ Analyze competitors (top 5 в нише)
+├─ Их контент-стратегия
+├─ Их posting schedule
+├─ Их engagement rate
+├─ Их growth trajectory
+├─ Benchmark analysis
+├─ Gap analysis
+├─ Opportunities & threats
+└─ Recommendations (what to copy/improve)
+
+───────────────────────────────────────────────────────────────────────────────
+
+🌍 MULTICHANNEL (НОВЫЙ МОДУЛЬ):
+
+TIKTOK ANALYTICS
+├─ Followers, views, engagement rate
+├─ Avg likes per video
+├─ Top videos performance
+└─ Upload frequency analysis
+
+YOUTUBE ANALYTICS
+├─ Subscribers, total views
+├─ Video performance stats
+├─ Avg views per video
+└─ Upload frequency
+
+CROSS-PLATFORM COMPARISON
+├─ Compare metrics across channels
+├─ Growth comparison
+├─ Engagement comparison
+└─ Cross-platform opportunities
+
+───────────────────────────────────────────────────────────────────────────────
+ЧАСТЬ 4: ТЕХНИЧЕСКИЕ ТРЕБОВАНИЯ
+───────────────────────────────────────────────────────────────────────────────
+
+📊 API ИНТЕГРАЦИЯ (APIFY):
+
+Authentication:
+const client = ApifyClient(apiKey: "apify_…9u8e")
+
+Параметры:
+{
+  "apiToken": "apify_…9u8e",
+  "username": "kiselevy_creo",
+  "resultsLimit": 50,
+  "fields": ["engagement", "metadata", "metrics"]
+}
+
+Response format (стандартный):
+{
+  "profile": {
+    "username": "kiselevy_creo",
+    "followers": 2534,
+    "following": 340,
+    "bio": "..."
+  },
+  "content": [
+    {
+      "id": "abc123",
+      "type": "reel",
+      "likes": 340,
+      "comments": 12,
+      "shares": 45,
+      "saves": 120,
+      "timestamp": "2026-07-15"
+    }
+  ],
+  "analytics": {
+    "engagement_rate": 8.2,
+    "avg_likes": 340,
+    "avg_comments": 12
+  }
+}
+
+───────────────────────────────────────────────────────────────────────────────
+
+🗄️ DATABASE SCHEMA:
+
+Основные таблицы:
+CREATE TABLE instagram_profiles (...)
+CREATE TABLE instagram_posts (...)
+CREATE TABLE instagram_comments (...)
+CREATE TABLE hashtag_data (...)
+
+Новые таблицы:
+CREATE TABLE instagram_mentions (
+  id PRIMARY KEY,
+  username VARCHAR(255),
+  mention_from VARCHAR(255),
+  caption TEXT,
+  sentiment VARCHAR(20),
+  collected_at TIMESTAMP
+)
+
+CREATE TABLE instagram_reels_analytics (
+  id PRIMARY KEY,
+  reels_id VARCHAR(255),
+  username VARCHAR(255),
+  views INT,
+  average_watch_time INT,
+  hook_type VARCHAR(50),
+  music_genre VARCHAR(100),
+  duration INT,
+  collected_at TIMESTAMP
+)
+
+CREATE TABLE competitor_tracking (
+  id PRIMARY KEY,
+  username VARCHAR(255),
+  competitor_username VARCHAR(255),
+  followers INT,
+  engagement_rate FLOAT,
+  content_strategy TEXT,
+  posting_schedule JSON,
+  growth_rate FLOAT,
+  last_updated TIMESTAMP
+)
+
+CREATE TABLE tiktok_analytics (
+  id PRIMARY KEY,
+  tiktok_username VARCHAR(255),
+  followers INT,
+  total_likes INT,
+  total_views BIGINT,
+  engagement_rate FLOAT,
+  avg_likes_per_video INT,
+  collected_at TIMESTAMP
+)
+
+CREATE TABLE youtube_analytics (
+  id PRIMARY KEY,
+  channel_id VARCHAR(255),
+  subscribers INT,
+  total_views BIGINT,
+  total_videos INT,
+  avg_views_per_video INT,
+  upload_frequency INT,
+  collected_at TIMESTAMP
+)
+
+───────────────────────────────────────────────────────────────────────────────
+
+⏰ CRON JOBS (АВТОМАТИЗАЦИЯ):
+
+Daily (09:00 UTC):
+└─ fetch_instagram_profile()
+└─ fetch_instagram_posts()
+└─ calculate_engagement_metrics()
+
+Weekly (Monday 00:00 UTC):
+└─ fetch_competitor_data()
+└─ analyze_reels_performance()
+└─ generate_weekly_report()
+
+Monthly (1st day 00:00 UTC):
+└─ fetch_tiktok_analytics()
+└─ fetch_youtube_analytics()
+└─ generate_monthly_strategy()
+
+───────────────────────────────────────────────────────────────────────────────
+ЧАСТЬ 5: СРОКИ РАЗРАБОТКИ
+───────────────────────────────────────────────────────────────────────────────
+
+ФАЗА 1 (НЕДЕЛЯ 1-2): КРИТИЧНОЕ — 10 дней
+☑ Mentions Tracker (Tavily)
+☑ Reels Deep Dive (InstaProducer)
+☑ Dashboard Analytics
+
+ФАЗА 2 (НЕДЕЛЯ 3): ВАЖНОЕ — 5 дней
+☑ Competitor Analysis (Strategist)
+☑ Location Insights (Tavily)
+☑ Growth Tracker
+
+ФАЗА 3 (НЕДЕЛЯ 4-5): РАСШИРЕНИЕ — 7 дней
+☑ TikTok Analytics (MultiChannel)
+☑ YouTube Analytics (MultiChannel)
+☑ Cross-platform Dashboard
+
+Testing & QA: 2 дня
+Deployment: 1 день
+
+ИТОГО: 25 дней
+
+───────────────────────────────────────────────────────────────────────────────
+
+Компонент                    | Время | Статус
+─────────────────────────────┼───────┼────────
+Mentions Tracker             | 2 дня | To-Do
+Reels Analytics              | 3 дня | To-Do
+Dashboard                    | 4 дня | To-Do
+Competitor Module            | 3 дня | To-Do
+Location Insights            | 2 дня | To-Do
+TikTok Integration           | 3 дня | To-Do
+YouTube Integration          | 3 дня | To-Do
+Testing & QA                 | 4 дня | To-Do
+Deployment                   | 1 день | To-Do
+────────────────────────────────────────────
+ИТОГО                        | 25 дн | -
+
+───────────────────────────────────────────────────────────────────────────────
+ЧАСТЬ 6: БЮДЖЕТ
+───────────────────────────────────────────────────────────────────────────────
+
+Development:
+- Frontend: 50 hours ($1,500)
+- Backend/API: 60 hours ($1,800)
+- Database: 20 hours ($600)
+- Testing: 20 hours ($600)
+Total Dev: 150 hours = $4,500
+
+Infrastructure (monthly):
+- Apify API: $50
+- Database hosting: $20
+- Hosting: $30
+- Monitoring: $10
+Total/month: $110
+
+TOTAL COST:
+- Development: $4,500 (one-time)
+- Monthly: $110
+
+───────────────────────────────────────────────────────────────────────────────
+ЧАСТЬ 7: КОНТАКТЫ
+───────────────────────────────────────────────────────────────────────────────
+
+Заказчик: Артур Киселев (@KISELEVY_CREO)
+Email: Dj.mr.fobs@gmail.com
+Telegram: @KISELEVY_CREO
+Сроки: ASAP (25 дней)
+
+───────────────────────────────────────────────────────────────────────────────
+
+Подготовлено: Нейро (AI Assistant)
+Версия: 2.1 полная
+Дата: 15.07.2026
+
+═══════════════════════════════════════════════════════════════════════════════
+КОНЕЦ ТЗ
+═══════════════════════════════════════════════════════════════════════════════

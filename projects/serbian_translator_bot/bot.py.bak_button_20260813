@@ -1,0 +1,443 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Сербско-русский бот-переводчик + голосовой ввод (Whisper) + озвучка (TTS).
+- Текстовый перевод: серб<->рус (автоопределение языка)
+- Голос: транскрипция Whisper (Groq) -> перевод
+- /ru : рус->серб (голос: + озвучка сербским голосом)
+- /sr : серб->рус
+Запуск: python3 bot.py
+"""
+
+import os, io, time, re, logging, subprocess, tempfile, json, threading, datetime
+import requests
+
+# ------------------ Конфигурация ------------------
+BASE = "/root/.openclaw/workspace-neuro"
+with open(f"{BASE}/secrets/serbian_translator_bot.token") as f:
+    TOKEN = f.read().strip()
+
+GROQ_KEY = open(os.path.expanduser("~/.openclaw-neuro/.groq_key")).read().strip()
+DEEPSEEK_KEY = open(os.path.expanduser("~/.openclaw-neuro/.deepseek_key")).read().strip()
+
+API = f"https://api.telegram.org/bot{TOKEN}"
+AUTHORIZED = {199790247, 5276541529}  # владелец (Артур) + супруга (Кети)
+
+# ---------------- История диалога (в памяти) ----------------
+# chat_id -> список сообщений {role, text}. Помним до 12 сообщений.
+HISTORY = {}
+HIST_LOCK = threading.Lock()
+HIST_MAX = 12
+
+
+def hist_add(chat_id, role, text):
+    with HIST_LOCK:
+        h = HISTORY.setdefault(chat_id, [])
+        h.append({"role": role, "text": text})
+        del h[:-HIST_MAX]
+
+
+def hist_get(chat_id):
+    with HIST_LOCK:
+        return list(HISTORY.get(chat_id, []))
+
+
+def hist_clear(chat_id):
+    with HIST_LOCK:
+        HISTORY.pop(chat_id, None)
+
+
+# Последний исходный текст пользователя на chat_id (для кнопки перевода на англ.).
+LAST_USER = {}
+LAST_LOCK = threading.Lock()
+
+
+def save_last_user(chat_id, text):
+    with LAST_LOCK:
+        LAST_USER[chat_id] = text
+
+
+def get_last_user(chat_id):
+    with LAST_LOCK:
+        return LAST_USER.get(chat_id)
+
+logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
+log = logging.getLogger("srbot")
+
+# ------------------ Telegram helpers ------------------
+def tg(method, **params):
+    r = requests.post(f"{API}/{method}", data=params, timeout=120)
+    try:
+        return r.json()
+    except Exception:
+        return {"ok": False}
+
+def send_text(chat_id, text, reply_to=None):
+    data = {"chat_id": chat_id, "text": text, "parse_mode": "HTML"}
+    if reply_to:
+        data["reply_to_message_id"] = reply_to
+    requests.post(f"{API}/sendMessage", data=data, timeout=60)
+
+
+def send_text_with_button(chat_id, text, button_text, callback_data):
+    """Текст + одна инлайн-кнопка под ним (без авто-дубля перевода)."""
+    keyboard = {"inline_keyboard": [[{"text": button_text, "callback_data": callback_data}]]}
+    data = {"chat_id": chat_id, "text": text, "parse_mode": "HTML", "reply_markup": json.dumps(keyboard)}
+    requests.post(f"{API}/sendMessage", data=data, timeout=60)
+
+def send_voice(chat_id, voice_path, caption=None, reply_to=None):
+    with open(voice_path, "rb") as f:
+        files = {"voice": ("voice.ogg", f, "audio/ogg")}
+        data = {"chat_id": chat_id}
+        if caption:
+            data["caption"] = caption
+        if reply_to:
+            data["reply_to_message_id"] = reply_to
+        requests.post(f"{API}/sendVoice", data=data, files=files, timeout=120)
+
+def send_audio(chat_id, audio_path, reply_to=None):
+    with open(audio_path, "rb") as f:
+        files = {"audio": ("audio.ogg", f, "audio/ogg")}
+        data = {"chat_id": chat_id}
+        if reply_to:
+            data["reply_to_message_id"] = reply_to
+        requests.post(f"{API}/sendAudio", data=data, files=files, timeout=120)
+
+# ------------------ Перевод (DeepSeek) ------------------
+def transcribe_groq(audio_path):
+    """Whisper через Groq. Модель whisper-large-v3, язык авто."""
+    with open(audio_path, "rb") as f:
+        r = requests.post(
+            "https://api.groq.com/openai/v1/audio/transcriptions",
+            headers={"Authorization": f"Bearer {GROQ_KEY}"},
+            data={"model": "whisper-large-v3-turbo"},
+            files={"file": ("audio.ogg", f, "audio/ogg")},
+            timeout=180,
+        )
+    if r.status_code != 200:
+        return None, f"STT error {r.status_code}: {r.text[:200]}"
+    data = r.json()
+    return data.get("text", "").strip(), None
+
+def detect_lang_sr_ru(text):
+    """Надёжно определить: сербский (латиница/кириллица), русский или английский."""
+    s = set(t.lower() for t in text)
+    # Сербская кириллица: специфичные буквы љ њ џ ћ ђ
+    if s & set("љњџћђ"):
+        return "sr"
+    # Русская кириллица: буквы, которых нет в сербском (ъ ы э щ ю я ё й ц ш)
+    ru_only = ("ъ", "ы", "э", "щ", "ё", "й", "ю", "я", "ц", "ш")
+    if any(ch in s for ch in ru_only):
+        return "ru"
+    # Доля кириллицы вообще
+    cyr_all = "абвгдежзийклмнопрстуфхцчшщъыьэюяљњџћђ"
+    letters = [c for c in text if c.isalpha()]
+    cyr = sum(1 for c in letters if c.lower() in cyr_all)
+    if letters and cyr / len(letters) > 0.5:
+        return "ru"  # общая кириллица без сербских маркеров -> русский
+    # Латиница: маркеры сербского
+    sr_lat = ("š", "ž", "ć", "č", "đ", "nj", "lj", "dž")
+    low = text.lower()
+    if any(m in low for m in sr_lat):
+        return "sr"
+    # Латиница без сербских диакритик — различаем английский и русский(латиницей)/сербский.
+    # Частые английские слова как сигнал английского.
+    en_words = {
+        "the", "and", "is", "are", "i", "you", "to", "of", "it", "in", "that",
+        "this", "with", "for", "on", "not", "my", "your", "hello", "hi", "please",
+        "thank", "how", "what", "when", "where", "why", "dear", "can", "do", "have",
+        "get", "need", "want", "good", "very", "really", "about", "from", "at", "by",
+    }
+    words = {w.strip(".,!?():;'\"").lower() for w in low.split()}
+    if words & en_words:
+        return "en"
+    # По умолчанию склоняемся к сербскому (пользователь учит сербский)
+    return "sr"
+
+
+def _now():
+    """Текущие реальные дата и время сервера (живой момент)."""
+    now = datetime.datetime.now()
+    wd = ["понедельник", "вторник", "среда", "четверг", "пятница", "суббота", "воскресенье"][now.weekday()]
+    return now.strftime(f"%d.%m.%Y год | {wd} | %H:%M UTC")
+
+
+def translate(text, source_lang, chat_id=None):
+    """Перевод через DeepSeek с учётом истории диалога (серб/рус/англ)."""
+    # определим пару переводов
+    if source_lang == "sr":
+        target, src_hint = "русский", "сербского"
+    elif source_lang == "en":
+        target, src_hint = "русский", "английского"
+    else:  # ru
+        target, src_hint = "сербский", "русского"
+    return translate_to(text, target, src_hint, chat_id=chat_id)
+
+
+def translate_to(text, target, src_hint, chat_id=None, history=True):
+    """Перевод через DeepSeek на указанный целевой язык. target = 'сербский'/'английский'/... ."""
+    system = (
+        "Ты профессиональный переводчик. Сейчас реальный момент: " + _now() + ". "
+        "Переведи последнее сообщение пользователя "
+        f"с {src_hint} языка на {target} язык. "
+        "ВАЖНО: верни ТОЛЬКО сам перевод на " + target + " языке, БЕЗ какого-либо русского текста, "
+        "без пояснений, без кавычек-разметки, без заголовков. Первым же словом начинай перевод. "
+        "Никогда не повторяй исходный русский запрос и не отвечай на русском - только на " + target + ". "
+        "Сохраняй смысл, тон и реалии (медицинские термины переводи точно). "
+        "Ранее в разговоре был такой контекст - используй его, чтобы перевод был связным, но не цитируй его."
+    )
+    # собираем историю для контекста
+    ctx = []
+    if chat_id:
+        for m in hist_get(chat_id):
+            role = "user" if m["role"] == "user" else "assistant"
+            ctx.append({"role": role, "content": m["text"]})
+    if not ctx:
+        ctx.append({"role": "system", "content": system})
+        ctx.append({"role": "user", "content": text})
+    else:
+        ctx.insert(0, {"role": "system", "content": system})
+        ctx.append({"role": "user", "content": text})
+    try:
+        from openai import OpenAI
+        client = OpenAI(
+            base_url="https://api.deepseek.com",
+            api_key=DEEPSEEK_KEY,
+        )
+        r = client.chat.completions.create(
+            model="deepseek-chat",
+            messages=ctx,
+            temperature=0.3,
+            max_tokens=800,
+        )
+        return r.choices[0].message.content.strip()
+    except Exception as e:
+        log.error(f"translate err: {e}")
+        return f"[ошибка перевода: {e}]"
+
+# ------------------ Озвучка (Google TTS, сербский) ------------------
+def tts_google(text, lang_code="sr"):
+    """Бесплатный Google Translate TTS -> ogg/mp3. lang_code: 'sr' (серб)."""
+    url = "https://translate.google.com/translate_tts"
+    headers = {"User-Agent": "Mozilla/5.0"}
+    params = {"ie": "UTF-8", "q": text[:200], "tl": lang_code, "client": "tw-ob"}
+    r = requests.get(url, params=params, headers=headers, timeout=60)
+    if r.status_code != 200 or len(r.content) < 1000:
+        return None
+    with tempfile.NamedTemporaryFile(suffix=".mp3", delete=False) as f:
+        f.write(r.content)
+        mp3 = f.name
+    # конвертируем в ogg/opus для Telegram голосового + замедляем (atempo=0.85)
+    # atempo не меняет тон голоса, просто тянет речь на ~15% медленнее — понятнее
+    ogg = mp3.replace(".mp3", ".ogg")
+    subprocess.run(["ffmpeg", "-y", "-i", mp3, "-filter:a", "atempo=0.85",
+                    "-c:a", "libopus", "-b:a", "48k", ogg],
+                   capture_output=True)
+    os.unlink(mp3)
+    return ogg if os.path.exists(ogg) else None
+
+# ------------------ OCR по фото (Gemini Vision) ------------------
+# Распознаём текст с картинки (сербский/русский/лат/кир).
+GEMINI_KEY = open(os.path.expanduser("~/.openclaw-neuro/.gemini_key")).read().strip()
+GEMINI_OCR_MODEL = "gemini-3-flash-preview"  # доступная vision-модель (2.5-flash закрыт для новых ключей)
+
+def ocr_image(image_path):
+    """Распознать текст с фото через Gemini Vision. Возвращает (text, error)."""
+    import base64, json as _json
+    try:
+        with open(image_path, "rb") as f:
+            b64 = base64.b64encode(f.read()).decode()
+        body = {
+            "contents": [{"parts": [
+                {"inline_data": {"mime_type": "image/jpeg", "data": b64}},
+                {"text": "Прочитай весь текст с этой фотографии дословно. Верни только распознанный текст, без пояснений, без перевода, без обрамления. Если текста нет — ответь одним словом: пусто"}
+            ]}]
+        }
+        req = requests.post(
+            f"https://generativelanguage.googleapis.com/v1beta/models/{GEMINI_OCR_MODEL}:generateContent?key={GEMINI_KEY}",
+            json=body, timeout=90)
+        if req.status_code != 200:
+            return None, f"OCR HTTP {req.status_code}: {req.text[:200]}"
+        d = req.json()
+        txt = d["candidates"][0]["content"]["parts"][0]["text"].strip()
+        if not txt or txt.lower() == "пусто":
+            return None, "Текст на фото не найден."
+        return txt, None
+    except Exception as e:
+        return None, f"OCR ошибка: {e}"
+
+# ------------------ Обработчики ------------------
+def handle_text(chat_id, text):
+    """Текстовый перевод: автоопределяем язык и переводим, сохраняем в историю."""
+    lang = detect_lang_sr_ru(text)
+    tr = translate(text, lang, chat_id=chat_id)
+    if lang == "sr":
+        flag = "🇷🇸 → 🇷🇺"
+    elif lang == "en":
+        flag = "🇬🇧 → 🇷🇺"
+    else:
+        flag = "🇷🇺 → 🇷🇸"
+    hist_add(chat_id, "user", text)
+    hist_add(chat_id, "assistant", tr)
+    # СЕРБСКИЙ ПЕРЕВОД - основной текст. Кнопка перевода на англ. без авто-дубля.
+    if lang == "ru":
+        # нужен исходный текст (на англ. переводим именно исходник, не сербский перевод)
+        save_last_user(chat_id, text)
+        send_text_with_button(chat_id, f"{flag}\n\n{tr}", "🇬🇧 Перевести на английский", "to_en")
+    else:
+        send_text(chat_id, f"{flag}\n\n{tr}", reply_to=None)
+
+def handle_voice(chat_id, file_id, forced_mode=None):
+    # скачиваем голосовое
+    fi = tg("getFile", file_id=file_id)
+    if not fi.get("ok"):
+        send_text(chat_id, "Не удалось получить файл 🙁")
+        return
+    path = fi["result"]["file_path"]
+    data = requests.get(f"https://api.telegram.org/file/bot{TOKEN}/{path}", timeout=120).content
+    with tempfile.NamedTemporaryFile(suffix=".oga", delete=False) as f:
+        f.write(data)
+        raw = f.name
+    # конвертируем в ogg/wav для Whisper (Groq принимает ogg/mp3/wav)
+    audio = raw + ".ogg"
+    subprocess.run(["ffmpeg", "-y", "-i", raw, "-c:a", "libopus", audio], capture_output=True)
+    os.unlink(raw)
+
+    text, err = transcribe_groq(audio)
+    os.unlink(audio)
+    if err or not text:
+        send_text(chat_id, f"Не распознал голос: {err or 'пусто'} 🙁")
+        return
+
+    # БЕЗ ПЕРЕКЛЮЧЕНИЯ: язык определяем по распознанному тексту автоматически.
+    lang = detect_lang_sr_ru(text)
+    # озвучиваем сербский, только если переводим НА сербский (исходник русский)
+    target = "ru" if lang == "sr" else ("sr" if lang == "ru" else "ru")
+
+    tr = translate(text, lang, chat_id=chat_id)
+    if lang == "sr":
+        flag = "🇷🇸 → 🇷🇺"
+    elif lang == "en":
+        flag = "🇬🇧 → 🇷🇺"
+    else:
+        flag = "🇷🇺 → 🇷🇸"
+    hist_add(chat_id, "user", text)
+    hist_add(chat_id, "assistant", tr)
+    out = f"🎙 <i>Распознано:</i> {text}\n\n{flag}\n<b>{tr}</b>"
+    send_text(chat_id, out)
+
+    # если переводили на сербский и нужна озвучка — пришлём голосовое
+    if target == "sr":
+        ogg = tts_google(tr, "sr")
+        if ogg:
+            send_voice(chat_id, ogg, caption="🔊 Сербский (озвучено)")
+            os.unlink(ogg)
+
+def handle_photo(chat_id, file_id):
+    """Фото на сербском: распознаём текст (OCR) и переводим на русский."""
+    try:
+        fi = tg("getFile", file_id=file_id)
+        if not fi.get("ok"):
+            send_text(chat_id, "Не удалось получить фото 🙁")
+            return
+        path = fi["result"]["file_path"]
+        data = requests.get(f"https://api.telegram.org/file/bot{TOKEN}/{path}", timeout=120).content
+        with tempfile.NamedTemporaryFile(suffix=".jpg", delete=False) as f:
+            f.write(data)
+            img = f.name
+        send_text(chat_id, "🔎 Распознаю текст на фото...")
+        text, err = ocr_image(img)
+        os.unlink(img)
+        if err or not text:
+            send_text(chat_id, f"{err or 'Не распознал текст'} 🙁")
+            return
+        lang = detect_lang_sr_ru(text)
+        tr = translate(text, "sr", chat_id=chat_id)
+        hist_add(chat_id, "user", text)
+        hist_add(chat_id, "assistant", tr)
+        out = f"🖼 <i>Распознано:</i> {text}\n\n🇷🇸 → 🇷🇺\n<b>{tr}</b>"
+        send_text(chat_id, out)
+        # озвучиваем перевод на русском
+        ogg = tts_google(tr, "ru")
+        if ogg:
+            send_voice(chat_id, ogg, caption="🔊 Русский (озвучено)")
+            os.unlink(ogg)
+    except Exception as e:
+        log.error(f"photo err: {e}")
+        send_text(chat_id, f"Ошибка при обработке фото: {e}")
+
+# ------------------ Цикл опроса ------------------
+def get_updates(offset):
+    r = requests.get(f"{API}/getUpdates",
+                     params={"offset": offset, "timeout": 50}, timeout=70)
+    try:
+        return r.json().get("result", [])
+    except Exception:
+        return []
+
+def main():
+    log.info("Бот запущен")
+    offset = 0
+    while True:
+        try:
+            for upd in get_updates(offset):
+                offset = upd["update_id"] + 1
+                # Обработка нажатия на кнопку (перевод на английский)
+                cb = upd.get("callback_query")
+                if cb:
+                    cid = cb["message"]["chat"]["id"]
+                    if cid not in AUTHORIZED:
+                        continue
+                    if cb["data"] == "to_en":
+                        requests.post(f"{API}/answerCallbackQuery",
+                                      data={"callback_query_id": cb["id"], "text": "Перевожу на английский..."}, timeout=30)
+                        src = get_last_user(cid) or ""
+                        if not src:
+                            send_text(cid, "Нет исходного текста для перевода. Напиши что-нибудь заново.")
+                        else:
+                            en = translate_to(src, "английский", "русского", chat_id=None, history=False)
+                            send_text(cid, f"🇷🇺 → 🇬🇧\n\n{en}")
+                    continue
+                msg = upd.get("message") or upd.get("edited_message")
+                if not msg:
+                    continue
+                chat_id = msg["chat"]["id"]
+                # доступ только владельцу
+                if chat_id not in AUTHORIZED:
+                    send_text(chat_id, "Извините, бот личный.")
+                    continue
+                text = msg.get("text")
+                voice = msg.get("voice")
+                if text and text.startswith("/"):
+                    if text.startswith("/start"):
+                        send_text(chat_id,
+                            "🤖 <b>Переводчик</b>\n\n"
+                            "📝 <b>Текст:</b> просто напиши фразу — бот сам определит язык и переведёт\n"
+                            "   (сербский ⇄ русский, английский ⇄ русский)\n"
+                            "🎙 <b>Голос:</b> нажми запись и говори — распознаю и переведу\n"
+                            "🧠 <b>История:</b> бот помнит диалог для связности перевода\n"
+                            "🗑 <b>/clear</b> — удалить всю историю разговора")
+                    elif text.startswith("/clear"):
+                        hist_clear(chat_id)
+                        send_text(chat_id, "🗑 История разговора удалена.")
+                    elif text.startswith("/sr"):
+                        send_text(chat_id, "Режим: 🇷🇸 сербский → русский. Говори по-сербски.")
+                    elif text.startswith("/ru"):
+                        send_text(chat_id, "Режим: русский → 🇷🇸 сербский (+ озвучка). Говори по-русски.")
+                    elif text.startswith("/en"):
+                        send_text(chat_id, "Режим: 🇬🇧 английский → русский. Говори по-английски.")
+                    else:
+                        send_text(chat_id, "Неизвестная команда. Используй /start, /clear, /sr, /ru, /en.")
+                elif text:
+                    handle_text(chat_id, text)
+                elif voice:
+                    handle_voice(chat_id, voice["file_id"])
+                elif msg.get("photo"):
+                    handle_photo(chat_id, msg["photo"][-1]["file_id"])
+        except Exception as e:
+            log.error(f"loop err: {e}")
+            time.sleep(3)
+        time.sleep(0.5)
+
+if __name__ == "__main__":
+    main()

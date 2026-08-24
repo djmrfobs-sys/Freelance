@@ -1,0 +1,19 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 720
+PlayResY: 1280
+WrapStyle: 2
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Sub, DejaVu Sans, 42, &H00FFFFFF, &H000000FF, &H00000000, &H96000000, -1, 0, 0, 0, 100, 100, 0, 0, 1, 3, 0, 2, 24, 24, 80, 1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0, 0:00:00.00, 0:00:06.00, Sub, , 0, 0, 0, , Я Катя, я сейчас учусь\Nвайб-кодингу, мне очень\Nнравится эта
+Dialogue: 0, 0:00:06.00, 0:00:09.72, Sub, , 0, 0, 0, , тема, я понимаю, что я\Nмогу на этом\Nзарабатывать большие
+Dialogue: 0, 0:00:09.72, 0:00:12.80, Sub, , 0, 0, 0, , деньги, именно к этому я\Nи стремлюсь.
+Dialogue: 0, 0:00:12.80, 0:00:15.98, Sub, , 0, 0, 0, , И очень важно, чтобы об\Nэтом услышал весь мир.
+Dialogue: 0, 0:00:15.98, 0:00:21.58, Sub, , 0, 0, 0, , Поэтому я хочу сейчас\Nзаписывать рилсы с\Nпрезентацией того,
+Dialogue: 0, 0:00:21.58, 0:00:24.92, Sub, , 0, 0, 0, , какие цифровые решения\Nсейчас могут быть\Nвстроены
+Dialogue: 0, 0:00:24.92, 0:00:27.80, Sub, , 0, 0, 0, , в бизнес любой ниши.

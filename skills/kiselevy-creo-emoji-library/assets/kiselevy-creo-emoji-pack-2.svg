@@ -1,0 +1,124 @@
+<svg width="680" height="700" viewBox="0 0 680 700" xmlns="http://www.w3.org/2000/svg" role="img">
+<title>Пакет 2: линейные смайлики KISELEVY CREO</title>
+<desc>16 дополнительных линейных смайликов-эмоций в персиково-бежевой палитре бренда KISELEVY CREO</desc>
+<style>
+  .bgA{fill:#e8b593} .bgB{fill:#e9ddd0} .bgC{fill:#d9986f}
+  .ln{fill:none;stroke:#5c4033;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .fl{fill:#5c4033}
+  .blue{fill:#8fb3c9;opacity:0.7}
+</style>
+
+<!-- row 1 -->
+<g transform="translate(120,110)"><!-- радость до слёз -->
+<circle r="60" class="bgA"/>
+<path d="M-25 -8 Q-18 -18 -10 -8" class="ln"/><path d="M10 -8 Q18 -18 25 -8" class="ln"/>
+<path d="M-22 15 Q0 35 22 15" class="ln"/>
+<ellipse cx="-24" cy="6" rx="4" ry="7" class="blue"/><ellipse cx="24" cy="6" rx="4" ry="7" class="blue"/>
+</g>
+
+<g transform="translate(280,110)"><!-- плачет -->
+<circle r="60" class="bgB"/>
+<path d="M-20 -8 a8 8 0 0 1 16 0" class="ln"/><path d="M4 -8 a8 8 0 0 1 16 0" class="ln"/>
+<path d="M-18 22 Q0 12 18 22" class="ln"/>
+<path d="M-24 0 Q-28 15 -22 26" class="ln"/><path d="M22 0 Q26 15 20 26" class="ln"/>
+</g>
+
+<g transform="translate(440,110)"><!-- растерянность -->
+<circle r="60" class="bgC"/>
+<circle cx="-16" cy="-8" r="4" class="fl"/><circle cx="18" cy="-12" r="4" class="fl"/>
+<path d="M-15 20 Q-2 12 12 22 Q2 26 -15 20 Z" class="ln"/>
+</g>
+
+<g transform="translate(600,110)"><!-- шок -->
+<circle r="60" class="bgA"/>
+<circle cx="-18" cy="-8" r="8" class="ln"/><circle cx="18" cy="-8" r="8" class="ln"/>
+<ellipse cx="0" cy="20" rx="10" ry="14" class="ln"/>
+</g>
+
+<!-- row 2 -->
+<g transform="translate(120,270)"><!-- смущение -->
+<circle r="60" class="bgB"/>
+<path d="M-24 -10 Q-16 -16 -8 -10" class="ln"/><path d="M8 -10 Q16 -16 24 -10" class="ln"/>
+<path d="M-14 18 Q0 26 14 18" class="ln"/>
+<circle cx="-28" cy="6" r="7" fill="#e39b7a" opacity="0.7"/><circle cx="28" cy="6" r="7" fill="#e39b7a" opacity="0.7"/>
+</g>
+
+<g transform="translate(280,270)"><!-- болезнь -->
+<circle r="60" class="bgC"/>
+<path d="M-22 -6 L-10 -12 M-22 -12 L-10 -6" class="ln"/>
+<path d="M22 -6 L10 -12 M22 -12 L10 -6" class="ln"/>
+<path d="M-16 20 Q0 10 16 20" class="ln"/>
+</g>
+
+<g transform="translate(440,270)"><!-- ботан в очках -->
+<circle r="60" class="bgA"/>
+<circle cx="-16" cy="-8" r="12" class="ln"/><circle cx="16" cy="-8" r="12" class="ln"/><line x1="-4" y1="-8" x2="4" y2="-8" class="ln"/>
+<path d="M-14 20 Q0 28 14 20" class="ln"/>
+</g>
+
+<g transform="translate(600,270)"><!-- вечеринка -->
+<circle r="60" class="bgB"/>
+<path d="M-30 -20 L-10 -30 L-14 -8 Z" class="ln" fill="#d9986f"/>
+<path d="M-26 -14 Q-18 -20 -12 -14" class="ln"/><circle cx="18" cy="-10" r="4" class="fl"/>
+<path d="M-18 18 Q0 30 18 18" class="ln"/>
+</g>
+
+<!-- row 3 -->
+<g transform="translate(120,430)"><!-- задумчивость -->
+<circle r="60" class="bgC"/>
+<line x1="-24" y1="-10" x2="-8" y2="-10" class="ln"/><circle cx="14" cy="-10" r="4" class="fl"/>
+<path d="M-4 16 Q6 10 18 14" class="ln"/>
+<circle cx="0" cy="-40" r="3" class="fl"/><circle cx="10" cy="-48" r="4" class="fl"/><circle cx="24" cy="-54" r="5" class="fl"/>
+</g>
+
+<g transform="translate(280,430)"><!-- рот на замке -->
+<circle r="60" class="bgA"/>
+<circle cx="-16" cy="-10" r="4" class="fl"/><circle cx="16" cy="-10" r="4" class="fl"/>
+<line x1="-16" y1="20" x2="16" y2="20" class="ln"/>
+<circle cx="-16" cy="20" r="3" class="fl"/><circle cx="16" cy="20" r="3" class="fl"/>
+</g>
+
+<g transform="translate(440,430)"><!-- взрыв мозга -->
+<circle r="60" class="bgB"/>
+<circle cx="-16" cy="-6" r="6" class="ln"/><circle cx="16" cy="-6" r="6" class="ln"/>
+<ellipse cx="0" cy="18" rx="8" ry="12" class="ln"/>
+<path d="M-6 -46 l6 -10 l6 10 l8 -6 l-2 12 l10 2 l-8 8 l8 8 l-10 2 l2 12 l-8 -6 l-6 10 l-6 -10 l-8 6 l2 -12 l-10 -2 l8 -8 l-8 -8 l10 -2 l-2 -12 z" fill="#d9986f" class="ln"/>
+</g>
+
+<g transform="translate(600,430)"><!-- гордость -->
+<circle r="60" class="bgC"/>
+<path d="M-24 -8 Q-16 -14 -8 -8" class="ln"/><path d="M8 -8 Q16 -14 24 -8" class="ln"/>
+<path d="M-18 16 Q0 8 18 16" class="ln"/>
+<line x1="-40" y1="4" x2="-30" y2="4" class="ln"/><line x1="30" y1="4" x2="40" y2="4" class="ln"/>
+</g>
+
+<!-- row 4 -->
+<g transform="translate(120,590)"><!-- зевота -->
+<circle r="60" class="bgA"/>
+<path d="M-26 -10 Q-18 -16 -10 -10" class="ln"/><path d="M10 -10 Q18 -16 26 -10" class="ln"/>
+<circle cx="0" cy="20" r="12" class="ln"/>
+</g>
+
+<g transform="translate(280,590)"><!-- маска -->
+<circle r="60" class="bgB"/>
+<circle cx="-16" cy="-14" r="4" class="fl"/><circle cx="16" cy="-14" r="4" class="fl"/>
+<rect x="-24" y="6" width="48" height="20" rx="10" class="ln" fill="#e8b593"/>
+<line x1="-24" y1="16" x2="24" y2="16" class="ln"/>
+</g>
+
+<g transform="translate(440,590)"><!-- ангел -->
+<circle r="60" class="bgC"/>
+<path d="M-16 -8 Q-10 -14 -4 -8" class="ln"/><path d="M4 -8 Q10 -14 16 -8" class="ln"/>
+<path d="M-12 16 Q0 22 12 16" class="ln"/>
+<ellipse cx="0" cy="-42" rx="20" ry="8" class="ln"/>
+</g>
+
+<g transform="translate(600,590)"><!-- рогатый -->
+<circle r="60" class="bgA"/>
+<path d="M-24 -8 L-8 -14" class="ln"/><path d="M24 -8 L8 -14" class="ln"/>
+<path d="M-16 18 Q0 8 16 18" class="ln"/>
+<path d="M-18 -42 Q-24 -54 -14 -58" class="ln"/><path d="M18 -42 Q24 -54 14 -58" class="ln"/>
+</g>
+
+<text x="340" y="670" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#8a6f5c">kiselevy creo — emoji pack 2</text>
+</svg>

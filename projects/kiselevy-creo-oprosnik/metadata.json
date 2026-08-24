@@ -1,0 +1,6 @@
+{
+  "name": "KISELEVY_CREO - Опрус",
+  "description": "Интерактивный опросник Опрус от команды KISELEVY_CREO. Помогает понять психологическое состояние и выявить потребности бизнеса в цифровых решениях, анализирует ответы с помощью ИИ и предлагает решения.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

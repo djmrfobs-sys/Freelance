@@ -1,0 +1,324 @@
+<script id="premium-script">
+/* ================================================================
+   KISELEVY_CREO PREMIUM LAYER — аддитивный слой. Не ломает логику.
+   ================================================================ */
+(function(){
+  if(document.documentElement.hasAttribute('data-pr-loaded')) return;
+  document.documentElement.setAttribute('data-pr-loaded','1');
+
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const finePointer = window.matchMedia('(hover:hover) and (pointer:fine)').matches;
+
+  /* ---------- РЕВИЛ-ОБСЕРВЕР ---------- */
+  const io = ('IntersectionObserver' in window) ? new IntersectionObserver((entries)=>{
+    entries.forEach(en=>{ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
+  },{ threshold:.12 }) : null;
+  function watch(el){ if(!el) return; if(io) io.observe(el); else el.classList.add('in'); }
+  // НЕ трогаем существующие .reveal - ими управляет базовый revealObserver с классом .visible.
+  // Наблюдаем только элементы, добавленные премиум-слоем (услуги, карточки, тёмная секция).
+
+  /* ---------- HERO: разбивка заголовка на слова ---------- */
+  const heroH1 = document.querySelector('.hero h1');
+  function splitHero(h){
+    if(!h || reduced) return;
+    const words = h.childNodes;
+    const frag = document.createDocumentFragment();
+    words.forEach(node=>{
+      if(node.nodeType === 3){
+        node.textContent.split(/(\s+)/).forEach(chunk=>{
+          if(chunk === ' ' || chunk === '\n'){ return; }
+          if(!chunk.trim()) return;
+          const w = document.createElement('span');
+          w.className = 'pr-hero-word';
+          const inner = document.createElement('span');
+          inner.textContent = chunk;
+          w.appendChild(inner);
+          frag.appendChild(document.createTextNode(' '));
+          frag.appendChild(w);
+        });
+      } else {
+        // элемент с .hl (подсветка) — рекурсивно разбиваем тоже
+        const copy = node.cloneNode(false);
+        const innerNodes = Array.from(node.childNodes);
+        innerNodes.forEach(n=>{
+          if(n.nodeType === 3){
+            n.textContent.split(/(\s+)/).forEach(chunk=>{
+              if(!chunk || !chunk.trim()) return;
+              const w=document.createElement('span'); w.className='pr-hero-word';
+              const inner=document.createElement('span'); inner.textContent=chunk;
+              w.appendChild(inner); copy.appendChild(document.createTextNode(' ')); copy.appendChild(w);
+            });
+          } else { copy.appendChild(n.cloneNode(true)); }
+        });
+        frag.appendChild(copy);
+      }
+    });
+    h.innerHTML='';
+    h.appendChild(frag);
+    const wordsE = Array.from(h.querySelectorAll('.pr-hero-word > span'));
+    wordsE.forEach((sp,i)=>{ sp.style.transitionDelay=(i*70)+'ms'; });
+    const apply = ()=> wordsE.forEach(sp=>sp.classList.add('on'));
+    if(io) io.observe(h,{ once:true }); // placeholder; реально ждём load
+    // запуск после loader/load
+    const start=()=>{ document.body.classList.add('pr-loaded'); setTimeout(apply,80); };
+    if(document.readyState==='complete') start(); else window.addEventListener('load', start, {once:true});
+    // если loader существует — после его исчезновения
+    const loader=document.getElementById('siteLoader');
+    if(loader && window.getComputedStyle(loader).display!=='none'){
+      const mo=new MutationObserver(()=>{ if(window.getComputedStyle(loader).display==='none'||loader.getAttribute('hidden')!==null){ start(); mo.disconnect(); } });
+      mo.observe(loader,{attributes:true, attributeFilter:['style','hidden','class']});
+      setTimeout(()=>{ mo.disconnect(); start(); },1800); // защитный таймаут
+    }
+  }
+  splitHero(heroH1);
+
+  /* ---------- НАВ: конденсация + blur + активный пункт ---------- */
+  const header=document.getElementById('siteHeader');
+  if(header && !reduced){
+    let ticking=false;
+    header.classList.add('pr-enter');
+    const onScroll=()=>{
+      const y=window.scrollY||window.pageYOffset;
+      header.classList.toggle('pr-shrunk', y>60);
+      header.classList.toggle('pr-solid', y>24);
+      ticking=false;
+    };
+    window.addEventListener('scroll',()=>{ if(!ticking){requestAnimationFrame(onScroll); ticking=true;} },{passive:true});
+    onScroll();
+  } else if(header){ header.classList.add('pr-enter'); }
+
+  /* ---------- МАГНИТНЫЕ КНОПКИ ---------- */
+  if(finePointer && !reduced){
+    const btns=document.querySelectorAll('.btn, .pr-srv-btn, .hero-actions a');
+    btns.forEach(b=>{
+      b.classList.add('pr-magnetic');
+      let rect=null, raf=null;
+      const ease=(t)=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
+      b.addEventListener('mousemove',(e)=>{
+        rect=b.getBoundingClientRect();
+        const mx=e.clientX-rect.left-rect.width/2;
+        const my=e.clientY-rect.top-rect.height/2;
+        const tx=Math.max(-10,Math.min(10,mx*.15));
+        const ty=Math.max(-10,Math.min(10,my*.15));
+        if(raf)cancelAnimationFrame(raf);
+        raf=requestAnimationFrame(()=>{ b.style.transform='translate3d('+tx+'px,'+ty+'px,0)'; });
+      });
+      b.addEventListener('mouseleave',()=>{
+        if(raf)cancelAnimationFrame(raf);
+        b.style.transition='transform .45s var(--ease-premium)';
+        b.style.transform='translate3d(0,0,0)';
+        setTimeout(()=>{ b.style.transition=''; },500);
+      });
+    });
+  }
+
+  /* ---------- КАСТОМНЫЙ КУРСОР ---------- */
+  if(finePointer && !reduced){
+    const dot=document.createElement('div'); dot.id='prCursor'; document.body.appendChild(dot);
+    const label=document.createElement('div'); label.id='prCursorLabel'; document.body.appendChild(label);
+    document.body.classList.add('pr-cursor');
+    let mx=-100,my=-100,dx=-100,dy=-100,visible=false;
+    window.addEventListener('mousemove',(e)=>{ mx=e.clientX; my=e.clientY; if(!visible){visible=true;} },{passive:true});
+    let docHidden=false;
+    document.addEventListener('visibilitychange',()=>{ docHidden = document.hidden; if(!docHidden) requestAnimationFrame(loop); });
+    (function loop(){
+      if(docHidden) return; // пауза при скрытой вкладке (ТЗ #22)
+      dx+=(mx-dx)*.18; dy+=(my-dy)*.18;
+      dot.style.transform='translate3d('+(dx-10)+'px,'+(dy-10)+'px,0)';
+      const lcw=label.offsetWidth, lch=label.offsetHeight;
+      label.style.transform='translate3d('+(dx+14)+'px,'+(dy+14)+'px,0)';
+      requestAnimationFrame(loop);
+    })();
+    const onOver=(e)=>{
+      const t=e.target.closest('a,button,.pr-card,.project-card');
+      if(t){ dot.classList.add('pr-hover'); }
+      if(e.target.closest('.pr-card,.project-card')){ label.textContent = (document.documentElement.lang==='en') ? 'View' : 'Смотреть'; label.classList.add('pr-show'); }
+    };
+    const onOut=()=>{ dot.classList.remove('pr-hover'); label.classList.remove('pr-show'); };
+    document.addEventListener('mouseover',onOver,{passive:true});
+    document.addEventListener('mouseout',onOut,{passive:true});
+  }
+
+  /* ---------- HERO МЕДИАБЛОК + параллакс ---------- */
+  const hero=document.querySelector('.hero');
+  const heroBg=document.querySelector('.hero-bg img');
+  if(hero && !document.querySelector('.hero-media')){
+    const media=document.createElement('div'); media.className='hero-media';
+    const img=document.createElement('img');
+    const src=(heroBg && heroBg.getAttribute('src'))||'assets/team-photo.jpg';
+    img.src=src; img.alt='Kiselevy_creo - цифровая студия'; img.loading='lazy';
+    const scrim=document.createElement('div'); scrim.className='hm-scrim';
+    media.appendChild(img); media.appendChild(scrim);
+    const inner=document.querySelector('.hero-inner'); 
+    if(inner) inner.appendChild(media);
+    // Видео (если в assets есть hero-video.mp4): подменяем картинку, иначе остаётся фото (по ТЗ)
+    try{
+      fetch('assets/hero-video.mp4',{method:'HEAD'}).then(r=>{
+        if(r.ok){
+          const v=document.createElement('video');
+          v.src='assets/hero-video.mp4'; v.autoplay=true; v.muted=true; v.loop=true; v.playsInline=true;
+          v.preload='metadata'; v.style.cssText='width:100%;height:100%;object-fit:cover;transform:scale(1.06)';
+          const cur=media.querySelector('img'); if(cur) media.replaceChild(v,cur);
+        }
+      }).catch(()=>{});
+    }catch(e){}
+    if(finePointer && !reduced && heroBg){
+      let rTick=false;
+      window.addEventListener('scroll',()=>{
+        if(rTick) return; rTick=true; requestAnimationFrame(()=>{
+          const r=media.getBoundingClientRect();
+          if(r.bottom<0||r.top>window.innerHeight){ rTick=false; return; }
+          const p=(r.top+ r.height/2 - window.innerHeight/2)/window.innerHeight;
+          const off=Math.max(-7,Math.min(7,p*4));
+          const el=media.querySelector('img,video');
+          if(el) el.style.transform='scale(1.06) translateY('+off+'%)';
+          rTick=false;
+        });
+      },{passive:true});
+    }
+  }
+
+  /* ---------- УСЛУГИ «НАШИ РЕШЕНИЯ»: конвертация в строки ---------- */
+  const servicesGrid=document.getElementById('servicesGrid');
+  if(servicesGrid && !servicesGrid.classList.contains('pr-solutions')){
+    // Ровно 4 услуги по ТЗ (не дублируем и не берём из старых карточек)
+    const data=[
+      ['Сайты и приложения','Создаём лендинги, корпоративные сайты, веб-сервисы, мобильные приложения и цифровые продукты под ключ - от идеи и прототипа до запуска.'],
+      ['Чат-боты и AI-ассистенты','Разрабатываем Telegram-ботов, AI-консультантов и нейро-продавцов для продаж, поддержки, записи клиентов и автоматической работы 24/7.'],
+      ['Автоматизация бизнеса','Объединяем сайт, CRM, Telegram, формы, базы данных, уведомления и AI в единую систему, которая освобождает команду от рутины.'],
+      ['Продюсирование и маркетинг','Кети помогает упаковать продукт, определить позиционирование, разработать контент-стратегию, воронку и систему продвижения.']
+    ];
+    servicesGrid.classList.add('pr-solutions');
+    servicesGrid.innerHTML='';
+    data.forEach((it,ci)=>{
+      const row=document.createElement('div'); row.className='pr-service-row';
+      const left=document.createElement('div'); left.className='pr-srv-name';
+      const num=document.createElement('span'); num.className='num'; num.textContent='0'+(ci+1);
+      const nm=document.createElement('span'); nm.textContent=it[0];
+      left.appendChild(num); left.appendChild(nm);
+      const body=document.createElement('div'); body.className='pr-srv-body';
+      const descP=document.createElement('p'); descP.className='pr-srv-desc'; descP.textContent=it[1];
+      const btn=document.createElement('button'); btn.className='pr-srv-btn'; btn.textContent='Подробнее';
+      btn.addEventListener('click',()=>{ document.getElementById('contact')&&document.getElementById('contact').scrollIntoView({behavior:'smooth'}); });
+      body.appendChild(descP); body.appendChild(btn);
+      row.appendChild(left); row.appendChild(body);
+      servicesGrid.appendChild(row); watch(row);
+    });
+    // Заголовок секции услуг обновляется через i18n-словарь (RU: «Наши решения», EN: «Our solutions»)
+    // - чтобы не перетирать выбранный язык во время исполнения.
+  }
+
+  /* ---------- ТЁМНАЯ СЕКЦИЯ «Почему выбирают нас» ---------- */
+  function svgIc(name,circle){
+    const s=document.createElementNS('http://www.w3.org/2000/svg','svg');
+    s.setAttribute('viewBox','0 0 24 24');
+    let p='';
+    if(name==='team') p='M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm14 10v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75';
+    else if(name==='launch') p='M12 15v2m-6 4h12M5 21l1-7 6-6 6 6 1 7M9 8V4m6 4V3M6 8h12';
+    else if(name==='custom') p='M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z';
+    else p='M12 20a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm0-4v-5m0-2h.01';
+    s.innerHTML='<path d="'+p+'"/>'; return s;
+  }
+  if(!document.querySelector('.why-section')){
+    const ref=document.getElementById('services')||document.getElementById('work');
+    if(ref){
+      const sec=document.createElement('section'); sec.className='why-section pr-section';
+      sec.setAttribute('aria-labelledby','whyTitle');
+      const glow=document.createElement('div'); glow.className='why-glow'; sec.appendChild(glow);
+      const wrap=document.createElement('div'); wrap.className='wrap';
+      const head=document.createElement('div'); head.className='why-head';
+      const ey=document.createElement('div'); ey.className='why-eyebrow';
+      ey.innerHTML='<span>KISELEVY_CREO</span><svg viewBox="0 0 24 24"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg>Ключевые преимущества';
+      const title=document.createElement('h2'); title.className='why-title'; title.id='whyTitle'; title.textContent='Почему выбирают нас';
+      head.appendChild(ey); head.appendChild(title);
+      const list=document.createElement('div'); list.className='why-list';
+      const items=[
+        ['team','Два специалиста - одна команда','Артур отвечает за разработку и автоматизацию, Кети - за упаковку, продюсирование и маркетинг. Клиент получает цельное решение без посредников.'],
+        ['launch','От идеи до запуска','Мы формулируем задачу, создаём прототип, разрабатываем продукт, тестируем, запускаем и сопровождаем его после публикации.'],
+        ['custom','Без шаблонных решений','Каждый продукт создаётся под конкретный бизнес, аудиторию и задачу. Мы не подгоняем клиента под готовую систему.'],
+        ['growth','Разработка и продвижение вместе','Мы не только создаём цифровой продукт, но и продумываем, как он будет привлекать клиентов, продавать и освобождать время команды.']
+      ];
+      items.forEach((it,i)=>{
+        const row=document.createElement('div'); row.className='why-item';
+        const ic=document.createElement('div'); ic.className='why-ic'; ic.appendChild(svgIc(it[0]));
+        const txt=document.createElement('div'); txt.className='why-txt';
+        const h3=document.createElement('h3'); h3.textContent=it[1];
+        const p=document.createElement('p'); p.textContent=it[2];
+        txt.appendChild(h3); txt.appendChild(p);
+        row.appendChild(ic); row.appendChild(txt); list.appendChild(row); watch(row);
+      });
+      wrap.appendChild(head); wrap.appendChild(list); sec.appendChild(wrap);
+      ref.after(sec);
+      // glow-visible: добавляем .why-visible когда секция в вьюпорте
+      if(io){
+        const wi=new IntersectionObserver((en)=>{ en.forEach(e=>{ if(e.isIntersecting){ sec.classList.add('why-visible'); wi.disconnect(); } }); },{threshold:.15});
+        wi.observe(sec);
+      } else sec.classList.add('why-visible');
+    }
+  }
+
+  /* ---------- Заголовки секций: появление строки-декора ---------- */
+  document.querySelectorAll('.section-head h2, .why-title').forEach(h=>{
+    if(h.closest('.section-head') && !h.parentElement.querySelector('.pr-line')){
+      // уже добавлен декоративный элемент — пропускаем, чтобы не дублировать
+    }
+  });
+
+  /* ---------- ПОРТФОЛИО: свечение по категории + подъём заголовка (ТЗ #16) ---------- */
+  (function(){
+    const catMap={'ph-automation':'auto','ph-chatbot':'chat','ph-ai':'ai','ph-production':'prod','ph-marketing':'mark'};
+    const stamp=function(root){
+      if(!root) return;
+      root.querySelectorAll('.card').forEach(c=>{
+        if(c.hasAttribute('data-cat')) return;
+        const media=c.querySelector('.card-media');
+        let cat='';
+        for(const k in catMap){ if(media && media.classList.contains(k)){ cat=catMap[k]; break; } }
+        // если фото не мокап (нет класса) - нейтральная
+        c.setAttribute('data-cat', cat||'default');
+        c.classList.add('pr-card');
+      });
+    };
+    ['gallery','portfolioPageGrid'].forEach(id=>{
+      const el=document.getElementById(id);
+      if(!el) return;
+      stamp(el);
+      const mo=new MutationObserver(()=>stamp(el));
+      mo.observe(el,{childList:true});
+    });
+  })();
+
+  /* ---------- МОБИЛЬНОЕ МЕНЮ: полноэкранное, логотип, блокировка скролла, Escape (ТЗ #14) ---------- */
+  (function(){
+    const burger=document.getElementById('burger');
+    const menu=document.getElementById('mobileMenu');
+    if(!burger||!menu) return;
+    let prevOverflow='';
+    const lock=function(){ prevOverflow=document.body.style.overflow; document.body.style.overflow='hidden'; };
+    const unlock=function(){ document.body.style.overflow=prevOverflow; };
+    const sync=function(open){
+      if(open){ menu.classList.add('open'); burger.classList.add('open'); lock(); }
+      else { menu.classList.remove('open'); burger.classList.remove('open'); unlock(); }
+    };
+    // логотип сверху (один раз, не дублируем)
+    menu.classList.add('pr-menu-ready');
+    if(!menu.querySelector('.pr-menu-logo') && !menu.querySelector('.logo')){
+      const l=document.createElement('div'); l.className='pr-menu-logo';
+      l.textContent=document.documentElement.lang==='en' ? 'KISELEVY CREO' : 'KISELEVY CREO';
+      menu.insertBefore(l, menu.firstChild);
+    }
+    // реюзаем существующий клик по бургеру: синхронизируем скролл, но не вешаем второй обработчик toggle
+    burger.addEventListener('click', ()=>{ setTimeout(()=>{ if(menu.classList.contains('open')) lock(); else unlock(); },0); });
+    menu.querySelectorAll('a,button').forEach(el=> el.addEventListener('click', ()=> setTimeout(unlock,0)));
+    // Escape закрывает и восстанавливает прокрутку
+    document.addEventListener('keydown', function escHandler(e){
+      if(e.key==='Escape' && menu.classList.contains('open')){ sync(false); }
+    });
+    // фоновый клик не оставляет залоченный скролл при сворачивании вручную
+    sync(menu.classList.contains('open'));
+  })();
+
+  /* ---------- Уведомление для Артура (в консоль, не посетителям) ---------- */
+  console.log('%cKISELEVY_CREO Premium Layer loaded','color:#f2733a;font-weight:bold');
+})();
+</script>

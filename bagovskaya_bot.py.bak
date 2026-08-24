@@ -1,0 +1,344 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Нейропродавец для домика в станице Баговской (Авито).
+Отвечает строго по базе знаний, ничего не выдумывает.
+Собирает лид: имя, о себе, желаемая дата просмотра и заселения, контакт.
+Шлёт готового лида в группу заказчика.
+"""
+
+import logging
+import re
+import time
+import asyncio
+from threading import Thread
+from telegram import Update, ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardMarkup, InlineKeyboardButton
+from telegram.ext import Application, CommandHandler, MessageHandler, filters, ContextTypes, CallbackQueryHandler
+
+# ==== НАСТРОЙКИ ====
+BOT_TOKEN = "8769879618:AAEKQRLCsjmtq5h5_UJDN9SpzcNqiU7ZpF8"
+LEAD_CHAT_ID = -5203432409  # группа «Баговская Авито Бот»
+OWNER_CHAT_ID = 199790247    # личка Артура
+OWNER_USERNAME = "KISELEVY_CREO"
+REMINDER_INTERVAL = 900       # 15 минут = 900 секунд
+
+logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO)
+logger = logging.getLogger("bagovskaya_bot")
+
+# ==== БАЗА ЗНАНИЙ ====
+BASE = {
+    "price": "17500 рублей в месяц",
+    "deposit": "залоговая сумма 17500 рублей, она возвращается при съезде",
+    "term": "сдаём на длительный срок, от 11 месяцев",
+    "capacity": "дом рассчитан на 2 человек, плюс можно с питомцем (котам и собакам рады)",
+    "communal": "коммуналка оплачивается отдельно: свет по счётчику (сколько израсходовано), мусор 150 руб в месяц, интернет 800 руб в месяц",
+    "heating": "зимой отапливается конвекционными электрорадиаторами, они расположены на стенах двух комнат. Дом очень тёплый, радиаторы и водонагреватель потребляют мало энергии",
+    "water": "горячая и холодная вода идёт со скважины, установлен новый водонагреватель на 30 литров, есть душевая кабина",
+    "wifi": "проведён интернет Wi-Fi, 200 мбит/с",
+    "toilet": "туалет расположен во дворе",
+    "furniture": "кухонный гарнитур, холодильник, микроволновая печь, комод, обеденный/рабочий стол, стулья, диван (раскладной), два дивана, новые одеяло и подушки, ковровое покрытие, ЖК-телевизор 32 дюйма",
+    "bedroom": "в спальной комнате большой двухспальный раскладной диван, который трансформируется",
+    "style": "свежий ремонт, всё сделано в бохо-стиле, абсолютно новые шторы, фасад расписан художником как настоящий арт-объект",
+    "plot": "участок без забора (специально, чтобы наслаждаться видами), рядом лес и ручей с видом на холмы, есть костровая зона и мангал рядом с большой елью, два навеса, два небольших сарайчика с дровами для растопки костра",
+    "fence": "забора нет, мы специально не ставили, чтобы всегда наслаждаться прекрасными видами",
+    "grass": "траву косить вам не нужно, она всегда идеально ровная и красивая и зелёная",
+    "animals": "коты и собаки рады. Каждый день на участке пасутся кони и барашки - это тактильный зоопарк",
+    "neighbors": "соседей за стеной нет, всё только ваше",
+    "outdoor": "перед входом навес с подсветкой, там столик и два хороших шезлонга, вечером можно отдыхать и расслабляться. Есть подсветка деревьев и фасада, она включается автоматически вечером и отключается утром",
+    "location": "станица Баговская",
+    "status": "дом сейчас свободен, и в нём после ремонта ещё никто не жил, вы будете первыми жильцами после ремонта",
+    "photos": "больше фото можно отправить, напишите что хотите посмотреть",
+    "about": "мы с женой купили домик несколько лет назад, но жизнь увела нас в другую страну, и дом стоит. Продавать жалко, решили пускать хороших людей. Домик сделан из самана и оштукатурен, фасад расписан художником, такого больше нигде не найдёте.",
+}
+
+# ==== СОСТОЯНИЯ ОПРОСА ====
+S_WELCOME = "welcome"
+S_ASK_NAME = "ask_name"
+S_ASK_ABOUT = "ask_about"
+S_ASK_CHECKIN = "ask_checkin"
+S_ASK_CONTACT = "ask_contact"
+S_DONE = "done"
+
+# Хранилище опросов по user_id: {user_id: {"state":..., "name":..., "about":..., "checkin":..., "contact":...}}
+surveys = {}
+
+# ==== ХЕЛПЕРЫ ====
+def kb(*rows):
+    return ReplyKeyboardMarkup([[KeyboardButton(b) for b in row] for row in rows], resize_keyboard=True, one_time_keyboard=True)
+
+# Открытые лиды (ждут подтверждения владельца): {lid: {name, about, checkin, contact, last}}
+open_leads = {}
+lead_counter = 0
+
+
+def done_kb():
+    """Инлайн-кнопка для закрытия всех лидов одним нажатием."""
+    return InlineKeyboardMarkup([[InlineKeyboardButton("✅ Готово - обработал", callback_data="close_leads")]])
+
+
+def send_lead(context, data):
+    """Отправляет собранного лида в группу и владельцу в личку, регистрирует для напоминаний."""
+    global lead_counter
+    name = data.get("name") or "-"
+    about = data.get("about") or "-"
+    checkin = data.get("checkin") or "-"
+    contact = data.get("contact") or "-"
+    text = (
+        "НОВЫЙ ЛИД - домик в Баговской\n"
+        "--------------------------------\n"
+        f"Имя: {name}\n"
+        f"О себе: {about}\n"
+        f"Желаемая дата просмотра и заселения: {checkin}\n"
+        f"Контакт: {contact}\n"
+        "--------------------------------\n"
+        "Связаться с человеком можно по контакту или в ответ здесь."
+    )
+    try:
+        context.bot.send_message(chat_id=LEAD_CHAT_ID, text=text)
+        logger.info("Лид отправлен в группу %s", LEAD_CHAT_ID)
+    except Exception as e:
+        logger.error("Не удалось отправить лид в группу: %s", e)
+
+    # Дублируем владельцу в личку с кнопкой /done
+    try:
+        context.bot.send_message(
+            chat_id=OWNER_CHAT_ID,
+            text=(
+                "НОВЫЙ ЛИД\n"
+                f"Имя: {name}\n"
+                f"О себе: {about}\n"
+                f"Просмотр/заселение: {checkin}\n"
+                f"Контакт: {contact}\n\n"
+                "Обработайте заявку и нажмите кнопку, чтобы остановить напоминания."
+            ),
+            reply_markup=done_kb(),
+        )
+        logger.info("Уведомление о лиде отправлено владельцу %s", OWNER_CHAT_ID)
+    except Exception as e:
+        logger.error("Не удалось отправить уведомление владельцу: %s", e)
+
+    # Регистрируем лид для напоминаний
+    lead_counter += 1
+    lid = f"L{lead_counter}-{int(time.time())}"
+    open_leads[lid] = {"name": name, "about": about, "checkin": checkin, "contact": contact, "last": time.time()}
+    logger.info("Лид %s открыт для напоминаний", lid)
+
+
+def reminder_loop():
+    """Фоновый поток: каждые 15 минут напоминает владельцу о необработанных лидах."""
+    async def check():
+        app = Application.builder().token(BOT_TOKEN).build()
+        await app.initialize()
+        try:
+            while True:
+                now = time.time()
+                for lid, rec in list(open_leads.items()):
+                    if now - rec["last"] >= REMINDER_INTERVAL:
+                        try:
+                            await app.bot.send_message(
+                                chat_id=OWNER_CHAT_ID,
+                                text=(
+                                    f"Напоминание: ещё не обработан лид - {rec['name']}, "
+                                    f"просмотр {rec['checkin']}, контакт {rec['contact']}.\n"
+                                    "Нажмите кнопку, когда обработаете."
+                                ),
+                                reply_markup=done_kb(),
+                            )
+                            open_leads[lid]["last"] = time.time()
+                            logger.info("Напоминание по лиду %s", lid)
+                        except Exception as e:
+                            logger.error("Ошибка напоминания: %s", e)
+                await asyncio.sleep(REMINDER_INTERVAL)
+        finally:
+            await app.shutdown()
+
+    asyncio.run(check())
+
+
+def start_reminders():
+    Thread(target=reminder_loop, daemon=True).start()
+    logger.info("Фоновый поток напоминаний запущен (интервал %s сек)", REMINDER_INTERVAL)
+
+# ==== ПОИСК ОТВЕТА ПО БАЗЕ ====
+def agrep(text):
+    """Возвращает ответ из базы по ключевым словам (ключи = англ., как в BASE)."""
+    t = text.lower()
+    pairs = {
+        "capacity": ["человек", "сколько нас", "вмести", "вмеща", "можем жив", "семь"],
+        "price": ["цен", "стоим", "стоит", "сколько", "плат", "аренд", "руб"],
+        "deposit": ["залог", "депозит"],
+        "term": ["длител", "месяц", "срок", "надолго", "долго"],
+        "communal": ["коммунал", "свет", "электрич", "оплат", "счётчик", "мусор", "интернет сколь"],
+        "heating": ["отопл", "радиатор", "тепло", "зим", "холодно"],
+        "water": ["вода", "душ", "горяч"],
+        "wifi": ["wi", "интернет", "вайфай"],
+        "toilet": ["туалет", "сорт"],
+        "furniture": ["мебел", "что внутри", "кухн", "холодильник", "плита", "телевизор", "диван", "кровать"],
+        "bedroom": ["спальн", "кровать", "спать"],
+        "style": ["ремонт", "бохо", "штор", "фасад", "арт"],
+        "outdoor": ["шезлонг", "подсветк", "вечер", "навес перед"],
+        "plot": ["участок", "кост", "мангал", "ручей", "лес", "сад", "огород"],
+        "fence": ["забор", "огражд"],
+        "grass": ["трава", "косить", "газон"],
+        "animals": ["животн", "кот", "собак", "питом", "кони", "бараш"],
+        "neighbors": ["сосед", "за стеной"],
+        "location": ["где", "район", "местопол", "адрес", "далеко", "город", "море"],
+        "status": ["свобод", "заехать", "можно жить", "пуст"],
+        "photos": ["фото", "фотограф", "больше", "покажи"],
+        "about": ["домик", "дом", "расскаж", "жильё", "квартир"],
+    }
+    for key, words in pairs.items():
+        for w in words:
+            if w in t:
+                return BASE[key]
+    return None
+
+# ==== ОБРАБОТЧИКИ ====
+async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    uid = update.effective_user.id
+    surveys[uid] = {"state": S_ASK_NAME, "name": None, "about": None, "checkin": None, "contact": None}
+    await update.message.reply_text(
+        "Добрый день! Спасибо за интерес к нашему домику в станице Баговской. 😊\n\n"
+        "Коротко о нём: это необычный арт-домик из самана с расписанным фасадом, свежий ремонт в бохо-стиле, "
+        "сделан для уютной жизни. Сдаём на длительный срок, от 11 месяцев.\n\n"
+        "Сейчас я отвечу на ваши вопросы, а в конце договоримся о просмотре.\n\n"
+        "Как вас зовут?",
+        reply_markup=kb(["Начать"]),
+    )
+
+async def cancel(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    uid = update.effective_user.id
+    surveys.pop(uid, None)
+    await update.message.reply_text("Хорошо, если что - напишите, я всегда на связи. 👋")
+
+
+async def done(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """Закрывает все открытые лиды - напоминания прекращаются."""
+    if update.effective_user.id != OWNER_CHAT_ID:
+        await update.message.reply_text("Эта команда только для владельца.")
+        return
+    if not open_leads:
+        await update.message.reply_text("Необработанных лидов нет. Напоминать нечего. 🎉")
+        return
+    open_leads.clear()
+    await update.message.reply_text("Готово! Все лиды отмечены как обработанные, напоминания прекращены.")
+    logger.info("Владелец закрыл все лиды")
+
+
+async def close_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """Обрабатывает нажатие кнопки 'Готово - обработал'."""
+    query = update.callback_query
+    if query.from_user.id != OWNER_CHAT_ID:
+        await query.answer("Эта кнопка только для владельца.")
+        return
+    await query.answer()
+    if not open_leads:
+        await query.edit_message_text("Необработанных лидов нет. Напоминать нечего. 🎉")
+        return
+    open_leads.clear()
+    await query.edit_message_text("✅ Готово! Все лиды отмечены как обработанные, напоминания прекращены.")
+    logger.info("Владелец закрыл все лиды кнопкой")
+
+
+async def status(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if update.effective_user.id != OWNER_CHAT_ID:
+        return
+    if not open_leads:
+        await update.message.reply_text("Необработанных лидов нет.")
+    else:
+        names = ", ".join(r["name"] for r in open_leads.values())
+        await update.message.reply_text(f"Открытых лидов: {len(open_leads)}. Имена: {names}. Напишите боту /done или 'готово', когда обработаете.")
+
+# Рукопожатие - если это первое сообщение, запускаем опрос
+async def handle(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    uid = update.effective_user.id
+    user = update.effective_user
+    text = update.message.text if update.message and update.message.text else ""
+
+    # Если от группы - игнорируем (не обрабатываем сообщения из групп)
+    if update.effective_chat.type != "private":
+        return
+
+    # Начало: сообщение, которое не является частью опроса и у нас нет активного счёпа
+    st = surveys.get(uid)
+
+    # Если пользователь пишет что-то новое, а опроса нет - начинаем опрос, но сначала ответим на вопросы
+    if st is None or st["state"] == S_DONE:
+        answer = agrep(text)
+        if answer:
+            await update.message.reply_text(answer)
+            # после ответа на вопрос - предложить продолжить
+            if st is None:
+                surveys[uid] = {"state": S_ASK_NAME, "name": None, "about": None, "checkin": None, "contact": None}
+                await update.message.reply_text("Если подходит - расскажите, как вас зовут, и обсудим просмотр. 😊")
+            return
+        if not st or st["state"] == S_DONE:
+            surveys[uid] = {"state": S_ASK_NAME, "name": None, "about": None, "checkin": None, "contact": None}
+            await update.message.reply_text(
+                "Здравствуйте! 😊 Посмотрим домик в Баговской? Отвечу на вопросы, а для просмотра познакомимся. Как вас зовут?"
+            )
+            return
+
+    st = surveys[uid]
+    state = st["state"]
+
+    # Ищем ответы на вопросы по базе в любой момент
+    if update.message and state not in (S_DONE,):
+        # Не прерываем сбор, но если человек задаёт вопрос - отвечаем кратко и продолжаем
+        pass
+
+    # State machine для сбора лида
+    if state == S_ASK_NAME:
+        st["name"] = text.strip()
+        st["state"] = S_ASK_ABOUT
+        await update.message.reply_text(
+            f"Приятно познакомиться, {st['name']}! 😊\n\n"
+            "Расскажите немного о себе: кто будет жить, чем занимаетесь, что вас привело к нам?"
+        )
+    elif state == S_ASK_ABOUT:
+        # Если человек задал вопрос про дом, отвечаем и не двигаемся дальше, ждём инфу о себе
+        ans = agrep(text)
+        if ans and len(text.split()) < 6:
+            await update.message.reply_text(ans)
+            await update.message.reply_text("Расскажите немного о себе и планах, чтобы я всё передал хозяину. 😊")
+            return
+        st["about"] = text.strip()
+        st["state"] = S_ASK_CHECKIN
+        await update.message.reply_text(
+            "Спасибо! Это очень помогает. 😊\n\n"
+            "Когда вам было бы удобно приехать на просмотр и ориентировочно когда планируете заселиться?"
+        )
+    elif state == S_ASK_CHECKIN:
+        st["checkin"] = text.strip()
+        st["state"] = S_ASK_CONTACT
+        await update.message.reply_text(
+            "Отлично! И последний вопрос: как с вами удобно связаться хозяину? Можете оставить номер телефона или @username в Telegram.",
+            reply_markup=kb([f"Мой номер: {user.phone}" if getattr(user, 'phone', None) else "Оставить контакт вручную"]),
+        )
+    elif state == S_ASK_CONTACT:
+        st["contact"] = text.strip()
+        st["state"] = S_DONE
+        # Финализируем и отправляем лида
+        await update.message.reply_text(
+            "Спасибо большое! 😊 Я передал вашу заявку хозяину, он свяжется с вами в ближайшее время, чтобы договориться о просмотре.\n\n"
+            "Если есть вопросы по домику - пишите, всегда рады помочь! 🏡"
+        )
+        send_lead(context, st)
+        surveys[uid]["state"] = S_DONE
+
+def main():
+    app = Application.builder().token(BOT_TOKEN).build()
+
+    app.add_handler(CommandHandler("start", start))
+    app.add_handler(CommandHandler("cancel", cancel))
+    app.add_handler(CommandHandler("done", done))
+    app.add_handler(CommandHandler("status", status))
+    app.add_handler(CallbackQueryHandler(close_callback, pattern="close_leads"))
+    app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle))
+
+    logger.info("Бот запущен. Токен OK. Группа лидов: %s, владелец: %s", LEAD_CHAT_ID, OWNER_CHAT_ID)
+    start_reminders()
+    app.run_polling()
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "registry": "https://clawhub.ai",
+  "slug": "superpowers-openclaw",
+  "installedVersion": "1.0.0",
+  "installedAt": 1787311653178,
+  "artifact": {
+    "kind": "archive",
+    "sha256": "1ec94b62a651b103aefd96433713075cb5df572e9ec6c0a3a9184d9f0034f7ce",
+    "integrity": "sha256-HslLYqZRsQOu/ZZDNxMHXLXfVy6exsCjqRhNnwA0984="
+  },
+  "skillFile": {
+    "path": "SKILL.md",
+    "sha256": "813f29af26079ed18cfac9ce84249f1c46b448736494b370795bf83a9016a908"
+  }
+}

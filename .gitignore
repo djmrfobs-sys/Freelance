@@ -1,0 +1,19 @@
+# Секреты: никогда не коммитить
+.bots_env.sh
+secrets/
+*.token
+.env
+.env.*
+!.env.example
+!*.env.example
+
+# API-ключи
+.apify_key
+.deepseek_key
+.gemini_key
+.groq_key
+*.key
+
+# Локальные конфиги с чувствительными данными
+*.pem
+*.key

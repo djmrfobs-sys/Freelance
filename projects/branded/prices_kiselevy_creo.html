@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Прайс — KISELEVY CREO</title>
+<style>
+:root{
+  --blue:#A8D0E6;
+  --peach:#F8C6A6;
+  --peach-deep:#FF8A5B;
+  --ink:#1C2B33;
+  --ink-soft:#5B6C74;
+  --glass:rgba(251,251,248,.86);
+  --radius:24px;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+  font-family:'Plus Jakarta Sans','Segoe UI',sans-serif;
+  color:var(--ink);
+  line-height:1.55;
+  background:linear-gradient(160deg,var(--blue),#D6D3DD 48%,var(--peach));
+  background-attachment:fixed;
+  min-height:100vh;
+}
+.sheet{
+  max-width:900px;
+  margin:0 auto;
+  padding:32px 20px 60px;
+}
+.card{
+  background:var(--glass);
+  backdrop-filter:blur(8px);
+  border-radius:var(--radius);
+  box-shadow:0 20px 50px rgba(28,43,51,.15);
+  overflow:hidden;
+  margin-bottom:28px;
+}
+/* Header with photo background */
+.hero{
+  position:relative;
+  overflow:hidden;
+  min-height:220px;
+  display:flex;
+  align-items:flex-end;
+  padding:28px;
+  color:#fff;
+}
+.hero .bg{
+  position:absolute;
+  inset:0;
+  background-image:url('fobs_keti_2.jpg');
+  background-size:cover;
+  background-position:center;
+  filter:brightness(.55);
+  z-index:0;
+}
+.hero .shade{
+  position:absolute;
+  inset:0;
+  background:linear-gradient(180deg,transparent 30%,rgba(28,43,51,.82) 100%);
+  z-index:1;
+}
+.hero .content{
+  position:relative;
+  z-index:2;
+}
+.hero .logo{
+  position:absolute;
+  top:18px;left:22px;
+  z-index:3;
+  background:rgba(255,255,255,.92);
+  border-radius:16px;
+  padding:8px 14px;
+  display:flex;
+  flex-direction:column;
+  line-height:1.1;
+  box-shadow:0 6px 18px rgba(0,0,0,.25);
+}
+.hero .logo b{
+  font-size:19px;
+  letter-spacing:.5px;
+  color:var(--ink);
+}
+.hero .logo span{
+  font-size:9px;
+  letter-spacing:3px;
+  color:var(--peach-deep);
+  font-weight:700;
+}
+.hero h1{
+  font-size:42px;
+  font-weight:800;
+  letter-spacing:.5px;
+  text-shadow:0 4px 20px rgba(0,0,0,.4);
+}
+.hero p{
+  margin-top:6px;
+  font-size:16px;
+  opacity:.95;
+}
+.body{padding:28px 30px 34px;}
+h2{
+  font-size:22px;
+  margin:26px 0 14px;
+  color:var(--ink);
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+h2:first-child{margin-top:0;}
+h2 .dot{
+  width:12px;height:12px;border-radius:50%;
+  background:linear-gradient(135deg,var(--blue),var(--peach-deep));
+  flex:0 0 auto;
+}
+.pkg{
+  background:#fff;
+  border:1px solid #E7EDF0;
+  border-left:5px solid var(--peach-deep);
+  border-radius:16px;
+  padding:16px 18px;
+  margin:12px 0;
+  transition:transform .15s;
+}
+.pkg:hover{transform:translateX(4px);}
+.pkg .t{font-weight:800;font-size:17px;}
+.pkg .p{color:var(--peach-deep);font-weight:800;font-size:16px;margin-top:2px;}
+.pkg .s{color:var(--ink-soft);font-size:14px;margin-top:6px;}
+.svc{
+  background:#fff;
+  border:1px solid #E7EDF0;
+  border-radius:14px;
+  padding:13px 16px;
+  margin:9px 0;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:16px;
+}
+.svc .name{font-weight:700;}
+.svc .price{color:var(--peach-deep);font-weight:800;white-space:nowrap;}
+.note{
+  background:#FFF7EF;
+  border:1px solid #FFE3CA;
+  border-radius:14px;
+  padding:14px 18px;
+  font-size:14px;
+  color:var(--ink-soft);
+  margin-top:16px;
+}
+.note b{color:var(--ink);}
+.footer{
+  text-align:center;
+  color:#fff;
+  font-size:13px;
+  opacity:.9;
+  margin-top:8px;
+}
+.badge{
+  display:inline-block;
+  background:linear-gradient(135deg,var(--blue),var(--peach-deep));
+  color:#fff;
+  font-weight:800;
+  font-size:12px;
+  border-radius:30px;
+  padding:5px 14px;
+  letter-spacing:1px;
+  margin-bottom:10px;
+}
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="card">
+    <div class="hero">
+      <div class="bg"></div>
+      <div class="shade"></div>
+      <div class="logo"><b>KISELEVY&nbsp;CREO</b><span>TECH INNOVATIONS</span></div>
+      <div class="content">
+        <div class="badge">ПРАЙС 2026</div>
+        <h1>Услуги и комбо-пакеты</h1>
+        <p>Цифровой фасад для бизнеса и личных брендов</p>
+      </div>
+    </div>
+    <div class="body">
+
+      <h2><span class="dot"></span>Отдельные услуги</h2>
+      <p style="color:var(--ink-soft);font-size:14px;margin-bottom:8px;">Точная цена за фиксированный состав - без расхождений и сюрпризов.</p>
+
+      <div class="svc"><div class="name">Telegram-бот базовый (заявки, FAQ, уведомления)</div><div class="price">29 000 ₽</div></div>
+      <div class="svc"><div class="name">Telegram-бот с логикой и базой данных</div><div class="price">59 000 ₽</div></div>
+      <div class="svc"><div class="name">Telegram-бот с оплатой и ИИ</div><div class="price">129 000 ₽</div></div>
+      <div class="svc"><div class="name">Фирменный ИИ-бот (роли, подписка, кабинет)</div><div class="price">от 149 000 ₽</div></div>
+
+      <div class="svc"><div class="name">Лендинг простой (дизайн + форма)</div><div class="price">49 000 ₽</div></div>
+      <div class="svc"><div class="name">Лендинг с автоматизацией (CRM, воронка)</div><div class="price">149 000 ₽</div></div>
+
+      <div class="svc"><div class="name">Маркетинг-стратегия + диагностика</div><div class="price">69 000 ₽</div></div>
+      <div class="svc"><div class="name">Маркетинг-система через личность (под ключ)</div><div class="price">250 000 ₽</div></div>
+      <div class="svc"><div class="name">Абонентское сопровождение личного бренда</div><div class="price">69 000 ₽/мес</div></div>
+
+      <div class="svc"><div class="name">Настройка Telegram-канала + позиционирование</div><div class="price">49 000 ₽</div></div>
+      <div class="svc"><div class="name">Бот автопостов в канал (по графику)</div><div class="price">39 000 ₽</div></div>
+
+      <div class="svc"><div class="name">Контент-план на месяц (темы, рубрики)</div><div class="price">29 000 ₽</div></div>
+      <div class="svc"><div class="name">Контент-план + тексты + сторис</div><div class="price">59 000 ₽/мес</div></div>
+      <div class="svc"><div class="name">Полное ведение (план + посты + стратегия)</div><div class="price">89 000 ₽/мес</div></div>
+
+      <h2><span class="dot"></span>Комбо-пакеты</h2>
+      <p style="color:var(--ink-soft);font-size:14px;margin-bottom:8px;">Готовое решение под ключ: закрывает боль клиента целиком, поэтому ценность выше суммы отдельных услуг.</p>
+
+      <div class="pkg">
+        <div class="t">Пакет 1 · Бизнес-фундамент</div>
+        <div class="s">Сайт-визитка + бот-помощник внутри сайта. Лендинг, бот, приём заявок, базовая автоматизация.</div>
+        <div class="p">149 000 ₽</div>
+      </div>
+
+      <div class="pkg">
+        <div class="t">Пакет 2 · Продюсер-под ключ</div>
+        <div class="s">Сайт + бот + продюсирование + продвижение. Стратегия, воронка, запуск.</div>
+        <div class="p">390 000 ₽</div>
+      </div>
+
+      <div class="pkg">
+        <div class="t">Пакет 3 · Цифровой фасад</div>
+        <div class="s">Маркетинговая система через личность: позиционирование, канал, бот, контент-система, нейропомощник.</div>
+        <div class="p">250 000 ₽ + абонемент 69 000 ₽/мес</div>
+      </div>
+
+      <div class="pkg">
+        <div class="t">Пакет 4 · Автоворонка продаж</div>
+        <div class="s">Лендинг + бот + воронка + Telegram-канал с автопостами. Трафик, захват, нагрев, продажа.</div>
+        <div class="p">450 000 ₽</div>
+      </div>
+
+      <div class="pkg">
+        <div class="t">Пакет 5 · ИИ-продукт под ключ</div>
+        <div class="s">Полный ИИ-сервис со своей механикой: бот с ролями, ИИ, подписка, оплата, личный кабинет. Цена каждого проекта своя - за точным расчётом оставьте заявку.</div>
+        <div class="p">от 750 000 ₽</div>
+      </div>
+
+      <div class="note">
+        <b>Эквивалент для бартера:</b> монтаж одного Reels 3 000 ₽, ведение Instagram 35 000 ₽/мес.
+        Мы не делаем «услугу за услугу» вслепую: обе стороны считаем в деньгах, чтобы никто не был в минусе.
+      </div>
+
+      <div class="note" style="margin-top:12px;">
+        <b>Кто мы:</b> Артур — разработка и автоматизация. Кети — продюсирование и стратегия.
+        Мы создаём продукты, которые продают и работают сами: боты, воронки, цифровой фасад.
+      </div>
+
+    </div>
+  </div>
+
+  <div class="footer">KISELEVY CREO · Tech Innovations · 2026</div>
+</div>
+</body>
+</html>

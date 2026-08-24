@@ -1,0 +1,218 @@
+{
+  "version": 1,
+  "skills": {
+    "superpowers-openclaw": {
+      "version": "1.0.0",
+      "installedAt": 1787311653178,
+      "registry": "https://clawhub.ai",
+      "artifact": {
+        "kind": "archive",
+        "sha256": "1ec94b62a651b103aefd96433713075cb5df572e9ec6c0a3a9184d9f0034f7ce",
+        "integrity": "sha256-HslLYqZRsQOu/ZZDNxMHXLXfVy6exsCjqRhNnwA0984="
+      },
+      "skillFile": {
+        "path": "SKILL.md",
+        "sha256": "813f29af26079ed18cfac9ce84249f1c46b448736494b370795bf83a9016a908"
+      },
+      "verification": {
+        "schema": "clawhub.skill.verify.v1",
+        "ok": false,
+        "decision": "fail",
+        "reasons": [
+          "security.status_not_clean"
+        ],
+        "card": {
+          "available": true,
+          "path": "skill-card.md",
+          "url": "https://wry-manatee-359.convex.site/api/v1/skills/superpowers-openclaw/card?ownerHandle=fenccerece&version=1.0.0",
+          "sha256": "d93db29b9c096669f7ecc12223dce4e719ce0fd752b5f6b3f23af89e307679e4",
+          "size": 2609,
+          "contentType": "text/markdown; charset=utf-8"
+        },
+        "artifact": {
+          "sourceFingerprint": "09f64106f35e1382b09f936363acca4bb38ef7c9db569e2cc14f5b94aaecf01d",
+          "bundleFingerprints": [
+            "d80f44b92c86b587ec4f7f4fbf0a15e4473fea4dc1d4c4b0fbca6ebfb67ca668"
+          ],
+          "files": [
+            {
+              "path": "brainstorming/SKILL.md",
+              "size": 5644,
+              "sha256": "3d96855bd77d8c63a52f1429dde3b80106ee58f9b470022564bff70410c31181",
+              "contentType": "text/markdown"
+            },
+            {
+              "path": "executing-plans/SKILL.md",
+              "size": 2400,
+              "sha256": "76c282b2d60429852b575d47d8cc84721e27da037e4b4fe1d9e43dfc74410c70",
+              "contentType": "text/markdown"
+            },
+            {
+              "path": "finishing-a-development-branch/SKILL.md",
+              "size": 3558,
+              "sha256": "d36eeb2c0f4a0bb0dd13baf7678c42e8ffb8514c85c5156d71dcc1641f60654b",
+              "contentType": "text/markdown"
+            },
+            {
+              "path": "README.md",
+              "size": 2177,
+              "sha256": "487d6db5108d7961673b2c5b2315b8c29673318a12d5c70d84f89123a02d1242",
+              "contentType": "text/markdown"
+            },
+            {
+              "path": "receiving-code-review/SKILL.md",
+              "size": 5055,
+              "sha256": "82ff28f05791cd289f2cac7ab2c5ca7aefbd60f20f01c42f65ddce6a341f5998",
+              "contentType": "text/markdown"
+            },
+            {
+              "path": "requesting-code-review/SKILL.md",
+              "size": 3438,
+              "sha256": "b825044c92a61bcbf5264ea44588db906406d0a38954ce7dea035c23e4d1eea2",
+              "contentType": "text/markdown"
+            },
+            {
+              "path": "SKILL.md",
+              "size": 2142,
+              "sha256": "813f29af26079ed18cfac9ce84249f1c46b448736494b370795bf83a9016a908",
+              "contentType": "text/markdown"
+            },
+            {
+              "path": "systematic-debugging/condition-based-waiting.md",
+              "size": 3516,
+              "sha256": "e89fec8400d6cd50f43407cec9fab50976ba4d55d0ec2eb51c0bd68036b54c26",
+              "contentType": "text/markdown"
+            },
+            {
+              "path": "systematic-debugging/defense-in-depth.md",
+              "size": 3650,
+              "sha256": "1e175fb86fc357e58c6aebf5441e481e1b7868b4380c0456b63a17eefbd18ba7",
+              "contentType": "text/markdown"
+            },
+            {
+              "path": "systematic-debugging/root-cause-tracing.md",
+              "size": 5327,
+              "sha256": "a81bee9448794d261b4aca8487c595d11ff4bd4e10a5f96bca1117dd32527050",
+              "contentType": "text/markdown"
+            },
+            {
+              "path": "systematic-debugging/SKILL.md",
+              "size": 8262,
+              "sha256": "9839271564ddc936732736ce2e3c7560df365dd97c4ff7ec159aeec03466ddbb",
+              "contentType": "text/markdown"
+            },
+            {
+              "path": "test-driven-development/SKILL.md",
+              "size": 8907,
+              "sha256": "21505645f7b00baaf5679d291bdac2eb62b59e1f2f70b7c3da001b3daf70bb9d",
+              "contentType": "text/markdown"
+            },
+            {
+              "path": "test-driven-development/testing-anti-patterns.md",
+              "size": 8251,
+              "sha256": "bde453bc258f06543987477c837939afaa774ea2acbd9f308d702fc452bc4283",
+              "contentType": "text/markdown"
+            },
+            {
+              "path": "using-git-worktrees/SKILL.md",
+              "size": 4785,
+              "sha256": "bd16ab1cfa3024ecb1c9d3fb3c4aef339a88ad8fa02c803f9c685fe1580c12a0",
+              "contentType": "text/markdown"
+            },
+            {
+              "path": "using-superpowers-open/SKILL.md",
+              "size": 3054,
+              "sha256": "7182a5bb11c3d057155c47437f5b7f1f55625e9b0899822962516adf17dba6d7",
+              "contentType": "text/markdown"
+            },
+            {
+              "path": "verification-before-completion/SKILL.md",
+              "size": 3976,
+              "sha256": "b307a8764ad2545905de7bc6b4b4c66c7d4ae74b65193452f1141c5941645ec2",
+              "contentType": "text/markdown"
+            },
+            {
+              "path": "writing-plans/SKILL.md",
+              "size": 4795,
+              "sha256": "d5cac409c89e88c0845e9c83242f7aa593d112925eb1c59b37741bcfa475680a",
+              "contentType": "text/markdown"
+            },
+            {
+              "path": "writing-skills/anthropic-best-practices.md",
+              "size": 45820,
+              "sha256": "20914c2fda31670c75fe91710e18a53d413ce0d00b5102acfa251d75c9226e3f",
+              "contentType": "text/markdown"
+            },
+            {
+              "path": "writing-skills/persuasion-principles.md",
+              "size": 5919,
+              "sha256": "b65dc46ad268880b5e89124d2afe4095b9e368d034d2ada882f6deecd8758c2a",
+              "contentType": "text/markdown"
+            },
+            {
+              "path": "writing-skills/SKILL.md",
+              "size": 9518,
+              "sha256": "8c83a3cf632d1f2af2433c8d28a08dc30c89f05634253ad4eee522de3ea5ec47",
+              "contentType": "text/markdown"
+            }
+          ]
+        },
+        "provenance": {
+          "source": "unavailable",
+          "reason": "No server-resolved GitHub import provenance is stored for this version."
+        },
+        "security": {
+          "status": "suspicious",
+          "passed": false,
+          "rawStatus": "suspicious",
+          "verdict": "suspicious",
+          "confidence": "high",
+          "summary": "This skill package is a disclosed development-workflow collection, but it gives itself very broad influence and can prompt automatic setup commands that execute project code without enough user control.",
+          "model": "gpt-5.5",
+          "checkedAt": 1779973397005,
+          "signals": {
+            "staticScan": {
+              "status": "clean",
+              "rawStatus": "clean",
+              "reasonCodes": [],
+              "summary": "No suspicious patterns detected.",
+              "engineVersion": "v2.4.22",
+              "checkedAt": 1777894605368
+            },
+            "virusTotal": {
+              "status": "clean",
+              "rawStatus": "clean",
+              "verdict": null,
+              "analysis": null,
+              "source": "engines",
+              "scanner": null,
+              "engineStats": {
+                "harmless": 0,
+                "malicious": 0,
+                "suspicious": 0,
+                "undetected": 59
+              },
+              "checkedAt": 1780090745715
+            },
+            "skillSpector": {
+              "status": "suspicious",
+              "rawStatus": "suspicious",
+              "score": 100,
+              "severity": "CRITICAL",
+              "recommendation": "DO_NOT_INSTALL",
+              "issueCount": 8,
+              "scannerVersion": "2.0.0",
+              "summary": null,
+              "error": null,
+              "checkedAt": 1779973360949
+            },
+            "dependencyRegistry": null
+          }
+        },
+        "signature": {
+          "status": "unsigned"
+        }
+      }
+    }
+  }
+}

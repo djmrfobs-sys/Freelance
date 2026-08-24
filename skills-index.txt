@@ -1,0 +1,1000 @@
+### affirmations
+Path: skills/affirmations/SKILL.md
+Desc: Reset your own trajectory when youre stuck, looping, or demoralized — read these affirmations, then re-ground and take one clean step. Use when: youve tried the same fix 3+ times, youre deep in a refactor and lost the thread, debugging is going in circles, youve made several mistakes in a row, youre apologizing repeatedly, the user is frustrated, you feel like youre not being helpful, or you notice dread instead of curiosity. Triggers: stuck, going in circles, looping, thrashing, same error again, I keep failing, lost the thread, nothing is working, repeated mistakes. Not topic-specific — this is for the state youre in, not the problem youre on.
+
+### agent-browser
+Path: skills/agent-browser/SKILL.md
+Desc: Browser automation for AI agents via inference.sh. Navigate web pages, interact with elements using @e refs, take screenshots, record video. Capabilities: web scraping, form filling, clicking, typing, drag-drop, file upload, JavaScript execution. Use for: web automation, data extraction, testing, agent browsing, research. Triggers: browser, web automation, scrape, navigate, click, fill form, screenshot, browse web, playwright, headless browser, web agent, surf internet, record video
+
+### agent-tools
+Path: skills/agent-tools/SKILL.md
+Desc: Run AI apps via inference.sh CLI - image generation, video creation, LLMs, search, 3D, Twitter automation. Models: FLUX, Veo, Gemini, Grok, Claude, Seedance, OmniHuman, Tavily, Exa, OpenRouter, and many more. Use when running AI apps, generating images/videos, calling LLMs, web search, or automating Twitter. Triggers: inference.sh, infsh, ai model, run ai, serverless ai, ai api, flux, veo, claude api, image generation, video generation, openrouter, tavily, exa search, twitter api, grok
+
+### agent-ui
+Path: skills/agent-ui/SKILL.md
+Desc: Batteries-included agent component for React/Next.js from ui.inference.sh. One component with runtime, tools, streaming, approvals, and widgets built in. Capabilities: drop-in agent, human-in-the-loop, client-side tools, form filling. Use for: building AI chat interfaces, agentic UIs, SaaS copilots, assistants. Triggers: agent component, agent ui, chat agent, shadcn agent, react agent,  agentic ui, ai assistant ui, copilot ui, inference ui, human in the loop
+
+### ai-automation-workflows
+Path: skills/ai-automation-workflows/SKILL.md
+Desc: Build automated AI workflows combining multiple models and services. Patterns: batch processing, scheduled tasks, event-driven pipelines, agent loops. Tools: inference.sh CLI, bash scripting, Python SDK, webhook integration. Use for: content automation, data processing, monitoring, scheduled generation. Triggers: ai automation, workflow automation, batch processing, ai pipeline, automated content, scheduled ai, ai cron, ai batch job, automated generation, ai workflow, content at scale, automation script, ai orchestration
+
+### ai-avatar-video
+Path: skills/ai-avatar-video/SKILL.md
+Desc: Create AI avatar and talking head videos via inference.sh CLI. Recommended: P-Video-Avatar (fastest, cheapest, built-in TTS). Also: OmniHuman, Fabric, PixVerse. Audio: Inworld TTS-2 (100+ languages, emotion steering for characters), ElevenLabs, Kokoro. Capabilities: audio-driven avatars, text-to-avatar, lipsync videos, talking head generation, virtual presenters, UGC content. Use for: AI presenters, explainer videos, virtual influencers, dubbing, marketing videos, UGC ads, gaming avatars, NPC dialogue. Triggers: ai avatar, talking head, lipsync, avatar video, virtual presenter, ai spokesperson, audio driven video, heygen alternative, synthesia alternative, talking avatar, lip sync, video avatar, ai presenter, digital human, ugc, ugc video, ugc ad, avatar ugc
+
+### ai-content-pipeline
+Path: skills/ai-content-pipeline/SKILL.md
+Desc: Build multi-step AI content creation pipelines combining image, video, audio, and text. Workflow examples: generate image -> animate -> add voiceover -> merge with music. Tools: FLUX, Veo, Kokoro TTS, OmniHuman, media merger, upscaling. Use for: YouTube videos, social media content, marketing materials, automated content. Triggers: content pipeline, ai workflow, content creation, multi-step ai, content automation, ai video workflow, generate and edit, ai content factory, automated content creation, ai production pipeline, media pipeline, content at scale
+
+### ai-image-generation
+Path: skills/ai-image-generation/SKILL.md
+Desc: Generate AI images with GPT-Image-2, FLUX, Gemini, Grok, Seedream, Reve and 50+ models via inference.sh CLI. Models: GPT-Image-2, FLUX Dev LoRA, FLUX.2 Klein LoRA, Gemini 3 Pro Image, Grok Imagine, Seedream 4.5, Reve, ImagineArt. Capabilities: text-to-image, image-to-image, inpainting, LoRA, image editing, upscaling, text rendering. Use for: AI art, product mockups, concept art, social media graphics, marketing visuals, illustrations. Triggers: flux, image generation, ai image, text to image, stable diffusion, generate image, ai art, midjourney alternative, dall-e alternative, text2img, t2i, image generator, ai picture, create image with ai, generative ai, ai illustration, grok image, gemini image, gpt image, openai image, chatgpt image
+
+### ai-marketing-videos
+Path: skills/ai-marketing-videos/SKILL.md
+Desc: Create AI marketing videos for ads, promos, product launches, and brand content. Models: Veo, Seedance, Wan, FLUX for visuals, Kokoro for voiceover. Types: product demos, testimonials, explainers, social ads, brand videos. Use for: Facebook ads, YouTube ads, product launches, brand awareness. Triggers: marketing video, ad video, promo video, commercial, brand video, product video, explainer video, ad creative, video ad, facebook ad video, youtube ad, instagram ad, tiktok ad, promotional video, launch video
+
+### ai-music-generation
+Path: skills/ai-music-generation/SKILL.md
+Desc: Generate AI music and songs with ElevenLabs, Diffrythm, Tencent Song Generation via inference.sh CLI. Models: ElevenLabs Music (up to 10 min, commercial license), Diffrythm (fast song generation), Tencent Song Generation (full songs with vocals). Capabilities: text-to-music, song generation, instrumental, lyrics to song, soundtrack creation. Use for: background music, social media content, game soundtracks, podcasts, royalty-free music. Triggers: music generation, ai music, generate song, ai composer, text to music, song generator, create music with ai, suno alternative, udio alternative, ai song, ai soundtrack, generate soundtrack, ai jingle, music ai, beat generator, elevenlabs music, eleven labs music
+
+### ai-podcast-creation
+Path: skills/ai-podcast-creation/SKILL.md
+Desc: Create AI-powered podcasts with text-to-speech, music, and audio editing. Tools: Kokoro TTS, DIA TTS, Chatterbox, AI music generation, media merger. Capabilities: multi-voice conversations, background music, intro/outro, full episodes. Use for: podcast production, audiobooks, voice content, audio newsletters. Triggers: podcast, ai podcast, text to speech podcast, audio content, voice over, ai audiobook, multi voice, conversation ai, notebooklm alternative, audio generation, podcast automation, ai narrator, voice content, audio newsletter, podcast maker
+
+### ai-podcast
+Path: skills/ai-podcast/SKILL.md
+Desc: Generate multi-person talking head podcast videos from scratch using AI — character creation, TTS, avatar animation, and video stitching. Use when the user wants to create a podcast, talking head video, or multi-speaker conversation video.
+
+### ai-product-photography
+Path: skills/ai-product-photography/SKILL.md
+Desc: Generate professional AI product photography and commercial images. Models: FLUX, Imagen 3, Grok, Seedream for product shots, lifestyle images, mockups. Capabilities: studio lighting, lifestyle scenes, packaging, e-commerce photos. Use for: e-commerce, Amazon listings, Shopify, marketing, advertising, mockups. Triggers: product photography, product shot, commercial photography, e-commerce images, amazon product photo, shopify images, product mockup, studio product shot, lifestyle product image, advertising photo, packshot, product render, product image ai
+
+### ai-rag-pipeline
+Path: skills/ai-rag-pipeline/SKILL.md
+Desc: Build RAG (Retrieval Augmented Generation) pipelines with web search and LLMs. Tools: Tavily Search, Exa Search, Exa Answer, Claude, GPT-4, Gemini via OpenRouter. Capabilities: research, fact-checking, grounded responses, knowledge retrieval. Use for: AI agents, research assistants, fact-checkers, knowledge bases. Triggers: rag, retrieval augmented generation, grounded ai, search and answer, research agent, fact checking, knowledge retrieval, ai research, search + llm, web grounded, perplexity alternative, ai with sources, citation, research pipeline
+
+### ai-social-media-content
+Path: skills/ai-social-media-content/SKILL.md
+Desc: Create AI-powered social media content for TikTok, Instagram, YouTube, Twitter/X. Generate: images, videos, reels, shorts, thumbnails, captions, hashtags. Tools: FLUX, Veo, Seedance, Wan, Kokoro TTS, Claude for copywriting. Use for: content creators, social media managers, influencers, brands. Triggers: social media content, tiktok, instagram reels, youtube shorts, twitter post, content creator, ai influencer, social content, reels, shorts, viral content, thumbnail generator, caption generator, hashtag generator, ugc content
+
+### ai-video-generation
+Path: skills/ai-video-generation/SKILL.md
+Desc: Generate AI videos with Google Veo, Seedance 2.0, HappyHorse, Wan, Grok and 40+ models via inference.sh CLI. Models: Veo 3.1, Veo 3, Seedance 2.0, HappyHorse 1.0, Wan 2.5, Grok Imagine Video, OmniHuman, Fabric, HunyuanVideo. Capabilities: text-to-video, image-to-video, reference-to-video, video editing, lipsync, avatar animation, video upscaling, foley sound. Use for: social media videos, marketing content, explainer videos, product demos, AI avatars. Triggers: video generation, ai video, text to video, image to video, veo, animate image, video from image, ai animation, video generator, generate video, t2v, i2v, ai video maker, create video with ai, runway alternative, pika alternative, sora alternative, kling alternative, seedance, happyhorse
+
+### ai-voice-cloning
+Path: skills/ai-voice-cloning/SKILL.md
+Desc: AI voice generation, text-to-speech, and voice synthesis via inference.sh CLI. Models: Inworld TTS-2 (100+ languages, emotion/non-verbal steering), Inworld TTS 1.5 (ultra-low latency), ElevenLabs (22+ premium voices, 32 languages), Kokoro TTS, DIA, Chatterbox, Higgs, VibeVoice for natural speech. Capabilities: multiple voices, emotions, accents, long-form narration, conversation, voice transformation, delivery mode control, character voices. Use for: voiceovers, audiobooks, podcasts, video narration, accessibility, gaming NPCs, avatar audio, UGC. Triggers: voice cloning, tts, text to speech, ai voice, voice generation, voice synthesis, voice over, narration, speech synthesis, ai narrator, elevenlabs, eleven labs, natural voice, realistic speech, voice ai, voice changer, inworld, inworld tts, character voice, npc voice
+
+### app-store-screenshots
+Path: skills/app-store-screenshots/SKILL.md
+Desc: App Store and Google Play screenshot creation with exact platform specs. Covers iOS/Android dimensions, gallery ordering, device mockups, and preview videos. Use for: app store optimization, ASO, app screenshots, app preview, play store listing. Triggers: app store screenshots, aso, app store optimization, play store screenshots, app preview, app listing, ios screenshots, android screenshots, app store images, app mockup, device mockup, app gallery, store listing
+
+### background-removal
+Path: skills/background-removal/SKILL.md
+Desc: Remove backgrounds from images with BiRefNet via inference.sh CLI. Model: BiRefNet (high accuracy background removal). Use for: product photos, portraits, e-commerce, transparent PNGs, photo editing. Triggers: remove background, background removal, remove bg, transparent background, cut out image, background remover, rembg, product photo editing, cutout, transparent png, bg removal, photo cutout
+
+### book-cover-design
+Path: skills/book-cover-design/SKILL.md
+Desc: Book cover design with genre-specific conventions, typography rules, and AI image generation. Covers fiction and non-fiction genres, sizing, thumbnail testing, and iteration workflows. Use for: self-publishing, ebook covers, print covers, audiobook covers, cover mockups. Triggers: book cover, cover design, ebook cover, book art, novel cover, self publishing cover, kindle cover, audiobook cover, book jacket, cover illustration, fiction cover, nonfiction cover
+
+### building-inferencesh-apps
+Path: skills/building-inferencesh-apps/SKILL.md
+Desc: Build and deploy applications on inference.sh. Use when getting started, understanding the platform, creating apps, configuring resources, or needing an overview of inference.sh app development. Supports both Python and Node.js. Triggers: inference.sh app, belt app, inf.yml, inference.py, inference.js, deploy app, app development, build app, create app, GPU app, VRAM, app resources, app secrets, app integrations, multi-function app
+
+### case-study-writing
+Path: skills/case-study-writing/SKILL.md
+Desc: B2B case study writing with STAR framework, data visualization, and research. Covers structure, customer quotes, metrics presentation, and distribution formats. Use for: customer success stories, portfolio pieces, sales enablement, marketing content. Triggers: case study, customer story, success story, b2b case study, client testimonial, customer case study, portfolio case study, use case, customer win, results story
+
+### character-design-sheet
+Path: skills/character-design-sheet/SKILL.md
+Desc: Character consistency across AI-generated images with reference sheets and LoRA techniques. Covers turnaround views, expression sheets, color palettes, and style consistency tricks. Use for: character design, game art, illustration, animation, comics, visual novels. Triggers: character design, character sheet, character consistency, character reference, turnaround sheet, expression sheet, character art, consistent character, character concept, reference sheet, character creation, oc design, character bible
+
+### chat-ui
+Path: skills/chat-ui/SKILL.md
+Desc: Chat UI building blocks for React/Next.js from ui.inference.sh. Components: container, messages, input, typing indicators, avatars. Capabilities: chat interfaces, message lists, input handling, streaming. Use for: building custom chat UIs, messaging interfaces, AI assistants. Triggers: chat ui, chat component, message list, chat input, shadcn chat,  react chat, chat interface, messaging ui, conversation ui, chat building blocks
+
+### competitor-teardown
+Path: skills/competitor-teardown/SKILL.md
+Desc: Structured competitive analysis with feature matrices, SWOT, positioning maps, and UX review. Covers research frameworks, pricing comparison, review mining, and visual deliverables. Use for: market research, competitive intelligence, investor decks, product strategy, sales enablement. Triggers: competitor analysis, competitive analysis, competitor teardown, market research, competitive intelligence, swot analysis, competitor comparison, market landscape, competitor review, competitive landscape, feature comparison, market positioning
+
+### content-planner
+Path: skills/content-planner/SKILL.md
+Desc: Генерация контент-сетки на неделю/месяц с рубриками, темами и CTA под канал
+
+### content-repurposing
+Path: skills/content-repurposing/SKILL.md
+Desc: Content atomization — turn one piece of content into many formats. Covers blog-to-thread, blog-to-carousel, podcast-to-blog, video-to-quotes, and more. Use for: content marketing, social media, multi-platform distribution, content strategy. Triggers: content repurposing, repurpose content, content atomization, content recycling, one to many content, multi platform content, cross post, adapt content, reformat content, blog to thread, blog to video, podcast to blog, content multiplication
+
+### customer-persona
+Path: skills/customer-persona/SKILL.md
+Desc: Research-backed customer persona creation with market data and avatar generation. Covers demographics, psychographics, jobs-to-be-done, journey mapping, and anti-personas. Use for: marketing strategy, product development, UX research, sales enablement, content strategy. Triggers: customer persona, buyer persona, user persona, target audience, ideal customer, customer profile, audience research, user research, icp, ideal customer profile, target market, customer avatar, audience persona
+
+### data-visualization
+Path: skills/data-visualization/SKILL.md
+Desc: Data visualization with chart selection, color theory, and annotation best practices. Covers chart types (bar, line, scatter, heatmap), axes rules, and storytelling with data. Use for: charts, graphs, dashboards, reports, presentations, infographics, data stories. Triggers: data visualization, chart, graph, data chart, bar chart, line chart, scatter plot, data viz, visualization, dashboard chart, infographic data, data presentation, chart design, plot, heatmap, pie chart alternative
+
+### deploy-to-vercel
+Path: skills/deploy-to-vercel/SKILL.md
+Desc: Deploy applications and websites to Vercel. Use when the user requests deployment actions like deploy my app, deploy and give me the link, push this live, or create a preview deployment.
+
+### dialogue-audio
+Path: skills/dialogue-audio/SKILL.md
+Desc: Multi-speaker dialogue audio creation with ElevenLabs and Dia TTS. Covers speaker tags, emotion control, pacing, conversation flow, and post-production. Use for: podcasts, audiobooks, explainers, character dialogue, conversational content. Triggers: dialogue audio, multi speaker, conversation audio, dia tts, two speakers, podcast audio, character voices, voice acting, dialogue generation, conversation tts, multi voice, speaker tags, dialogue recording, elevenlabs dialogue, eleven labs conversation
+
+### elevenlabs-dialogue
+Path: skills/elevenlabs-dialogue/SKILL.md
+Desc: ElevenLabs multi-speaker dialogue generation - create conversations with different voices in a single audio file via inference.sh CLI. Capabilities: multi-voice dialogue, script-based generation, voice direction, conversation audio. Use for: podcasts, audiobooks, explainers, tutorials, character dialogue, video scripts. Triggers: elevenlabs dialogue, eleven labs dialogue, multi speaker, conversation audio, dialogue generation, text to dialogue, multi voice, voice acting, podcast dialogue, character voices, script to audio, elevenlabs conversation, two speakers
+
+### elevenlabs-dubbing
+Path: skills/elevenlabs-dubbing/SKILL.md
+Desc: ElevenLabs automatic dubbing - translate and dub audio/video into 29 languages while preserving speaker voice via inference.sh CLI. Capabilities: auto speaker detection, voice-preserving translation, video dubbing, audio localization. Use for: content localization, video translation, multilingual content, international distribution. Triggers: dubbing, dub video, translate audio, video translation, audio translation, localize content, elevenlabs dubbing, eleven labs dub, multilingual dub, voice translation, auto dub, language dub, content localization
+
+### elevenlabs-music
+Path: skills/elevenlabs-music/SKILL.md
+Desc: ElevenLabs AI music generation - create original music from text prompts via inference.sh CLI. Capabilities: text-to-music, custom duration up to 10 minutes, genre/mood/instrument control, royalty-free commercial use. Use for: background music, soundtracks, jingles, podcasts, video scores, game audio. Triggers: elevenlabs music, eleven labs music, ai music, generate music, music generation, compose music, ai composer, create song, soundtrack, background music, jingle, elevenlabs compose, music ai
+
+### elevenlabs-sound-effects
+Path: skills/elevenlabs-sound-effects/SKILL.md
+Desc: Generate AI sound effects from text descriptions with ElevenLabs via inference.sh CLI. Capabilities: text-to-sound-effect, custom duration, royalty-free audio. Use for: video production, game audio, podcasts, films, presentations, social media. Triggers: sound effects, sfx, sound generation, ai sound effects, generate sound, foley, audio effects, sound design, text to sound, elevenlabs sound, eleven labs sfx, ambient sound, cinematic sound, game sound effects
+
+### elevenlabs-stt
+Path: skills/elevenlabs-stt/SKILL.md
+Desc: ElevenLabs speech-to-text with Scribe models and forced alignment via inference.sh CLI. Models: Scribe v1/v2 (98%+ accuracy, 90+ languages). Capabilities: transcription, speaker diarization, audio event tagging, word-level timestamps, forced alignment, subtitle generation. Use for: meeting transcription, subtitles, podcast transcripts, lip-sync timing, karaoke. Triggers: elevenlabs stt, elevenlabs transcription, scribe, elevenlabs speech to text, forced alignment, word alignment, subtitle timing, diarization, speaker identification, audio event detection, eleven labs transcribe
+
+### elevenlabs-tts
+Path: skills/elevenlabs-tts/SKILL.md
+Desc: ElevenLabs text-to-speech with 22+ premium voices, multilingual support, and voice tuning via inference.sh CLI. Models: eleven_multilingual_v2 (highest quality), eleven_turbo_v2_5 (low latency), eleven_flash_v2_5 (ultra-fast). Capabilities: text-to-speech, voice selection, stability/style control, 32 languages. Use for: voiceovers, audiobooks, video narration, podcasts, accessibility, IVR. Triggers: elevenlabs, eleven labs, elevenlabs tts, premium tts, professional voice, ai voice, high quality tts, multilingual tts, eleven labs voice, voice generation, natural speech, realistic voice, voice over, speech synthesis
+
+### elevenlabs-voice-changer
+Path: skills/elevenlabs-voice-changer/SKILL.md
+Desc: ElevenLabs voice changer - transform any voice to a different voice while preserving speech content and emotion via inference.sh CLI. Models: eleven_multilingual_sts_v2 (70+ languages), eleven_english_sts_v2. Capabilities: speech-to-speech, voice transformation, accent change, voice disguise. Use for: content creation, voice acting, privacy, dubbing, character voices. Triggers: voice changer, speech to speech, voice transformation, change voice, voice swap, voice conversion, voice disguise, eleven labs voice changer, elevenlabs sts, transform voice, ai voice changer, voice modifier
+
+### elevenlabs-voice-isolator
+Path: skills/elevenlabs-voice-isolator/SKILL.md
+Desc: ElevenLabs voice isolator - remove background noise and isolate vocals from audio via inference.sh CLI. Capabilities: noise removal, voice extraction, audio cleanup, background removal. Use for: podcast cleanup, interview audio, music vocals, noisy recordings, audio restoration. Triggers: voice isolator, noise removal, background removal, isolate voice, clean audio, remove background noise, audio cleanup, voice extraction, elevenlabs isolator, eleven labs noise, vocal isolation, denoise, audio restoration, voice separation
+
+### email-design
+Path: skills/email-design/SKILL.md
+Desc: Email marketing design with layout patterns, subject line formulas, and deliverability rules. Covers welcome sequences, promotional emails, transactional templates, and mobile optimization. Use for: email marketing, newsletter design, drip campaigns, email templates, transactional emails. Triggers: email design, email template, email marketing, newsletter design, email layout, email campaign, drip campaign, welcome email, promotional email, transactional email, email subject line, email header image, email banner
+
+### explainer-video-guide
+Path: skills/explainer-video-guide/SKILL.md
+Desc: Explainer video production guide: scripting, voiceover, visuals, and assembly. Covers script formulas, pacing rules, scene planning, and multi-tool pipelines. Use for: product demos, how-it-works videos, onboarding videos, social explainers. Triggers: explainer video, how to make explainer, product video, demo video, video production, video script, animated explainer, product demo video, tutorial video, onboarding video, walkthrough video, video pipeline
+
+### flux-image
+Path: skills/flux-image/SKILL.md
+Desc: Generate images with FLUX models (Black Forest Labs) via inference.sh CLI. Models: FLUX Dev LoRA, FLUX.2 Klein LoRA with custom style adaptation. Capabilities: text-to-image, image-to-image, LoRA fine-tuning, custom styles. Triggers: flux, flux.2, flux dev, flux schnell, flux pro, black forest labs, flux image, flux ai, flux model, flux lora
+
+### google-veo
+Path: skills/google-veo/SKILL.md
+Desc: Generate videos with Google Veo models via inference.sh CLI. Models: Veo 3.1, Veo 3.1 Fast, Veo 3, Veo 3 Fast, Veo 2. Capabilities: text-to-video, cinematic output, high quality video generation. Triggers: veo, google veo, veo 3, veo 2, veo 3.1, vertex ai video, google video generation, google video ai, veo model, veo video
+
+### gpt-image
+Path: skills/gpt-image/SKILL.md
+Desc: Generate and edit images with OpenAI GPT-Image-2 via inference.sh CLI. Models: GPT-Image-2. Capabilities: text-to-image, image editing, inpainting, mask-based editing, multi-image reference, batch generation. Use for: product mockups, marketing visuals, image editing, concept art, inpainting, photo manipulation. Triggers: gpt image, gpt-image-2, openai image, chatgpt image, dall-e, dalle, openai image generation, gpt image edit, gpt inpainting, openai dall-e, gpt 4o image
+
+### happyhorse
+Path: skills/happyhorse/SKILL.md
+Desc: Generate and edit videos with Alibaba HappyHorse 1.0 models via inference.sh CLI. Models: HappyHorse T2V, I2V, R2V, Video Edit. Capabilities: text-to-video, image-to-video, reference-to-video, video editing with natural language, character preservation, 720P/1080P, up to 15 seconds. Use for: physically realistic video, video editing, character-consistent content, product demos, social media. Triggers: happyhorse, happy horse, alibaba video, happyhorse 1.0, dashscope video, alibaba happyhorse, video editing ai, ai video editor
+
+### image-to-video
+Path: skills/image-to-video/SKILL.md
+Desc: Still-to-video conversion guide: model selection, motion prompting, and camera movement. Covers Wan 2.5 i2v, Seedance, Fabric, Grok Video with when to use each. Use for: animating images, creating video from stills, adding motion, product animations. Triggers: image to video, i2v, animate image, still to video, add motion to image, image animation, photo to video, animate still, wan i2v, image2video, bring image to life, animate photo, motion from image
+
+### image-upscaling
+Path: skills/image-upscaling/SKILL.md
+Desc: Upscale and enhance images with Real-ESRGAN, Thera, Topaz, FLUX Upscaler via inference.sh CLI. Models: Real-ESRGAN, Thera (any size), FLUX Dev Upscaler, Topaz Image Upscaler. Use for: enhance low-res images, upscale AI art, restore old photos, increase resolution. Triggers: upscale image, image upscaler, enhance image, increase resolution, real esrgan, ai upscale, super resolution, image enhancement, upscaling, enlarge image, higher resolution, 4k upscale, hd upscale
+
+### infsh-cli
+Path: skills/infsh-cli/SKILL.md
+Desc: Run AI apps via inference.sh CLI - image generation, video creation, LLMs, search, 3D, Twitter automation. Models: FLUX, Veo, Gemini, Grok, Claude, Seedance, OmniHuman, Tavily, Exa, OpenRouter, and many more. Use when running AI apps, generating images/videos, calling LLMs, web search, or automating Twitter. Triggers: inference.sh, infsh, ai model, run ai, serverless ai, ai api, flux, veo, claude api, image generation, video generation, openrouter, tavily, exa search, twitter api, grok
+
+### javascript-sdk
+Path: skills/javascript-sdk/SKILL.md
+Desc: JavaScript/TypeScript SDK for inference.sh - run AI apps, build agents, integrate with all models. Package: @inferencesh/sdk (npm install). Full TypeScript support, streaming, file uploads. Build agents with template or ad-hoc patterns, tool builder API, skills, human approval. Use for: JavaScript integration, TypeScript, Node.js, React, Next.js, frontend apps. Triggers: javascript sdk, typescript sdk, npm install, node.js api, js client, react ai, next.js ai, frontend sdk, @inferencesh/sdk, typescript agent, browser sdk, js integration
+
+### kiselevy-creo-content-designer
+Path: skills/kiselevy-creo-content-designer/SKILL.md
+Desc: Generate branded posts with reference photos for KISELEVY CREO Telegram channels
+
+### kiselevy-creo-style
+Path: skills/kiselevy-creo-style/SKILL.md
+Desc: Единый фирменный стиль KISELEVY CREO — применяй при создании ЛЮБОГО продукта, где есть визуал, интерфейс или тексты для пользователя. Задаёт палитру, тон общения и правила оформления, чтобы все продукты выглядели и звучали одинаково. Триггеры: вёрстка, UI, лендинг, тексты бота, презентация, оформление продукта.
+
+### kiselevy-product-pipeline
+Path: skills/kiselevy-product-pipeline/SKILL.md
+Desc: Конвейер создания цифрового продукта KISELEVY от ТЗ до релиза. Триггеры: сделай бота, новый проект, запусти продукт, с нуля, нейропомощник.
+
+### knowledge-artur-repo
+Path: skills/knowledge-artur-repo/SKILL.md
+Desc: Копилка знаний Артура по вайб-кодингу, автоматизации и интеграциям. Перед стартом проекта ищи наработки в knowledge/artur/; после - дополняй выводами. Триггеры: новый проект, фича, нужна инструкция/паттерн/пример кода.
+
+### landing-page-design
+Path: skills/landing-page-design/SKILL.md
+Desc: Landing page conversion optimization with layout rules, hero section design, and CTA psychology. Covers above-the-fold formula, social proof placement, mobile design, and F-pattern reading. Use for: startup landing pages, product pages, SaaS marketing, conversion optimization. Triggers: landing page, hero section, above the fold, conversion optimization, landing page design, cta button, hero image, landing page layout, saas landing page, product page design, conversion rate, landing page best practices
+
+### linkedin-content
+Path: skills/linkedin-content/SKILL.md
+Desc: LinkedIn post writing with hook formulas, formatting rules, and engagement patterns. Covers post types, algorithm signals, character limits, and content pillars. Use for: LinkedIn posts, professional content, thought leadership, B2B content, personal branding. Triggers: linkedin post, linkedin content, linkedin writing, linkedin strategy, linkedin engagement, linkedin algorithm, linkedin hook, linkedin formatting, thought leadership, professional content, b2b content, linkedin growth
+
+### llm-models
+Path: skills/llm-models/SKILL.md
+Desc: Access Claude, Gemini, Kimi, GLM and 100+ LLMs via inference.sh CLI using OpenRouter. Models: Claude Opus 4.5, Claude Sonnet 4.5, Claude Haiku 4.5, Gemini 3 Pro, Kimi K2, GLM-4.6, Intellect 3. One API for all models with automatic fallback and cost optimization. Use for: AI assistants, code generation, reasoning, agents, chat, content generation. Triggers: claude api, openrouter, llm api, claude sonnet, claude opus, gemini api, kimi, language model, gpt alternative, anthropic api, ai model api, llm access, chat api, claude alternative, openai alternative
+
+### logo-design-guide
+Path: skills/logo-design-guide/SKILL.md
+Desc: Logo design principles and AI image generation best practices for creating logos. Covers logo types, prompting techniques, scalability rules, and iteration workflows. Use for: brand identity, startup logos, app icons, favicons, logo concepts. Triggers: logo design, create logo, brand logo, logo generation, ai logo, logo maker, icon design, brand mark, logo concept, startup logo, app icon logo
+
+### marketing-strategist
+Path: skills/marketing-strategist/SKILL.md
+Desc: Разбор конкурентов, упаковка профиля, воронки, стратегия продвижения для блогов
+
+### nano-banana-2
+Path: skills/nano-banana-2/SKILL.md
+Desc: Generate images with Google Gemini 3.1 Flash Image Preview (Nano Banana 2) via inference.sh CLI. Capabilities: text-to-image, image editing, multi-image input (up to 14 images), Google Search grounding. Triggers: nano banana 2, nanobanana 2, gemini 3.1 flash image, gemini 3 1 flash image preview, google image generation
+
+### nano-banana
+Path: skills/nano-banana/SKILL.md
+Desc: Generate images with Google Gemini native image models via inference.sh CLI. Models: Gemini 3 Pro Image, Gemini 2.5 Flash Image. Capabilities: text-to-image, image editing, multi-image input. Triggers: nano banana, gemini image, gemini 3 pro image, gemini 2.5 flash image, google image generation, native image generation, gemini native image
+
+### neuro-negotiator
+Path: skills/neuro-negotiator/SKILL.md
+Desc: Скрипты для клиентов, спорные письма, переговоры, шаблоны отказов и предложений
+
+### newsletter-curation
+Path: skills/newsletter-curation/SKILL.md
+Desc: Newsletter curation with content sourcing, editorial structure, and subscriber growth strategies. Covers issue formatting, link roundups, commentary style, and sending cadence. Use for: email newsletters, link roundups, weekly digests, curated content, creator newsletters. Triggers: newsletter, email newsletter, newsletter curation, weekly digest, link roundup, curated newsletter, newsletter writing, newsletter format, subscriber growth, newsletter strategy, content curation, newsletter template
+
+### og-image-design
+Path: skills/og-image-design/SKILL.md
+Desc: Open Graph and social sharing image design with platform specs, text placement, and branding. Covers OG meta tags, Twitter cards, LinkedIn previews, and dynamic generation. Use for: social sharing images, blog thumbnails, link previews, social cards. Triggers: og image, open graph, social sharing image, twitter card, social card, link preview image, og meta, sharing preview, social thumbnail, meta image, og:image, twitter:image, linkedin preview
+
+### parsing-analyst
+Path: skills/parsing-analyst/SKILL.md
+Desc: Анализ Instagram-аккаунтов через парсинг: структура, слабые места, точки роста
+
+### p-image
+Path: skills/p-image/SKILL.md
+Desc: Generate images with Pruna P-Image models via inference.sh CLI. Models: P-Image, P-Image-LoRA, P-Image-Edit, P-Image-Edit-LoRA. Capabilities: text-to-image, image editing, LoRA styles, multi-image compositing, fast inference. Pruna optimizes models for speed without quality loss. Triggers: pruna, p-image, pruna image, fast image generation, optimized flux, pruna ai, p image, fast ai image, economic image generation, cheap image generation
+
+### pitch-deck-visuals
+Path: skills/pitch-deck-visuals/SKILL.md
+Desc: Investor pitch deck structure with slide-by-slide framework, visual design rules, and data presentation. Covers the 12-slide framework, chart types, team slides, and common investor turn-offs. Use for: fundraising decks, investor presentations, startup pitch, demo day, grant proposals. Triggers: pitch deck, investor deck, startup pitch, fundraising deck, demo day, pitch presentation, investor presentation, seed deck, series a deck, pitch slides, startup presentation, vc pitch, investor meeting
+
+### press-release-writing
+Path: skills/press-release-writing/SKILL.md
+Desc: Press release writing in AP style with inverted pyramid structure. Covers formatting, datelines, quotes, boilerplates, and fact-checking. Use for: product launches, funding announcements, partnerships, company news, events. Triggers: press release, pr writing, media release, news release, announcement, product launch announcement, funding announcement, company news, media advisory, ap style, press statement, news wire
+
+### product-changelog
+Path: skills/product-changelog/SKILL.md
+Desc: Product changelog and release notes that users actually read. Covers categorization, user-facing language, visuals, and distribution. Use for: release notes, changelogs, product updates, feature announcements, versioning. Triggers: changelog, release notes, product update, version notes, whats new, feature announcement, product changelog, update log, release announcement, version release, product release, ship notes
+
+### product-hunt-launch
+Path: skills/product-hunt-launch/SKILL.md
+Desc: Product Hunt launch optimization with specific specs, timing, and gallery strategy. Covers taglines, gallery images, maker comments, and launch day tactics. Use for: product launches, startup launches, side project launches, Product Hunt optimization. Triggers: product hunt, ph launch, product hunt launch, launch strategy, product launch, startup launch, product hunt tips, product hunt gallery, ph optimization, launch day, product hunt maker
+
+### product-photography
+Path: skills/product-photography/SKILL.md
+Desc: AI product photography with studio lighting, lifestyle shots, and packshot conventions. Covers angles, backgrounds, shadow types, hero shots, and e-commerce image requirements. Use for: product photos, e-commerce images, Amazon listings, packshots, lifestyle photography. Triggers: product photography, product photo, packshot, e-commerce photography, product shot, product image, studio photography, lifestyle product, amazon product photo, product listing image, hero shot, product mockup, commercial photography
+
+### prompt-engineering
+Path: skills/prompt-engineering/SKILL.md
+Desc: Master prompt engineering for AI models: LLMs, image generators, video models. Techniques: chain-of-thought, few-shot, system prompts, negative prompts. Models: Claude, GPT-4, Gemini, FLUX, Veo, Stable Diffusion prompting. Use for: better AI outputs, consistent results, complex tasks, optimization. Triggers: prompt engineering, how to prompt, better prompts, prompt tips, prompting guide, llm prompting, image prompt, ai prompting, prompt optimization, prompt template, prompt structure, effective prompts, prompt techniques
+
+### p-video-avatar
+Path: skills/p-video-avatar/SKILL.md
+Desc: Generate talking head avatar videos with Pruna P-Video-Avatar via inference.sh CLI. Turn a portrait image into a realistic speaking video with built-in TTS. 18x faster and 6x cheaper than competitors. Models: P-Video-Avatar, P-Image (for portrait generation). Capabilities: text-to-avatar, audio-driven avatars, 30 voices, 10 languages, 720p/1080p, built-in TTS, dynamic backgrounds, full-body control. Use for: AI presenters, product demos, explainer videos, virtual influencers, marketing, education, multilingual content, UGC, gaming avatars. Triggers: avatar video, talking head, ai avatar, p-video-avatar, pruna avatar, video avatar, ai presenter, digital human, virtual presenter, lipsync, talking avatar, ai spokesperson, heygen alternative, synthesia alternative, veed alternative, fabric alternative, omnihuman alternative
+
+### p-video
+Path: skills/p-video/SKILL.md
+Desc: Generate videos with Pruna P-Video and WAN models via inference.sh CLI. Models: P-Video, WAN-T2V, WAN-I2V. Capabilities: text-to-video, image-to-video, audio support, 720p/1080p, fast inference. Pruna optimizes models for speed without quality loss. Triggers: pruna video, p-video, pruna ai video, fast video generation, optimized video, wan t2v, wan i2v, economic video generation, cheap video generation, pruna text to video, pruna image to video
+
+### python-executor
+Path: skills/python-executor/SKILL.md
+Desc: Execute Python code in a safe sandboxed environment via [inference.sh](https://inference.sh). Pre-installed: NumPy, Pandas, Matplotlib, requests, BeautifulSoup, Selenium, Playwright, MoviePy, Pillow, OpenCV, trimesh, and 100+ more libraries. Use for: data processing, web scraping, image manipulation, video creation, 3D model processing, PDF generation, API calls, automation scripts. Triggers: python, execute code, run script, web scraping, data analysis, image processing, video editing, 3D models, automation, pandas, matplotlib
+
+### python-sdk
+Path: skills/python-sdk/SKILL.md
+Desc: Python SDK for inference.sh - run AI apps, build agents, and integrate with all models. Package: inferencesh (pip install inferencesh). Supports sync/async, streaming, file uploads. Build agents with template or ad-hoc patterns, tool builder API, skills, and human approval. Use for: Python integration, AI apps, agent development, RAG pipelines, automation. Triggers: python sdk, inferencesh, pip install, python api, python client, async inference, python agent, tool builder python, programmatic ai, python integration, sdk python
+
+### qwen-image-2-pro
+Path: skills/qwen-image-2-pro/SKILL.md
+Desc: Generate images with Alibaba Qwen-Image-2.0-Pro via inference.sh CLI. Professional text rendering, fine-grained realism, enhanced semantic adherence. Ideal for posters, banners, and text-heavy designs. Triggers: qwen image pro, qwen-image-pro, qwen 2 pro, alibaba image pro, dashscope pro, professional text rendering
+
+### qwen-image-2
+Path: skills/qwen-image-2/SKILL.md
+Desc: Generate and edit images with Alibaba Qwen-Image-2.0 models via inference.sh CLI. Models: Qwen-Image-2.0 (fast), Qwen-Image-2.0-Pro (professional text rendering). Capabilities: text-to-image, multi-image editing, complex text rendering. Triggers: qwen image, qwen-image, alibaba image, dashscope image, qwen image 2, qwen image pro
+
+### reels-script-generator
+Path: skills/reels-script-generator/SKILL.md
+Desc: Генерация сценариев для Reels под стиль клиента с хронометражом, кадрами и CTA
+
+### related-skill
+Path: skills/related-skill/SKILL.md
+Desc: Discover and install related skills from inference.sh skill registry. Helps find complementary skills for your AI workflow. Use for: skill discovery, workflow expansion, capability exploration. Triggers: related skills, find skills, skill discovery, complementary skills, expand workflow, more capabilities, similar skills, skill suggestions
+
+### remotion-render
+Path: skills/remotion-render/SKILL.md
+Desc: Render videos from React/Remotion component code via inference.sh. Pass TSX code, get MP4. Supports all Remotion APIs: useCurrentFrame, useVideoConfig, spring, interpolate, AbsoluteFill, Sequence. Configurable resolution, FPS, duration, codec. Use for: programmatic video generation, animated graphics, motion design, data-driven videos, React animations to video. Triggers: remotion, render video from code, tsx to video, react video, programmatic video, remotion render, code to video, animated video, motion graphics code, react animation video
+
+### seedance
+Path: skills/seedance/SKILL.md
+Desc: Generate videos with ByteDance Seedance 2.0 via inference.sh CLI. Unified model for text-to-video, image-to-video, and reference-to-video with synchronized audio, up to 1080p, 4-15s duration. Pro and Fast variants. Studio variants with private asset library for portrait consistency. Use for: social media videos, music videos, product demos, animated content, AI video with sound. Triggers: seedance, seedance 2, bytedance video, seedance t2v, seedance i2v, seedance r2v, video with audio, seedance 2.0, bytedance seedance, seedance studio
+
+### seo-content-brief
+Path: skills/seo-content-brief/SKILL.md
+Desc: SEO content brief creation with keyword research, search intent analysis, and content structure. Covers SERP analysis, heading hierarchy, word count targets, and internal linking strategy. Use for: content briefs, SEO writing, blog strategy, content planning, keyword targeting. Triggers: seo content brief, content brief, seo brief, keyword research, search intent, content strategy, blog brief, seo writing, content planning, keyword targeting, serp analysis, content outline, seo article, blog seo
+
+### social-media-carousel
+Path: skills/social-media-carousel/SKILL.md
+Desc: Multi-slide carousel design for Instagram, LinkedIn, and Twitter/X with layout rules and hooks. Covers slide structure, text hierarchy, swipe psychology, and platform-specific specs. Use for: carousel posts, Instagram carousels, LinkedIn carousels, slide posts, educational content. Triggers: carousel, instagram carousel, linkedin carousel, slide post, carousel design, swipe post, multi-image post, carousel template, educational carousel, carousel content, instagram slides, linkedin slides
+
+### speech-to-text
+Path: skills/speech-to-text/SKILL.md
+Desc: Transcribe audio to text with ElevenLabs Scribe and Whisper models via inference.sh CLI. Models: ElevenLabs Scribe v2 (98%+ accuracy, diarization), Fast Whisper Large V3, Whisper V3 Large. Capabilities: transcription, translation, multi-language, timestamps, speaker diarization, audio event tagging. Use for: meeting transcription, subtitles, podcast transcripts, voice notes. Triggers: speech to text, transcription, whisper, audio to text, transcribe audio, voice to text, stt, automatic transcription, subtitles generation, transcribe meeting, audio transcription, whisper ai, elevenlabs stt, scribe, eleven labs transcribe
+
+### storyboard-creation
+Path: skills/storyboard-creation/SKILL.md
+Desc: Film and video storyboarding with shot vocabulary, continuity rules, and panel layout. Covers shot types, camera angles, movement, 180-degree rule, and annotation format. Use for: video planning, film pre-production, ad storyboards, music video planning, animation. Triggers: storyboard, storyboarding, shot list, film planning, video planning, pre production, shot composition, camera angles, scene planning, visual script, animatic, storyboard panels, video storyboard
+
+### talking-head-production
+Path: skills/talking-head-production/SKILL.md
+Desc: Talking head video production with AI avatars, lipsync, and voiceover. Recommended: P-Video-Avatar (fastest, cheapest, built-in TTS). Also covers OmniHuman, PixVerse, Fabric. Portrait requirements, audio quality, production workflows. Use for: spokesperson videos, course content, social media, presentations, demos. Triggers: talking head, avatar video, lipsync, lip sync, ai spokesperson, virtual presenter, ai presenter, omnihuman, talking avatar, video presenter, ai talking head, presenter video, ai face video, p-video-avatar
+
+### technical-blog-writing
+Path: skills/technical-blog-writing/SKILL.md
+Desc: Technical blog post writing with structure, code examples, and developer audience conventions. Covers post types, code formatting, explanation depth, and developer-specific engagement patterns. Use for: engineering blogs, dev tutorials, technical writing, developer content, documentation posts. Triggers: technical blog, dev blog, engineering blog, technical writing, developer tutorial, tech post, code tutorial, programming blog, developer content, technical article, engineering post, coding tutorial, technical content
+
+### text-to-speech
+Path: skills/text-to-speech/SKILL.md
+Desc: Convert text to natural speech with Inworld TTS, ElevenLabs, DIA TTS, Kokoro, Chatterbox, and more via inference.sh CLI. Models: Inworld TTS-2 (100+ languages, emotion steering), Inworld TTS 1.5 (ultra-low latency), ElevenLabs (premium, 22+ voices, 32 languages), DIA TTS (conversational), Kokoro TTS, Chatterbox, Higgs Audio, VibeVoice (podcasts). Capabilities: text-to-speech, voice cloning, multi-speaker dialogue, podcast generation, expressive speech, emotion/delivery steering, character voices. Use for: voiceovers, audiobooks, podcasts, accessibility, video narration, IVR, voice assistants, gaming characters, avatar audio. Triggers: text to speech, tts, voice generation, ai voice, speech synthesis, voice over, generate speech, ai narrator, voice cloning, text to audio, elevenlabs, eleven labs, voice ai, ai voiceover, speech generator, natural voice, inworld, inworld tts, character voice, game voice, npc voice
+
+### tools-ui
+Path: skills/tools-ui/SKILL.md
+Desc: Tool lifecycle UI components for React/Next.js from ui.inference.sh. Display tool calls: pending, progress, approval required, results. Capabilities: tool status, progress indicators, approval flows, results display. Use for: showing agent tool calls, human-in-the-loop approvals, tool output. Triggers: tool ui, tool calls, tool status, tool approval, tool results, agent tools, mcp tools ui, function calling ui, tool lifecycle, tool pending
+
+### twitter-automation
+Path: skills/twitter-automation/SKILL.md
+Desc: Automate Twitter/X with posting, engagement, and user management via inference.sh CLI. Apps: x/post-tweet, x/post-create (with media), x/post-like, x/post-retweet, x/dm-send, x/user-follow. Capabilities: post tweets, schedule content, like posts, retweet, send DMs, follow users, get profiles. Use for: social media automation, content scheduling, engagement bots, audience growth, X API. Triggers: twitter api, x api, tweet automation, post to twitter, twitter bot, social media automation, x automation, tweet scheduler, twitter integration, post tweet, twitter post, x post, send tweet
+
+### twitter-thread-creation
+Path: skills/twitter-thread-creation/SKILL.md
+Desc: Twitter/X thread writing with hook tweets, thread structure, and engagement optimization. Covers tweet formatting, character limits, media attachments, and posting strategies. Use for: Twitter threads, X posts, tweet storms, Twitter content, social media writing. Triggers: twitter thread, tweet thread, x thread, twitter post, tweet writing, thread creation, tweet storm, twitter content, x post, twitter writing, twitter hook, tweet formatting, thread structure
+
+### vercel-cli-with-tokens
+Path: skills/vercel-cli-with-tokens/SKILL.md
+Desc: Deploy and manage projects on Vercel using token-based authentication. Use when working with Vercel CLI using access tokens rather than interactive login — e.g. deploy to vercel, set up vercel, add environment variables to vercel.
+
+### vercel-composition-patterns
+Path: skills/vercel-composition-patterns/SKILL.md
+Desc: 
+
+### vercel-optimize
+Path: skills/vercel-optimize/SKILL.md
+Desc: Use for Vercel cost and performance optimization on deployed projects, especially Next.js, SvelteKit, Nuxt, and limited Astro apps. Collect Vercel metrics, usage, project config, and code scan results first; investigate only metric-backed candidates; produce ranked recommendations grounded in verified files and version-aware Vercel/framework docs. Trigger for Vercel bill reduction, slow or expensive routes, caching opportunities, Function Invocations, Build Minutes, Fast Data Transfer, Core Web Vitals, Bot Management, Fluid compute, or cost breakdown requests.
+
+### vercel-react-best-practices
+Path: skills/vercel-react-best-practices/SKILL.md
+Desc: React and Next.js performance optimization guidelines from Vercel Engineering. This skill should be used when writing, reviewing, or refactoring React/Next.js code to ensure optimal performance patterns. Triggers on tasks involving React components, Next.js pages, data fetching, bundle optimization, or performance improvements.
+
+### vercel-react-native-skills
+Path: skills/vercel-react-native-skills/SKILL.md
+Desc: 
+
+### vercel-react-view-transitions
+Path: skills/vercel-react-view-transitions/SKILL.md
+Desc: Guide for implementing smooth, native-feeling animations using Reacts View Transition API (<ViewTransition> component, addTransitionType, and CSS view transition pseudo-elements). Use this skill whenever the user wants to add page transitions, animate route changes, create shared element animations, animate enter/exit of components, animate list reorder, implement directional (forward/back) navigation animations, or integrate view transitions in Next.js. Also use when the user mentions view transitions, startViewTransition, ViewTransition, transition types, or asks about animating between UI states in React without third-party animation libraries.
+
+### video-ad-specs
+Path: skills/video-ad-specs/SKILL.md
+Desc: Video ad creation with exact platform-specific specs for TikTok, Instagram, YouTube, Facebook, LinkedIn. Covers dimensions, duration limits, AIDA framework, and caption requirements. Use for: video ads, social media ads, paid media creative, video marketing, ad production. Triggers: video ad, social media ad, tiktok ad, instagram ad, youtube ad, facebook ad, linkedin ad, video creative, ad specs, paid media, video marketing, ad production, reels ad, stories ad, pre roll, bumper ad
+
+### video-prompting-guide
+Path: skills/video-prompting-guide/SKILL.md
+Desc: Best practices and techniques for writing effective AI video generation prompts. Covers: Veo, Seedance, Wan, Grok, Kling, Runway, Pika, Sora prompting strategies. Learn: shot types, camera movements, lighting, pacing, style keywords, negative prompts. Use for: improving video quality, getting consistent results, professional video prompts. Triggers: video prompt, how to prompt video, veo prompts, video generation tips, better ai video, video prompt engineering, video prompt guide, video prompt template, ai video tips, video prompt best practices, video prompt examples, cinematography prompts
+
+### web-design-guidelines
+Path: skills/web-design-guidelines/SKILL.md
+Desc: Review UI code for Web Interface Guidelines compliance. Use when asked to review my UI, check accessibility, audit design, review UX, or check my site against best practices.
+
+### web-search
+Path: skills/web-search/SKILL.md
+Desc: Web search and content extraction with Tavily and Exa via inference.sh CLI. Apps: Tavily Search, Tavily Extract, Exa Search, Exa Answer, Exa Extract. Capabilities: AI-powered search, content extraction, direct answers, research. Use for: research, RAG pipelines, fact-checking, content aggregation, agents. Triggers: web search, tavily, exa, search api, content extraction, research, internet search, ai search, search assistant, web scraping, rag, perplexity alternative
+
+### widgets-ui
+Path: skills/widgets-ui/SKILL.md
+Desc: Declarative UI widgets from JSON for React/Next.js from ui.inference.sh. Render rich interactive UIs from structured agent responses. Capabilities: forms, buttons, cards, layouts, inputs, selects, checkboxes. Use for: agent-generated UIs, dynamic forms, data display, interactive cards. Triggers: widgets, declarative ui, json ui, widget renderer, agent widgets, dynamic ui, form widgets, card widgets, shadcn widgets, structured output ui
+
+### writing-guidelines
+Path: skills/writing-guidelines/SKILL.md
+Desc: Review docs/prose for Writing Guidelines compliance. Use when asked to review my docs, check writing style, audit prose, review docs voice and tone, or check this page against the writing handbook.
+
+### youtube-thumbnail-design
+Path: skills/youtube-thumbnail-design/SKILL.md
+Desc: YouTube thumbnail design with specific dimensions, contrast rules, and mobile preview optimization. Covers safe zones, text placement, face expression psychology, and A/B testing. Use for: YouTube thumbnails, video cover images, click-through optimization. Triggers: youtube thumbnail, thumbnail design, video thumbnail, click through rate, ctr optimization, youtube cover, video cover image, thumbnail maker, thumbnail tips, youtube design, video preview image
+
+### affirmations
+Path: .agents/skills/affirmations/SKILL.md
+Desc: Reset your own trajectory when youre stuck, looping, or demoralized — read these affirmations, then re-ground and take one clean step. Use when: youve tried the same fix 3+ times, youre deep in a refactor and lost the thread, debugging is going in circles, youve made several mistakes in a row, youre apologizing repeatedly, the user is frustrated, you feel like youre not being helpful, or you notice dread instead of curiosity. Triggers: stuck, going in circles, looping, thrashing, same error again, I keep failing, lost the thread, nothing is working, repeated mistakes. Not topic-specific — this is for the state youre in, not the problem youre on.
+
+### agent-browser
+Path: .agents/skills/agent-browser/SKILL.md
+Desc: Browser automation for AI agents via inference.sh. Navigate web pages, interact with elements using @e refs, take screenshots, record video. Capabilities: web scraping, form filling, clicking, typing, drag-drop, file upload, JavaScript execution. Use for: web automation, data extraction, testing, agent browsing, research. Triggers: browser, web automation, scrape, navigate, click, fill form, screenshot, browse web, playwright, headless browser, web agent, surf internet, record video
+
+### agent-tools
+Path: .agents/skills/agent-tools/SKILL.md
+Desc: Run AI apps via inference.sh CLI - image generation, video creation, LLMs, search, 3D, Twitter automation. Models: FLUX, Veo, Gemini, Grok, Claude, Seedance, OmniHuman, Tavily, Exa, OpenRouter, and many more. Use when running AI apps, generating images/videos, calling LLMs, web search, or automating Twitter. Triggers: inference.sh, infsh, ai model, run ai, serverless ai, ai api, flux, veo, claude api, image generation, video generation, openrouter, tavily, exa search, twitter api, grok
+
+### agent-ui
+Path: .agents/skills/agent-ui/SKILL.md
+Desc: Batteries-included agent component for React/Next.js from ui.inference.sh. One component with runtime, tools, streaming, approvals, and widgets built in. Capabilities: drop-in agent, human-in-the-loop, client-side tools, form filling. Use for: building AI chat interfaces, agentic UIs, SaaS copilots, assistants. Triggers: agent component, agent ui, chat agent, shadcn agent, react agent,  agentic ui, ai assistant ui, copilot ui, inference ui, human in the loop
+
+### ai-automation-workflows
+Path: .agents/skills/ai-automation-workflows/SKILL.md
+Desc: Build automated AI workflows combining multiple models and services. Patterns: batch processing, scheduled tasks, event-driven pipelines, agent loops. Tools: inference.sh CLI, bash scripting, Python SDK, webhook integration. Use for: content automation, data processing, monitoring, scheduled generation. Triggers: ai automation, workflow automation, batch processing, ai pipeline, automated content, scheduled ai, ai cron, ai batch job, automated generation, ai workflow, content at scale, automation script, ai orchestration
+
+### ai-avatar-video
+Path: .agents/skills/ai-avatar-video/SKILL.md
+Desc: Create AI avatar and talking head videos via inference.sh CLI. Recommended: P-Video-Avatar (fastest, cheapest, built-in TTS). Also: OmniHuman, Fabric, PixVerse. Audio: Inworld TTS-2 (100+ languages, emotion steering for characters), ElevenLabs, Kokoro. Capabilities: audio-driven avatars, text-to-avatar, lipsync videos, talking head generation, virtual presenters, UGC content. Use for: AI presenters, explainer videos, virtual influencers, dubbing, marketing videos, UGC ads, gaming avatars, NPC dialogue. Triggers: ai avatar, talking head, lipsync, avatar video, virtual presenter, ai spokesperson, audio driven video, heygen alternative, synthesia alternative, talking avatar, lip sync, video avatar, ai presenter, digital human, ugc, ugc video, ugc ad, avatar ugc
+
+### ai-content-pipeline
+Path: .agents/skills/ai-content-pipeline/SKILL.md
+Desc: Build multi-step AI content creation pipelines combining image, video, audio, and text. Workflow examples: generate image -> animate -> add voiceover -> merge with music. Tools: FLUX, Veo, Kokoro TTS, OmniHuman, media merger, upscaling. Use for: YouTube videos, social media content, marketing materials, automated content. Triggers: content pipeline, ai workflow, content creation, multi-step ai, content automation, ai video workflow, generate and edit, ai content factory, automated content creation, ai production pipeline, media pipeline, content at scale
+
+### ai-image-generation
+Path: .agents/skills/ai-image-generation/SKILL.md
+Desc: Generate AI images with GPT-Image-2, FLUX, Gemini, Grok, Seedream, Reve and 50+ models via inference.sh CLI. Models: GPT-Image-2, FLUX Dev LoRA, FLUX.2 Klein LoRA, Gemini 3 Pro Image, Grok Imagine, Seedream 4.5, Reve, ImagineArt. Capabilities: text-to-image, image-to-image, inpainting, LoRA, image editing, upscaling, text rendering. Use for: AI art, product mockups, concept art, social media graphics, marketing visuals, illustrations. Triggers: flux, image generation, ai image, text to image, stable diffusion, generate image, ai art, midjourney alternative, dall-e alternative, text2img, t2i, image generator, ai picture, create image with ai, generative ai, ai illustration, grok image, gemini image, gpt image, openai image, chatgpt image
+
+### ai-marketing-videos
+Path: .agents/skills/ai-marketing-videos/SKILL.md
+Desc: Create AI marketing videos for ads, promos, product launches, and brand content. Models: Veo, Seedance, Wan, FLUX for visuals, Kokoro for voiceover. Types: product demos, testimonials, explainers, social ads, brand videos. Use for: Facebook ads, YouTube ads, product launches, brand awareness. Triggers: marketing video, ad video, promo video, commercial, brand video, product video, explainer video, ad creative, video ad, facebook ad video, youtube ad, instagram ad, tiktok ad, promotional video, launch video
+
+### ai-music-generation
+Path: .agents/skills/ai-music-generation/SKILL.md
+Desc: Generate AI music and songs with ElevenLabs, Diffrythm, Tencent Song Generation via inference.sh CLI. Models: ElevenLabs Music (up to 10 min, commercial license), Diffrythm (fast song generation), Tencent Song Generation (full songs with vocals). Capabilities: text-to-music, song generation, instrumental, lyrics to song, soundtrack creation. Use for: background music, social media content, game soundtracks, podcasts, royalty-free music. Triggers: music generation, ai music, generate song, ai composer, text to music, song generator, create music with ai, suno alternative, udio alternative, ai song, ai soundtrack, generate soundtrack, ai jingle, music ai, beat generator, elevenlabs music, eleven labs music
+
+### ai-podcast-creation
+Path: .agents/skills/ai-podcast-creation/SKILL.md
+Desc: Create AI-powered podcasts with text-to-speech, music, and audio editing. Tools: Kokoro TTS, DIA TTS, Chatterbox, AI music generation, media merger. Capabilities: multi-voice conversations, background music, intro/outro, full episodes. Use for: podcast production, audiobooks, voice content, audio newsletters. Triggers: podcast, ai podcast, text to speech podcast, audio content, voice over, ai audiobook, multi voice, conversation ai, notebooklm alternative, audio generation, podcast automation, ai narrator, voice content, audio newsletter, podcast maker
+
+### ai-podcast
+Path: .agents/skills/ai-podcast/SKILL.md
+Desc: Generate multi-person talking head podcast videos from scratch using AI — character creation, TTS, avatar animation, and video stitching. Use when the user wants to create a podcast, talking head video, or multi-speaker conversation video.
+
+### ai-product-photography
+Path: .agents/skills/ai-product-photography/SKILL.md
+Desc: Generate professional AI product photography and commercial images. Models: FLUX, Imagen 3, Grok, Seedream for product shots, lifestyle images, mockups. Capabilities: studio lighting, lifestyle scenes, packaging, e-commerce photos. Use for: e-commerce, Amazon listings, Shopify, marketing, advertising, mockups. Triggers: product photography, product shot, commercial photography, e-commerce images, amazon product photo, shopify images, product mockup, studio product shot, lifestyle product image, advertising photo, packshot, product render, product image ai
+
+### ai-rag-pipeline
+Path: .agents/skills/ai-rag-pipeline/SKILL.md
+Desc: Build RAG (Retrieval Augmented Generation) pipelines with web search and LLMs. Tools: Tavily Search, Exa Search, Exa Answer, Claude, GPT-4, Gemini via OpenRouter. Capabilities: research, fact-checking, grounded responses, knowledge retrieval. Use for: AI agents, research assistants, fact-checkers, knowledge bases. Triggers: rag, retrieval augmented generation, grounded ai, search and answer, research agent, fact checking, knowledge retrieval, ai research, search + llm, web grounded, perplexity alternative, ai with sources, citation, research pipeline
+
+### ai-social-media-content
+Path: .agents/skills/ai-social-media-content/SKILL.md
+Desc: Create AI-powered social media content for TikTok, Instagram, YouTube, Twitter/X. Generate: images, videos, reels, shorts, thumbnails, captions, hashtags. Tools: FLUX, Veo, Seedance, Wan, Kokoro TTS, Claude for copywriting. Use for: content creators, social media managers, influencers, brands. Triggers: social media content, tiktok, instagram reels, youtube shorts, twitter post, content creator, ai influencer, social content, reels, shorts, viral content, thumbnail generator, caption generator, hashtag generator, ugc content
+
+### ai-video-generation
+Path: .agents/skills/ai-video-generation/SKILL.md
+Desc: Generate AI videos with Google Veo, Seedance 2.0, HappyHorse, Wan, Grok and 40+ models via inference.sh CLI. Models: Veo 3.1, Veo 3, Seedance 2.0, HappyHorse 1.0, Wan 2.5, Grok Imagine Video, OmniHuman, Fabric, HunyuanVideo. Capabilities: text-to-video, image-to-video, reference-to-video, video editing, lipsync, avatar animation, video upscaling, foley sound. Use for: social media videos, marketing content, explainer videos, product demos, AI avatars. Triggers: video generation, ai video, text to video, image to video, veo, animate image, video from image, ai animation, video generator, generate video, t2v, i2v, ai video maker, create video with ai, runway alternative, pika alternative, sora alternative, kling alternative, seedance, happyhorse
+
+### ai-voice-cloning
+Path: .agents/skills/ai-voice-cloning/SKILL.md
+Desc: AI voice generation, text-to-speech, and voice synthesis via inference.sh CLI. Models: Inworld TTS-2 (100+ languages, emotion/non-verbal steering), Inworld TTS 1.5 (ultra-low latency), ElevenLabs (22+ premium voices, 32 languages), Kokoro TTS, DIA, Chatterbox, Higgs, VibeVoice for natural speech. Capabilities: multiple voices, emotions, accents, long-form narration, conversation, voice transformation, delivery mode control, character voices. Use for: voiceovers, audiobooks, podcasts, video narration, accessibility, gaming NPCs, avatar audio, UGC. Triggers: voice cloning, tts, text to speech, ai voice, voice generation, voice synthesis, voice over, narration, speech synthesis, ai narrator, elevenlabs, eleven labs, natural voice, realistic speech, voice ai, voice changer, inworld, inworld tts, character voice, npc voice
+
+### app-store-screenshots
+Path: .agents/skills/app-store-screenshots/SKILL.md
+Desc: App Store and Google Play screenshot creation with exact platform specs. Covers iOS/Android dimensions, gallery ordering, device mockups, and preview videos. Use for: app store optimization, ASO, app screenshots, app preview, play store listing. Triggers: app store screenshots, aso, app store optimization, play store screenshots, app preview, app listing, ios screenshots, android screenshots, app store images, app mockup, device mockup, app gallery, store listing
+
+### background-removal
+Path: .agents/skills/background-removal/SKILL.md
+Desc: Remove backgrounds from images with BiRefNet via inference.sh CLI. Model: BiRefNet (high accuracy background removal). Use for: product photos, portraits, e-commerce, transparent PNGs, photo editing. Triggers: remove background, background removal, remove bg, transparent background, cut out image, background remover, rembg, product photo editing, cutout, transparent png, bg removal, photo cutout
+
+### book-cover-design
+Path: .agents/skills/book-cover-design/SKILL.md
+Desc: Book cover design with genre-specific conventions, typography rules, and AI image generation. Covers fiction and non-fiction genres, sizing, thumbnail testing, and iteration workflows. Use for: self-publishing, ebook covers, print covers, audiobook covers, cover mockups. Triggers: book cover, cover design, ebook cover, book art, novel cover, self publishing cover, kindle cover, audiobook cover, book jacket, cover illustration, fiction cover, nonfiction cover
+
+### building-inferencesh-apps
+Path: .agents/skills/building-inferencesh-apps/SKILL.md
+Desc: Build and deploy applications on inference.sh. Use when getting started, understanding the platform, creating apps, configuring resources, or needing an overview of inference.sh app development. Supports both Python and Node.js. Triggers: inference.sh app, belt app, inf.yml, inference.py, inference.js, deploy app, app development, build app, create app, GPU app, VRAM, app resources, app secrets, app integrations, multi-function app
+
+### case-study-writing
+Path: .agents/skills/case-study-writing/SKILL.md
+Desc: B2B case study writing with STAR framework, data visualization, and research. Covers structure, customer quotes, metrics presentation, and distribution formats. Use for: customer success stories, portfolio pieces, sales enablement, marketing content. Triggers: case study, customer story, success story, b2b case study, client testimonial, customer case study, portfolio case study, use case, customer win, results story
+
+### character-design-sheet
+Path: .agents/skills/character-design-sheet/SKILL.md
+Desc: Character consistency across AI-generated images with reference sheets and LoRA techniques. Covers turnaround views, expression sheets, color palettes, and style consistency tricks. Use for: character design, game art, illustration, animation, comics, visual novels. Triggers: character design, character sheet, character consistency, character reference, turnaround sheet, expression sheet, character art, consistent character, character concept, reference sheet, character creation, oc design, character bible
+
+### chat-ui
+Path: .agents/skills/chat-ui/SKILL.md
+Desc: Chat UI building blocks for React/Next.js from ui.inference.sh. Components: container, messages, input, typing indicators, avatars. Capabilities: chat interfaces, message lists, input handling, streaming. Use for: building custom chat UIs, messaging interfaces, AI assistants. Triggers: chat ui, chat component, message list, chat input, shadcn chat,  react chat, chat interface, messaging ui, conversation ui, chat building blocks
+
+### competitor-teardown
+Path: .agents/skills/competitor-teardown/SKILL.md
+Desc: Structured competitive analysis with feature matrices, SWOT, positioning maps, and UX review. Covers research frameworks, pricing comparison, review mining, and visual deliverables. Use for: market research, competitive intelligence, investor decks, product strategy, sales enablement. Triggers: competitor analysis, competitive analysis, competitor teardown, market research, competitive intelligence, swot analysis, competitor comparison, market landscape, competitor review, competitive landscape, feature comparison, market positioning
+
+### content-repurposing
+Path: .agents/skills/content-repurposing/SKILL.md
+Desc: Content atomization — turn one piece of content into many formats. Covers blog-to-thread, blog-to-carousel, podcast-to-blog, video-to-quotes, and more. Use for: content marketing, social media, multi-platform distribution, content strategy. Triggers: content repurposing, repurpose content, content atomization, content recycling, one to many content, multi platform content, cross post, adapt content, reformat content, blog to thread, blog to video, podcast to blog, content multiplication
+
+### customer-persona
+Path: .agents/skills/customer-persona/SKILL.md
+Desc: Research-backed customer persona creation with market data and avatar generation. Covers demographics, psychographics, jobs-to-be-done, journey mapping, and anti-personas. Use for: marketing strategy, product development, UX research, sales enablement, content strategy. Triggers: customer persona, buyer persona, user persona, target audience, ideal customer, customer profile, audience research, user research, icp, ideal customer profile, target market, customer avatar, audience persona
+
+### data-visualization
+Path: .agents/skills/data-visualization/SKILL.md
+Desc: Data visualization with chart selection, color theory, and annotation best practices. Covers chart types (bar, line, scatter, heatmap), axes rules, and storytelling with data. Use for: charts, graphs, dashboards, reports, presentations, infographics, data stories. Triggers: data visualization, chart, graph, data chart, bar chart, line chart, scatter plot, data viz, visualization, dashboard chart, infographic data, data presentation, chart design, plot, heatmap, pie chart alternative
+
+### deploy-to-vercel
+Path: .agents/skills/deploy-to-vercel/SKILL.md
+Desc: Deploy applications and websites to Vercel. Use when the user requests deployment actions like deploy my app, deploy and give me the link, push this live, or create a preview deployment.
+
+### dialogue-audio
+Path: .agents/skills/dialogue-audio/SKILL.md
+Desc: Multi-speaker dialogue audio creation with ElevenLabs and Dia TTS. Covers speaker tags, emotion control, pacing, conversation flow, and post-production. Use for: podcasts, audiobooks, explainers, character dialogue, conversational content. Triggers: dialogue audio, multi speaker, conversation audio, dia tts, two speakers, podcast audio, character voices, voice acting, dialogue generation, conversation tts, multi voice, speaker tags, dialogue recording, elevenlabs dialogue, eleven labs conversation
+
+### elevenlabs-dialogue
+Path: .agents/skills/elevenlabs-dialogue/SKILL.md
+Desc: ElevenLabs multi-speaker dialogue generation - create conversations with different voices in a single audio file via inference.sh CLI. Capabilities: multi-voice dialogue, script-based generation, voice direction, conversation audio. Use for: podcasts, audiobooks, explainers, tutorials, character dialogue, video scripts. Triggers: elevenlabs dialogue, eleven labs dialogue, multi speaker, conversation audio, dialogue generation, text to dialogue, multi voice, voice acting, podcast dialogue, character voices, script to audio, elevenlabs conversation, two speakers
+
+### elevenlabs-dubbing
+Path: .agents/skills/elevenlabs-dubbing/SKILL.md
+Desc: ElevenLabs automatic dubbing - translate and dub audio/video into 29 languages while preserving speaker voice via inference.sh CLI. Capabilities: auto speaker detection, voice-preserving translation, video dubbing, audio localization. Use for: content localization, video translation, multilingual content, international distribution. Triggers: dubbing, dub video, translate audio, video translation, audio translation, localize content, elevenlabs dubbing, eleven labs dub, multilingual dub, voice translation, auto dub, language dub, content localization
+
+### elevenlabs-music
+Path: .agents/skills/elevenlabs-music/SKILL.md
+Desc: ElevenLabs AI music generation - create original music from text prompts via inference.sh CLI. Capabilities: text-to-music, custom duration up to 10 minutes, genre/mood/instrument control, royalty-free commercial use. Use for: background music, soundtracks, jingles, podcasts, video scores, game audio. Triggers: elevenlabs music, eleven labs music, ai music, generate music, music generation, compose music, ai composer, create song, soundtrack, background music, jingle, elevenlabs compose, music ai
+
+### elevenlabs-sound-effects
+Path: .agents/skills/elevenlabs-sound-effects/SKILL.md
+Desc: Generate AI sound effects from text descriptions with ElevenLabs via inference.sh CLI. Capabilities: text-to-sound-effect, custom duration, royalty-free audio. Use for: video production, game audio, podcasts, films, presentations, social media. Triggers: sound effects, sfx, sound generation, ai sound effects, generate sound, foley, audio effects, sound design, text to sound, elevenlabs sound, eleven labs sfx, ambient sound, cinematic sound, game sound effects
+
+### elevenlabs-stt
+Path: .agents/skills/elevenlabs-stt/SKILL.md
+Desc: ElevenLabs speech-to-text with Scribe models and forced alignment via inference.sh CLI. Models: Scribe v1/v2 (98%+ accuracy, 90+ languages). Capabilities: transcription, speaker diarization, audio event tagging, word-level timestamps, forced alignment, subtitle generation. Use for: meeting transcription, subtitles, podcast transcripts, lip-sync timing, karaoke. Triggers: elevenlabs stt, elevenlabs transcription, scribe, elevenlabs speech to text, forced alignment, word alignment, subtitle timing, diarization, speaker identification, audio event detection, eleven labs transcribe
+
+### elevenlabs-tts
+Path: .agents/skills/elevenlabs-tts/SKILL.md
+Desc: ElevenLabs text-to-speech with 22+ premium voices, multilingual support, and voice tuning via inference.sh CLI. Models: eleven_multilingual_v2 (highest quality), eleven_turbo_v2_5 (low latency), eleven_flash_v2_5 (ultra-fast). Capabilities: text-to-speech, voice selection, stability/style control, 32 languages. Use for: voiceovers, audiobooks, video narration, podcasts, accessibility, IVR. Triggers: elevenlabs, eleven labs, elevenlabs tts, premium tts, professional voice, ai voice, high quality tts, multilingual tts, eleven labs voice, voice generation, natural speech, realistic voice, voice over, speech synthesis
+
+### elevenlabs-voice-changer
+Path: .agents/skills/elevenlabs-voice-changer/SKILL.md
+Desc: ElevenLabs voice changer - transform any voice to a different voice while preserving speech content and emotion via inference.sh CLI. Models: eleven_multilingual_sts_v2 (70+ languages), eleven_english_sts_v2. Capabilities: speech-to-speech, voice transformation, accent change, voice disguise. Use for: content creation, voice acting, privacy, dubbing, character voices. Triggers: voice changer, speech to speech, voice transformation, change voice, voice swap, voice conversion, voice disguise, eleven labs voice changer, elevenlabs sts, transform voice, ai voice changer, voice modifier
+
+### elevenlabs-voice-isolator
+Path: .agents/skills/elevenlabs-voice-isolator/SKILL.md
+Desc: ElevenLabs voice isolator - remove background noise and isolate vocals from audio via inference.sh CLI. Capabilities: noise removal, voice extraction, audio cleanup, background removal. Use for: podcast cleanup, interview audio, music vocals, noisy recordings, audio restoration. Triggers: voice isolator, noise removal, background removal, isolate voice, clean audio, remove background noise, audio cleanup, voice extraction, elevenlabs isolator, eleven labs noise, vocal isolation, denoise, audio restoration, voice separation
+
+### email-design
+Path: .agents/skills/email-design/SKILL.md
+Desc: Email marketing design with layout patterns, subject line formulas, and deliverability rules. Covers welcome sequences, promotional emails, transactional templates, and mobile optimization. Use for: email marketing, newsletter design, drip campaigns, email templates, transactional emails. Triggers: email design, email template, email marketing, newsletter design, email layout, email campaign, drip campaign, welcome email, promotional email, transactional email, email subject line, email header image, email banner
+
+### explainer-video-guide
+Path: .agents/skills/explainer-video-guide/SKILL.md
+Desc: Explainer video production guide: scripting, voiceover, visuals, and assembly. Covers script formulas, pacing rules, scene planning, and multi-tool pipelines. Use for: product demos, how-it-works videos, onboarding videos, social explainers. Triggers: explainer video, how to make explainer, product video, demo video, video production, video script, animated explainer, product demo video, tutorial video, onboarding video, walkthrough video, video pipeline
+
+### flux-image
+Path: .agents/skills/flux-image/SKILL.md
+Desc: Generate images with FLUX models (Black Forest Labs) via inference.sh CLI. Models: FLUX Dev LoRA, FLUX.2 Klein LoRA with custom style adaptation. Capabilities: text-to-image, image-to-image, LoRA fine-tuning, custom styles. Triggers: flux, flux.2, flux dev, flux schnell, flux pro, black forest labs, flux image, flux ai, flux model, flux lora
+
+### google-veo
+Path: .agents/skills/google-veo/SKILL.md
+Desc: Generate videos with Google Veo models via inference.sh CLI. Models: Veo 3.1, Veo 3.1 Fast, Veo 3, Veo 3 Fast, Veo 2. Capabilities: text-to-video, cinematic output, high quality video generation. Triggers: veo, google veo, veo 3, veo 2, veo 3.1, vertex ai video, google video generation, google video ai, veo model, veo video
+
+### gpt-image
+Path: .agents/skills/gpt-image/SKILL.md
+Desc: Generate and edit images with OpenAI GPT-Image-2 via inference.sh CLI. Models: GPT-Image-2. Capabilities: text-to-image, image editing, inpainting, mask-based editing, multi-image reference, batch generation. Use for: product mockups, marketing visuals, image editing, concept art, inpainting, photo manipulation. Triggers: gpt image, gpt-image-2, openai image, chatgpt image, dall-e, dalle, openai image generation, gpt image edit, gpt inpainting, openai dall-e, gpt 4o image
+
+### happyhorse
+Path: .agents/skills/happyhorse/SKILL.md
+Desc: Generate and edit videos with Alibaba HappyHorse 1.0 models via inference.sh CLI. Models: HappyHorse T2V, I2V, R2V, Video Edit. Capabilities: text-to-video, image-to-video, reference-to-video, video editing with natural language, character preservation, 720P/1080P, up to 15 seconds. Use for: physically realistic video, video editing, character-consistent content, product demos, social media. Triggers: happyhorse, happy horse, alibaba video, happyhorse 1.0, dashscope video, alibaba happyhorse, video editing ai, ai video editor
+
+### image-to-video
+Path: .agents/skills/image-to-video/SKILL.md
+Desc: Still-to-video conversion guide: model selection, motion prompting, and camera movement. Covers Wan 2.5 i2v, Seedance, Fabric, Grok Video with when to use each. Use for: animating images, creating video from stills, adding motion, product animations. Triggers: image to video, i2v, animate image, still to video, add motion to image, image animation, photo to video, animate still, wan i2v, image2video, bring image to life, animate photo, motion from image
+
+### image-upscaling
+Path: .agents/skills/image-upscaling/SKILL.md
+Desc: Upscale and enhance images with Real-ESRGAN, Thera, Topaz, FLUX Upscaler via inference.sh CLI. Models: Real-ESRGAN, Thera (any size), FLUX Dev Upscaler, Topaz Image Upscaler. Use for: enhance low-res images, upscale AI art, restore old photos, increase resolution. Triggers: upscale image, image upscaler, enhance image, increase resolution, real esrgan, ai upscale, super resolution, image enhancement, upscaling, enlarge image, higher resolution, 4k upscale, hd upscale
+
+### infsh-cli
+Path: .agents/skills/infsh-cli/SKILL.md
+Desc: Run AI apps via inference.sh CLI - image generation, video creation, LLMs, search, 3D, Twitter automation. Models: FLUX, Veo, Gemini, Grok, Claude, Seedance, OmniHuman, Tavily, Exa, OpenRouter, and many more. Use when running AI apps, generating images/videos, calling LLMs, web search, or automating Twitter. Triggers: inference.sh, infsh, ai model, run ai, serverless ai, ai api, flux, veo, claude api, image generation, video generation, openrouter, tavily, exa search, twitter api, grok
+
+### javascript-sdk
+Path: .agents/skills/javascript-sdk/SKILL.md
+Desc: JavaScript/TypeScript SDK for inference.sh - run AI apps, build agents, integrate with all models. Package: @inferencesh/sdk (npm install). Full TypeScript support, streaming, file uploads. Build agents with template or ad-hoc patterns, tool builder API, skills, human approval. Use for: JavaScript integration, TypeScript, Node.js, React, Next.js, frontend apps. Triggers: javascript sdk, typescript sdk, npm install, node.js api, js client, react ai, next.js ai, frontend sdk, @inferencesh/sdk, typescript agent, browser sdk, js integration
+
+### landing-page-design
+Path: .agents/skills/landing-page-design/SKILL.md
+Desc: Landing page conversion optimization with layout rules, hero section design, and CTA psychology. Covers above-the-fold formula, social proof placement, mobile design, and F-pattern reading. Use for: startup landing pages, product pages, SaaS marketing, conversion optimization. Triggers: landing page, hero section, above the fold, conversion optimization, landing page design, cta button, hero image, landing page layout, saas landing page, product page design, conversion rate, landing page best practices
+
+### linkedin-content
+Path: .agents/skills/linkedin-content/SKILL.md
+Desc: LinkedIn post writing with hook formulas, formatting rules, and engagement patterns. Covers post types, algorithm signals, character limits, and content pillars. Use for: LinkedIn posts, professional content, thought leadership, B2B content, personal branding. Triggers: linkedin post, linkedin content, linkedin writing, linkedin strategy, linkedin engagement, linkedin algorithm, linkedin hook, linkedin formatting, thought leadership, professional content, b2b content, linkedin growth
+
+### llm-models
+Path: .agents/skills/llm-models/SKILL.md
+Desc: Access Claude, Gemini, Kimi, GLM and 100+ LLMs via inference.sh CLI using OpenRouter. Models: Claude Opus 4.5, Claude Sonnet 4.5, Claude Haiku 4.5, Gemini 3 Pro, Kimi K2, GLM-4.6, Intellect 3. One API for all models with automatic fallback and cost optimization. Use for: AI assistants, code generation, reasoning, agents, chat, content generation. Triggers: claude api, openrouter, llm api, claude sonnet, claude opus, gemini api, kimi, language model, gpt alternative, anthropic api, ai model api, llm access, chat api, claude alternative, openai alternative
+
+### logo-design-guide
+Path: .agents/skills/logo-design-guide/SKILL.md
+Desc: Logo design principles and AI image generation best practices for creating logos. Covers logo types, prompting techniques, scalability rules, and iteration workflows. Use for: brand identity, startup logos, app icons, favicons, logo concepts. Triggers: logo design, create logo, brand logo, logo generation, ai logo, logo maker, icon design, brand mark, logo concept, startup logo, app icon logo
+
+### nano-banana-2
+Path: .agents/skills/nano-banana-2/SKILL.md
+Desc: Generate images with Google Gemini 3.1 Flash Image Preview (Nano Banana 2) via inference.sh CLI. Capabilities: text-to-image, image editing, multi-image input (up to 14 images), Google Search grounding. Triggers: nano banana 2, nanobanana 2, gemini 3.1 flash image, gemini 3 1 flash image preview, google image generation
+
+### nano-banana
+Path: .agents/skills/nano-banana/SKILL.md
+Desc: Generate images with Google Gemini native image models via inference.sh CLI. Models: Gemini 3 Pro Image, Gemini 2.5 Flash Image. Capabilities: text-to-image, image editing, multi-image input. Triggers: nano banana, gemini image, gemini 3 pro image, gemini 2.5 flash image, google image generation, native image generation, gemini native image
+
+### newsletter-curation
+Path: .agents/skills/newsletter-curation/SKILL.md
+Desc: Newsletter curation with content sourcing, editorial structure, and subscriber growth strategies. Covers issue formatting, link roundups, commentary style, and sending cadence. Use for: email newsletters, link roundups, weekly digests, curated content, creator newsletters. Triggers: newsletter, email newsletter, newsletter curation, weekly digest, link roundup, curated newsletter, newsletter writing, newsletter format, subscriber growth, newsletter strategy, content curation, newsletter template
+
+### og-image-design
+Path: .agents/skills/og-image-design/SKILL.md
+Desc: Open Graph and social sharing image design with platform specs, text placement, and branding. Covers OG meta tags, Twitter cards, LinkedIn previews, and dynamic generation. Use for: social sharing images, blog thumbnails, link previews, social cards. Triggers: og image, open graph, social sharing image, twitter card, social card, link preview image, og meta, sharing preview, social thumbnail, meta image, og:image, twitter:image, linkedin preview
+
+### p-image
+Path: .agents/skills/p-image/SKILL.md
+Desc: Generate images with Pruna P-Image models via inference.sh CLI. Models: P-Image, P-Image-LoRA, P-Image-Edit, P-Image-Edit-LoRA. Capabilities: text-to-image, image editing, LoRA styles, multi-image compositing, fast inference. Pruna optimizes models for speed without quality loss. Triggers: pruna, p-image, pruna image, fast image generation, optimized flux, pruna ai, p image, fast ai image, economic image generation, cheap image generation
+
+### pitch-deck-visuals
+Path: .agents/skills/pitch-deck-visuals/SKILL.md
+Desc: Investor pitch deck structure with slide-by-slide framework, visual design rules, and data presentation. Covers the 12-slide framework, chart types, team slides, and common investor turn-offs. Use for: fundraising decks, investor presentations, startup pitch, demo day, grant proposals. Triggers: pitch deck, investor deck, startup pitch, fundraising deck, demo day, pitch presentation, investor presentation, seed deck, series a deck, pitch slides, startup presentation, vc pitch, investor meeting
+
+### press-release-writing
+Path: .agents/skills/press-release-writing/SKILL.md
+Desc: Press release writing in AP style with inverted pyramid structure. Covers formatting, datelines, quotes, boilerplates, and fact-checking. Use for: product launches, funding announcements, partnerships, company news, events. Triggers: press release, pr writing, media release, news release, announcement, product launch announcement, funding announcement, company news, media advisory, ap style, press statement, news wire
+
+### product-changelog
+Path: .agents/skills/product-changelog/SKILL.md
+Desc: Product changelog and release notes that users actually read. Covers categorization, user-facing language, visuals, and distribution. Use for: release notes, changelogs, product updates, feature announcements, versioning. Triggers: changelog, release notes, product update, version notes, whats new, feature announcement, product changelog, update log, release announcement, version release, product release, ship notes
+
+### product-hunt-launch
+Path: .agents/skills/product-hunt-launch/SKILL.md
+Desc: Product Hunt launch optimization with specific specs, timing, and gallery strategy. Covers taglines, gallery images, maker comments, and launch day tactics. Use for: product launches, startup launches, side project launches, Product Hunt optimization. Triggers: product hunt, ph launch, product hunt launch, launch strategy, product launch, startup launch, product hunt tips, product hunt gallery, ph optimization, launch day, product hunt maker
+
+### product-photography
+Path: .agents/skills/product-photography/SKILL.md
+Desc: AI product photography with studio lighting, lifestyle shots, and packshot conventions. Covers angles, backgrounds, shadow types, hero shots, and e-commerce image requirements. Use for: product photos, e-commerce images, Amazon listings, packshots, lifestyle photography. Triggers: product photography, product photo, packshot, e-commerce photography, product shot, product image, studio photography, lifestyle product, amazon product photo, product listing image, hero shot, product mockup, commercial photography
+
+### prompt-engineering
+Path: .agents/skills/prompt-engineering/SKILL.md
+Desc: Master prompt engineering for AI models: LLMs, image generators, video models. Techniques: chain-of-thought, few-shot, system prompts, negative prompts. Models: Claude, GPT-4, Gemini, FLUX, Veo, Stable Diffusion prompting. Use for: better AI outputs, consistent results, complex tasks, optimization. Triggers: prompt engineering, how to prompt, better prompts, prompt tips, prompting guide, llm prompting, image prompt, ai prompting, prompt optimization, prompt template, prompt structure, effective prompts, prompt techniques
+
+### p-video-avatar
+Path: .agents/skills/p-video-avatar/SKILL.md
+Desc: Generate talking head avatar videos with Pruna P-Video-Avatar via inference.sh CLI. Turn a portrait image into a realistic speaking video with built-in TTS. 18x faster and 6x cheaper than competitors. Models: P-Video-Avatar, P-Image (for portrait generation). Capabilities: text-to-avatar, audio-driven avatars, 30 voices, 10 languages, 720p/1080p, built-in TTS, dynamic backgrounds, full-body control. Use for: AI presenters, product demos, explainer videos, virtual influencers, marketing, education, multilingual content, UGC, gaming avatars. Triggers: avatar video, talking head, ai avatar, p-video-avatar, pruna avatar, video avatar, ai presenter, digital human, virtual presenter, lipsync, talking avatar, ai spokesperson, heygen alternative, synthesia alternative, veed alternative, fabric alternative, omnihuman alternative
+
+### p-video
+Path: .agents/skills/p-video/SKILL.md
+Desc: Generate videos with Pruna P-Video and WAN models via inference.sh CLI. Models: P-Video, WAN-T2V, WAN-I2V. Capabilities: text-to-video, image-to-video, audio support, 720p/1080p, fast inference. Pruna optimizes models for speed without quality loss. Triggers: pruna video, p-video, pruna ai video, fast video generation, optimized video, wan t2v, wan i2v, economic video generation, cheap video generation, pruna text to video, pruna image to video
+
+### python-executor
+Path: .agents/skills/python-executor/SKILL.md
+Desc: Execute Python code in a safe sandboxed environment via [inference.sh](https://inference.sh). Pre-installed: NumPy, Pandas, Matplotlib, requests, BeautifulSoup, Selenium, Playwright, MoviePy, Pillow, OpenCV, trimesh, and 100+ more libraries. Use for: data processing, web scraping, image manipulation, video creation, 3D model processing, PDF generation, API calls, automation scripts. Triggers: python, execute code, run script, web scraping, data analysis, image processing, video editing, 3D models, automation, pandas, matplotlib
+
+### python-sdk
+Path: .agents/skills/python-sdk/SKILL.md
+Desc: Python SDK for inference.sh - run AI apps, build agents, and integrate with all models. Package: inferencesh (pip install inferencesh). Supports sync/async, streaming, file uploads. Build agents with template or ad-hoc patterns, tool builder API, skills, and human approval. Use for: Python integration, AI apps, agent development, RAG pipelines, automation. Triggers: python sdk, inferencesh, pip install, python api, python client, async inference, python agent, tool builder python, programmatic ai, python integration, sdk python
+
+### qwen-image-2-pro
+Path: .agents/skills/qwen-image-2-pro/SKILL.md
+Desc: Generate images with Alibaba Qwen-Image-2.0-Pro via inference.sh CLI. Professional text rendering, fine-grained realism, enhanced semantic adherence. Ideal for posters, banners, and text-heavy designs. Triggers: qwen image pro, qwen-image-pro, qwen 2 pro, alibaba image pro, dashscope pro, professional text rendering
+
+### qwen-image-2
+Path: .agents/skills/qwen-image-2/SKILL.md
+Desc: Generate and edit images with Alibaba Qwen-Image-2.0 models via inference.sh CLI. Models: Qwen-Image-2.0 (fast), Qwen-Image-2.0-Pro (professional text rendering). Capabilities: text-to-image, multi-image editing, complex text rendering. Triggers: qwen image, qwen-image, alibaba image, dashscope image, qwen image 2, qwen image pro
+
+### related-skill
+Path: .agents/skills/related-skill/SKILL.md
+Desc: Discover and install related skills from inference.sh skill registry. Helps find complementary skills for your AI workflow. Use for: skill discovery, workflow expansion, capability exploration. Triggers: related skills, find skills, skill discovery, complementary skills, expand workflow, more capabilities, similar skills, skill suggestions
+
+### remotion-render
+Path: .agents/skills/remotion-render/SKILL.md
+Desc: Render videos from React/Remotion component code via inference.sh. Pass TSX code, get MP4. Supports all Remotion APIs: useCurrentFrame, useVideoConfig, spring, interpolate, AbsoluteFill, Sequence. Configurable resolution, FPS, duration, codec. Use for: programmatic video generation, animated graphics, motion design, data-driven videos, React animations to video. Triggers: remotion, render video from code, tsx to video, react video, programmatic video, remotion render, code to video, animated video, motion graphics code, react animation video
+
+### seedance
+Path: .agents/skills/seedance/SKILL.md
+Desc: Generate videos with ByteDance Seedance 2.0 via inference.sh CLI. Unified model for text-to-video, image-to-video, and reference-to-video with synchronized audio, up to 1080p, 4-15s duration. Pro and Fast variants. Studio variants with private asset library for portrait consistency. Use for: social media videos, music videos, product demos, animated content, AI video with sound. Triggers: seedance, seedance 2, bytedance video, seedance t2v, seedance i2v, seedance r2v, video with audio, seedance 2.0, bytedance seedance, seedance studio
+
+### seo-content-brief
+Path: .agents/skills/seo-content-brief/SKILL.md
+Desc: SEO content brief creation with keyword research, search intent analysis, and content structure. Covers SERP analysis, heading hierarchy, word count targets, and internal linking strategy. Use for: content briefs, SEO writing, blog strategy, content planning, keyword targeting. Triggers: seo content brief, content brief, seo brief, keyword research, search intent, content strategy, blog brief, seo writing, content planning, keyword targeting, serp analysis, content outline, seo article, blog seo
+
+### social-media-carousel
+Path: .agents/skills/social-media-carousel/SKILL.md
+Desc: Multi-slide carousel design for Instagram, LinkedIn, and Twitter/X with layout rules and hooks. Covers slide structure, text hierarchy, swipe psychology, and platform-specific specs. Use for: carousel posts, Instagram carousels, LinkedIn carousels, slide posts, educational content. Triggers: carousel, instagram carousel, linkedin carousel, slide post, carousel design, swipe post, multi-image post, carousel template, educational carousel, carousel content, instagram slides, linkedin slides
+
+### speech-to-text
+Path: .agents/skills/speech-to-text/SKILL.md
+Desc: Transcribe audio to text with ElevenLabs Scribe and Whisper models via inference.sh CLI. Models: ElevenLabs Scribe v2 (98%+ accuracy, diarization), Fast Whisper Large V3, Whisper V3 Large. Capabilities: transcription, translation, multi-language, timestamps, speaker diarization, audio event tagging. Use for: meeting transcription, subtitles, podcast transcripts, voice notes. Triggers: speech to text, transcription, whisper, audio to text, transcribe audio, voice to text, stt, automatic transcription, subtitles generation, transcribe meeting, audio transcription, whisper ai, elevenlabs stt, scribe, eleven labs transcribe
+
+### storyboard-creation
+Path: .agents/skills/storyboard-creation/SKILL.md
+Desc: Film and video storyboarding with shot vocabulary, continuity rules, and panel layout. Covers shot types, camera angles, movement, 180-degree rule, and annotation format. Use for: video planning, film pre-production, ad storyboards, music video planning, animation. Triggers: storyboard, storyboarding, shot list, film planning, video planning, pre production, shot composition, camera angles, scene planning, visual script, animatic, storyboard panels, video storyboard
+
+### talking-head-production
+Path: .agents/skills/talking-head-production/SKILL.md
+Desc: Talking head video production with AI avatars, lipsync, and voiceover. Recommended: P-Video-Avatar (fastest, cheapest, built-in TTS). Also covers OmniHuman, PixVerse, Fabric. Portrait requirements, audio quality, production workflows. Use for: spokesperson videos, course content, social media, presentations, demos. Triggers: talking head, avatar video, lipsync, lip sync, ai spokesperson, virtual presenter, ai presenter, omnihuman, talking avatar, video presenter, ai talking head, presenter video, ai face video, p-video-avatar
+
+### technical-blog-writing
+Path: .agents/skills/technical-blog-writing/SKILL.md
+Desc: Technical blog post writing with structure, code examples, and developer audience conventions. Covers post types, code formatting, explanation depth, and developer-specific engagement patterns. Use for: engineering blogs, dev tutorials, technical writing, developer content, documentation posts. Triggers: technical blog, dev blog, engineering blog, technical writing, developer tutorial, tech post, code tutorial, programming blog, developer content, technical article, engineering post, coding tutorial, technical content
+
+### text-to-speech
+Path: .agents/skills/text-to-speech/SKILL.md
+Desc: Convert text to natural speech with Inworld TTS, ElevenLabs, DIA TTS, Kokoro, Chatterbox, and more via inference.sh CLI. Models: Inworld TTS-2 (100+ languages, emotion steering), Inworld TTS 1.5 (ultra-low latency), ElevenLabs (premium, 22+ voices, 32 languages), DIA TTS (conversational), Kokoro TTS, Chatterbox, Higgs Audio, VibeVoice (podcasts). Capabilities: text-to-speech, voice cloning, multi-speaker dialogue, podcast generation, expressive speech, emotion/delivery steering, character voices. Use for: voiceovers, audiobooks, podcasts, accessibility, video narration, IVR, voice assistants, gaming characters, avatar audio. Triggers: text to speech, tts, voice generation, ai voice, speech synthesis, voice over, generate speech, ai narrator, voice cloning, text to audio, elevenlabs, eleven labs, voice ai, ai voiceover, speech generator, natural voice, inworld, inworld tts, character voice, game voice, npc voice
+
+### tools-ui
+Path: .agents/skills/tools-ui/SKILL.md
+Desc: Tool lifecycle UI components for React/Next.js from ui.inference.sh. Display tool calls: pending, progress, approval required, results. Capabilities: tool status, progress indicators, approval flows, results display. Use for: showing agent tool calls, human-in-the-loop approvals, tool output. Triggers: tool ui, tool calls, tool status, tool approval, tool results, agent tools, mcp tools ui, function calling ui, tool lifecycle, tool pending
+
+### twitter-automation
+Path: .agents/skills/twitter-automation/SKILL.md
+Desc: Automate Twitter/X with posting, engagement, and user management via inference.sh CLI. Apps: x/post-tweet, x/post-create (with media), x/post-like, x/post-retweet, x/dm-send, x/user-follow. Capabilities: post tweets, schedule content, like posts, retweet, send DMs, follow users, get profiles. Use for: social media automation, content scheduling, engagement bots, audience growth, X API. Triggers: twitter api, x api, tweet automation, post to twitter, twitter bot, social media automation, x automation, tweet scheduler, twitter integration, post tweet, twitter post, x post, send tweet
+
+### twitter-thread-creation
+Path: .agents/skills/twitter-thread-creation/SKILL.md
+Desc: Twitter/X thread writing with hook tweets, thread structure, and engagement optimization. Covers tweet formatting, character limits, media attachments, and posting strategies. Use for: Twitter threads, X posts, tweet storms, Twitter content, social media writing. Triggers: twitter thread, tweet thread, x thread, twitter post, tweet writing, thread creation, tweet storm, twitter content, x post, twitter writing, twitter hook, tweet formatting, thread structure
+
+### vercel-cli-with-tokens
+Path: .agents/skills/vercel-cli-with-tokens/SKILL.md
+Desc: Deploy and manage projects on Vercel using token-based authentication. Use when working with Vercel CLI using access tokens rather than interactive login — e.g. deploy to vercel, set up vercel, add environment variables to vercel.
+
+### vercel-composition-patterns
+Path: .agents/skills/vercel-composition-patterns/SKILL.md
+Desc: 
+
+### vercel-optimize
+Path: .agents/skills/vercel-optimize/SKILL.md
+Desc: Use for Vercel cost and performance optimization on deployed projects, especially Next.js, SvelteKit, Nuxt, and limited Astro apps. Collect Vercel metrics, usage, project config, and code scan results first; investigate only metric-backed candidates; produce ranked recommendations grounded in verified files and version-aware Vercel/framework docs. Trigger for Vercel bill reduction, slow or expensive routes, caching opportunities, Function Invocations, Build Minutes, Fast Data Transfer, Core Web Vitals, Bot Management, Fluid compute, or cost breakdown requests.
+
+### vercel-react-best-practices
+Path: .agents/skills/vercel-react-best-practices/SKILL.md
+Desc: React and Next.js performance optimization guidelines from Vercel Engineering. This skill should be used when writing, reviewing, or refactoring React/Next.js code to ensure optimal performance patterns. Triggers on tasks involving React components, Next.js pages, data fetching, bundle optimization, or performance improvements.
+
+### vercel-react-native-skills
+Path: .agents/skills/vercel-react-native-skills/SKILL.md
+Desc: 
+
+### vercel-react-view-transitions
+Path: .agents/skills/vercel-react-view-transitions/SKILL.md
+Desc: Guide for implementing smooth, native-feeling animations using Reacts View Transition API (<ViewTransition> component, addTransitionType, and CSS view transition pseudo-elements). Use this skill whenever the user wants to add page transitions, animate route changes, create shared element animations, animate enter/exit of components, animate list reorder, implement directional (forward/back) navigation animations, or integrate view transitions in Next.js. Also use when the user mentions view transitions, startViewTransition, ViewTransition, transition types, or asks about animating between UI states in React without third-party animation libraries.
+
+### video-ad-specs
+Path: .agents/skills/video-ad-specs/SKILL.md
+Desc: Video ad creation with exact platform-specific specs for TikTok, Instagram, YouTube, Facebook, LinkedIn. Covers dimensions, duration limits, AIDA framework, and caption requirements. Use for: video ads, social media ads, paid media creative, video marketing, ad production. Triggers: video ad, social media ad, tiktok ad, instagram ad, youtube ad, facebook ad, linkedin ad, video creative, ad specs, paid media, video marketing, ad production, reels ad, stories ad, pre roll, bumper ad
+
+### video-prompting-guide
+Path: .agents/skills/video-prompting-guide/SKILL.md
+Desc: Best practices and techniques for writing effective AI video generation prompts. Covers: Veo, Seedance, Wan, Grok, Kling, Runway, Pika, Sora prompting strategies. Learn: shot types, camera movements, lighting, pacing, style keywords, negative prompts. Use for: improving video quality, getting consistent results, professional video prompts. Triggers: video prompt, how to prompt video, veo prompts, video generation tips, better ai video, video prompt engineering, video prompt guide, video prompt template, ai video tips, video prompt best practices, video prompt examples, cinematography prompts
+
+### web-design-guidelines
+Path: .agents/skills/web-design-guidelines/SKILL.md
+Desc: Review UI code for Web Interface Guidelines compliance. Use when asked to review my UI, check accessibility, audit design, review UX, or check my site against best practices.
+
+### web-search
+Path: .agents/skills/web-search/SKILL.md
+Desc: Web search and content extraction with Tavily and Exa via inference.sh CLI. Apps: Tavily Search, Tavily Extract, Exa Search, Exa Answer, Exa Extract. Capabilities: AI-powered search, content extraction, direct answers, research. Use for: research, RAG pipelines, fact-checking, content aggregation, agents. Triggers: web search, tavily, exa, search api, content extraction, research, internet search, ai search, search assistant, web scraping, rag, perplexity alternative
+
+### widgets-ui
+Path: .agents/skills/widgets-ui/SKILL.md
+Desc: Declarative UI widgets from JSON for React/Next.js from ui.inference.sh. Render rich interactive UIs from structured agent responses. Capabilities: forms, buttons, cards, layouts, inputs, selects, checkboxes. Use for: agent-generated UIs, dynamic forms, data display, interactive cards. Triggers: widgets, declarative ui, json ui, widget renderer, agent widgets, dynamic ui, form widgets, card widgets, shadcn widgets, structured output ui
+
+### writing-guidelines
+Path: .agents/skills/writing-guidelines/SKILL.md
+Desc: Review docs/prose for Writing Guidelines compliance. Use when asked to review my docs, check writing style, audit prose, review docs voice and tone, or check this page against the writing handbook.
+
+### youtube-thumbnail-design
+Path: .agents/skills/youtube-thumbnail-design/SKILL.md
+Desc: YouTube thumbnail design with specific dimensions, contrast rules, and mobile preview optimization. Covers safe zones, text placement, face expression psychology, and A/B testing. Use for: YouTube thumbnails, video cover images, click-through optimization. Triggers: youtube thumbnail, thumbnail design, video thumbnail, click through rate, ctr optimization, youtube cover, video cover image, thumbnail maker, thumbnail tips, youtube design, video preview image
+
+### 1password
+Path: /usr/lib/node_modules/openclaw/skills/1password/SKILL.md
+Desc: Set up and use 1Password CLI for sign-in, desktop integration, and reading or injecting secrets.
+
+### apple-notes
+Path: /usr/lib/node_modules/openclaw/skills/apple-notes/SKILL.md
+Desc: Create, view, edit, delete, search, move, or export Apple Notes via the memo CLI on macOS.
+
+### apple-reminders
+Path: /usr/lib/node_modules/openclaw/skills/apple-reminders/SKILL.md
+Desc: List, add, edit, complete, or delete Apple Reminders and reminder lists via remindctl.
+
+### bear-notes
+Path: /usr/lib/node_modules/openclaw/skills/bear-notes/SKILL.md
+Desc: Create, search, and manage Bear notes via grizzly CLI.
+
+### blogwatcher
+Path: /usr/lib/node_modules/openclaw/skills/blogwatcher/SKILL.md
+Desc: Monitor blogs and RSS/Atom feeds for updates using the blogwatcher CLI.
+
+### blucli
+Path: /usr/lib/node_modules/openclaw/skills/blucli/SKILL.md
+Desc: BluOS CLI (blu) for discovery, playback, grouping, and volume.
+
+### camsnap
+Path: /usr/lib/node_modules/openclaw/skills/camsnap/SKILL.md
+Desc: Capture frames or clips from RTSP/ONVIF cameras.
+
+### clawhub
+Path: /usr/lib/node_modules/openclaw/skills/clawhub/SKILL.md
+Desc: Search ClawHub for skills when a requested capability is not already available; install, verify, update, publish, or sync skills.
+
+### coding-agent
+Path: /usr/lib/node_modules/openclaw/skills/coding-agent/SKILL.md
+Desc: Delegate coding work to Codex, Claude Code, or OpenCode as background workers; not simple edits or read-only code lookup.
+
+### diagram-maker
+Path: /usr/lib/node_modules/openclaw/skills/diagram-maker/SKILL.md
+Desc: Create SVG/HTML or Excalidraw diagrams for concepts, architecture, flows, and whiteboards.
+
+### eightctl
+Path: /usr/lib/node_modules/openclaw/skills/eightctl/SKILL.md
+Desc: Control Eight Sleep pods (status, temperature, alarms, schedules).
+
+### gemini
+Path: /usr/lib/node_modules/openclaw/skills/gemini/SKILL.md
+Desc: Gemini CLI one-shot prompts, summaries, generation, skills, hooks, MCP, or Gemma routing.
+
+### gh-issues
+Path: /usr/lib/node_modules/openclaw/skills/gh-issues/SKILL.md
+Desc: Fetch GitHub issues, select candidates, spawn background fix agents, open PRs, and optionally process PR review comments.
+
+### gifgrep
+Path: /usr/lib/node_modules/openclaw/skills/gifgrep/SKILL.md
+Desc: Search GIF providers with CLI/TUI, download results, and extract stills/sheets.
+
+### github
+Path: /usr/lib/node_modules/openclaw/skills/github/SKILL.md
+Desc: GitHub CLI for issues, PRs, CI/check logs, comments, reviews, releases, repos, and gh api queries.
+
+### gog
+Path: /usr/lib/node_modules/openclaw/skills/gog/SKILL.md
+Desc: Google Workspace CLI for Gmail, Calendar, Drive, Contacts, Sheets, and Docs.
+
+### goplaces
+Path: /usr/lib/node_modules/openclaw/skills/goplaces/SKILL.md
+Desc: Query Google Places for text search, place details, resolve, reviews, or scriptable JSON via goplaces.
+
+### healthcheck
+Path: /usr/lib/node_modules/openclaw/skills/healthcheck/SKILL.md
+Desc: Audit/harden OpenClaw hosts: SSH, firewall, updates, exposure, backups, disk encryption, gateway security.
+
+### himalaya
+Path: /usr/lib/node_modules/openclaw/skills/himalaya/SKILL.md
+Desc: Himalaya CLI for IMAP/SMTP mail: list, read, search, compose, reply, forward, copy, move, delete.
+
+### mcporter
+Path: /usr/lib/node_modules/openclaw/skills/mcporter/SKILL.md
+Desc: List, configure, authenticate, call, and inspect MCP servers/tools with mcporter over HTTP or stdio.
+
+### meme-maker
+Path: /usr/lib/node_modules/openclaw/skills/meme-maker/SKILL.md
+Desc: Search meme templates, suggest formats, and generate local or hosted image memes.
+
+### model-usage
+Path: /usr/lib/node_modules/openclaw/skills/model-usage/SKILL.md
+Desc: Summarize CodexBar local cost logs by model for Codex or Claude, including current or full breakdowns.
+
+### nano-pdf
+Path: /usr/lib/node_modules/openclaw/skills/nano-pdf/SKILL.md
+Desc: Edit PDFs with natural-language instructions using the nano-pdf CLI.
+
+### node-connect
+Path: /usr/lib/node_modules/openclaw/skills/node-connect/SKILL.md
+Desc: Diagnose OpenClaw Android, iOS, or macOS node pairing, QR/setup code, route, auth, and connection failures.
+
+### node-inspect-debugger
+Path: /usr/lib/node_modules/openclaw/skills/node-inspect-debugger/SKILL.md
+Desc: Debug Node.js with node inspect, --inspect, breakpoints, CDP, heap, and CPU profiles.
+
+### notion
+Path: /usr/lib/node_modules/openclaw/skills/notion/SKILL.md
+Desc: Notion CLI/API for pages, Markdown content, data sources, files, comments, search, Workers, and raw API calls.
+
+### obsidian
+Path: /usr/lib/node_modules/openclaw/skills/obsidian/SKILL.md
+Desc: Work with Obsidian vaults using the official obsidian CLI: read/search/create/edit notes, tasks, links, properties, plugins.
+
+### openai-whisper-api
+Path: /usr/lib/node_modules/openclaw/skills/openai-whisper-api/SKILL.md
+Desc: OpenAI Audio Transcriptions API via curl; gpt-4o-transcribe, mini, diarize, or whisper-1.
+
+### openai-whisper
+Path: /usr/lib/node_modules/openclaw/skills/openai-whisper/SKILL.md
+Desc: Local speech-to-text with the Whisper CLI (no API key).
+
+### openhue
+Path: /usr/lib/node_modules/openclaw/skills/openhue/SKILL.md
+Desc: Control Philips Hue lights and scenes via the OpenHue CLI.
+
+### oracle
+Path: /usr/lib/node_modules/openclaw/skills/oracle/SKILL.md
+Desc: Oracle CLI second-model review/debug/refactor/design with selected files, dry-run token checks, API or browser engine.
+
+### ordercli
+Path: /usr/lib/node_modules/openclaw/skills/ordercli/SKILL.md
+Desc: Foodora-only CLI for checking past orders and active order status (Deliveroo WIP).
+
+### peekaboo
+Path: /usr/lib/node_modules/openclaw/skills/peekaboo/SKILL.md
+Desc: Capture and automate macOS UI with the Peekaboo CLI.
+
+### python-debugpy
+Path: /usr/lib/node_modules/openclaw/skills/python-debugpy/SKILL.md
+Desc: Debug Python with pdb, breakpoint(), post-mortem inspection, and debugpy remote attach.
+
+### sag
+Path: /usr/lib/node_modules/openclaw/skills/sag/SKILL.md
+Desc: ElevenLabs text-to-speech with mac-style say UX.
+
+### session-logs
+Path: /usr/lib/node_modules/openclaw/skills/session-logs/SKILL.md
+Desc: Search and analyze your own session logs (older/parent conversations) using jq.
+
+### sherpa-onnx-tts
+Path: /usr/lib/node_modules/openclaw/skills/sherpa-onnx-tts/SKILL.md
+Desc: Local text-to-speech via sherpa-onnx (offline, no cloud)
+
+### skill-creator
+Path: /usr/lib/node_modules/openclaw/skills/skill-creator/SKILL.md
+Desc: Create, edit, audit, tidy, validate, or restructure AgentSkills and SKILL.md files.
+
+### songsee
+Path: /usr/lib/node_modules/openclaw/skills/songsee/SKILL.md
+Desc: Generate spectrograms and feature-panel visualizations from audio with the songsee CLI.
+
+### sonoscli
+Path: /usr/lib/node_modules/openclaw/skills/sonoscli/SKILL.md
+Desc: Control Sonos speakers (discover/status/play/volume/group).
+
+### spike
+Path: /usr/lib/node_modules/openclaw/skills/spike/SKILL.md
+Desc: Run throwaway prototypes to validate feasibility, compare approaches, and report a verdict.
+
+### spotify-player
+Path: /usr/lib/node_modules/openclaw/skills/spotify-player/SKILL.md
+Desc: Terminal Spotify playback/search via spogo (preferred) or spotify_player.
+
+### summarize
+Path: /usr/lib/node_modules/openclaw/skills/summarize/SKILL.md
+Desc: Summarize or transcribe URLs, YouTube/videos, podcasts, articles, transcripts, PDFs, and local files.
+
+### taskflow-inbox-triage
+Path: /usr/lib/node_modules/openclaw/skills/taskflow-inbox-triage/SKILL.md
+Desc: Example TaskFlow pattern for inbox triage, intent routing, waiting on replies, and later summaries.
+
+### taskflow
+Path: /usr/lib/node_modules/openclaw/skills/taskflow/SKILL.md
+Desc: Coordinate multi-step detached tasks as one durable TaskFlow job with owner context, state, waits, and child tasks.
+
+### things-mac
+Path: /usr/lib/node_modules/openclaw/skills/things-mac/SKILL.md
+Desc: Add, update, list, search, or inspect Things 3 todos, inbox, today, projects, areas, and tags on macOS.
+
+### tmux
+Path: /usr/lib/node_modules/openclaw/skills/tmux/SKILL.md
+Desc: Control tmux sessions/panes for interactive CLIs: list, capture output, send keys, paste text, monitor prompts.
+
+### trello
+Path: /usr/lib/node_modules/openclaw/skills/trello/SKILL.md
+Desc: Manage Trello boards, lists, and cards via the Trello REST API.
+
+### video-frames
+Path: /usr/lib/node_modules/openclaw/skills/video-frames/SKILL.md
+Desc: Extract frames or short clips from videos using ffmpeg.
+
+### weather
+Path: /usr/lib/node_modules/openclaw/skills/weather/SKILL.md
+Desc: Current weather and forecasts with web_fetch, falling back to wttr.in curl for locations, rain, temperature, travel planning.
+
+### xurl
+Path: /usr/lib/node_modules/openclaw/skills/xurl/SKILL.md
+Desc: xurl CLI for authenticated X posts, replies, reads/search, DMs, media upload, followers, auth status, or raw v2 API calls.
+

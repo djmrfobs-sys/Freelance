@@ -13,7 +13,7 @@ import re
 import base64
 import subprocess
 
-TOKEN = "854751…w584"
+TOKEN = "8547512810:AAGlNvWdI_V01bWrzOr6BjTPJ6Kts4Fw584"
 API_URL = f"https://api.telegram.org/bot{TOKEN}"
 
 # ========== КАНАЛЫ ==========
